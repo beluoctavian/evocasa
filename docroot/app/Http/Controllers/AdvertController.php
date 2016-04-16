@@ -13,9 +13,13 @@ class AdvertController extends Controller {
     $this->middleware('auth');
   }
 
-  public function chooseCreationType()
+  public function getIndex()
   {
     return view('advert.chooseCreationType');
+  }
+
+  public function getApartment(){
+    return view('advert.createApartment');
   }
 
 }

@@ -18,15 +18,15 @@
 @section('content')
 <div class="row">
     <div class="col-xs-12">
-        <a class="add-advert-type" href="{!! route('advert.add.apartment') !!}">
+        <a href="/advert/add/apartment" class="add-advert-type">
             <span class="glyphicon glyphicon-th"></span>
             <span>Apartament</span>
         </a>
-        <a class="add-advert-type" href="{!! route('advert.add.house') !!}">
+        <a href="/advert/add/house" class="add-advert-type">
             <span class="glyphicon glyphicon-home"></span>
             <span>Casa / Vila</span>
         </a>
-        <a class="add-advert-type" href="{!! route('advert.add.terrain') !!}">
+        <a href="/advert/add/terrain" class="add-advert-type">
             <span class="glyphicon glyphicon-picture"></span>
             <span>Teren</span>
         </a>

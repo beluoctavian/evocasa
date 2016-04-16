@@ -62,7 +62,20 @@ class Advert extends Model {
     public static function createFromArray(array $parameters)
     {
         //@ToDo: Create neighborhood & area
-        return Advert::create([
+        $neighborhood = Neighborhood::where('name', $parameters['neighborhood'])->first();
+        if (!$neighborhood) {
+            $neighborhood = Neighborhood::create([
+              'name' => $parameters['neighborhood'],
+            ]);
+        }
+        $area = Area::where('name', $parameters['area'])->where('neighborhood_id', $neighborhood->id)->first();
+        if (!$area) {
+            $area = Area::create([
+              'name' => $parameters['area'],
+              'neighborhood_id' => $neighborhood->id,
+            ]);
+        }
+        $advert = Advert::create([
           'title' => $parameters['title'],
           'first_page' => !empty($parameters['first_page']),
           'type' => $parameters['type'],
@@ -70,6 +83,9 @@ class Advert extends Model {
           'price' => $parameters['price'],
           'old_price' => $parameters['old_price'],
           'description' => $parameters['description'],
+          'neighborhood_id' => $neighborhood->id,
+          'area_id' => $area->id,
         ]);
+        return $advert;
     }
 }

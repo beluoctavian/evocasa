@@ -25,7 +25,7 @@ class Owner extends Migration {
 			$table->boolean('map_pictures');
 			$table->boolean('rehabilitated_block');
 			$table->string('address');
-			$table->integer('advert_id');
+			$table->integer('advert_id')->unsigned();
 			$table->foreign('advert_id')
 				->references('id')
 				->on('advert')

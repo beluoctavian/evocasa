@@ -3,7 +3,4 @@ node_modules
 .env
 .idea
 public/uploaded-images
-/docroot/.env
-/docroot/.htaccess
-/docroot/composer.json
-/docroot/public/.htaccess
+_ide_helper.php

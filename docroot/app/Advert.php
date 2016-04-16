@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Advert extends Model {
 
-	protected $guarded = [];
+    protected $guarded = [];
 
     protected $table = 'advert';
 
@@ -24,8 +24,6 @@ class Advert extends Model {
         return $this->hasMany('App\Observation');
     }
 
-
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -40,5 +38,22 @@ class Advert extends Model {
     public function terrain()
     {
         return $this->hasOne('App\Terrain');
+    }
+
+    /**
+     * @param array $parameters
+     */
+    public static function createFromArray(array $parameters)
+    {
+        //@ToDo: Create neighborhood & area
+        return $this->create([
+          'title' => $parameters['title'],
+          'first_page' => !empty($parameters['first_page']),
+          'type' => $parameters['type'],
+          'no_rooms' => $parameters['no_rooms'],
+          'price' => $parameters['price'],
+          'old_price' => $parameters['old_price'],
+          'description' => $parameters['description'],
+        ]);
     }
 }

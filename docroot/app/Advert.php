@@ -1,4 +1,5 @@
-<?php namespace App;
+<?php
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -61,7 +62,6 @@ class Advert extends Model {
      */
     public static function createFromArray(array $parameters)
     {
-        //@ToDo: Create neighborhood & area
         $neighborhood = Neighborhood::where('name', $parameters['neighborhood'])->first();
         if (!$neighborhood) {
             $neighborhood = Neighborhood::create([
@@ -86,6 +86,8 @@ class Advert extends Model {
           'neighborhood_id' => $neighborhood->id,
           'area_id' => $area->id,
         ]);
+        $advert->code = \Auth::user()->code . '_' . $advert->id;
+        $advert->save();
         return $advert;
     }
 }

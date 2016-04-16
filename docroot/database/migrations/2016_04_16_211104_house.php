@@ -45,10 +45,7 @@ class House extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('house', function(Blueprint $table)
-		{
-			//
-		});
+		Schema::drop('house');
 	}
 
 }

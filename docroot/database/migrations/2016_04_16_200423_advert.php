@@ -23,6 +23,16 @@ class Advert extends Migration {
 			$table->string('price');
 			$table->string('old_price');
 			$table->string('description');
+			$table->integer('neighborhood_id')->unsigned();
+			$table->foreign('neighborhood_id')
+				->references('id')
+				->on('neighborhood')
+				->onDelete('cascade');
+			$table->integer('area_id')->unsigned();
+			$table->foreign('area_id')
+				->references('id')
+				->on('area')
+				->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

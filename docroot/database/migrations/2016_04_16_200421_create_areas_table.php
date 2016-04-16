@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNeighborhoodsTable extends Migration {
+class CreateAreasTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,14 @@ class CreateNeighborhoodsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('neighborhood', function(Blueprint $table)
+		Schema::create('area', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->integer('advert_id')->unsigned();
-			$table->foreign('advert_id')
+			$table->integer('neighborhood_id')->unsigned();
+			$table->foreign('neighborhood_id')
 				->references('id')
-				->on('advert')
+				->on('neighborhood')
 				->onDelete('cascade');
 			$table->timestamps();
 		});
@@ -32,7 +32,7 @@ class CreateNeighborhoodsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('neighborhoods');
+		Schema::drop('areas');
 	}
 
 }

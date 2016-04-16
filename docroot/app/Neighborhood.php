@@ -9,19 +9,19 @@ class Neighborhood extends Model {
     protected $table = 'neighborhood';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function advert()
     {
-        return $this->belongsTo('App\Advert');
+        return $this->hasMany('App\Advert');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function area()
     {
-        return $this->hasOne('App\Area');
+        return $this->hasMany('App\Area');
     }
 
 }

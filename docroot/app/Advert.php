@@ -41,12 +41,28 @@ class Advert extends Model {
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function heighborhood()
+    {
+        return $this->belongsTo('App\Neighborhood');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function area()
+    {
+        return $this->belongsTo('App\Area');
+    }
+
+    /**
      * @param array $parameters
      */
     public static function createFromArray(array $parameters)
     {
         //@ToDo: Create neighborhood & area
-        return $this->create([
+        return Advert::create([
           'title' => $parameters['title'],
           'first_page' => !empty($parameters['first_page']),
           'type' => $parameters['type'],

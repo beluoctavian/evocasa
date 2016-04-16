@@ -1,0 +1,107 @@
+.red {
+    color: #e30000 !important;
+}
+.grey {
+    color: #9b9b9b !important;
+}
+.no-overflow {
+    overflow: hidden;
+}
+.no-margin {
+    margin: 0;
+}
+.margin-bottom {
+    margin-bottom: 30px;
+}
+.margin-bottom-small {
+    margin-bottom: 20px;
+}
+.margin-top {
+    margin-top: 30px;
+}
+.margin-top-small {
+    margin-top: 20px;
+}
+.no-padding {
+    padding: 0;
+}
+.no-padding-left {
+    padding-left: 0;
+}
+.no-padding-right {
+    padding-right: 0;
+}
+.clear-both {
+    clear: both;
+}
+.relative {
+    position: relative;
+}
+.btn-warning {
+    background: #fcbf10;
+    border-color: #e9b10f;
+}
+.btn-warning:hover {
+    background: #f0b70f;
+}
+.list-group-item.active {
+    background-color: #fcbf10;
+    border-color: #fcbf10;
+    font-weight: bold;
+}
+.list-group-item.active:hover {
+    background-color: #fcbf10;
+    border-color: #fcbf10;
+    font-weight: bold;
+}
+.list-group-item.active:active {
+    background-color: #fcbf10;
+    border-color: #fcbf10;
+    font-weight: bold;
+}
+.red {
+    color: #e30000;
+}
+.ui-datepicker-calendar, .ui-datepicker-month {
+    display: none;
+}​
+select, select option {
+    color: #000000;
+}
+.selected-file {
+    border: 1px dotted #000000;
+    padding: 5px;
+    margin: 0 0 10px 0;
+}
+.selected-file div {
+    line-height: 20px;
+}
+.thumb {
+    display: block;
+    max-width: 136px;
+    min-width: 136px;
+    border: 2px solid #000;
+    margin: 0 0 10px 10px;
+    float: left;
+    cursor: pointer;
+}
+.thumb-dimensions {
+    line-height: 15px;
+    font-size: 12px;
+    margin: 0 0 0 20px;
+}
+.banner-preview {
+    max-width: 100%;
+}
+.pagination li a {
+    margin-bottom: 5px;
+}
+.fotorama {
+    max-width: 100%;
+}
+.fotorama * {
+    max-width: 100%;
+}
+ul.default {
+    list-style-type: none;
+}

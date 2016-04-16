@@ -1,0 +1,8 @@
+[11-Jun-2015 10:03:36 EET] PHP Fatal error:  Maximum execution time of 60 seconds exceeded in /home/evocasai/public_html/app/Http/Controllers/UsersController.php on line 229
+[11-Jun-2015 18:04:41 EET] PHP Fatal error:  Maximum execution time of 60 seconds exceeded in /home/evocasai/public_html/app/Http/Controllers/UsersController.php on line 239
+[11-Jun-2015 18:06:03 EET] PHP Fatal error:  Maximum execution time of 60 seconds exceeded in /home/evocasai/public_html/app/Http/Controllers/UsersController.php on line 239
+[28-Jul-2015 22:54:34 EET] PHP Fatal error:  Can't use function return value in write context in /home/evocasai/public_html/storage/framework/views/52f4c2be440cb2872c569922903c10b6 on line 118
+[28-Jul-2015 22:54:36 EET] PHP Fatal error:  Can't use function return value in write context in /home/evocasai/public_html/storage/framework/views/52f4c2be440cb2872c569922903c10b6 on line 118
+[27-Aug-2015 07:49:58 UTC] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[27-Aug-2015 07:49:58 UTC] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[27-Aug-2015 07:49:58 UTC] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0

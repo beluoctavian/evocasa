@@ -18,6 +18,7 @@ class Advert extends Migration {
 			$table->string('title');
 			$table->string('type');
 			$table->string('no_rooms');
+			$table->boolean('first_page');
 			$table->string('neighborhood');
 			$table->string('area');
 			$table->string('price');

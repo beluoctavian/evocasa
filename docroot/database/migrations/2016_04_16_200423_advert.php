@@ -26,13 +26,11 @@ class Advert extends Migration {
 			$table->integer('neighborhood_id')->unsigned();
 			$table->foreign('neighborhood_id')
 				->references('id')
-				->on('neighborhood')
-				->onDelete('cascade');
+				->on('neighborhood');
 			$table->integer('area_id')->unsigned();
 			$table->foreign('area_id')
 				->references('id')
-				->on('area')
-				->onDelete('cascade');
+				->on('area');
 			$table->timestamps();
 		});
 	}

@@ -37,3 +37,7 @@ Route::post('edit-client', 'CustomersController@postEditCustomer');
 Route::post('adauga-client', 'CustomersController@addCustomer');
 Route::post('cauta-client', 'CustomersController@search');
 Route::get('delete-client/{id}', 'CustomersController@deleteCustomer');
+
+/* ----------------- REFACTOR ALL ROUTES ----------------- */
+
+Route::get('advert/add', 'AdvertController@chooseCreationType');

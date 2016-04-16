@@ -40,4 +40,7 @@ Route::get('delete-client/{id}', 'CustomersController@deleteCustomer');
 
 /* ----------------- REFACTOR ALL ROUTES ----------------- */
 
-Route::get('advert/add', 'AdvertController@chooseCreationType');
+Route::get('advert/add', ['as' => 'advert.add', 'uses' => 'AdvertController@chooseCreationType']);
+Route::get('advert/add/apartment', ['as' => 'advert.add.apartment', 'uses' => 'AdvertController@addApartment']);
+Route::get('advert/add/house', ['as' => 'advert.add.house', 'uses' => 'AdvertController@addHouse']);
+Route::get('advert/add/terrain', ['as' => 'advert.add.terrain', 'uses' => 'AdvertController@addTerrain']);

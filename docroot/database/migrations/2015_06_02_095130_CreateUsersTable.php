@@ -5,8 +5,12 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration {
 
+    /**
+     * @    return void
+     */
     public function up(){
-        Schema::create('users', function(Blueprint $table){
+
+        Schema::create('users', function(Blueprint $table) {
             $table->increments('id');
             $table->string('username');
             $table->string('name');

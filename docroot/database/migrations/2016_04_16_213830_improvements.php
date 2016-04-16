@@ -12,7 +12,7 @@ class Improvements extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('improvements', function(Blueprint $table)
+		Schema::create('improvements', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('improvements');

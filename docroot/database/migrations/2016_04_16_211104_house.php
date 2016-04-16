@@ -12,7 +12,7 @@ class House extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('house', function(Blueprint $table)
+		Schema::create('house', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('land_area');
@@ -30,6 +30,7 @@ class House extends Migration {
 			$table->string('obs_balconies');
 			$table->string('garage');
 			$table->string('obs_garage');
+			$table->integer('advert_id')->unsigned();
 			$table->foreign('advert_id')
 				->references('id')
 				->on('advert')

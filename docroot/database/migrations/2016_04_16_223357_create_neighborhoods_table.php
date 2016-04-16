@@ -16,7 +16,7 @@ class CreateNeighborhoodsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->integer('advert_id');
+			$table->integer('advert_id')->unsigned();
 			$table->foreign('advert_id')
 				->references('id')
 				->on('advert')

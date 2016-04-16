@@ -24,13 +24,7 @@ class Advert extends Model {
         return $this->hasMany('App\Observation');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function apartment()
-    {
-        return $this->hasOne('App\Apartment');
-    }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

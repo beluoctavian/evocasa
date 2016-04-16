@@ -12,11 +12,11 @@ class Observation extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('observation', function(Blueprint $table)
+		Schema::create('observation', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('text');
-			$table->integer('owner_id');
+			$table->integer('owner_id')->unsigned();
 			$table->foreign('owner_id')
 				->references('id')
 				->on('owner')

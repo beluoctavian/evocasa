@@ -41,7 +41,7 @@ class Owner extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('owner');
 	}
 
 }

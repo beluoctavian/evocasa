@@ -16,4 +16,12 @@ class Neighborhood extends Model {
         return $this->belongsTo('App\Advert');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function area()
+    {
+        return $this->hasOne('App\Area');
+    }
+
 }

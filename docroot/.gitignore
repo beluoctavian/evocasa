@@ -3,4 +3,3 @@ node_modules
 .env
 .idea
 public/uploaded-images
-_ide_helper.php

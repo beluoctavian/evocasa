@@ -38,7 +38,7 @@ class AdvertController extends Controller {
   public function postApartment(Request $request) {
     $advert_parameters = $request->advert;
     $advert_parameters['type'] = 'apartment';
-    $advert = $this->createAdvert($request->advert);
+    $advert = $this->createAdvert($advert_parameters);
   }
 
 }

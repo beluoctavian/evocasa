@@ -189,101 +189,109 @@
                 <!-- DETALII IMOBIL -->
                 <div class="row margin-bottom">
                     <div class="col-xs-12 col-sm-6">
-                        <div class="main-title">
-                            <i class="fa fa-home"></i>
-                            <h2>Detalii imobil</h2>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label>Suprafata utila</label>
-                                <div class="input-group">
-                                    <input name="su" type="text" class="form-control">
-                                    <span class="input-group-addon">mp</span>
-                                </div>
+                        @if ($entity_type == 'apartment')
+                            <div class="main-title">
+                                <i class="fa fa-home"></i>
+                                <h2>Detalii imobil</h2>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label>Suprafata construita</label>
-                                <div class="input-group">
-                                    <input name="sc" type="text" class="form-control">
-                                    <span class="input-group-addon">mp</span>
+                            <div class="form-row">
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label>Suprafata utila</label>
+                                    <div class="input-group">
+                                        <input name="house[usable_area]" type="text" class="form-control">
+                                        <span class="input-group-addon">mp</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label>Compartimentare</label>
-                                <div>
-                                    <input name="compartimentare" type="text" class="form-control">
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label>Suprafata construita</label>
+                                    <div class="input-group">
+                                        <input name="house[built_area]" type="text" class="form-control">
+                                        <span class="input-group-addon">mp</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label>Confort</label>
-                                <div>
-                                    <input name="confort" type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label>Etaj</label>
-                                <div>
-                                    <input name="etaj" type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label>An constructie</label>
-                                <div>
-                                    <input name="an_constructie" type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label>Numar bai</label>
-                                <div class="row">
-                                    <div class="col-xs-4"><input name="numar_bai" type="text" class="form-control no-padding text-center"></div>
-                                    <div class="col-xs-8 no-padding-left"><input name="obs_numar_bai" type="text" class="form-control"></div>
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label>Nr. gr. sanitare</label>
-                                <div class="row">
-                                    <div class="col-xs-4"><input name="numar_bai_serviciu" type="text" class="form-control no-padding text-center"></div>
-                                    <div class="col-xs-8 no-padding-left"><input name="obs_numar_bai_serviciu" type="text" class="form-control"></div>
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label>Numar balcoane</label>
-                                <div class="row">
-                                    <div class="col-xs-4"><input name="numar_balcoane" type="text" class="form-control no-padding text-center"></div>
-                                    <div class="col-xs-8 no-padding-left"><input name="obs_numar_balcoane" type="text" class="form-control"></div>
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label>Loc parcare</label>
-                                <div>
-                                    <div class="row">
-                                        <div class="col-xs-4"><input name="loc_parcare" type="text" class="form-control no-padding text-center"></div>
-                                        <div class="col-xs-8 no-padding-left"><input name="obs_loc_parcare" type="text" class="form-control"></div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label>Compartimentare</label>
+                                    <div>
+                                        <input name="house[partitioning]" type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label>Boxa</label>
-                                <div>
-                                    <div class="row">
-                                        <div class="col-xs-4"><input name="boxa" type="text" class="form-control no-padding text-center"></div>
-                                        <div class="col-xs-8 no-padding-left"><input name="obs_boxa" type="text" class="form-control"></div>
+                            <div class="form-row">
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label>Confort</label>
+                                    <div>
+                                        <input name="house[comfort]" type="text" class="form-control">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label>Garaj</label>
-                                <div>
-                                    <div class="row">
-                                        <div class="col-xs-4"><input name="garaj" type="text" class="form-control no-padding text-center"></div>
-                                        <div class="col-xs-8 no-padding-left"><input name="obs_garaj" type="text" class="form-control"></div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label>Etaj</label>
+                                    <div>
+                                        <input name="house[floor]" type="text" class="form-control">
                                     </div>
                                 </div>
-                            </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label>An constructie</label>
+                                    <div>
+                                        <input name="house[built_year]" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label>Numar bai</label>
+                                    <div class="row">
+                                        <div class="col-xs-4"><input name="house[bathrooms]" type="text" class="form-control no-padding text-center"></div>
+                                        <div class="col-xs-8 no-padding-left"><input name="house[obs_bathrooms]" type="text" class="form-control"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label>Nr. gr. sanitare</label>
+                                    <div class="row">
+                                        <div class="col-xs-4"><input name="house[sanitary]" type="text" class="form-control no-padding text-center"></div>
+                                        <div class="col-xs-8 no-padding-left"><input name="house[obs_sanitary]" type="text" class="form-control"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label>Numar balcoane</label>
+                                    <div class="row">
+                                        <div class="col-xs-4"><input name="house[balconies]" type="text" class="form-control no-padding text-center"></div>
+                                        <div class="col-xs-8 no-padding-left"><input name="house[obs_balconies]" type="text" class="form-control"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label>Loc parcare</label>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-xs-4"><input name="house[parking]" type="text" class="form-control no-padding text-center"></div>
+                                            <div class="col-xs-8 no-padding-left"><input name="house[obs_parking]" type="text" class="form-control"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label>Boxa</label>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-xs-4"><input name="house[storeroom]" type="text" class="form-control no-padding text-center"></div>
+                                            <div class="col-xs-8 no-padding-left"><input name="house[obs_storeroom]" type="text" class="form-control"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label>Garaj</label>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-xs-4"><input name="house[garage]" type="text" class="form-control no-padding text-center"></div>
+                                            <div class="col-xs-8 no-padding-left"><input name="house[obs_garage]" type="text" class="form-control"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @elseif ($entity_type == 'house')
+
+                            @else
+
+                            @endif
                         </div>
-                    </div><!-- end imobil -->
+                    </div>
+
+                    <!-- END IMOBIL -->
 
                     <!-- IMBUNATATIRI -->
                     <div class="col-xs-12 col-sm-6">

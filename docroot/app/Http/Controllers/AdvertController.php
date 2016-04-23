@@ -71,8 +71,11 @@ class AdvertController extends Controller {
   public function editEntity($id) {
     /** @var Advert $advert */
     $advert = Advert::find($id);
+    /** @var Owner $owner */
     $owner = $advert->owner;
+    $owner->setAttribute('phone', json_decode($owner->phone, TRUE));
     $entity = $advert->{$advert->type};
+    /** @var Improvements $improvements */
     $improvements = json_decode($advert->improvements->improvements, TRUE);
     $advert->setAttribute('area', $advert->area->name);
     $advert->setAttribute('neighborhood', $advert->neighborhood->name);

@@ -129,39 +129,54 @@
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label for="owner[last_name]">Nume</label>
                                 <div>
-                                    <input id="owner[last_name]" name="owner[last_name]" type="text" class="form-control">
+                                    <input value="{{ !empty($owner['last_name']) ? $owner['last_name'] : '' }}" id="owner[last_name]" name="owner[last_name]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label for="owner[first_name]">Prenume</label>
                                 <div>
-                                    <input id="owner[first_name]" name="owner[first_name]" type="text" class="form-control">
+                                    <input value="{{ !empty($owner['first_name']) ? $owner['first_name'] : '' }}" id="owner[first_name]" name="owner[first_name]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div id="telefons">
-                                <div class="form-group col-xs-12 col-sm-4 telefon-container">
-                                    <label for="owner[phone]">Telefon <a class="adauga-telefon" href="javascript:"><i class="fa fa-plus-square"></i></a></label>
-                                    <div>
-                                        <input id="owner[phone]" name="owner[phone][]" type="text" class="form-control">
+                                @if (!empty($owner['phone']) && count($owner['phone']) > 0)
+                                    @foreach($owner['phone'] as $it => $tel)
+                                        <div class="form-group col-xs-12 col-sm-4 telefon-container">
+                                            @if ($it == 0)
+                                                <label for="owner[phone]">Telefon <a class="adauga-telefon" href="javascript:"><i class="fa fa-plus-square"></i></a></label>
+                                            @else
+                                                <label>Telefon {{ $it }}</label>
+                                            @endif
+                                            <div>
+                                                <input name="owner[phone][]" type="text" class="form-control" value="{{ $tel }}">
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="form-group col-xs-12 col-sm-4 telefon-container">
+                                        <label for="owner[phone]">Telefon <a class="adauga-telefon" href="javascript:"><i class="fa fa-plus-square"></i></a></label>
+                                        <div>
+                                            <input id="owner[phone]" name="owner[phone][]" type="text" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                             <div class="form-group col-xs-12 col-sm-8">
                                 <label for="owner[email]">E-mail</label>
                                 <div>
-                                    <input id="owner[email]" name="owner[email]" type="text" class="form-control">
+                                    <input value="{{ !empty($owner['email']) ? $owner['email'] : '' }}" id="owner[email]" name="owner[email]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label for="owner[cadaster]">Cadastru</label>
                                 <div>
-                                    <input id="owner[cadaster]" name="owner[cadaster]" type="text" class="form-control">
+                                    <input value="{{ !empty($owner['cadaster']) ? $owner['cadaster'] : '' }}" id="owner[cadaster]" name="owner[cadaster]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label for="owner[registration]">Intabulare</label>
                                 <div>
-                                    <input id="owner[registration]" name="owner[registration]" type="text" class="form-control">
+                                    <input value="{{ !empty($owner['registration']) ? $owner['registration'] : '' }}" id="owner[registration]" name="owner[registration]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
@@ -169,14 +184,14 @@
                                     <div>
                                         <label for="owner[urbanism_certificate]">Certificat urbanism</label>
                                         <div>
-                                            <input id="owner[urbanism_certificate]" name="owner[urbanism_certificate]" type="text" class="form-control">
+                                            <input value="{{ !empty($owner['urbanism_certificate']) ? $owner['urbanism_certificate'] : '' }}" id="owner[urbanism_certificate]" name="owner[urbanism_certificate]" type="text" class="form-control">
                                         </div>
                                     </div>
                                 @else
                                     <div>
                                         <label for="owner[energy_certificate]">Certificat energetic</label>
                                         <div>
-                                            <input id=owner[energy_certificate] name="owner[energy_certificate]" type="text" class="form-control">
+                                            <input value="{{ !empty($owner['energy_certificate']) ? $owner['energy_certificate'] : '' }}" id=owner[energy_certificate] name="owner[energy_certificate]" type="text" class="form-control">
                                         </div>
                                     </div>
                                 @endif
@@ -184,13 +199,13 @@
                             <div class="form-group col-xs-12 col-sm-4 margin-top-small">
                                 <div>
                                     <label class="checkbox-inline">
-                                        <input name="owner[map_pictures]" type="checkbox" value="1"> Poze MAP
+                                        <input {{ !empty($owner['map_pictures']) ? 'checked' : '' }} name="owner[map_pictures]" type="checkbox" value="1"> Poze MAP
                                     </label>
                                 </div>
                                 @if ($entity_type == 'apartment')
                                     <div>
                                         <label class="checkbox-inline">
-                                            <input name="owner[rehabilitated_block]" type="checkbox" value="1"> Bloc reabilitat
+                                            <input {{ !empty($owner['rehabilitated_block']) ? 'checked' : '' }} name="owner[rehabilitated_block]" type="checkbox" value="1"> Bloc reabilitat
                                         </label>
                                     </div>
                                 @endif
@@ -198,13 +213,13 @@
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label for="owner[address]">Adresa</label>
                                 <div>
-                                    <textarea id="owner[address]" name="owner[address]" class="form-control" rows="2"></textarea>
+                                    <textarea id="owner[address]" name="owner[address]" class="form-control" rows="2">{{ !empty($owner['address']) ? $owner['address'] : '' }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label for="owner[observation]">Observatii (TO DO: link to observation model)</label>
                                 <div>
-                                    <textarea id="owner[observation]" name="owner[observation]" class="form-control" rows="2"></textarea>
+                                    <textarea disabled id="owner[observation]" name="owner[observation]" class="form-control" rows="2"></textarea>
                                 </div>
                             </div>
                         </div>

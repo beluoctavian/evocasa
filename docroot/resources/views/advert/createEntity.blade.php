@@ -14,7 +14,7 @@
                         Adauga un apartament
                     @elseif ($entity_type == 'house')
                         Adauga o casa
-                    @else
+                    @elseif ($entity_type == 'terrain')
                         Adauga un teren
                     @endif
                 </h1>
@@ -52,7 +52,7 @@
                             <i class="fa fa-file"></i>
                             <h2>Detalii anunt</h2>
                         </div>
-                        <div class="form-row">
+                        <div class="row">
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label class="checkbox-inline">
                                     <input name="advert[first_page]" type="checkbox" value="1"> Anuntul apare pe prima pagina
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div class="row">
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label for="advert[neighborhood]">Cartier</label>
                                 <div>
@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div class="row">
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label for="advert[price]">Pret actual</label>
                                 <div class="input-group">
@@ -105,14 +105,10 @@
                                     <span class="input-group-addon">&euro;</span>
                                 </div>
                             </div>
-                            <div class="col-xs-12 no-padding">
-                                <div class="form-row">
-                                    <div class="form-group col-xs-12">
-                                        <label for="advert[description]">Descriere</label>
-                                        <div>
-                                            <textarea id="advert[description]" name="advert[description]" class="form-control" rows="4"></textarea>
-                                        </div>
-                                    </div>
+                            <div class="form-group col-xs-12">
+                                <label for="advert[description]">Descriere</label>
+                                <div>
+                                    <textarea id="advert[description]" name="advert[description]" class="form-control" rows="4"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +120,7 @@
                             <i class="fa fa-male"></i>
                             <h2>Detalii proprietar</h2>
                         </div>
-                        <div class="form-row">
+                        <div class="row">
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label for="owner[last_name]">Nume</label>
                                 <div>
@@ -164,20 +160,21 @@
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
-                                <div>
-                                    <label for="owner[energy_certificate]">Certificat energetic</label>
+                                @if ($entity_type == 'terrain')
                                     <div>
-                                        <input id=owner[energy_certificate] name="owner[energy_certificate]" type="text" class="form-control">
+                                        <label for="owner[urbanism_certificate]">Certificat urbanism</label>
+                                        <div>
+                                            <input id="owner[urbanism_certificate]" name="owner[urbanism_certificate]" type="text" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <div>
-                                    <label for="owner[urbanism_certificate]">Certificat energetic</label>
+                                @else
                                     <div>
-                                        <input id="owner[urbanism_certificate]" name="owner[urbanism_certificate]" type="text" class="form-control">
+                                        <label for="owner[energy_certificate]">Certificat energetic</label>
+                                        <div>
+                                            <input id=owner[energy_certificate] name="owner[energy_certificate]" type="text" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                             <div class="form-group col-xs-12 col-sm-4 margin-top-small">
                                 <div>
@@ -185,11 +182,13 @@
                                         <input name="owner[map_pictures]" type="checkbox" value="1"> Poze MAP
                                     </label>
                                 </div>
-                                <div>
-                                    <label class="checkbox-inline">
-                                        <input name="owner[rehabilitated_block]" type="checkbox" value="1"> Bloc reabilitat
-                                    </label>
-                                </div>
+                                @if ($entity_type == 'apartment')
+                                    <div>
+                                        <label class="checkbox-inline">
+                                            <input name="owner[rehabilitated_block]" type="checkbox" value="1"> Bloc reabilitat
+                                        </label>
+                                    </div>
+                                @endif
                             </div>
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label for="owner[address]">Adresa</label>
@@ -216,7 +215,7 @@
                             <h2>Detalii imobil</h2>
                         </div>
                         @if ($entity_type == 'apartment')
-                            <div class="form-row">
+                            <div class="row">
                                 <div class="form-group col-xs-12 col-sm-4">
                                     <label for="entity[usable_area]">Suprafata utila</label>
                                     <div class="input-group">
@@ -238,7 +237,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-row">
+                            <div class="row">
                                 <div class="form-group col-xs-12 col-sm-4">
                                     <label for="entity[comfort]">Confort</label>
                                     <div>
@@ -307,8 +306,92 @@
                                 </div>
                             </div>
                         @elseif ($entity_type == 'house')
-
-                        @else
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[land_area]">Suprafata teren</label>
+                                    <div class="input-group">
+                                        <input id="entity[land_area]" name="entity[land_area]" type="text" class="form-control">
+                                        <span class="input-group-addon">mp</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[street_opening]">Deschidere stradala</label>
+                                    <div class="input-group">
+                                        <input id="entity[street_opening]" name="entity[street_opening]" type="text" class="form-control">
+                                        <span class="input-group-addon">ml</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[footprint]">Amprenta la sol</label>
+                                    <div class="input-group">
+                                        <input id="entity[footprint]" name="entity[footprint]" type="text" class="form-control">
+                                        <span class="input-group-addon">mp</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[total_area]">Suprafata desfasurata totala</label>
+                                    <div class="input-group">
+                                        <input id="entity[total_area]" name="entity[total_area]" type="text" class="form-control">
+                                        <span class="input-group-addon">mp</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[level_area]">Suprafata per nivel</label>
+                                    <div class="input-group">
+                                        <input id="entity[level_area]" name="entity[level_area]" type="text" class="form-control">
+                                        <span class="input-group-addon">mp</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[height]">Regim inaltime</label>
+                                    <div>
+                                        <input id="entity[height]" name="entity[height]" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[built_year]">An constructie</label>
+                                    <div>
+                                        <input id="entity[built_year]" name="entity[built_year]" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[bathrooms]">Numar bai</label>
+                                    <div class="row">
+                                        <div class="col-xs-4"><input id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding text-center"></div>
+                                        <div class="col-xs-8 no-padding-left"><input title="bathrooms observations" name="entity[obs_bathrooms]" type="text" class="form-control"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[sanitary]">Nr. gr. sanitare</label>
+                                    <div class="row">
+                                        <div class="col-xs-4"><input id="entity[sanitary]" name="entity[sanitary]" type="text" class="form-control no-padding text-center"></div>
+                                        <div class="col-xs-8 no-padding-left"><input title="sanitary" name="entity[obs_sanitary]" type="text" class="form-control"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[balconies]">Numar balcoane</label>
+                                    <div class="row">
+                                        <div class="col-xs-4"><input id="entity[balconies]" name="entity[balconies]" type="text" class="form-control no-padding text-center"></div>
+                                        <div class="col-xs-8 no-padding-left"><input title="balconies observations" name="entity[obs_balconies]" type="text" class="form-control"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[garage]">Garaj</label>
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-xs-4"><input id="entity[garage]" name="entity[garage]" type="text" class="form-control no-padding text-center"></div>
+                                            <div class="col-xs-8 no-padding-left"><input title="garage observations" name="entity[obs_garage]" type="text" class="form-control"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @elseif ($entity_type == 'terrain')
 
                         @endif
                     </div>
@@ -322,9 +405,9 @@
                             <h2>Imbunatatiri</h2>
                         </div>
                         @if ($entity_type == 'apartment')
-                            <div class="form-row">
+                            <div class="row">
                                 <div class="col-xs-6">
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
                                                 <input name="improvements[gresie]" type="checkbox" value="1"> Gresie
@@ -363,7 +446,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
-                                    <div class="form-row">
+                                    <div class="row">
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
                                                 <input name="improvements[contor_gaze]" type="checkbox" value="1"> Contor gaze individual
@@ -402,7 +485,7 @@
                             </div>
                         @elseif ($entity_type == 'house')
 
-                        @else
+                        @elseif ($entity_type == 'terrain')
 
                         @endif
                     </div><!-- end imbunatatiri -->

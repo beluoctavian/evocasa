@@ -33,7 +33,7 @@
                         <div class="form-row">
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label class="checkbox-inline">
-                                    <input name="advert[first_page]" type="checkbox" value="first_page"> Anuntul apare pe prima pagina
+                                    <input name="advert[first_page]" type="checkbox" value="1"> Anuntul apare pe prima pagina
                                 </label>
                             </div>
                             <div class="form-group col-xs-12 col-sm-12">

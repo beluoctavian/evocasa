@@ -52,6 +52,7 @@
                             <i class="fa fa-file"></i>
                             <h2>Detalii anunt</h2>
                         </div>
+                        //TODO: Statusuri!!!
                         <div class="row">
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label class="checkbox-inline">

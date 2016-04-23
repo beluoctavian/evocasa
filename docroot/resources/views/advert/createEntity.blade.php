@@ -515,11 +515,13 @@
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="row">
-                                        <div class="col-xs-12">
-                                            <label class="checkbox-inline">
-                                                <input name="improvements[contor_gaze]" {{ !empty($improvements['contor_gaze']) ? 'checked' : '' }} type="checkbox" value="1"> Contor gaze individual
-                                            </label>
-                                        </div>
+                                        @if ($entity_type == 'apartment')
+                                            <div class="col-xs-12">
+                                                <label class="checkbox-inline">
+                                                    <input name="improvements[contor_gaze]" {{ !empty($improvements['contor_gaze']) ? 'checked' : '' }} type="checkbox" value="1"> Contor gaze individual
+                                                </label>
+                                            </div>
+                                        @endif
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
                                                 <input name="improvements[centrala]" {{ !empty($improvements['centrala']) ? 'checked' : '' }} type="checkbox" value="1"> Centrala

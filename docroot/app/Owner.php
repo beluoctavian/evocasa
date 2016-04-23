@@ -53,7 +53,7 @@ class Owner extends Model {
             $valid_parameters['phone'] = json_encode($parameters['phone']);
         }
         $valid_parameters['advert_id'] = $advert->id;
-        return Owner::create($valid_parameters);
+        return self::create($valid_parameters);
     }
 
 }

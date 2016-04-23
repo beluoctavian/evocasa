@@ -100,7 +100,7 @@ class Advert extends Model {
             }
         }
         /** @var Advert $advert */
-        $advert = Advert::create($valid_parameters);
+        $advert = self::create($valid_parameters);
         $advert->code = \Auth::user()->code . '_' . $advert->id;
         $advert->save();
         return $advert;

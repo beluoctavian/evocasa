@@ -37,7 +37,7 @@ class AdvertController extends Controller {
     return view('advert.createEntity')->with('entity_type', 'terrain');
   }
 
-  private function createEntity(Request $request, $entity_type) {
+  public function createEntity(Request $request, $entity_type) {
     if (empty($request->get('advert')) || empty($request->get('owner')) || empty($request->get('entity')) || empty($request->get('improvements'))) {
       return redirect('/advert/add/apartment')->withErrors('A aparut o eroare.');
     }
@@ -61,6 +61,25 @@ class AdvertController extends Controller {
     }
 
     return $entity;
+  }
+
+  /**
+   * @param $id
+   *  Entity unique id.
+   * @return $this
+   */
+  public function editEntity($id) {
+    /** @var Advert $advert */
+    $advert = Advert::find($id);
+    $owner = $advert->owner;
+    $entity = $advert->{$advert->type};
+    $improvements = json_decode($advert->improvements->improvements, TRUE);
+    return view('advert.createEntity')
+      ->with('entity_type', $advert->type)
+      ->with('advert', $advert->attributesToArray())
+      ->with('owner', $owner->attributesToArray())
+      ->with('entity', $entity->attributesToArray())
+      ->with('improvements', $improvements);
   }
 
   public function postApartment(Request $request)

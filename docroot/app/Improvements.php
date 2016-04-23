@@ -16,6 +16,18 @@ class Improvements extends Model {
     'advert_id',
   ];
 
+  /**
+   * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+   */
+  public function advert() {
+    return $this->belongsTo('App\Advert');
+  }
+
+  /**
+   * @param array $parameters
+   * @param \App\Advert $advert
+   * @return static
+   */
   public static function createFromArray(array $parameters, Advert $advert)
   {
     $valid_parameters = [

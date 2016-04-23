@@ -84,6 +84,13 @@ class Advert extends Model {
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function improvements() {
+        return $this->hasOne('App\Improvements');
+    }
+
+    /**
      * @param array $parameters
      */
     public static function createFromArray(array $parameters)

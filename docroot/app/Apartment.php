@@ -13,7 +13,7 @@ class Apartment extends Model {
      */
     public function advert()
     {
-        return $this->hasOne('App\Advert');
+        return $this->belongsTo('App\Advert');
     }
 
 }

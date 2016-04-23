@@ -74,6 +74,8 @@ class AdvertController extends Controller {
     $owner = $advert->owner;
     $entity = $advert->{$advert->type};
     $improvements = json_decode($advert->improvements->improvements, TRUE);
+    $advert->setAttribute('area', $advert->area->name);
+    $advert->setAttribute('neighborhood', $advert->neighborhood->name);
     return view('advert.createEntity')
       ->with('entity_type', $advert->type)
       ->with('advert', $advert->attributesToArray())

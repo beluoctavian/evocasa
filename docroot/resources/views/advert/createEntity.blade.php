@@ -55,7 +55,7 @@
                         <div class="row">
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label class="checkbox-inline">
-                                    <input name="advert[first_page]" type="checkbox" value="1"> Anuntul apare pe prima pagina
+                                    <input {{ !empty($advert['first_page']) ? 'checked' : '' }} name="advert[first_page]" type="checkbox" value="1"> Anuntul apare pe prima pagina
                                 </label>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label for="advert[title]">Titlu anunt</label>
                                 <div>
-                                    <input id="advert[title]" name="advert[title]" type="text" class="form-control" required>
+                                    <input value="{{ !empty($advert['title']) ? $advert['title'] : '' }}" id="advert[title]" name="advert[title]" type="text" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -71,13 +71,13 @@
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label for="advert[neighborhood]">Cartier</label>
                                 <div>
-                                    <input id="advert[neighborhood]" name="advert[neighborhood]" type="text" class="form-control">
+                                    <input value="{{ !empty($advert['neighborhood']) ? $advert['neighborhood'] : '' }}" id="advert[neighborhood]" name="advert[neighborhood]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label for="advert[area]">Zona</label>
                                 <div>
-                                    <input id="advert[area]" name="advert[area]" type="text" class="form-control">
+                                    <input value="{{ !empty($advert['area']) ? $advert['area'] : '' }}" id="advert[area]" name="advert[area]" type="text" class="form-control">
                                 </div>
                             </div>
                             @if ($entity_type == 'apartment' || $entity_type == 'house')
@@ -85,10 +85,11 @@
                                     <label for="advert[no_rooms]">Numar camere</label>
                                     <div>
                                         <select id="advert[no_rooms]" name="advert[no_rooms]" class="form-control">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4+</option>
+                                            @for ($i = 1; $i <= 4; $i++)
+                                                <option {{ $advert['no_rooms'] == $i ? 'selected' : '' }} value="{{ $i }}">
+                                                    {{ $i }}{{ $i == 4 ? '+' : '' }}
+                                                </option>
+                                            @endfor
                                         </select>
                                     </div>
                                 </div>
@@ -98,21 +99,21 @@
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label for="advert[price]">Pret actual</label>
                                 <div class="input-group">
-                                    <input id="advert[price]" name="advert[price]" type="text" class="form-control">
+                                    <input value="{{ !empty($advert['price']) ? $advert['price'] : '' }}" id="advert[price]" name="advert[price]" type="text" class="form-control">
                                     <span class="input-group-addon">&euro;</span>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label for="advert[old_price]">Pret vechi</label>
                                 <div class="input-group">
-                                    <input id="advert[old_price]" name="advert[old_price]" type="text" class="form-control">
+                                    <input value="{{ !empty($advert['old_price']) ? $advert['old_price'] : '' }}" id="advert[old_price]" name="advert[old_price]" type="text" class="form-control">
                                     <span class="input-group-addon">&euro;</span>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12">
                                 <label for="advert[description]">Descriere</label>
                                 <div>
-                                    <textarea id="advert[description]" name="advert[description]" class="form-control" rows="4"></textarea>
+                                    <textarea id="advert[description]" name="advert[description]" class="form-control" rows="4">{{ !empty($advert['description']) ? $advert['description'] : '' }}</textarea>
                                 </div>
                             </div>
                         </div>

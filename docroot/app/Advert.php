@@ -40,7 +40,7 @@ class Advert extends Model {
      */
     public function owner()
     {
-        return $this->hasOne('App\Owner');
+        return $this->belongsTo('App\Owner');
     }
 
     /**

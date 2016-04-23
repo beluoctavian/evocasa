@@ -41,9 +41,9 @@ class Owner extends Model {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function owner()
+    public function advert()
     {
-        return $this->belongsTo('App\Advert');
+        return $this->hasOne('App\Advert');
     }
 
     /**

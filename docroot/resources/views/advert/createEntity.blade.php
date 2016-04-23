@@ -197,11 +197,11 @@
                 <!-- DETALII IMOBIL -->
                 <div class="row margin-bottom">
                     <div class="col-xs-12 col-sm-6">
+                        <div class="main-title">
+                            <i class="fa fa-home"></i>
+                            <h2>Detalii imobil</h2>
+                        </div>
                         @if ($entity_type == 'apartment')
-                            <div class="main-title">
-                                <i class="fa fa-home"></i>
-                                <h2>Detalii imobil</h2>
-                            </div>
                             <div class="form-row">
                                 <div class="form-group col-xs-12 col-sm-4">
                                     <label for="house[usable_area]">Suprafata utila</label>
@@ -291,12 +291,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            @elseif ($entity_type == 'house')
+                            </div>
+                        @elseif ($entity_type == 'house')
 
-                            @else
+                        @else
 
-                            @endif
-                        </div>
+                        @endif
                     </div>
 
                     <!-- END IMOBIL -->
@@ -307,84 +307,90 @@
                             <i class="fa fa-star"></i>
                             <h2>Imbunatatiri</h2>
                         </div>
-                        <div class="form-row">
-                            <div class="col-xs-6">
-                                <div class="form-row">
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="gresie" type="checkbox" value="gresie"> Gresie
-                                        </label>
+                        @if ($entity_type == 'apartmanet')
+                            <div class="form-row">
+                                <div class="col-xs-6">
+                                    <div class="form-row">
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[gresie]" type="checkbox" value="1"> Gresie
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[faianta]" type="checkbox" value="1"> Faianta
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[parchet]" type="checkbox" value="1"> Parchet
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[termopan]" type="checkbox" value="1"> Termopan
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[aer]" type="checkbox" value="1"> Aer conditionat
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[instalatie_sanitara]" type="checkbox" value="1"> Instalatie sanitara noua
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[instalatie_electrica]" type="checkbox" value="1"> Instalatie electrica noua
+                                            </label>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="faianta" type="checkbox" value="faianta"> Faianta
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="parchet" type="checkbox" value="parchet"> Parchet
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="termopan" type="checkbox" value="termopan"> Termopan
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="aer" type="checkbox" value="aer"> Aer conditionat
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="instalatie_sanitara" type="checkbox" value="instalatie_sanitara"> Instalatie sanitara noua
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="instalatie_electrica" type="checkbox" value="instalatie_electrica"> Instalatie electrica noua
-                                        </label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-row">
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[contor_gaze]" type="checkbox" value="1"> Contor gaze individual
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[centrala]" type="checkbox" value="1"> Centrala
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[mobilier]" type="checkbox" value="1"> Mobilier inclus
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[usi_interioare]" type="checkbox" value="1"> Usi interioare schimbate
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[usa_metalica]" type="checkbox" value="1"> Usa metalica
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            &nbsp;
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[fara_imbunatatiri]" type="checkbox" value="1"> Fara imbunatatiri
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-6">
-                                <div class="form-row">
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="contor_gaze" type="checkbox" value="contor_gaze"> Contor gaze individual
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="centrala" type="checkbox" value="centrala"> Centrala
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="mobilier" type="checkbox" value="mobilier"> Mobilier inclus
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="usi_interioare" type="checkbox" value="usa_metalica"> Usi interioare schimbate
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="usa_metalica" type="checkbox" value="usa_metalica"> Usa metalica
-                                        </label>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        &nbsp;
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="fara_imbunatatiri" type="checkbox" value="fara_imbunatatiri"> Fara imbunatatiri
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @elseif ($entity_type == 'house')
+
+                        @else
+
+                        @endif
                     </div><!-- end imbunatatiri -->
 
                 </div><!-- /.row -->

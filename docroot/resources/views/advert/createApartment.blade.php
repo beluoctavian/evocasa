@@ -106,69 +106,77 @@
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label>Nume</label>
                                 <div>
-                                    <input name="nume_proprietar" type="text" class="form-control">
+                                    <input name="owner[surname]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label>Prenume</label>
                                 <div>
-                                    <input name="prenume_proprietar" type="text" class="form-control">
+                                    <input name="owner[firstname]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div id="telefons">
                                 <div class="form-group col-xs-12 col-sm-4 telefon-container">
                                     <label>Telefon <a class="adauga-telefon" href="javascript:"><i class="fa fa-plus-square"></i></a></label>
                                     <div>
-                                        <input name="telefon_proprietar[]" type="text" class="form-control">
+                                        <input name="owner[phone][]" type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-8">
                                 <label>E-mail</label>
                                 <div>
-                                    <input name="email_proprietar" type="text" class="form-control">
+                                    <input name="owner[email]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label>Cadastru</label>
                                 <div>
-                                    <input name="cadastru_proprietar" type="text" class="form-control">
+                                    <input name="owner[cadaster]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label>Intabulare</label>
                                 <div>
-                                    <input name="intabulare_proprietar" type="text" class="form-control">
+                                    <input name="owner[registration]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
                                 <div>
                                     <label>Certificat energetic</label>
                                     <div>
-                                        <input name="certificat_energetic_proprietar" type="text" class="form-control">
+                                        <input name="owner[energy_certificate]" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-4">
+                                <div>
+                                    <label>Certificat energetic</label>
+                                    <div>
+                                        <input name="owner[urbanism_certificate]" type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4 margin-top-small">
                                 <div>
                                     <label class="checkbox-inline">
-                                        <input name="poze_map_proprietar" type="checkbox"> Poze MAP
+                                        <input name="owner[map_pictures]" type="checkbox"> Poze MAP
                                     </label>
                                 </div>
                                 <div>
                                     <label class="checkbox-inline">
-                                        <input name="bloc_reabilitat" type="checkbox"> Bloc reabilitat
+                                        <input name="owner[rehabilitated_block]" type="checkbox"> Bloc reabilitat
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label>Adresa</label>
                                 <div>
-                                    <textarea name="adresa_proprietar" class="form-control" rows="2"></textarea>
+                                    <textarea name="owner[address]" class="form-control" rows="2"></textarea>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-12">
-                                <label>Observatii</label>
+                                <label>Observatii (TO DO: link to observation model)</label>
                                 <div>
                                     <textarea name="observatii_proprietar" class="form-control" rows="2"></textarea>
                                 </div>

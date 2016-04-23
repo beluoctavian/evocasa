@@ -70,7 +70,7 @@ class Advert extends Model {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function heighborhood()
+    public function neighborhood()
     {
         return $this->belongsTo('App\Neighborhood');
     }

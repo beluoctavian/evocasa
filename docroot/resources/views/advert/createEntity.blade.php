@@ -54,7 +54,12 @@
                     <div class="col-xs-12 col-sm-6">
                         <div class="main-title">
                             <i class="fa fa-file"></i>
-                            <h2>Detalii anunt</h2>
+                            <h2>
+                                <span>Detalii anunt</span>
+                                @if (!empty($advert['id']))
+                                    <span>: <a href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['code'] }}</a></span>
+                                @endif
+                            </h2>
                         </div>
                         //TODO: Statusuri!!!
                         <div class="row">

@@ -307,7 +307,7 @@
                             <i class="fa fa-star"></i>
                             <h2>Imbunatatiri</h2>
                         </div>
-                        @if ($entity_type == 'apartmanet')
+                        @if ($entity_type == 'apartment')
                             <div class="form-row">
                                 <div class="col-xs-6">
                                     <div class="form-row">

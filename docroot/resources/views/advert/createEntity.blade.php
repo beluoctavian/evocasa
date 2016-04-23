@@ -9,7 +9,15 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h1>Adauga un anunt</h1>
+                <h1>
+                    @if ($entity_type == 'apartment')
+                        Adauga un apartament
+                    @elseif ($entity_type == 'house')
+                        Adauga o casa
+                    @else
+                        Adauga un teren
+                    @endif
+                </h1>
             </div>
         </div>
     </div>

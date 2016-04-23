@@ -106,13 +106,13 @@
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label>Nume</label>
                                 <div>
-                                    <input name="owner[surname]" type="text" class="form-control">
+                                    <input name="owner[last_name]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label>Prenume</label>
                                 <div>
-                                    <input name="owner[firstname]" type="text" class="form-control">
+                                    <input name="owner[first_name]" type="text" class="form-control">
                                 </div>
                             </div>
                             <div id="telefons">

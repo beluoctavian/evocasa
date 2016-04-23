@@ -9,6 +9,19 @@ class Advert extends Model {
 
     protected $table = 'advert';
 
+    protected $fillable = [
+      'title',
+      'first_page',
+      'type',
+      'no_rooms',
+      'price',
+      'old_price',
+      'description',
+      'neighborhood_id',
+      'area_id',
+      'code',
+    ];
+
     public static $properties = [
         'title',
         'first_page',
@@ -100,7 +113,7 @@ class Advert extends Model {
             }
         }
         /** @var Advert $advert */
-        $advert = Advert::create($valid_parameters);
+        $advert = self::create($valid_parameters);
         $advert->code = \Auth::user()->code . '_' . $advert->id;
         $advert->save();
         return $advert;

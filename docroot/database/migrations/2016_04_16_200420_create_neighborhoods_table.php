@@ -27,7 +27,7 @@ class CreateNeighborhoodsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('neighborhoods');
+		Schema::drop('neighborhood');
 	}
 
 }

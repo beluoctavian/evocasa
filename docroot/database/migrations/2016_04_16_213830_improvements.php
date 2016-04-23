@@ -16,7 +16,11 @@ class Improvements extends Migration {
 		{
 			$table->increments('id');
 			$table->string('improvements');
-			$table->integer('parent_id');
+			$table->integer('advert_id')->unsigned();
+			$table->foreign('advert_id')
+				->references('id')
+				->on('advert')
+				->onDelete('cascade');
 			$table->timestamps();
 		});
 	}
@@ -28,10 +32,7 @@ class Improvements extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('improvements', function(Blueprint $table)
-		{
-			//
-		});
+		Schema::drop('improvements');
 	}
 
 }

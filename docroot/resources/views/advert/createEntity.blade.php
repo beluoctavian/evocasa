@@ -47,7 +47,7 @@
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label for="advert[title]">Titlu anunt</label>
                                 <div>
-                                    <input id="advert[title]" name="advert[title]" type="text" class="form-control">
+                                    <input id="advert[title]" name="advert[title]" type="text" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">

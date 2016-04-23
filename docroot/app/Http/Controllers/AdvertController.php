@@ -68,7 +68,7 @@ class AdvertController extends Controller {
    *  Entity unique id.
    * @return $this
    */
-  public function editEntity($id) {
+  public function getEditEntity($id) {
     /** @var Advert $advert */
     $advert = Advert::find($id);
     /** @var Owner $owner */
@@ -85,6 +85,12 @@ class AdvertController extends Controller {
       ->with('owner', $owner->attributesToArray())
       ->with('entity', $entity->attributesToArray())
       ->with('improvements', $improvements);
+  }
+
+  public function postEditEntity(Request $request, $id)
+  {
+    //TODO: Edit the entity
+    return $this->getEditEntity($id);
   }
 
   public function postApartment(Request $request)

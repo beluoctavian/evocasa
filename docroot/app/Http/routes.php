@@ -41,4 +41,5 @@ Route::get('delete-client/{id}', 'CustomersController@deleteCustomer');
 /* ----------------- REFACTOR ALL ROUTES ----------------- */
 
 Route::controller('advert/add', 'AdvertController');
-Route::get('advert/edit/{id}', 'AdvertController@editEntity');
+Route::get('advert/edit/{id}', 'AdvertController@getEditEntity');
+Route::post('advert/edit/{id}', 'AdvertController@postEditEntity');

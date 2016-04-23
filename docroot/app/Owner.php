@@ -8,7 +8,7 @@ class Owner extends Model {
 
     protected $table = 'owner';
 
-    protected $fillable = [
+    public static $properties = [
       'firstname',
       'surname',
       'phone',
@@ -43,24 +43,9 @@ class Owner extends Model {
      * @param array $parameters
      */
     public static function createFromArray(array $parameters, Advert $advert) {
-        // TODO: find a better way to use these properties.
-        $properties = [
-          'first_name',
-          'last_name',
-          'phone',
-          'email',
-          'cadaster',
-          'registration',
-          'energy_certificate',
-          'urbanism_certificate',
-          'map_pictures',
-          'rehabilitated_block',
-          'address',
-          'advert_id',
-        ];
         $valid_parameters = [];
         foreach ($parameters as $key => $value) {
-            if (in_array($key, $properties)) {
+            if (in_array($key, self::$properties)) {
                 $valid_parameters[$key] = $value;
             }
         }

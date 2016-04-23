@@ -9,6 +9,19 @@ class Advert extends Model {
 
     protected $table = 'advert';
 
+    public static $properties = [
+        'title',
+        'first_page',
+        'type',
+        'no_rooms',
+        'price',
+        'old_price',
+        'description',
+        'neighborhood_id',
+        'area_id',
+        'code',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -77,18 +90,17 @@ class Advert extends Model {
               'neighborhood_id' => $neighborhood->id,
             ]);
         }
-        /** @var Advert $advert */
-        $advert = Advert::create([
-          'title' => $parameters['title'],
-          'first_page' => !empty($parameters['first_page']),
-          'type' => $parameters['type'],
-          'no_rooms' => $parameters['no_rooms'],
-          'price' => $parameters['price'],
-          'old_price' => $parameters['old_price'],
-          'description' => $parameters['description'],
+        $valid_parameters = [
           'neighborhood_id' => $neighborhood->id,
           'area_id' => $area->id,
-        ]);
+        ];
+        foreach ($parameters as $key => $value) {
+            if (in_array($key, self::$properties)) {
+                $valid_parameters[$key] = $value;
+            }
+        }
+        /** @var Advert $advert */
+        $advert = Advert::create($valid_parameters);
         $advert->code = \Auth::user()->code . '_' . $advert->id;
         $advert->save();
         return $advert;

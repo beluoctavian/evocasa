@@ -160,12 +160,12 @@
                             <div class="form-group col-xs-12 col-sm-4 margin-top-small">
                                 <div>
                                     <label class="checkbox-inline">
-                                        <input name="owner[map_pictures]" type="checkbox"> Poze MAP
+                                        <input name="owner[map_pictures]" type="checkbox" value="1"> Poze MAP
                                     </label>
                                 </div>
                                 <div>
                                     <label class="checkbox-inline">
-                                        <input name="owner[rehabilitated_block]" type="checkbox"> Bloc reabilitat
+                                        <input name="owner[rehabilitated_block]" type="checkbox" value="1"> Bloc reabilitat
                                     </label>
                                 </div>
                             </div>

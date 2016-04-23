@@ -474,37 +474,37 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[gresie]" type="checkbox" value="1"> Gresie
+                                                <input name="improvements[gresie]" {{ !empty($improvements['gresie']) ? 'checked' : '' }} type="checkbox" value="1"> Gresie
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[faianta]" type="checkbox" value="1"> Faianta
+                                                <input name="improvements[faianta]" {{ !empty($improvements['faianta']) ? 'checked' : '' }} type="checkbox" value="1"> Faianta
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[parchet]" type="checkbox" value="1"> Parchet
+                                                <input name="improvements[parchet]" {{ !empty($improvements['parchet']) ? 'checked' : '' }} type="checkbox" value="1"> Parchet
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[termopan]" type="checkbox" value="1"> Termopan
+                                                <input name="improvements[termopan]" {{ !empty($improvements['termopan']) ? 'checked' : '' }} type="checkbox" value="1"> Termopan
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[aer]" type="checkbox" value="1"> Aer conditionat
+                                                <input name="improvements[aer]" {{ !empty($improvements['aer']) ? 'checked' : '' }} type="checkbox" value="1"> Aer conditionat
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[instalatie_sanitara]" type="checkbox" value="1"> Instalatie sanitara noua
+                                                <input name="improvements[instalatie_sanitara]" {{ !empty($improvements['instalatie_sanitara']) ? 'checked' : '' }} type="checkbox" value="1"> Instalatie sanitara noua
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[instalatie_electrica]" type="checkbox" value="1"> Instalatie electrica noua
+                                                <input name="improvements[instalatie_electrica]" {{ !empty($improvements['instalatie_electrica']) ? 'checked' : '' }} type="checkbox" value="1"> Instalatie electrica noua
                                             </label>
                                         </div>
                                     </div>
@@ -513,27 +513,27 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[contor_gaze]" type="checkbox" value="1"> Contor gaze individual
+                                                <input name="improvements[contor_gaze]" {{ !empty($improvements['contor_gaze']) ? 'checked' : '' }} type="checkbox" value="1"> Contor gaze individual
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[centrala]" type="checkbox" value="1"> Centrala
+                                                <input name="improvements[centrala]" {{ !empty($improvements['centrala']) ? 'checked' : '' }} type="checkbox" value="1"> Centrala
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[mobilier]" type="checkbox" value="1"> Mobilier inclus
+                                                <input name="improvements[mobilier]" {{ !empty($improvements['mobilier']) ? 'checked' : '' }} type="checkbox" value="1"> Mobilier inclus
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[usi_interioare]" type="checkbox" value="1"> Usi interioare schimbate
+                                                <input name="improvements[usi_interioare]" {{ !empty($improvements['usi_interioare']) ? 'checked' : '' }} type="checkbox" value="1"> Usi interioare schimbate
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[usa_metalica]" type="checkbox" value="1"> Usa metalica
+                                                <input name="improvements[usa_metalica]" {{ !empty($improvements['usa_metalica']) ? 'checked' : '' }} type="checkbox" value="1"> Usa metalica
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
@@ -541,7 +541,7 @@
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[fara_imbunatatiri]" type="checkbox" value="1"> Fara imbunatatiri
+                                                <input name="improvements[fara_imbunatatiri]" {{ !empty($improvements['fara_imbunatatiri']) ? 'checked' : '' }} type="checkbox" value="1"> Fara imbunatatiri
                                             </label>
                                         </div>
                                     </div>
@@ -553,22 +553,22 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <label class="checkbox-inline">
-                                                    <input name="improvements[canalizare]" type="checkbox" value="1"> Canalizare
+                                                    <input name="improvements[canalizare]" {{ !empty($improvements['canalizare']) ? 'checked' : '' }} type="checkbox" value="1"> Canalizare
                                                 </label>
                                             </div>
                                             <div class="col-xs-12">
                                                 <label class="checkbox-inline">
-                                                    <input name="improvements[apa_curenta]" type="checkbox" value="1"> Apa curenta
+                                                    <input name="improvements[apa_curenta]" {{ !empty($improvements['apa_curenta']) ? 'checked' : '' }} type="checkbox" value="1"> Apa curenta
                                                 </label>
                                             </div>
                                             <div class="col-xs-12">
                                                 <label class="checkbox-inline">
-                                                    <input name="improvements[gaze]" type="checkbox" value="1"> Gaze
+                                                    <input name="improvements[gaze]" {{ !empty($improvements['gaze']) ? 'checked' : '' }} type="checkbox" value="1"> Gaze
                                                 </label>
                                             </div>
                                             <div class="col-xs-12">
                                                 <label class="checkbox-inline">
-                                                    <input name="improvements[electricitate]" type="checkbox" value="1"> Electricitate
+                                                    <input name="improvements[electricitate]" {{ !empty($improvements['electricitate']) ? 'checked' : '' }} type="checkbox" value="1"> Electricitate
                                                 </label>
                                             </div>
                                         </div>
@@ -581,27 +581,27 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[modernizat]" type="checkbox" value="1"> Modernizat
+                                                <input name="improvements[modernizat]" {{ !empty($improvements['modernizat']) ? 'checked' : '' }} type="checkbox" value="1"> Modernizat
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[canalizare]" type="checkbox" value="1"> Canalizare
+                                                <input name="improvements[canalizare]" {{ !empty($improvements['canalizare']) ? 'checked' : '' }} type="checkbox" value="1"> Canalizare
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[apa_curenta]" type="checkbox" value="1"> Apa curenta
+                                                <input name="improvements[apa_curenta]" {{ !empty($improvements['apa_curenta']) ? 'checked' : '' }} type="checkbox" value="1"> Apa curenta
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[gaze]" type="checkbox" value="1"> Gaze
+                                                <input name="improvements[gaze]" {{ !empty($improvements['gaze']) ? 'checked' : '' }} type="checkbox" value="1"> Gaze
                                             </label>
                                         </div>
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[electricitate]" type="checkbox" value="1"> Electricitate
+                                                <input name="improvements[electricitate]" {{ !empty($improvements['electricitate']) ? 'checked' : '' }} type="checkbox" value="1"> Electricitate
                                             </label>
                                         </div>
                                     </div>

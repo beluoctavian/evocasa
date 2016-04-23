@@ -31,6 +31,11 @@ class Advert extends Migration {
 			$table->foreign('area_id')
 				->references('id')
 				->on('area');
+			$table->integer('owner_id')->unsigned();
+			$table->foreign('owner_id')
+				->references('id')
+				->on('owner')
+				->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

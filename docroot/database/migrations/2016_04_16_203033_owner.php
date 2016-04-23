@@ -19,7 +19,7 @@ class Owner extends Migration {
 			$table->string('phone');
 			$table->string('email');
 			$table->string('cadaster');
-			$table->string('registrations');
+			$table->string('registration');
 			$table->string('energy_certificate');
 			$table->string('urbanism_certificate');
 			$table->boolean('map_pictures');

@@ -396,7 +396,38 @@
                                 </div>
                             </div>
                         @elseif ($entity_type == 'terrain')
-
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[total_area]">Suprafata totala</label>
+                                    <div class="input-group">
+                                        <input id="entity[total_area]" name="entity[total_area]" type="text" class="form-control">
+                                        <span class="input-group-addon">mp</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[street_opening]">Deschidere stradala</label>
+                                    <div class="input-group">
+                                        <input id="entity[street_opening]" name="entity[street_opening]" type="text" class="form-control">
+                                        <span class="input-group-addon">ml</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[depth]">Adancime</label>
+                                    <div class="input-group">
+                                        <input id="entity[depth]" name="entity[depth]" type="text" class="form-control">
+                                        <span class="input-group-addon">ml</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="entity[access_width]">Latime drum acces</label>
+                                    <div class="input-group">
+                                        <input id="entity[access_width]" name="entity[access_width]" type="text" class="form-control">
+                                        <span class="input-group-addon">ml</span>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
                     </div>
 

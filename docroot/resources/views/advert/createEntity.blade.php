@@ -91,7 +91,7 @@
                                     <div>
                                         <select id="advert[no_rooms]" name="advert[no_rooms]" class="form-control">
                                             @for ($i = 1; $i <= 4; $i++)
-                                                <option {{ $advert['no_rooms'] == $i ? 'selected' : '' }} value="{{ $i }}">
+                                                <option {{ !empty($advert['no_rooms']) && $advert['no_rooms'] == $i ? 'selected' : '' }} value="{{ $i }}">
                                                     {{ $i }}{{ $i == 4 ? '+' : '' }}
                                                 </option>
                                             @endfor

@@ -37,7 +37,8 @@ class AdvertController extends Controller {
     return view('advert.createEntity')->with('entity_type', 'terrain');
   }
 
-  public function createEntity(Request $request, $entity_type) {
+  public function createEntity(Request $request, $entity_type)
+  {
     if (empty($request->get('advert')) || empty($request->get('owner')) || empty($request->get('entity')) || empty($request->get('improvements'))) {
       return redirect('/advert/add/apartment')->withErrors('A aparut o eroare.');
     }
@@ -63,12 +64,8 @@ class AdvertController extends Controller {
     return $entity;
   }
 
-  /**
-   * @param $id
-   *  Entity unique id.
-   * @return $this
-   */
-  public function getEditEntity($id) {
+  public function getEntityDetails($id)
+  {
     /** @var Advert $advert */
     $advert = Advert::find($id);
     /** @var Owner $owner */
@@ -79,12 +76,25 @@ class AdvertController extends Controller {
     $improvements = json_decode($advert->improvements->improvements, TRUE);
     $advert->setAttribute('area', $advert->area->name);
     $advert->setAttribute('neighborhood', $advert->neighborhood->name);
+
+    return [
+      'advert' => $advert->attributesToArray(),
+      'owner' => $owner->attributesToArray(),
+      'entity' => $entity->attributesToArray(),
+      'improvements' => $improvements,
+    ];
+  }
+
+  /**
+   * @param $id
+   *  Entity unique id.
+   * @return $this
+   */
+  public function getEditEntity($id)
+  {
+    $details = $this->getEntityDetails($id);
     return view('advert.createEntity')
-      ->with('entity_type', $advert->type)
-      ->with('advert', $advert->attributesToArray())
-      ->with('owner', $owner->attributesToArray())
-      ->with('entity', $entity->attributesToArray())
-      ->with('improvements', $improvements);
+      ->with('entity_type', $details['advert']['type'])->with($details);
   }
 
   public function postEditEntity(Request $request, $id)
@@ -109,6 +119,13 @@ class AdvertController extends Controller {
   {
     $entity = $this->createEntity($request, 'terrain');
     return view('advert.createEntity')->with('entity_type', 'terrain');
+  }
+
+  public function viewEntity($id)
+  {
+    $details = $this->getEntityDetails($id);
+    return view('advert.viewEntity')
+      ->with('entity_type', $details['advert']['type'])->with($details);
   }
 
 }

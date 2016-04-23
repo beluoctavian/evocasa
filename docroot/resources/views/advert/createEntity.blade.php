@@ -58,21 +58,12 @@
                                     <input name="advert[first_page]" type="checkbox" value="1"> Anuntul apare pe prima pagina
                                 </label>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="form-group col-xs-12 col-sm-12">
                                 <label for="advert[title]">Titlu anunt</label>
                                 <div>
                                     <input id="advert[title]" name="advert[title]" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-4">
-                                <label for="advert[no_rooms]">Numar camere</label>
-                                <div>
-                                    <select id="advert[no_rooms]" name="advert[no_rooms]" class="form-control">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4+</option>
-                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -89,6 +80,19 @@
                                     <input id="advert[area]" name="advert[area]" type="text" class="form-control">
                                 </div>
                             </div>
+                            @if ($entity_type == 'apartment' || $entity_type == 'house')
+                                <div class="form-group col-xs-12 col-sm-4">
+                                    <label for="advert[no_rooms]">Numar camere</label>
+                                    <div>
+                                        <select id="advert[no_rooms]" name="advert[no_rooms]" class="form-control">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4+</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                         <div class="row">
                             <div class="form-group col-xs-12 col-sm-4">
@@ -400,11 +404,23 @@
 
                     <!-- IMBUNATATIRI -->
                     <div class="col-xs-12 col-sm-6">
-                        <div class="main-title">
-                            <i class="fa fa-star"></i>
-                            <h2>Imbunatatiri</h2>
-                        </div>
                         @if ($entity_type == 'apartment')
+                            <div class="main-title">
+                                <i class="fa fa-star"></i>
+                                <h2>Imbunatatiri</h2>
+                            </div>
+                        @elseif ($entity_type == 'house')
+                            <div class="main-title">
+                                <i class="fa fa-star"></i>
+                                <h2>Imbunatatiri & utilitati</h2>
+                            </div>
+                        @elseif ($entity_type == 'terrain')
+                            <div class="main-title">
+                                <i class="fa fa-star"></i>
+                                <h2>Utilitati</h2>
+                            </div>
+                        @endif
+                        @if ($entity_type == 'apartment' || $entity_type == 'house')
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="row">
@@ -483,10 +499,66 @@
                                     </div>
                                 </div>
                             </div>
-                        @elseif ($entity_type == 'house')
-
+                            @if ($entity_type == 'house')
+                                <div class="row" style="margin-top: 20px;">
+                                    <div class="col-xs-6">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <label class="checkbox-inline">
+                                                    <input name="improvements[canalizare]" type="checkbox" value="1"> Canalizare
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <label class="checkbox-inline">
+                                                    <input name="improvements[apa_curenta]" type="checkbox" value="1"> Apa curenta
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <label class="checkbox-inline">
+                                                    <input name="improvements[gaze]" type="checkbox" value="1"> Gaze
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <label class="checkbox-inline">
+                                                    <input name="improvements[electricitate]" type="checkbox" value="1"> Electricitate
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         @elseif ($entity_type == 'terrain')
-
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[modernizat]" type="checkbox" value="1"> Modernizat
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[canalizare]" type="checkbox" value="1"> Canalizare
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[apa_curenta]" type="checkbox" value="1"> Apa curenta
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[gaze]" type="checkbox" value="1"> Gaze
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[electricitate]" type="checkbox" value="1"> Electricitate
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
                     </div><!-- end imbunatatiri -->
 

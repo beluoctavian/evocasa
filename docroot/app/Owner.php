@@ -9,8 +9,8 @@ class Owner extends Model {
     protected $table = 'owner';
 
     protected $fillable = [
-      'firstname',
-      'surname',
+      'first_name',
+      'last_name',
       'phone',
       'email',
       'cadaster',
@@ -24,8 +24,8 @@ class Owner extends Model {
     ];
 
     public static $properties = [
-      'firstname',
-      'surname',
+      'first_name',
+      'last_name',
       'phone',
       'email',
       'cadaster',

@@ -38,6 +38,9 @@ class AdvertController extends Controller {
 
   public function postApartment(Request $request)
   {
+    if (empty($request->advert) || empty($request->owner) || empty($request->house) || empty($request->improvements)) {
+      return redirect('/advert/add/apartment')->withErrors('A aparut o eroare.');
+    }
     $advert_parameters = $request->advert;
     $advert_parameters['type'] = 'apartment';
     $advert = Advert::createFromArray($advert_parameters);
@@ -47,6 +50,20 @@ class AdvertController extends Controller {
     $apartment = Apartment::createFromArray($request->house, $advert);
 
     $improvements = Improvements::createFromArray($request->improvements, $advert);
+  }
+
+  public function postHouse(Request $request)
+  {
+    if (empty($request->advert) || empty($request->owner) || empty($request->house) || empty($request->improvements)) {
+      return redirect('/advert/add/house')->withErrors('A aparut o eroare.');
+    }
+  }
+
+  public function postTerrain(Request $request)
+  {
+    if (empty($request->advert) || empty($request->owner) || empty($request->house) || empty($request->improvements)) {
+      return redirect('/advert/add/terrain')->withErrors('A aparut o eroare.');
+    }
   }
 
 }

@@ -72,11 +72,13 @@ class AdvertController extends Controller {
   public function postHouse(Request $request)
   {
     $apartment = $this->createEntity($request, 'house');
+    return view('advert.createEntity')->with('entity_type', 'house');
   }
 
   public function postTerrain(Request $request)
   {
     $apartment = $this->createEntity($request, 'terrain');
+    return view('advert.createEntity')->with('entity_type', 'terrain');
   }
 
 }

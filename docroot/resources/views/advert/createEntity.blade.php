@@ -42,7 +42,11 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="container-fluid">
-            <form method="POST" action="{{ URL::to('advert/add/' . $entity_type) }}">
+            @if (!empty($advert['id']))
+                <form method="POST" action="{{ URL::to('advert/edit/' . $advert['id']) }}">
+            @else
+                <form method="POST" action="{{ URL::to('advert/add/' . $entity_type) }}">
+            @endif
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <!-- DETALII ANUNT -->
 
@@ -614,7 +618,11 @@
 
                 <div class="row">
                     <div class="col-xs-12 text-center">
-                        <button type="submit" class="btn btn-warning btn-lg">Adauga anuntul</button>
+                        @if (!empty($advert['id']))
+                            <button type="submit" class="btn btn-warning btn-lg">Editeaza anuntul</button>
+                        @else
+                            <button type="submit" class="btn btn-warning btn-lg">Adauga anuntul</button>
+                        @endif
                     </div>
                 </div>
             </form>

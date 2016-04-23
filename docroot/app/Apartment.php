@@ -43,7 +43,8 @@ class Apartment extends Model {
      * @param \App\Advert $advert
      * @return static
      */
-    public static function createFromArray(array $parameters, Advert $advert) {
+    public static function createFromArray(array $parameters, Advert $advert)
+    {
         $valid_parameters = [];
         foreach ($parameters as $key => $value) {
             if (in_array($key, self::$properties)) {

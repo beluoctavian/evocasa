@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Advert;
 use App\Owner;
 use App\Apartment;
+use App\Improvements;
 
 class AdvertController extends Controller {
 
@@ -44,6 +45,8 @@ class AdvertController extends Controller {
     $owner = Owner::createFromArray($request->owner, $advert);
 
     $apartment = Apartment::createFromArray($request->house, $advert);
+
+    $improvements = Improvements::createFromArray($request->improvements, $advert);
   }
 
 }

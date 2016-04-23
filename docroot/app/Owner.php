@@ -42,7 +42,8 @@ class Owner extends Model {
     /**
      * @param array $parameters
      */
-    public static function createFromArray(array $parameters, Advert $advert) {
+    public static function createFromArray(array $parameters, Advert $advert)
+    {
         $valid_parameters = [];
         foreach ($parameters as $key => $value) {
             if (in_array($key, self::$properties)) {

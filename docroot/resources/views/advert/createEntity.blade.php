@@ -218,90 +218,90 @@
                         @if ($entity_type == 'apartment')
                             <div class="form-row">
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="house[usable_area]">Suprafata utila</label>
+                                    <label for="entity[usable_area]">Suprafata utila</label>
                                     <div class="input-group">
-                                        <input id="house[usable_area]" name="house[usable_area]" type="text" class="form-control">
+                                        <input id="entity[usable_area]" name="entity[usable_area]" type="text" class="form-control">
                                         <span class="input-group-addon">mp</span>
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="house[built_area]">Suprafata construita</label>
+                                    <label for="entity[built_area]">Suprafata construita</label>
                                     <div class="input-group">
-                                        <input id="house[built_area]" name="house[built_area]" type="text" class="form-control">
+                                        <input id="entity[built_area]" name="entity[built_area]" type="text" class="form-control">
                                         <span class="input-group-addon">mp</span>
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="house[partitioning]">Compartimentare</label>
+                                    <label for="entity[partitioning]">Compartimentare</label>
                                     <div>
-                                        <input id="house[partitioning]" name="house[partitioning]" type="text" class="form-control">
+                                        <input id="entity[partitioning]" name="entity[partitioning]" type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="house[comfort]">Confort</label>
+                                    <label for="entity[comfort]">Confort</label>
                                     <div>
-                                        <input id="house[comfort]" name="house[comfort]" type="text" class="form-control">
+                                        <input id="entity[comfort]" name="entity[comfort]" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="house[floor]">Etaj</label>
+                                    <label for="entity[floor]">Etaj</label>
                                     <div>
-                                        <input id=house[floor] name="house[floor]" type="text" class="form-control">
+                                        <input id=entity[floor] name="entity[floor]" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="house[built_year]">An constructie</label>
+                                    <label for="entity[built_year]">An constructie</label>
                                     <div>
-                                        <input id="house[built_year]" name="house[built_year]" type="text" class="form-control">
+                                        <input id="entity[built_year]" name="entity[built_year]" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="house[bathrooms]">Numar bai</label>
+                                    <label for="entity[bathrooms]">Numar bai</label>
                                     <div class="row">
-                                        <div class="col-xs-4"><input id="house[bathrooms]" name="house[bathrooms]" type="text" class="form-control no-padding text-center"></div>
-                                        <div class="col-xs-8 no-padding-left"><input title="bathrooms observations" name="house[obs_bathrooms]" type="text" class="form-control"></div>
+                                        <div class="col-xs-4"><input id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding text-center"></div>
+                                        <div class="col-xs-8 no-padding-left"><input title="bathrooms observations" name="entity[obs_bathrooms]" type="text" class="form-control"></div>
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="house[sanitary]">Nr. gr. sanitare</label>
+                                    <label for="entity[sanitary]">Nr. gr. sanitare</label>
                                     <div class="row">
-                                        <div class="col-xs-4"><input id="house[sanitary]" name="house[sanitary]" type="text" class="form-control no-padding text-center"></div>
-                                        <div class="col-xs-8 no-padding-left"><input title="sanitary" name="house[obs_sanitary]" type="text" class="form-control"></div>
+                                        <div class="col-xs-4"><input id="entity[sanitary]" name="entity[sanitary]" type="text" class="form-control no-padding text-center"></div>
+                                        <div class="col-xs-8 no-padding-left"><input title="sanitary" name="entity[obs_sanitary]" type="text" class="form-control"></div>
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="house[balconies]">Numar balcoane</label>
+                                    <label for="entity[balconies]">Numar balcoane</label>
                                     <div class="row">
-                                        <div class="col-xs-4"><input id="house[balconies]" name="house[balconies]" type="text" class="form-control no-padding text-center"></div>
-                                        <div class="col-xs-8 no-padding-left"><input title="balconies observations" name="house[obs_balconies]" type="text" class="form-control"></div>
+                                        <div class="col-xs-4"><input id="entity[balconies]" name="entity[balconies]" type="text" class="form-control no-padding text-center"></div>
+                                        <div class="col-xs-8 no-padding-left"><input title="balconies observations" name="entity[obs_balconies]" type="text" class="form-control"></div>
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="house[parking]">Loc parcare</label>
+                                    <label for="entity[parking]">Loc parcare</label>
                                     <div>
                                         <div class="row">
-                                            <div class="col-xs-4"><input id="house[parking]" name="house[parking]" type="text" class="form-control no-padding text-center"></div>
-                                            <div class="col-xs-8 no-padding-left"><input title="parking observations" name="house[obs_parking]" type="text" class="form-control"></div>
+                                            <div class="col-xs-4"><input id="entity[parking]" name="entity[parking]" type="text" class="form-control no-padding text-center"></div>
+                                            <div class="col-xs-8 no-padding-left"><input title="parking observations" name="entity[obs_parking]" type="text" class="form-control"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="house[storeroom]">Boxa</label>
+                                    <label for="entity[storeroom]">Boxa</label>
                                     <div>
                                         <div class="row">
-                                            <div class="col-xs-4"><input id="house[storeroom]" name="house[storeroom]" type="text" class="form-control no-padding text-center"></div>
-                                            <div class="col-xs-8 no-padding-left"><input title="storeroom observations" name="house[obs_storeroom]" type="text" class="form-control"></div>
+                                            <div class="col-xs-4"><input id="entity[storeroom]" name="entity[storeroom]" type="text" class="form-control no-padding text-center"></div>
+                                            <div class="col-xs-8 no-padding-left"><input title="storeroom observations" name="entity[obs_storeroom]" type="text" class="form-control"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="house[garage]">Garaj</label>
+                                    <label for="entity[garage]">Garaj</label>
                                     <div>
                                         <div class="row">
-                                            <div class="col-xs-4"><input id="house[garage]" name="house[garage]" type="text" class="form-control no-padding text-center"></div>
-                                            <div class="col-xs-8 no-padding-left"><input title="garage observations" name="house[obs_garage]" type="text" class="form-control"></div>
+                                            <div class="col-xs-4"><input id="entity[garage]" name="entity[garage]" type="text" class="form-control no-padding text-center"></div>
+                                            <div class="col-xs-8 no-padding-left"><input title="garage observations" name="entity[obs_garage]" type="text" class="form-control"></div>
                                         </div>
                                     </div>
                                 </div>

@@ -9,6 +9,19 @@ class Advert extends Model {
 
     protected $table = 'advert';
 
+    protected $fillable = [
+      'title',
+      'first_page',
+      'type',
+      'no_rooms',
+      'price',
+      'old_price',
+      'description',
+      'neighborhood_id',
+      'area_id',
+      'code',
+    ];
+
     public static $properties = [
         'title',
         'first_page',

@@ -8,6 +8,21 @@ class Owner extends Model {
 
     protected $table = 'owner';
 
+    protected $fillable = [
+      'firstname',
+      'surname',
+      'phone',
+      'email',
+      'cadaster',
+      'registration',
+      'energy_certificate',
+      'urbanism_certificate',
+      'map_pictures',
+      'rehabilitated_block',
+      'address',
+      'advert_id',
+    ];
+
     public static $properties = [
       'firstname',
       'surname',

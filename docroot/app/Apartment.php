@@ -8,6 +8,28 @@ class Apartment extends Model {
 
     protected $table = 'apartment';
 
+    protected $fillable = [
+      'usable_area',
+      'built_area',
+      'partitioning',
+      'comfort',
+      'floor',
+      'built_year',
+      'bathrooms',
+      'obs_bathrooms',
+      'sanitary',
+      'obs_sanitary',
+      'balconies',
+      'obs_balconies',
+      'parking',
+      'obs_parking',
+      'storeroom',
+      'obs_storeroom',
+      'garage',
+      'obs_garage',
+      'advert_id',
+    ];
+
     public static $properties = [
       'usable_area',
       'built_area',

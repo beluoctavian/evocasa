@@ -6,6 +6,11 @@ class Improvements extends Model {
 
   protected $table = 'improvements';
 
+  protected $fillable = [
+    'improvements',
+    'advert_id',
+  ];
+
   public static $properties = [
     'improvements',
     'advert_id',

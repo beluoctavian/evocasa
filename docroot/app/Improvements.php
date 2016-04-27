@@ -30,6 +30,9 @@ class Improvements extends Model {
    */
   public static function createFromArray(array $parameters, Advert $advert)
   {
+    if (empty($parameters)) {
+      $parameters = [];
+    }
     $valid_parameters = [
       'improvements' => json_encode($parameters),
       'advert_id' => $advert->id,

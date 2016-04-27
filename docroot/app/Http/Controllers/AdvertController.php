@@ -161,6 +161,10 @@ class AdvertController extends Controller {
         if (strpos($key, 'obs_') === 0) {
           continue;
         }
+        if (empty($value)) {
+          unset($entity[$key]);
+          continue;
+        }
         $suffix = '';
         $mp = [
           'usable_area',

@@ -1,5 +1,9 @@
 @extends('default')
 
+@section('title')
+- {{ $advert['title'] }}
+@endsection
+
 @section('in-head')
 <!-- fotorama.css & fotorama.js. -->
 <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
@@ -37,8 +41,8 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="id" value="{{ $advert['id'] }}">
                             <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-times"></i> Sterge</button>
-                            <a href="{{ URL::to('upload-images/' . $advert['id']) }}" class="btn btn-success pull-right"><i class="fa fa-picture-o"></i> Upload</a>
-                            <a href="{{ URL::to('editeaza-anunt/' . $advert['id']) }}" class="btn btn-primary pull-right"><i class="fa fa-pencil"></i> Editeaza</a>
+                            <a href="{{ URL::to('advert/upload-images/' . $advert['id']) }}" class="btn btn-success pull-right"><i class="fa fa-picture-o"></i> Upload</a>
+                            <a href="{{ URL::to('advert/edit/' . $advert['id']) }}" class="btn btn-primary pull-right"><i class="fa fa-pencil"></i> Editeaza</a>
                         </form>
                     </div>
                     @endif

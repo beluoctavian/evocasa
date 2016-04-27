@@ -10,6 +10,8 @@ use App\Improvements;
 use App\Apartment;
 use App\House;
 use App\Terrain;
+use App\StatusType;
+use App\Status;
 
 class AdvertController extends Controller {
 
@@ -73,21 +75,6 @@ class AdvertController extends Controller {
     return view('advert.chooseCreationType');
   }
 
-  public function getApartment()
-  {
-    return view('advert.createEntity')->with('entity_type', 'apartment');
-  }
-
-  public function getHouse()
-  {
-    return view('advert.createEntity')->with('entity_type', 'house');
-  }
-
-  public function getTerrain()
-  {
-    return view('advert.createEntity')->with('entity_type', 'terrain');
-  }
-
   public function createEntity(Request $request, $entity_type)
   {
     if (empty($request->get('advert')) || empty($request->get('owner')) || empty($request->get('entity'))) {
@@ -119,6 +106,26 @@ class AdvertController extends Controller {
   {
     /** @var Advert $advert */
     $advert = Advert::find($id);
+    if ($advert == NULL) {
+      return NULL;
+    }
+    /** @var Status $statuses */
+    $status = $advert->status;
+    $advert_status = [];
+    if (!empty($status)) {
+      foreach ($status as $sts) {
+        if (empty($advert_status[$sts->type_id])) {
+          $advert_status[$sts->type_id] = [
+            'count' => 1,
+            'date' => $sts->created_at,
+          ];
+        }
+        else {
+          $advert_status[$sts->type_id]['count']++;
+          $advert_status[$sts->type_id]['date'] = ($sts->created_at > $advert_status[$sts->type_id]['date']) ? $sts->created_at : $advert_status[$sts->type_id]['date'];
+        }
+      }
+    }
     /** @var Owner $owner */
     $owner = $advert->owner;
     $owner->setAttribute('phone', json_decode($owner->phone, TRUE));
@@ -198,10 +205,19 @@ class AdvertController extends Controller {
 
     return [
       'advert' => $advert->attributesToArray(),
+      'advert_status' => $advert_status,
       'owner' => $owner->attributesToArray(),
       'entity' => $entity->attributesToArray(),
       'improvements' => $improvements,
     ];
+  }
+
+  public function getCreateEntity($entity_type)
+  {
+    $status_types = StatusType::all();
+    return view('advert.createEntity')
+      ->with('entity_type', $entity_type)
+      ->with('status_types', $status_types);
   }
 
   /**
@@ -212,8 +228,29 @@ class AdvertController extends Controller {
   public function getEditEntity($id)
   {
     $details = $this->getEntityDetails($id);
+    if ($details == NULL) {
+      abort(404);
+    }
+    $status_types = StatusType::all();
     return view('advert.createEntity')
-      ->with('entity_type', $details['advert']['type'])->with($details);
+      ->with('entity_type', $details['advert']['type'])
+      ->with($details)
+      ->with('status_types', $status_types);
+  }
+
+  public function getApartment()
+  {
+    return $this->getCreateEntity('apartment');
+  }
+
+  public function getHouse()
+  {
+    return $this->getCreateEntity('house');
+  }
+
+  public function getTerrain()
+  {
+    return $this->getCreateEntity('terrain');
   }
 
   public function postEditEntity(Request $request, $id)
@@ -246,8 +283,20 @@ class AdvertController extends Controller {
   public function viewEntity($id)
   {
     $details = $this->getEntityDetails($id, TRUE);
+    if ($details == NULL) {
+      abort(404);
+    }
     return view('advert.viewEntity')
       ->with('entity_type', $details['advert']['type'])->with($details);
+  }
+
+  public function postAddStatus($id, Request $request)
+  {
+    Status::create([
+      'type_id' => $request->get('status_type'),
+      'advert_id' => $id,
+    ]);
+    return redirect('advert/edit/' . $id);
   }
 
 }

@@ -20,6 +20,21 @@ class StatusType extends Migration {
 			$table->timestamps();
 
 		});
+		$types = [
+			'recomandat' => 'Recomandat',
+			'telefon_dat' => 'Telefon dat',
+			'nu_raspunde' => 'Nu raspunde',
+			'telefon_inchis' => 'Telefon inchis',
+			'nu_colaboreaza' => 'Nu colaboreaza',
+			'retras' => 'Retras momentan',
+			'inactiv' => 'Inactiv',
+		];
+		foreach ($types as $type => $title) {
+			DB::table('status_type')->insert([
+				'type' => $type,
+				'title' => $title,
+			]);
+		}
 	}
 
 	/**

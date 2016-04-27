@@ -21,6 +21,14 @@ class CreateUsersTable extends Migration {
             $table->timestamps();
         });
 
+        $user = new App\User();
+        $user->username = 'administrator';
+        $user->name = 'administrator';
+        $user->email = 'administrator@example.com';
+        $user->code = 'AD';
+        $user->password = Hash::make('administrator');
+        $user->save();
+
     }
 
     public function down(){

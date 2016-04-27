@@ -56,3 +56,4 @@ Route::controller('advert/add', 'AdvertController');
 Route::get('/migrate', 'PagesController@migrate');
 
 
+Route::post('advert/add-status/{id}', 'AdvertController@postAddStatus');

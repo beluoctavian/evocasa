@@ -15,8 +15,8 @@ class StatusType extends Migration {
 		Schema::create('status_type', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('type');
 			$table->string('title');
-			$table->string('image');
 			$table->timestamps();
 
 		});

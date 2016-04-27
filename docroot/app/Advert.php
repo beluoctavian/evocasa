@@ -91,6 +91,14 @@ class Advert extends Model {
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function status()
+    {
+        return $this->hasMany('App\Status');
+    }
+
+    /**
      * @param array $parameters
      */
     public static function createFromArray(array $parameters)

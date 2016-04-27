@@ -43,14 +43,15 @@
     <div class="col-xs-12">
         <div class="container-fluid">
             @if (!empty($advert['id']))
-                <div class="row margin-bottom">
+                <div class="row margin-bottom" id="status-area">
                     <div class="col-xs-6">
                         <div class="row">
                             <form method="POST" action="{{ URL::to('advert/add-status/' . $advert['id']) }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group col-xs-12 col-sm-6">
                                     <div>
-                                        <select id="status" name="status" class="form-control">
+                                        <select required title="Alege statusul" name="status" class="form-control">
+                                            <option selected disabled hidden value=""></option>
                                             @foreach ($status_types as $status_type)
                                                 <option value="{{ $status_type->id }}">
                                                     {{ $status_type->title }}
@@ -671,5 +672,10 @@
 </script>
 <script type="text/javascript">
     $('textarea').elastic();
+</script>
+<script type="text/javascript">
+    $('select', '#status-area').select2({
+        placeholder: "Alegeti un status"
+    });
 </script>
 @endsection

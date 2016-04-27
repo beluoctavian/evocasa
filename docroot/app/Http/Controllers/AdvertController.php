@@ -119,6 +119,9 @@ class AdvertController extends Controller {
   {
     /** @var Advert $advert */
     $advert = Advert::find($id);
+    if ($advert == NULL) {
+      return NULL;
+    }
     /** @var Owner $owner */
     $owner = $advert->owner;
     $owner->setAttribute('phone', json_decode($owner->phone, TRUE));
@@ -212,6 +215,9 @@ class AdvertController extends Controller {
   public function getEditEntity($id)
   {
     $details = $this->getEntityDetails($id);
+    if ($details == NULL) {
+      abort(404);
+    }
     return view('advert.createEntity')
       ->with('entity_type', $details['advert']['type'])->with($details);
   }
@@ -246,6 +252,9 @@ class AdvertController extends Controller {
   public function viewEntity($id)
   {
     $details = $this->getEntityDetails($id, TRUE);
+    if ($details == NULL) {
+      abort(404);
+    }
     return view('advert.viewEntity')
       ->with('entity_type', $details['advert']['type'])->with($details);
   }

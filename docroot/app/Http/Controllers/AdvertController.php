@@ -129,6 +129,18 @@ class AdvertController extends Controller {
 
     if ($prepareForDisplay === TRUE) {
       // Prepare the advert
+      switch ($advert->getAttribute('type')) {
+        case 'apartment':
+          $advert->setAttribute('type', 'apartament');
+          break;
+        case 'house':
+          $advert->setAttribute('type', 'casa');
+          break;
+        case 'terrain':
+          $advert->setAttribute('type', 'teren');
+          break;
+
+      }
       $advert->setAttribute('area', $advert->area->name);
       $advert->setAttribute('neighborhood', $advert->neighborhood->name);
 

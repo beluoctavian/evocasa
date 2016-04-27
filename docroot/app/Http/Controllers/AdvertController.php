@@ -93,13 +93,13 @@ class AdvertController extends Controller {
     if (empty($request->get('advert')) || empty($request->get('owner')) || empty($request->get('entity'))) {
       return redirect('/advert/add/apartment')->withErrors('A aparut o eroare.');
     }
-    $advert_parameters = $request->advert;
+    $advert_parameters = $request->get('advert');
     $advert_parameters['type'] = $entity_type;
     $advert = Advert::createFromArray($advert_parameters);
 
-    Owner::createFromArray($request->owner, $advert);
+    Owner::createFromArray($request->get('owner'), $advert);
 
-    Improvements::createFromArray($request->improvements, $advert);
+    Improvements::createFromArray($request->get('improvements') ?: [], $advert);
 
     switch($entity_type) {
       case 'house':

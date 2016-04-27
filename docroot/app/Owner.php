@@ -66,7 +66,13 @@ class Owner extends Model {
             }
         }
         if (!empty($parameters['phone'])) {
-            $valid_parameters['phone'] = json_encode($parameters['phone']);
+            $valid_parameters['phone'] = [];
+            foreach ($parameters['phone'] as $phone) {
+                if (!empty($phone)) {
+                    $valid_parameters['phone'][] = $phone;
+                }
+            }
+            $valid_parameters['phone'] = json_encode($valid_parameters['phone']);
         }
         $valid_parameters['advert_id'] = $advert->id;
         return self::create($valid_parameters);

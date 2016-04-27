@@ -90,7 +90,7 @@ class AdvertController extends Controller {
 
   public function createEntity(Request $request, $entity_type)
   {
-    if (empty($request->get('advert')) || empty($request->get('owner')) || empty($request->get('entity')) || empty($request->get('improvements'))) {
+    if (empty($request->get('advert')) || empty($request->get('owner')) || empty($request->get('entity'))) {
       return redirect('/advert/add/apartment')->withErrors('A aparut o eroare.');
     }
     $advert_parameters = $request->advert;

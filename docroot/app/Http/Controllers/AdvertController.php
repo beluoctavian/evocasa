@@ -224,20 +224,23 @@ class AdvertController extends Controller {
 
   public function postApartment(Request $request)
   {
+    /** @var Apartment $entity */
     $entity = $this->createEntity($request, 'apartment');
-    return view('advert.createEntity')->with('entity_type', 'apartment');
+    return redirect('advert/edit/' . $entity->getAttribute('advert_id'))->with('successAdd', TRUE);
   }
 
   public function postHouse(Request $request)
   {
+    /** @var House $entity */
     $entity = $this->createEntity($request, 'house');
-    return view('advert.createEntity')->with('entity_type', 'house');
+    return redirect('advert/edit/' . $entity->getAttribute('advert_id'))->with('successAdd', TRUE);
   }
 
   public function postTerrain(Request $request)
   {
+    /** @var Terrain $entity */
     $entity = $this->createEntity($request, 'terrain');
-    return view('advert.createEntity')->with('entity_type', 'terrain');
+    return redirect('advert/edit/' . $entity->getAttribute('advert_id'))->with('successAdd', TRUE);
   }
 
   public function viewEntity($id)

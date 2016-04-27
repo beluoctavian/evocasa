@@ -111,29 +111,33 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-4">
-                    <div class="list-group">
-                        <div class="list-group-item active text-center">DETALII IMOBIL</div>
-                        @foreach ($entity as $attr => $value)
-                            <a href="javascript:" class="list-group-item">{{ $attr }}: {{ $value }}</a>
-                        @endforeach
+                @if (!empty($entity))
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="list-group">
+                            <div class="list-group-item active text-center">DETALII IMOBIL</div>
+                            @foreach ($entity as $attr => $value)
+                                <a href="javascript:" class="list-group-item">{{ $attr }}: {{ $value }}</a>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-4">
-                    <div class="list-group">
-                        <div class="list-group-item active text-center" id="improvements">DETALII IMBUNATATIRI</div>
-                        <a href="javascript:" class="list-group-item">
-                            <div class="imbunats">
-                                @foreach ($improvements as $improvement)
-                                    <p>
-                                        {{ $improvement }} <i class='fa fa-check'></i>
-                                    </p>
-                                @endforeach
-                                <div class="clear-both"></div>
-                            </div>
-                        </a>
+                @endif
+                @if (!empty($improvements))
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="list-group">
+                            <div class="list-group-item active text-center" id="improvements">DETALII IMBUNATATIRI</div>
+                            <a href="javascript:" class="list-group-item">
+                                <div class="imbunats">
+                                    @foreach ($improvements as $improvement)
+                                        <p>
+                                            {{ $improvement }} <i class='fa fa-check'></i>
+                                        </p>
+                                    @endforeach
+                                    <div class="clear-both"></div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
             @if (!Auth::guest() && isset($files))
                 <div class="row margin-top">

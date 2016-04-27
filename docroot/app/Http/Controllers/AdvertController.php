@@ -264,4 +264,13 @@ class AdvertController extends Controller {
       ->with('entity_type', $details['advert']['type'])->with($details);
   }
 
+  public function postAddStatus($id, Request $request)
+  {
+    Status::create([
+      'type_id' => $request->get('status_type'),
+      'advert_id' => $id,
+    ]);
+    return redirect('advert/edit/' . $id);
+  }
+
 }

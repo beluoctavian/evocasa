@@ -50,7 +50,7 @@
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group col-xs-12 col-sm-6">
                                     <div>
-                                        <select required title="Alege statusul" name="status" class="form-control">
+                                        <select required title="Alege statusul" name="status_type" class="form-control">
                                             <option selected disabled hidden value=""></option>
                                             @foreach ($status_types as $status_type)
                                                 <option value="{{ $status_type->id }}">

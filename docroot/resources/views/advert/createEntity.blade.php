@@ -43,6 +43,31 @@
     <div class="col-xs-12">
         <div class="container-fluid">
             @if (!empty($advert['id']))
+                <div class="row margin-bottom">
+                    <div class="col-xs-6">
+                        <div class="row">
+                            <form method="POST" action="{{ URL::to('advert/add-status/' . $advert['id']) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <div>
+                                        <select id="status" name="status" class="form-control">
+                                            @foreach ($status_types as $status_type)
+                                                <option value="{{ $status_type->id }}">
+                                                    {{ $status_type->title }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <button type="submit" class="btn btn-warning"><i class="fa fa-check" aria-hidden="true"></i> Adauga status</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
                 <form method="POST" action="{{ URL::to('advert/edit/' . $advert['id']) }}">
             @else
                 <form method="POST" action="{{ URL::to('advert/add/' . $entity_type) }}">
@@ -60,14 +85,6 @@
                                     <span>: <a href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['code'] }}</a></span>
                                 @endif
                             </h2>
-                        </div>
-                        //TODO: Statusuri!!!
-                        <div class="row">
-                            <div class="form-group col-xs-12 col-sm-12">
-                                <label class="checkbox-inline">
-                                    <input {{ !empty($advert['first_page']) ? 'checked' : '' }} name="advert[first_page]" type="checkbox" value="1"> Anuntul apare pe prima pagina
-                                </label>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-xs-12 col-sm-12">

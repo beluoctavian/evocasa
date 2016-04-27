@@ -10,6 +10,8 @@ use App\Improvements;
 use App\Apartment;
 use App\House;
 use App\Terrain;
+use App\StatusType;
+use App\Status;
 
 class AdvertController extends Controller {
 
@@ -218,8 +220,11 @@ class AdvertController extends Controller {
     if ($details == NULL) {
       abort(404);
     }
+    $status_types = StatusType::all();
     return view('advert.createEntity')
-      ->with('entity_type', $details['advert']['type'])->with($details);
+      ->with('entity_type', $details['advert']['type'])
+      ->with($details)
+      ->with('status_types', $status_types);
   }
 
   public function postEditEntity(Request $request, $id)

@@ -54,6 +54,14 @@ class Advert extends Model {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
+    public function apartment()
+    {
+        return $this->hasOne('App\Apartment');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function house()
     {
         return $this->hasOne('App\House');

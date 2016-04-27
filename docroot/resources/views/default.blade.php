@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Evocasa | Agentie imobiliara</title>
+    <title>Evocasa @yield('title', '- Agentie imobiliara')</title>
 	<link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
 
     <!-- Bootstrap Core CSS & Font-Awesome -->

@@ -1,5 +1,9 @@
 @extends('default')
 
+@section('title')
+- {{ $advert['title'] }}
+@endsection
+
 @section('in-head')
 <!-- fotorama.css & fotorama.js. -->
 <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->

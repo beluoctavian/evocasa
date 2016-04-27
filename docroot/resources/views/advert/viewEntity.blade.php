@@ -68,7 +68,7 @@
                         <a href="javascript:" class="list-group-item">Prenume: {{ $owner['first_name'] }}</a>
                         @if (!empty($owner['phone']))
                             @foreach($owner['phone'] as $key => $tel)
-                                <a href="javascript:" class="list-group-item">Telefon {{ $key }}: {{ $tel }}</a>
+                                <a href="javascript:" class="list-group-item">Telefon {{ $key+1 }}: {{ $tel }}</a>
                             @endforeach
                         @endif
                         <a href="javascript:" class="list-group-item">E-mail: {{ $owner['email'] }}</a>

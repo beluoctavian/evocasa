@@ -75,21 +75,6 @@ class AdvertController extends Controller {
     return view('advert.chooseCreationType');
   }
 
-  public function getApartment()
-  {
-    return view('advert.createEntity')->with('entity_type', 'apartment');
-  }
-
-  public function getHouse()
-  {
-    return view('advert.createEntity')->with('entity_type', 'house');
-  }
-
-  public function getTerrain()
-  {
-    return view('advert.createEntity')->with('entity_type', 'terrain');
-  }
-
   public function createEntity(Request $request, $entity_type)
   {
     if (empty($request->get('advert')) || empty($request->get('owner')) || empty($request->get('entity'))) {
@@ -123,6 +108,23 @@ class AdvertController extends Controller {
     $advert = Advert::find($id);
     if ($advert == NULL) {
       return NULL;
+    }
+    /** @var Status $statuses */
+    $status = $advert->status;
+    $advert_status = [];
+    if (!empty($status)) {
+      foreach ($status as $sts) {
+        if (empty($advert_status[$sts->type_id])) {
+          $advert_status[$sts->type_id] = [
+            'count' => 1,
+            'date' => $sts->created_at,
+          ];
+        }
+        else {
+          $advert_status[$sts->type_id]['count']++;
+          $advert_status[$sts->type_id]['date'] = ($sts->created_at > $advert_status[$sts->type_id]['date']) ? $sts->created_at : $advert_status[$sts->type_id]['date'];
+        }
+      }
     }
     /** @var Owner $owner */
     $owner = $advert->owner;
@@ -203,10 +205,19 @@ class AdvertController extends Controller {
 
     return [
       'advert' => $advert->attributesToArray(),
+      'advert_status' => $advert_status,
       'owner' => $owner->attributesToArray(),
       'entity' => $entity->attributesToArray(),
       'improvements' => $improvements,
     ];
+  }
+
+  public function getCreateEntity($entity_type)
+  {
+    $status_types = StatusType::all();
+    return view('advert.createEntity')
+      ->with('entity_type', $entity_type)
+      ->with('status_types', $status_types);
   }
 
   /**
@@ -225,6 +236,21 @@ class AdvertController extends Controller {
       ->with('entity_type', $details['advert']['type'])
       ->with($details)
       ->with('status_types', $status_types);
+  }
+
+  public function getApartment()
+  {
+    return $this->getCreateEntity('apartment');
+  }
+
+  public function getHouse()
+  {
+    return $this->getCreateEntity('house');
+  }
+
+  public function getTerrain()
+  {
+    return $this->getCreateEntity('terrain');
   }
 
   public function postEditEntity(Request $request, $id)

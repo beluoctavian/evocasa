@@ -65,6 +65,17 @@
                                 </div>
                             </form>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @foreach ($status_types as $status_type)
+                                    @if (!empty($advert_status[$status_type->id]))
+                                        <span class="status-item" data-toggle="tooltip" data-placement="top" title="{{ $advert_status[$status_type->id]['date'] }}">
+                                            {{ $status_type->title }} <span class="badge">{{ $advert_status[$status_type->id]['count'] }}</span>
+                                        </span>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -677,5 +688,6 @@
     $('select', '#status-area').select2({
         placeholder: "Alegeti un status"
     });
+    $(".status-item").tooltip({ trigger: "hover" });
 </script>
 @endsection

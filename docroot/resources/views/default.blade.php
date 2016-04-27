@@ -24,6 +24,10 @@
     <link href="{{ URL::asset('css/jquery-ui.theme.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/jquery-ui.structure.min.css') }}" rel="stylesheet">
 
+    <!-- Select2 -->
+    <link href="{{ URL::asset('library/select2/dist/css/select2.min.css') }}" rel="stylesheet">
+    <script src="{{ URL::asset('library/select2/dist/js/select2.min.js') }}"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 
@@ -274,6 +278,11 @@
             return false;
         })
     });
+</script>
+
+<!-- Select2 -->
+<script type="text/javascript">
+    $('select').select2();
 </script>
 @yield('scripts')
 </body>

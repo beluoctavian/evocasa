@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Advert;
 use App\Owner;
@@ -31,6 +32,35 @@ class AdvertController extends Controller {
     'gaze' => 'Gaze',
     'electricitate' => 'Electricitate',
     'modernizat' => 'Modernizat',
+  ];
+
+  public $entity_attributes = [
+    'usable_area' => 'Suprafata utila',
+    'built_area' => 'Suprafata construita',
+    'partitioning' => 'Compartimentare',
+    'comfort' => 'Confort',
+    'floor' => 'Etaj',
+    'built_year' => 'An constructie',
+    'bathrooms' => 'Numar bai',
+    'obs_bathrooms' => 'Observatii numar bai',
+    'sanitary' => 'Nr. gr. sanitare',
+    'obs_sanitary' => 'Observatii nr. gr. sanitare',
+    'balconies' => 'Numar balcoane',
+    'obs_balconies' => 'Observatii numar balcoane',
+    'parking' => 'Loc parcare',
+    'obs_parking' => 'Observatii loc parcare',
+    'storeroom' => 'Boxa',
+    'obs_storeroom' => 'Observatii boxa',
+    'garage' => 'Garaj',
+    'obs_garage' => 'Observatii garaj',
+    'land_area' => 'Suprafata teren',
+    'street_opening' => 'Deschidere stradala',
+    'footprint' => 'Amprenta la sol',
+    'total_area' => 'Suprafata desfasurata totala',
+    'level_area' => 'Suprafata per nivel',
+    'height' => 'Regim inaltime',
+    'depth' => 'Adancime',
+    'access_width' => 'Latime drum acces',
   ];
 
   public function __construct()
@@ -92,20 +122,62 @@ class AdvertController extends Controller {
     /** @var Owner $owner */
     $owner = $advert->owner;
     $owner->setAttribute('phone', json_decode($owner->phone, TRUE));
+    /** @var Model $entity */
     $entity = $advert->{$advert->type};
     /** @var Improvements $improvements */
     $improvements = json_decode($advert->improvements->improvements, TRUE);
 
     if ($prepareForDisplay === TRUE) {
+      // Prepare the advert
       $advert->setAttribute('area', $advert->area->name);
       $advert->setAttribute('neighborhood', $advert->neighborhood->name);
 
+      // Prepare the improvements
       foreach ($improvements as $key => $improvement) {
         if (!array_key_exists($key, $this->improvements)) {
           throw new \Exception('Found undeclared improvement: ' . $key);
         }
         $improvements[$key] = $this->improvements[$key];
       }
+
+      // Prepare the entity
+      $to_unset = ['id', 'advert_id', 'created_at', 'updated_at'];
+      foreach ($to_unset as $to) {
+        unset($entity[$to]);
+      }
+      foreach ($entity->getAttributes() as $key => $value) {
+        if (strpos($key, 'obs_') === 0) {
+          continue;
+        }
+        $suffix = '';
+        $mp = [
+          'usable_area',
+          'built_area',
+          'land_area',
+          'footprint',
+          'total_area',
+          'level_area',
+        ];
+        $ml = [
+          'street_opening',
+          'height',
+          'depth',
+          'access_width',
+        ];
+        if (in_array($key, $mp)) {
+          $suffix .= " mp";
+        }
+        if (in_array($key, $ml)) {
+          $suffix .= " ml";
+        }
+        if (array_key_exists("obs_{$key}", $entity->getAttributes())) {
+          $suffix .= " ({$entity["obs_{$key}"]})";
+          unset($entity["obs_{$key}"]);
+        }
+        $entity->setAttribute($this->entity_attributes[$key], $value . $suffix);
+        unset($entity[$key]);
+      }
+
     }
 
     return [
@@ -155,7 +227,6 @@ class AdvertController extends Controller {
   public function viewEntity($id)
   {
     $details = $this->getEntityDetails($id, TRUE);
-//    dd($details);
     return view('advert.viewEntity')
       ->with('entity_type', $details['advert']['type'])->with($details);
   }

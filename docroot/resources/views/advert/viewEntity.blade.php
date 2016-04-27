@@ -114,42 +114,9 @@
                 <div class="col-xs-12 col-sm-4">
                     <div class="list-group">
                         <div class="list-group-item active text-center">DETALII IMOBIL</div>
-                        {{--@if($advert->nr_camere)--}}
-                        {{--<a href="javascript:" class="list-group-item">Numar camere: {{ $advert->nr_camere }}</a>--}}
-                        {{--@endif--}}
-                        {{--@if($imobil->su)--}}
-                            {{--<a href="javascript:" class="list-group-item">Suprafata utila: {{ $imobil->su }} mp</a>--}}
-                        {{--@endif--}}
-                        {{--@if($imobil->sc)--}}
-                        {{--<a href="javascript:" class="list-group-item">Suprafata construita: {{ $imobil->sc }} mp</a>--}}
-                        {{--@endif--}}
-                        {{--@if($imobil->compartimentare)--}}
-                        {{--<a href="javascript:" class="list-group-item">Compartimentare: {{ $imobil->compartimentare }}</a>--}}
-                        {{--@endif--}}
-                        {{--@if($imobil->etaj)--}}
-                        {{--<a href="javascript:" class="list-group-item">Etaj: {{ $imobil->etaj }}</a>--}}
-                        {{--@endif--}}
-                        {{--@if($imobil->numbar_bai)--}}
-                        {{--<a href="javascript:" class="list-group-item">Numar bai: {{ $imobil->numbar_bai }} {{ $imobil->obs_numbar_bai ? '('.$imobil->obs_numbar_bai.')' : '' }}</a>--}}
-                        {{--@endif--}}
-                        {{--@if($imobil->numbar_bai_serviciu)--}}
-                        {{--<a href="javascript:" class="list-group-item">Numar bai serviciu: {{ $imobil->numbar_bai_serviciu }} {{ $imobil->obs_numbar_bai_serviciu ? '('.$imobil->obs_numbar_bai_serviciu.')' : '' }}</a>--}}
-                        {{--@endif--}}
-                        {{--@if($imobil->numbar_balcoane)--}}
-                        {{--<a href="javascript:" class="list-group-item">Numbar balcoane: {{ $imobil->numbar_balcoane }} {{ $imobil->obs_numbar_balcoane ? '('.$imobil->obs_numbar_balcoane.')' : '' }}</a>--}}
-                        {{--@endif--}}
-                        {{--@if($imobil->an_constructie)--}}
-                        {{--<a href="javascript:" class="list-group-item">An constructie: {{ $imobil->an_constructie }}</a>--}}
-                        {{--@endif--}}
-                        {{--@if($imobil->loc_parcare)--}}
-                            {{--<a href="javascript:" class="list-group-item">Loc parcare: {{ $imobil->loc_parcare }} {{ $imobil->obs_loc_parcare ? '('.$imobil->obs_loc_parcare.')' : '' }}</a>--}}
-                        {{--@endif--}}
-                        {{--@if($imobil->boxa)--}}
-                            {{--<a href="javascript:" class="list-group-item">Boxa: {{ $imobil->boxa }} {{ $imobil->obs_boxa ? '('.$imobil->obs_boxa.')' : '' }}</a>--}}
-                        {{--@endif--}}
-                        {{--@if($imobil->garaj)--}}
-                            {{--<a href="javascript:" class="list-group-item">Garaj: {{ $imobil->garaj }} {{ $imobil->obs_garaj ? '('.$imobil->obs_garaj.')' : '' }}</a>--}}
-                        {{--@endif--}}
+                        @foreach ($entity as $attr => $value)
+                            <a href="javascript:" class="list-group-item">{{ $attr }}: {{ $value }}</a>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-4">

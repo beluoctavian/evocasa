@@ -35,8 +35,8 @@
                 </div>
                 <div class="col-xs-12">
                     <div id="search-box">
-                        <form method="POST" action="{{ URL::to('anunturi') }}">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <form method="get" action="{{ URL::to('anunturiSearch') }}">
+                            {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
                             @if(!Auth::guest())
                             <div class="row">
                                 <div class="form-group col-xs-12 col-sm-2">

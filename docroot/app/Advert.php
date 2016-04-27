@@ -133,4 +133,12 @@ class Advert extends Model {
         $advert->save();
         return $advert;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function apartment()
+    {
+        return $this->hasOne('App\Apartment');
+    }
 }

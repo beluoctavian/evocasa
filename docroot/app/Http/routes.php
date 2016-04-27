@@ -8,7 +8,9 @@ Route::get('auth/logout', 'SessionsController@destroy');
 /*Pages*/
 Route::get('/', 'PagesController@index');
 Route::get('anunturi', 'PagesController@anunturi');
-Route::post('anunturi', 'PagesController@postSearch');
+
+Route::get('anunturiSearch', 'PagesController@postSearch');
+Route::get('anunturi/{id}', 'PagesController@detalii');
 Route::get('despre-noi', 'PagesController@despreNoi');
 Route::get('servicii', 'PagesController@servicii');
 Route::get('contact', 'PagesController@contact');
@@ -40,9 +42,17 @@ Route::get('delete-client/{id}', 'CustomersController@deleteCustomer');
 /* ----------------- REFACTOR ALL ROUTES ----------------- */
 
 /* Pages */
+Route::controller('advert/add', 'AdvertController');
+
 Route::get('anunturi/{id}', 'AdvertController@viewEntity');
 
 /* Admin */
 Route::controller('advert/add', 'AdvertController');
 Route::get('advert/edit/{id}', 'AdvertController@getEditEntity');
 Route::post('advert/edit/{id}', 'AdvertController@postEditEntity');
+Route::controller('advert/add', 'AdvertController');
+
+// Search routes
+Route::get('/migrate', 'PagesController@migrate');
+
+

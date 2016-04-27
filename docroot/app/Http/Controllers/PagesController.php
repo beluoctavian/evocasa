@@ -1,13 +1,21 @@
 <?php namespace App\Http\Controllers;
 
+use App\Advert;
+use App\Apartment;
+use App\Area;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Imobil;
+use App\Observation;
+use App\Neighborhood;
+use App\Owner;
+use App\StatusType;
 use Illuminate\Http\Request;
 use Auth;
 use Input;
 use File;
 use Illuminate\Support\Facades\DB;
+use PhpSpec\Wrapper\Subject\Expectation\Negative;
 
 class PagesController extends Controller {
 
@@ -24,7 +32,14 @@ class PagesController extends Controller {
         $cartiere = array_map('ucwords',array_unique(array_map('strtolower', DB::table('anunts')->lists('cartier'))));
         sort($cartiere);
         $compartimentari = array_map('ucwords',array_unique(array_map('strtolower', DB::table('imobils')->lists('compartimentare'))));
-        return view('pages.index')->with('anunts',$anunts)->with('orase',$orase)->with('zone',$zone)->with('cartiere',$cartiere)->with('compartimentari',$compartimentari)->with('page',$page);
+        return view('pages.index')
+            ->with('anunts',$anunts)
+            ->with('orase',$orase)
+            ->with('zone',$zone)
+            ->with('cartiere',$cartiere)
+            ->with('compartimentari',$compartimentari)
+            ->with('page',$page)
+            ->with('entity_type', 'apartment');
     }
 	public function anunturi() {
         $gets = Input::get();
@@ -63,6 +78,7 @@ class PagesController extends Controller {
             ->join('proprietars', 'proprietars.id_anunt', '=', 'anunts.id')
             ->where(strtolower('titlu'), 'LIKE', '%'.$cuvinte_cheie.'%')
             ->whereRaw($statusQuery . '')
+            //TODO:ASK  Why are you searching for a phone number if a phone field is not defined in the FE ?
             ->where('proprietars.telefon', 'LIKE', '%'.$telefon_proprietar.'%')
             ->whereRaw("(pret >= " . $pret_minim . " OR pret = '')")
             ->whereRaw("(pret <= " . $pret_maxim . " OR pret = '')")
@@ -128,7 +144,110 @@ class PagesController extends Controller {
         return view('pages.contact');
     }
     public function postSearch(Request $request){
-        $link = array();
+//        $link = array();
+        $key_words = Input::get('cuvinte_cheie');
+        $advert_id = Input::get('id_anunt');
+        $min_price = Input::get('pret_minim');
+        $max_price = Input::get('pret_maxim');
+        $min_year = Input::get('an_constructie_minim');
+        $max_year = Input::get('an_constructie_maxim');
+        $no_rooms = Input::get('numar_camere');
+        $min_floor = Input::get('etaj_minim');
+        $max_floor = Input::get('etaj_maxim');
+        $min_surface = Input::get('suprafata_minima');
+        $max_surface = Input::get('suprafata_maxima');
+        $partitioning = Input::get('compartimentare');
+        $neighborhood = Input::get('cartier');
+        $phone = Input::get('phone');
+        $area = Input::get('zona');
+
+        $type = StatusType::find(Input::get('status'));
+        $type_id = $type == null ? null : $type->id;
+        $adverts = Advert::whereHas('apartment', function($query)
+        use($min_year, $max_year, $min_floor, $max_floor, $min_surface, $max_surface, $partitioning) {
+            if($min_year)
+            {
+                $query->where('built_year', '>=', $min_year);
+            }
+            if($max_year)
+            {
+                $query->where('built_year', '<=', $max_year);
+            }
+            if($max_floor)
+            {
+                $query->where('floor', '<=', substr($max_floor,0,1));
+            }
+            if($min_floor)
+            {
+                $query->where('floor', '>=', substr($min_floor,0,1));
+            }
+            if($min_surface)
+            {
+                $query->where('built_area', '<=', $min_surface);
+            }
+            if($max_surface)
+            {
+                $query->where('built_area', '>=', $max_surface);
+            }
+            if($partitioning)
+            {
+                $query->where('partitioning', $partitioning);
+            }
+        });
+        if($phone)
+        {
+            $adverts ->whereHas('owner', function ($query) use ($phone) {
+                $query->where('phone', 'like', '%' . $phone . '%');
+            });
+        };
+
+        if($neighborhood)
+        {
+            $adverts->whereHas('neighborhood', function($query) use ($neighborhood) {
+                $query->where('name', 'like', '%'.$neighborhood.'%');
+            });
+        }
+        if($area)
+        {
+            $adverts->whereHas('area', function ($query) use ($area) {
+                $query->where('name', 'like', '%'.$area.'%');
+            });
+        }
+
+        if($type)
+        {
+            $adverts->whereHas('status', function ($query) use ($type_id) {
+                $query->where('type_id', $type_id);
+            });
+        }
+        if($min_price)
+        {
+            $adverts->where('price', '>=', $min_price);
+        }
+
+        if($max_price)
+        {
+            $adverts->where('price', '<=', $max_price);
+        }
+        if($key_words)
+        {
+            $adverts->where('title', 'like', '%'.$key_words.'%');
+        }
+        if($no_rooms)
+        {
+            $no_rooms = explode(' ', $no_rooms);
+                $adverts->whereIn('no_rooms', $no_rooms);
+        }
+        if($advert_id)
+        {
+            $adverts->where('id', Input::get('id_anunt'));
+        }
+
+        $results  = $adverts->get();
+
+        dd($results);
+
+
         if($request->telefon_proprietar != "") array_push($link, 'telefon_proprietar=' . $request->telefon_proprietar);
         if($request->status != "") array_push($link, 'status=' . $request->status);
         if($request->cuvinte_cheie != "") array_push($link, 'cuvinte_cheie=' . $request->cuvinte_cheie);

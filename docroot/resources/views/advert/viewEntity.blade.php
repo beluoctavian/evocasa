@@ -31,7 +31,7 @@
                     <h2 class="no-margin">{{ $advert['title'] }}, ID: {{ $advert['code'] }}</h2>
                 </div>
                 <div class="col-xs-12">
-                    @if(!Auth::guest())
+                    @if (!Auth::guest())
                     <div class="editbutton">
                         <form method="POST" action="{{ URL::to('advert/delete/' . $advert['id']) }}" onSubmit="return confirm('Sigur vrei sa stergi anuntul?');">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -47,13 +47,12 @@
                     <h3 class="red">Pret vechi: {{ $advert['old_price'] }} &euro;</h3>
                     @endif
                 </div>
-                @if(Auth::guest() && isset($files))
+                @if (Auth::guest() && isset($files))
                     @if($files[0] != null)
                     <div class="col-xs-12">
                         <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true" data-width="100%" data-ratio="1280/720">
-                            @foreach( $files as $file)
-                            <?php $filename = $file->getRelativePathName(); ?>
-                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert->id . '/' . $filename) }}">
+                            @foreach ($files as $file)
+                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert->id . '/' . $file->getRelativePathName()) }}">
                             @endforeach
                          </div>
                     </div>
@@ -155,94 +154,33 @@
                 </div>
                 <div class="col-xs-12 col-sm-4">
                     <div class="list-group">
-                        <div class="list-group-item active text-center">DETALII IMBUNATATIRI</div>
+                        <div class="list-group-item active text-center" id="improvements">DETALII IMBUNATATIRI</div>
                         <a href="javascript:" class="list-group-item">
                             <div class="imbunats">
-                                {{--@if($imbunat->gresie)--}}
-                                {{--<p>--}}
-                                    {{--Gresie <i class='fa fa-check'></i>--}}
-                                {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if($imbunat->faianta)--}}
-                                {{--<p>--}}
-                                    {{--Faianta <i class='fa fa-check'></i>--}}
-                                {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if($imbunat->termopan)--}}
-                                {{--<p>--}}
-                                    {{--Termopan <i class='fa fa-check'></i>--}}
-                                {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if($imbunat->aer)--}}
-                                {{--<p>--}}
-                                    {{--Aer conditionat <i class='fa fa-check'></i>--}}
-                                {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if($imbunat->parchet)--}}
-                                {{--<p>--}}
-                                    {{--Parchet <i class='fa fa-check'></i>--}}
-                                {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if($imbunat->instalatie_sanitara)--}}
-                                {{--<p>--}}
-                                    {{--Instalatie sanitara noua <i class='fa fa-check'></i>--}}
-                                {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if($imbunat->instalatie_electrica)--}}
-                                {{--<p>--}}
-                                    {{--Instalatie electrica noua <i class='fa fa-check'></i>--}}
-                                {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if($imbunat->contor_gaze)--}}
-                                {{--<p>--}}
-                                    {{--Contor gaze individual <i class='fa fa-check'></i>--}}
-                                {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if($imbunat->centrala)--}}
-                                {{--<p>--}}
-                                    {{--Centrala termica <i class='fa fa-check'></i>--}}
-                                {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if($imbunat->mobilier)--}}
-                                {{--<p>--}}
-                                    {{--Mobilier inclus <i class='fa fa-check'></i>--}}
-                                {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if($imbunat->usi_interioare)--}}
-                                    {{--<p>--}}
-                                        {{--Usi interioare schimbate <i class='fa fa-check'></i>--}}
-                                    {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if($imbunat->usa_metalica)--}}
-                                {{--<p>--}}
-                                    {{--Usa metalica <i class='fa fa-check'></i>--}}
-                                {{--</p>--}}
-                                {{--@endif--}}
-                                {{--@if($imbunat->fara_imbunatatiri)--}}
-                                {{--<p>--}}
-                                    {{--Fara imbunatatiri--}}
-                                {{--</p>--}}
-                                {{--@endif--}}
+                                @foreach ($improvements as $improvement)
+                                    <p>
+                                        {{ $improvement }} <i class='fa fa-check'></i>
+                                    </p>
+                                @endforeach
                                 <div class="clear-both"></div>
                             </div>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="row margin-top">
-                @if (!Auth::guest() && isset($files))
+            @if (!Auth::guest() && isset($files))
+                <div class="row margin-top">
                     @if ($files[0] != null)
                     <div class="col-xs-12">
                         <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true" data-width="100%" data-ratio="1280/720">
                             @foreach ($files as $file)
-                            <?php $filename = $file->getRelativePathName(); ?>
-                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert->id . '/' . $filename) }}">
+                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert->id . '/' . $file->getRelativePathName()) }}">
                             @endforeach
                         </div>
                     </div>
                     @endif
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
     </div>
     <div id="sidebar" class="col-xs-4 hidden-xs hidden-sm">

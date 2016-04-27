@@ -12,6 +12,27 @@ use App\Terrain;
 
 class AdvertController extends Controller {
 
+  public $improvements = [
+    'gresie' => 'Gresie',
+    'faianta' => 'Faianta',
+    'parchet' => 'Parchet',
+    'termopan' => 'Termopan',
+    'aer' => 'Aer conditionat',
+    'instalatie_sanitara' => 'Instalatie sanitara',
+    'instalatie_electrica' => 'Instalatie electrica',
+    'contor_gaze' => 'Contor gaze',
+    'centrala' => 'Centrala',
+    'mobilier' => 'Mobilier',
+    'usi_interioare' => 'Usi interioare',
+    'usa_metalica' => 'Usa metalica',
+    'fara_imbunatatiri' => 'Fara imbunatatiri',
+    'canalizare' => 'Canalizare',
+    'apa_curenta' => 'Apa curenta',
+    'gaze' => 'Gaze',
+    'electricitate' => 'Electricitate',
+    'modernizat' => 'Modernizat',
+  ];
+
   public function __construct()
   {
     $this->middleware('auth');
@@ -64,7 +85,7 @@ class AdvertController extends Controller {
     return $entity;
   }
 
-  public function getEntityDetails($id)
+  public function getEntityDetails($id, $prepareForDisplay = FALSE)
   {
     /** @var Advert $advert */
     $advert = Advert::find($id);
@@ -74,8 +95,18 @@ class AdvertController extends Controller {
     $entity = $advert->{$advert->type};
     /** @var Improvements $improvements */
     $improvements = json_decode($advert->improvements->improvements, TRUE);
-    $advert->setAttribute('area', $advert->area->name);
-    $advert->setAttribute('neighborhood', $advert->neighborhood->name);
+
+    if ($prepareForDisplay === TRUE) {
+      $advert->setAttribute('area', $advert->area->name);
+      $advert->setAttribute('neighborhood', $advert->neighborhood->name);
+
+      foreach ($improvements as $key => $improvement) {
+        if (!array_key_exists($key, $this->improvements)) {
+          throw new \Exception('Found undeclared improvement: ' . $key);
+        }
+        $improvements[$key] = $this->improvements[$key];
+      }
+    }
 
     return [
       'advert' => $advert->attributesToArray(),
@@ -123,7 +154,8 @@ class AdvertController extends Controller {
 
   public function viewEntity($id)
   {
-    $details = $this->getEntityDetails($id);
+    $details = $this->getEntityDetails($id, TRUE);
+//    dd($details);
     return view('advert.viewEntity')
       ->with('entity_type', $details['advert']['type'])->with($details);
   }

@@ -166,6 +166,9 @@ class AdvertController extends Controller {
       }
       foreach ($entity->getAttributes() as $key => $value) {
         if (strpos($key, 'obs_') === 0) {
+          if (!array_key_exists(substr($key, 4), $entity->getAttributes())) {
+            unset($entity[$key]);
+          }
           continue;
         }
         if (empty($value)) {

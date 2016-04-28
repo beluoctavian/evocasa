@@ -205,10 +205,11 @@ class AdvertController extends Controller {
 
     return [
       'advert' => $advert->attributesToArray(),
-      'advert_status' => $advert_status,
       'owner' => $owner->attributesToArray(),
       'entity' => $entity->attributesToArray(),
       'improvements' => $improvements,
+      'status_types' => StatusType::all(),
+      'advert_status' => $advert_status,
     ];
   }
 
@@ -231,11 +232,10 @@ class AdvertController extends Controller {
     if ($details == NULL) {
       abort(404);
     }
-    $status_types = StatusType::all();
     return view('advert.createEntity')
       ->with('entity_type', $details['advert']['type'])
       ->with($details)
-      ->with('status_types', $status_types);
+      ->with('status_types', $details['status_types']);
   }
 
   public function getApartment()

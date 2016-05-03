@@ -109,6 +109,8 @@ class AdvertController extends Controller {
     if ($advert == NULL) {
       return NULL;
     }
+    $advert->setAttribute('area', $advert->area->name);
+    $advert->setAttribute('neighborhood', $advert->neighborhood->name);
     /** @var Status $statuses */
     $status = $advert->status;
     $advert_status = [];
@@ -148,8 +150,6 @@ class AdvertController extends Controller {
           break;
 
       }
-      $advert->setAttribute('area', $advert->area->name);
-      $advert->setAttribute('neighborhood', $advert->neighborhood->name);
 
       // Prepare the improvements
       foreach ($improvements as $key => $improvement) {

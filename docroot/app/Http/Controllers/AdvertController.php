@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Observation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Advert;
@@ -311,6 +312,14 @@ class AdvertController extends Controller {
     $status = Status::where('advert_id', '=', $id)->where('type_id', '=', $type_id)->orderBy('created_at', 'desc')->first();
     $status->delete();
     return redirect('advert/edit/' . $id);
+  }
+
+  public function postDeleteObservation($id) {
+    /** @var Observation $observation */
+    $observation = Observation::find($id);
+    $advert_id = $observation->owner->advert->id;
+    $observation->delete();
+    return redirect('advert/edit/' . $advert_id);
   }
 
 }

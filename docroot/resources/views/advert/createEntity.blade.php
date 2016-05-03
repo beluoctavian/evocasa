@@ -65,6 +65,11 @@
                         @foreach ($status_types as $status_type)
                             @if (!empty($advert_status[$status_type->id]))
                                 <span class="status-item" data-toggle="tooltip" data-placement="top" title="{{ $advert_status[$status_type->id]['date'] }}">
+                                    <form method="POST" action="{{ URL::to('advert/delete-status/' . $advert['id']) }}">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="type_id" value="{{ $status_type->id }}">
+                                        <button type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                    </form>
                                     {{ $status_type->title }} <span class="badge">{{ $advert_status[$status_type->id]['count'] }}</span>
                                 </span>
                             @endif

@@ -302,4 +302,13 @@ class AdvertController extends Controller {
     return redirect('advert/edit/' . $id);
   }
 
+  public function postDeleteStatus($id, Request $request)
+  {
+    $type_id = $request->get('type_id');
+    /** @var Status $status */
+    $status = Status::where('advert_id', '=', $id)->where('type_id', '=', $type_id)->orderBy('created_at', 'desc')->first();
+    $status->delete();
+    return redirect('advert/edit/' . $id);
+  }
+
 }

@@ -109,7 +109,7 @@ class Advert extends Model {
     /**
      * @param array $parameters
      */
-    public static function createFromArray(array $parameters)
+    public static function createFromArray(array $parameters, $entity_id = NULL)
     {
         /** @var Neighborhood $neighborhood */
         $neighborhood = Neighborhood::where('name', $parameters['neighborhood'])->first();
@@ -135,9 +135,16 @@ class Advert extends Model {
                 $valid_parameters[$key] = $value;
             }
         }
-        /** @var Advert $advert */
-        $advert = self::create($valid_parameters);
-        $advert->code = \Auth::user()->code . '_' . $advert->id;
+        if ($entity_id) {
+            /** @var Advert $advert */
+            $advert = self::find($entity_id);
+            $advert->fill($valid_parameters);
+        }
+        else {
+            /** @var Advert $advert */
+            $advert = self::create($valid_parameters);
+            $advert->code = \Auth::user()->code . '_' . $advert->id;
+        }
         $advert->save();
         return $advert;
     }

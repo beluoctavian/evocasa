@@ -80,6 +80,7 @@
 
 
                 <form method="POST" action="{{ URL::to('advert/edit/' . $advert['id']) }}">
+                    <input type="hidden" name="entity_type" value="{{ $entity_type }}">
             @else
                 <form method="POST" action="{{ URL::to('advert/add/' . $entity_type) }}">
             @endif

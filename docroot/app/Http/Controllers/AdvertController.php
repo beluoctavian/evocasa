@@ -75,14 +75,14 @@ class AdvertController extends Controller {
     return view('advert.chooseCreationType');
   }
 
-  public function createEntity(Request $request, $entity_type)
+  public function createOrEditEntity(Request $request, $entity_type, $entity_id = NULL)
   {
     if (empty($request->get('advert')) || empty($request->get('owner')) || empty($request->get('entity'))) {
       return redirect('/advert/add/apartment')->withErrors('A aparut o eroare.');
     }
     $advert_parameters = $request->get('advert');
     $advert_parameters['type'] = $entity_type;
-    $advert = Advert::createFromArray($advert_parameters);
+    $advert = Advert::createFromArray($advert_parameters, $entity_id);
 
     Owner::createFromArray($request->get('owner'), $advert);
 
@@ -258,28 +258,29 @@ class AdvertController extends Controller {
 
   public function postEditEntity(Request $request, $id)
   {
-    //TODO: Edit the entity
+    $type = $request->get('entity_type');
+    $this->createOrEditEntity($request, $type, $id);
     return $this->getEditEntity($id);
   }
 
   public function postApartment(Request $request)
   {
     /** @var Apartment $entity */
-    $entity = $this->createEntity($request, 'apartment');
+    $entity = $this->createOrEditEntity($request, 'apartment');
     return redirect('advert/edit/' . $entity->getAttribute('advert_id'))->with('successAdd', TRUE);
   }
 
   public function postHouse(Request $request)
   {
     /** @var House $entity */
-    $entity = $this->createEntity($request, 'house');
+    $entity = $this->createOrEditEntity($request, 'house');
     return redirect('advert/edit/' . $entity->getAttribute('advert_id'))->with('successAdd', TRUE);
   }
 
   public function postTerrain(Request $request)
   {
     /** @var Terrain $entity */
-    $entity = $this->createEntity($request, 'terrain');
+    $entity = $this->createOrEditEntity($request, 'terrain');
     return redirect('advert/edit/' . $entity->getAttribute('advert_id'))->with('successAdd', TRUE);
   }
 

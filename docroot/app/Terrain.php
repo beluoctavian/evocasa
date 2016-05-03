@@ -47,6 +47,12 @@ class Terrain extends Model {
                 $valid_parameters[$key] = $value;
             }
         }
+        $exists = $advert->terrain;
+        if ($exists) {
+            $exists->fill($valid_parameters);
+            $exists->save();
+            return $exists;
+        }
         return self::create($valid_parameters);
     }
 

@@ -75,6 +75,12 @@ class Owner extends Model {
             $valid_parameters['phone'] = json_encode($valid_parameters['phone']);
         }
         $valid_parameters['advert_id'] = $advert->id;
+        $exists = $advert->owner;
+        if ($exists) {
+            $exists->fill($valid_parameters);
+            $exists->save();
+            return $exists;
+        }
         return self::create($valid_parameters);
     }
 

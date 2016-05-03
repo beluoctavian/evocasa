@@ -74,6 +74,13 @@ class Apartment extends Model {
             }
         }
         $valid_parameters['advert_id'] = $advert->id;
+
+        $exists = $advert->apartment;
+        if ($exists) {
+            $exists->fill($valid_parameters);
+            $exists->save();
+            return $exists;
+        }
         return self::create($valid_parameters);
     }
 

@@ -19,9 +19,9 @@ class Area extends Model {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function adverts()
+    public function advert()
     {
-        return $this->hasMany('App\Adverts');
+        return $this->hasMany('App\Advert');
     }
 
 }

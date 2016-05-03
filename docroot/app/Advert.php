@@ -138,14 +138,23 @@ class Advert extends Model {
         if ($entity_id) {
             /** @var Advert $advert */
             $advert = self::find($entity_id);
+            $old_neighborhood = $advert->neighborhood;
+            $old_area = $advert->area;
             $advert->fill($valid_parameters);
+            $advert->save();
+            if ($old_neighborhood->advert->count() == 0) {
+                $old_neighborhood->delete();
+            }
+            if ($old_area->advert->count() == 0) {
+                $old_area->delete();
+            }
         }
         else {
             /** @var Advert $advert */
             $advert = self::create($valid_parameters);
             $advert->code = \Auth::user()->code . '_' . $advert->id;
+            $advert->save();
         }
-        $advert->save();
         return $advert;
     }
 }

@@ -256,9 +256,9 @@
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-12">
-                                <label for="owner[observation]">Observatii (TO DO: link to observation model)</label>
+                                <label for="owner[observation]">Observatii</label>
                                 <div>
-                                    <textarea disabled id="owner[observation]" name="owner[observation]" class="form-control" rows="2"></textarea>
+                                    <textarea id="owner[observation]" name="owner[observation]" class="form-control" rows="2"></textarea>
                                 </div>
                             </div>
                         </div>

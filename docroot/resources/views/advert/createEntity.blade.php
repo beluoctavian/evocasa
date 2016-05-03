@@ -260,6 +260,12 @@
                                 <div>
                                     <textarea id="owner[observation]" name="owner[observation]" class="form-control" rows="2"></textarea>
                                 </div>
+                                @foreach ($owner['observations'] as $observation)
+                                    <div>
+                                        <textarea disabled class="form-control" rows="2">{{ $observation->text }}</textarea>
+                                        {{ $observation->created_at }}
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div><!-- end proprietar -->

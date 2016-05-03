@@ -131,6 +131,7 @@ class AdvertController extends Controller {
     /** @var Owner $owner */
     $owner = $advert->owner;
     $owner->setAttribute('phone', json_decode($owner->phone, TRUE));
+    $owner->setAttribute('observations', $owner->observations);
     /** @var Model $entity */
     $entity = $advert->{$advert->type};
     /** @var Improvements $improvements */

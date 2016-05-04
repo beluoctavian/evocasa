@@ -7,9 +7,9 @@ Route::get('auth/logout', 'SessionsController@destroy');
 
 /*Pages*/
 Route::get('/', 'PagesController@index');
-Route::get('anunturi', 'PagesController@anunturi');
+Route::get('anunturi', 'PagesController@postSearch');
 
-Route::get('anunturiSearch', 'PagesController@postSearch');
+Route::get('search', 'PagesController@postSearch');
 Route::get('anunturi/{id}', 'PagesController@detalii');
 Route::get('despre-noi', 'PagesController@despreNoi');
 Route::get('servicii', 'PagesController@servicii');
@@ -55,5 +55,6 @@ Route::controller('advert/add', 'AdvertController');
 // Search routes
 Route::get('/migrate', 'PagesController@migrate');
 
-
 Route::post('advert/add-status/{id}', 'AdvertController@postAddStatus');
+Route::post('advert/delete-status/{id}', 'AdvertController@postDeleteStatus');
+Route::get('advert/delete-observation/{id}', 'AdvertController@postDeleteObservation');

@@ -27,10 +27,13 @@
     <div id="main-content" class="col-xs-12 col-md-8">
         <div class="container-fluid">
             <div class="row">
-                // TODO: Check advert status
-                <div class="col-xs-12 relative red margin-bottom text-center">
-                    <h1 class="no-margin">Anunțul este inactiv!</h1>
-                </div>
+                @foreach ($status_types as $status_type)
+                    @if ($status_type->type == 'inactiv' && !empty($advert_status[$status_type->id]))
+                        <div class="col-xs-12 relative red margin-bottom text-center">
+                            <h1 class="no-margin">Anunțul este inactiv!</h1>
+                        </div>
+                    @endif
+                @endforeach
                 <div class="col-xs-12 relative">
                     <h2 class="no-margin">{{ $advert['title'] }}, ID: {{ $advert['code'] }}</h2>
                 </div>

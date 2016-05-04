@@ -109,7 +109,7 @@ class Advert extends Model {
     /**
      * @param array $parameters
      */
-    public static function createFromArray(array $parameters)
+    public static function createFromArray(array $parameters, $entity_id = NULL)
     {
         /** @var Neighborhood $neighborhood */
         $neighborhood = Neighborhood::where('name', $parameters['neighborhood'])->first();
@@ -135,18 +135,26 @@ class Advert extends Model {
                 $valid_parameters[$key] = $value;
             }
         }
-        /** @var Advert $advert */
-        $advert = self::create($valid_parameters);
-        $advert->code = \Auth::user()->code . '_' . $advert->id;
-        $advert->save();
+        if ($entity_id) {
+            /** @var Advert $advert */
+            $advert = self::find($entity_id);
+            $old_neighborhood = $advert->neighborhood;
+            $old_area = $advert->area;
+            $advert->fill($valid_parameters);
+            $advert->save();
+            if ($old_neighborhood->advert->count() == 0) {
+                $old_neighborhood->delete();
+            }
+            if ($old_area->advert->count() == 0) {
+                $old_area->delete();
+            }
+        }
+        else {
+            /** @var Advert $advert */
+            $advert = self::create($valid_parameters);
+            $advert->code = \Auth::user()->code . '_' . $advert->id;
+            $advert->save();
+        }
         return $advert;
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function apartment()
-    {
-        return $this->hasOne('App\Apartment');
     }
 }

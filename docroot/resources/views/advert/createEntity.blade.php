@@ -44,43 +44,43 @@
         <div class="container-fluid">
             @if (!empty($advert['id']))
                 <div class="row margin-bottom" id="status-area">
-                    <div class="col-xs-6">
+                    <div class="col-xs-12">
                         <div class="row">
                             <form method="POST" action="{{ URL::to('advert/add-status/' . $advert['id']) }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group col-xs-12 col-sm-6">
-                                    <div>
-                                        <select required title="Alege statusul" name="status_type" class="form-control">
-                                            <option selected disabled hidden value=""></option>
-                                            @foreach ($status_types as $status_type)
-                                                <option value="{{ $status_type->id }}">
-                                                    {{ $status_type->title }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-xs-12 col-sm-6">
+                                    <select required title="Alege statusul" name="status_type" class="form-control">
+                                        <option selected disabled hidden value=""></option>
+                                        @foreach ($status_types as $status_type)
+                                            <option value="{{ $status_type->id }}">
+                                                {{ $status_type->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                     <button type="submit" class="btn btn-warning"><i class="fa fa-check" aria-hidden="true"></i> Adauga status</button>
                                 </div>
                             </form>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                @foreach ($status_types as $status_type)
-                                    @if (!empty($advert_status[$status_type->id]))
-                                        <span class="status-item" data-toggle="tooltip" data-placement="top" title="{{ $advert_status[$status_type->id]['date'] }}">
-                                            {{ $status_type->title }} <span class="badge">{{ $advert_status[$status_type->id]['count'] }}</span>
-                                        </span>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
+                    <div class="col-xs-12">
+                        @foreach ($status_types as $status_type)
+                            @if (!empty($advert_status[$status_type->id]))
+                                <span class="status-item" data-toggle="tooltip" data-placement="top" title="{{ $advert_status[$status_type->id]['date'] }}">
+                                    <form method="POST" action="{{ URL::to('advert/delete-status/' . $advert['id']) }}">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="type_id" value="{{ $status_type->id }}">
+                                        <button type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                    </form>
+                                    {{ $status_type->title }} <span class="badge">{{ $advert_status[$status_type->id]['count'] }}</span>
+                                </span>
+                            @endif
+                        @endforeach
+                    </div>
                     </div>
                 </div>
 
 
                 <form method="POST" action="{{ URL::to('advert/edit/' . $advert['id']) }}">
+                    <input type="hidden" name="entity_type" value="{{ $entity_type }}">
             @else
                 <form method="POST" action="{{ URL::to('advert/add/' . $entity_type) }}">
             @endif
@@ -256,10 +256,21 @@
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-12">
-                                <label for="owner[observation]">Observatii (TO DO: link to observation model)</label>
+                                <label for="owner[observation]">Observatii</label>
                                 <div>
-                                    <textarea disabled id="owner[observation]" name="owner[observation]" class="form-control" rows="2"></textarea>
+                                    <textarea id="owner[observation]" name="owner[observation]" class="form-control" rows="2"></textarea>
                                 </div>
+                                @foreach ($owner['observations'] as $observation)
+                                    <div class="row">
+                                        <div class="col-xs-11">
+                                            <textarea disabled class="form-control" rows="2">{{ $observation->text }}</textarea>
+                                            {{ $observation->created_at }}
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <a href="{{ URL::to('advert/delete-observation/' . $observation->id) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div><!-- end proprietar -->

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Observation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Advert;
@@ -75,14 +76,14 @@ class AdvertController extends Controller {
     return view('advert.chooseCreationType');
   }
 
-  public function createEntity(Request $request, $entity_type)
+  public function createOrEditEntity(Request $request, $entity_type, $entity_id = NULL)
   {
     if (empty($request->get('advert')) || empty($request->get('owner')) || empty($request->get('entity'))) {
       return redirect('/advert/add/apartment')->withErrors('A aparut o eroare.');
     }
     $advert_parameters = $request->get('advert');
     $advert_parameters['type'] = $entity_type;
-    $advert = Advert::createFromArray($advert_parameters);
+    $advert = Advert::createFromArray($advert_parameters, $entity_id);
 
     Owner::createFromArray($request->get('owner'), $advert);
 
@@ -109,6 +110,8 @@ class AdvertController extends Controller {
     if ($advert == NULL) {
       return NULL;
     }
+    $advert->setAttribute('area', $advert->area->name);
+    $advert->setAttribute('neighborhood', $advert->neighborhood->name);
     /** @var Status $statuses */
     $status = $advert->status;
     $advert_status = [];
@@ -129,6 +132,7 @@ class AdvertController extends Controller {
     /** @var Owner $owner */
     $owner = $advert->owner;
     $owner->setAttribute('phone', json_decode($owner->phone, TRUE));
+    $owner->setAttribute('observations', $owner->observations);
     /** @var Model $entity */
     $entity = $advert->{$advert->type};
     /** @var Improvements $improvements */
@@ -148,8 +152,6 @@ class AdvertController extends Controller {
           break;
 
       }
-      $advert->setAttribute('area', $advert->area->name);
-      $advert->setAttribute('neighborhood', $advert->neighborhood->name);
 
       // Prepare the improvements
       foreach ($improvements as $key => $improvement) {
@@ -166,6 +168,9 @@ class AdvertController extends Controller {
       }
       foreach ($entity->getAttributes() as $key => $value) {
         if (strpos($key, 'obs_') === 0) {
+          if (!array_key_exists(substr($key, 4), $entity->getAttributes())) {
+            unset($entity[$key]);
+          }
           continue;
         }
         if (empty($value)) {
@@ -205,10 +210,11 @@ class AdvertController extends Controller {
 
     return [
       'advert' => $advert->attributesToArray(),
-      'advert_status' => $advert_status,
       'owner' => $owner->attributesToArray(),
       'entity' => $entity->attributesToArray(),
       'improvements' => $improvements,
+      'status_types' => StatusType::all(),
+      'advert_status' => $advert_status,
     ];
   }
 
@@ -231,11 +237,10 @@ class AdvertController extends Controller {
     if ($details == NULL) {
       abort(404);
     }
-    $status_types = StatusType::all();
     return view('advert.createEntity')
       ->with('entity_type', $details['advert']['type'])
       ->with($details)
-      ->with('status_types', $status_types);
+      ->with('status_types', $details['status_types']);
   }
 
   public function getApartment()
@@ -255,28 +260,29 @@ class AdvertController extends Controller {
 
   public function postEditEntity(Request $request, $id)
   {
-    //TODO: Edit the entity
+    $type = $request->get('entity_type');
+    $this->createOrEditEntity($request, $type, $id);
     return $this->getEditEntity($id);
   }
 
   public function postApartment(Request $request)
   {
     /** @var Apartment $entity */
-    $entity = $this->createEntity($request, 'apartment');
+    $entity = $this->createOrEditEntity($request, 'apartment');
     return redirect('advert/edit/' . $entity->getAttribute('advert_id'))->with('successAdd', TRUE);
   }
 
   public function postHouse(Request $request)
   {
     /** @var House $entity */
-    $entity = $this->createEntity($request, 'house');
+    $entity = $this->createOrEditEntity($request, 'house');
     return redirect('advert/edit/' . $entity->getAttribute('advert_id'))->with('successAdd', TRUE);
   }
 
   public function postTerrain(Request $request)
   {
     /** @var Terrain $entity */
-    $entity = $this->createEntity($request, 'terrain');
+    $entity = $this->createOrEditEntity($request, 'terrain');
     return redirect('advert/edit/' . $entity->getAttribute('advert_id'))->with('successAdd', TRUE);
   }
 
@@ -297,6 +303,23 @@ class AdvertController extends Controller {
       'advert_id' => $id,
     ]);
     return redirect('advert/edit/' . $id);
+  }
+
+  public function postDeleteStatus($id, Request $request)
+  {
+    $type_id = $request->get('type_id');
+    /** @var Status $status */
+    $status = Status::where('advert_id', '=', $id)->where('type_id', '=', $type_id)->orderBy('created_at', 'desc')->first();
+    $status->delete();
+    return redirect('advert/edit/' . $id);
+  }
+
+  public function postDeleteObservation($id) {
+    /** @var Observation $observation */
+    $observation = Observation::find($id);
+    $advert_id = $observation->owner->advert->id;
+    $observation->delete();
+    return redirect('advert/edit/' . $advert_id);
   }
 
 }

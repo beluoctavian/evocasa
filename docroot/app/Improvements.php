@@ -37,6 +37,12 @@ class Improvements extends Model {
       'improvements' => json_encode($parameters),
       'advert_id' => $advert->id,
     ];
+    $exists = $advert->improvements;
+    if ($exists) {
+      $exists->fill($valid_parameters);
+      $exists->save();
+      return $exists;
+    }
     return self::create($valid_parameters);
   }
 

@@ -1,4 +1,6 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -75,7 +77,21 @@ class Owner extends Model {
             $valid_parameters['phone'] = json_encode($valid_parameters['phone']);
         }
         $valid_parameters['advert_id'] = $advert->id;
-        return self::create($valid_parameters);
+        $owner = $advert->owner;
+        if ($owner) {
+            $owner->fill($valid_parameters);
+            $owner->save();
+        }
+        else {
+            $owner = self::create($valid_parameters);
+        }
+        if (!empty($parameters['observation'])) {
+            Observation::create([
+                'text' => $parameters['observation'],
+                'owner_id' => $owner->id,
+            ]);
+        }
+        return $owner;
     }
 
 }

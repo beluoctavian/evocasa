@@ -160,7 +160,13 @@ foreach($proprietars as $proprietar) {
             if($status_name == 'recomandat')
             {
                 $status = new \App\Status();
-
+                $status->type_id = 1;
+                $status->advert_id = $advert->id;
+                $status->save();
+            }
+            if($anunt->prima_pagina == 1)
+            {
+                $status = new \App\Status();
                 $status->type_id = 1;
                 $status->advert_id = $advert->id;
                 $status->save();

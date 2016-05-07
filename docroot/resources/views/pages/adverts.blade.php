@@ -196,6 +196,17 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                        <label>Sortare</label>
+                                        <div>
+                                            <select name="sortare" class="form-control">
+                                                <option value="">Indiferent</option>
+                                                <option value="asc">Crescator</option>
+                                                <option value="desc">Descrescator</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12 text-center">
@@ -212,39 +223,8 @@
                         <div class="main-title">
                             <i class="fa fa-th-list"></i>
                             <h2>Anunturi</h2>
-                            <div class="pull-right ordoneaza hidden-xs hidden-sm">
-                                <?php
-                                $link_final = '';
-                                foreach(Input::get() as $key => $value){
-                                    if($key == "sort")
-                                        continue;
-                                    if($link_final != '')
-                                        $link_final = $link_final . '&' . $key . '=' . $value;
-                                    else
-                                        $link_final = '?' . $key . '=' . $value;
-                                }
-                                if($link_final != '')
-                                    $link_final = $link_final . '&sort=price';
-                                else
-                                    $link_final = '?sort=price';
-                                ?>
-                                Ordoneaza dupa pret:
-                                <a href="{{ URL::to('/anunturi'. $link_final . '&tip_sortare=asc') }}">crescator <i class="fa fa-arrow-circle-o-up"></i></a>
-                                <span>|</span>
-                                <a href="{{ URL::to('/anunturi'. $link_final . '&tip_sortare=desc') }}">descrescator <i class="fa fa-arrow-circle-o-down"></i></a>
-                            </div>
                         </div>
                     </div>
-                    <!--
-                <div class="col-xs-12 text-center hidden-md hidden-lg margin-bottom">
-                    <div class="ordoneaza">
-                        <div>Ordoneaza dupa pret:</div>
-                        <a href="{{ URL::to('/anunturi'. $link_final) }}">crescator <i class="fa fa-arrow-circle-o-up"></i></a>
-                        <span>|</span>
-                        <a href="{{ URL::to('/anunturi'. $link_final . '&tip_sortare=desc') }}">descrescator <i class="fa fa-arrow-circle-o-down"></i></a>
-                    </div>
-                </div>
-                -->
                     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
                         @foreach($adverts as $advert)
                             <?php $apartment = $advert->apartment ?>
@@ -285,7 +265,7 @@
                                                 <div class="type">{{ $advert->type }}</div>
                                 </div>
                                 <div class="description">
-                                    @if(!Auth::guest())
+                                    @if(Auth::guest())
                                         <h2><a href="{{ URL::to('anunturi/' . $advert->id) }}">{{ $advert->title }}</a></h2>
                                     @else
                                         <h2><a class="" href="{{ URL::to('editeaza-anunt/' . $advert->id) }}">{{ $advert->title }}</a></h2>

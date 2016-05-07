@@ -155,8 +155,7 @@ class PagesController extends Controller {
         $neighborhood = Input::get('cartier');
         $phone = Input::get('phone');
         $area = Input::get('zona');
-        $sort_after = Input::get('sort');
-        $sort_order = Input::get('tip_sortare');
+        $sort_after = Input::get('sortare');
 
         // house properties
 
@@ -307,7 +306,7 @@ class PagesController extends Controller {
         }
         if($sort_after)
         {
-            $adverts->orderBy($sort_after, $sort_order);
+            $adverts->orderBy('price', $sort_after);
         }
 
         $results  = $adverts->paginate(10);

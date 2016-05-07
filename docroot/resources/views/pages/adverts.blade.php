@@ -289,37 +289,39 @@
                     </div>
                     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
                         @foreach($adverts as $advert)
-                            <?php $apartment = $advert->apartment ?>
-                            <div class="advert-item" id="{{ 'advert-item-no-' . $advert->id }}">
+                            <?php $apartment = $advert['entity'];
+                                $advert = $advert['advert'];
+                            ?>
+                            <div class="advert-item" id="{{ 'advert-item-no-' . $advert['id'] }}">
                                 @if(!Auth::guest())
                                     <div class="controls">
                                         <div>
-                                            <a href="{{ URL::to('advert/edit/' . $advert->id) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{ URL::to('advert/edit/' . $advert['id']) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                                         </div>
                                         <div>
-                                            <a href="{{ URL::to('advert/images/' . $advert->id) }}" class="btn btn-success"><i class="fa fa-file-image-o"></i></a>
+                                            <a href="{{ URL::to('advert/images/' . $advert['id']) }}" class="btn btn-success"><i class="fa fa-file-image-o"></i></a>
                                         </div>
                                         <div>
-                                            <a href="{{ URL::to('advert/update/' . $advert->id) }}" class="btn btn-warning"><i class="fa fa-wrench"></i></a>
+                                            <a href="{{ URL::to('advert/update/' . $advert['id']) }}" class="btn btn-warning"><i class="fa fa-wrench"></i></a>
                                         </div>
                                         <form method="POST" action="{{ URL::to('advert/delete') }}" onSubmit="return confirm('Sigur vrei sa stergi anuntul?');">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="id" value="{{ $advert->id }}">
+                                            <input type="hidden" name="id" value="{{ $advert['id'] }}">
                                             <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i></button>
                                         </form>
                                     </div>
                                 @endif
                                 <div class="img-container">
                                     @if(Auth::guest())
-                                        <a href="{{ URL::to('anunturi/' . $advert->id) }}">
+                                        <a href="{{ URL::to('anunturi/' . $advert['id']) }}">
                                             @else
-                                                <a href="{{ URL::to('advert/edit/' . $advert->id) }}">
+                                                <a href="{{ URL::to('advert/edit/' . $advert['id']) }}">
                                                     @endif
-                                                    @if(File::exists('uploaded-images/anunt_' . $advert->id . '/'))
-                                                        <?php $files = File::allFiles('uploaded-images/anunt_' . $advert->id . '/'); sort($files); ?>
+                                                    @if(File::exists('uploaded-images/anunt_' . $advert['id'] . '/'))
+                                                        <?php $files = File::allFiles('uploaded-images/anunt_' . $advert['id'] . '/'); sort($files); ?>
                                                         @if(count($files))
                                                             <?php $filename = $files[0]->getRelativePathName(); ?>
-                                                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert->id . '/' . $filename) }}">
+                                                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $filename) }}">
                                                         @else
                                                             <img src="{{ URL::asset('img/default-img.jpg') }}" />
                                                         @endif
@@ -327,53 +329,53 @@
                                                         <img src="{{ URL::asset('img/default-img.jpg') }}" />
                                                     @endif
                                                 </a>
-                                                <div class="type">{{ $advert->type }}</div>
+                                                <div class="type">{{ $advert['type'] }}</div>
                                 </div>
                                 <div class="description">
                                     @if(Auth::guest())
-                                        <h2><a href="{{ URL::to('anunturi/' . $advert->id) }}">{{ $advert->title }}</a></h2>
+                                        <h2><a href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
                                     @else
-                                        <h2><a class="" href="{{ URL::to('advert/edit/' . $advert->id) }}">{{ $advert->title }}</a></h2>
+                                        <h2><a class="" href="{{ URL::to('advert/edit/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
                                     @endif
                                     <div class="price">
                                         <div class="a-container">
-                                            <a class="actual" href="{{ URL::to('anunturi/' . $advert->id) }}">{{ $advert->price }} &euro;</a>
+                                            <a class="actual" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['price'] }} &euro;</a>
                                         </div>
-                                        @if($advert->old_price)
+                                        @if($advert['old_price'])
                                             <div class="a-container">
-                                                <a class="vechi" href="{{ URL::to('anunturi/' . $advert->id) }}">{{ $advert->old_price }} &euro;</a>
+                                                <a class="vechi" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['old_price'] }} &euro;</a>
                                             </div>
                                         @endif
                                         <div class="clear-both"></div>
-                                        <div class="updated-at text-center" href="{{ URL::to('anunturi/' . $advert->id) }}">
+                                        <div class="updated-at text-center" href="{{ URL::to('anunturi/' . $advert['id']) }}">
                                             <div>
-                                                <p>Actualizat: {{ date("d-m-Y", strtotime($advert->updated_at)) }}</p>
-                                                <p>Adaugat: {{ date("d-m-Y", strtotime($advert->created_at)) }}</p>
+                                                <p>Actualizat: {{ date("d-m-Y", strtotime($advert['updated_at'])) }}</p>
+                                                <p>Adaugat: {{ date("d-m-Y", strtotime($advert['updated_at'])) }}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="details">
                                         <ul>
-                                            <li>ID: <b>{{ $advert->code }}</b></li>
+                                            <li>ID: <b>{{ $advert['code'] }}</b></li>
 
                                             <li>
-                                                @if($apartment->built_area)
-                                                    {{ $apartment->built_area }} mp
+                                                @if($apartment['built_area'])
+                                                    {{ $apartment['built_area'] }} mp
                                                 @endif
                                             </li>
                                             <li class="hidden-xs hidden-sm">
-                                                @if($apartment->partitioning)
-                                                    {{ $apartment->partitioning }}
+                                                @if($apartment['partitioning'])
+                                                    {{ $apartment['partitioning'] }}
                                                 @endif
                                             </li>
                                             <li class="hidden-xs hidden-sm">
-                                                @if($apartment->floor)
-                                                    Etaj {{ $apartment->floor }}
+                                                @if($apartment['floor'])
+                                                    Etaj {{ $apartment['floor'] }}
                                                 @endif
                                             </li>
                                             <li class="last">
-                                                @if($apartment->built_year)
-                                                    An {{ $apartment->built_year }}
+                                                @if($apartment['built_year'])
+                                                    An {{ $apartment['built_year'] }}
                                                 @endif
                                             </li>
                                         </ul>

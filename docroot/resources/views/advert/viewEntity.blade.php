@@ -44,7 +44,7 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="id" value="{{ $advert['id'] }}">
                             <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-times"></i> Sterge</button>
-                            <a href="{{ URL::to('advert/upload-images/' . $advert['id']) }}" class="btn btn-success pull-right"><i class="fa fa-picture-o"></i> Upload</a>
+                            <a href="{{ URL::to('advert/images/' . $advert['id']) }}" class="btn btn-success pull-right"><i class="fa fa-picture-o"></i> Upload</a>
                             <a href="{{ URL::to('advert/edit/' . $advert['id']) }}" class="btn btn-primary pull-right"><i class="fa fa-pencil"></i> Editeaza</a>
                         </form>
                     </div>

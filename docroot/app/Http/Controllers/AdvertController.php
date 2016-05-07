@@ -13,6 +13,8 @@ use App\House;
 use App\Terrain;
 use App\StatusType;
 use App\Status;
+use Illuminate\Support\Collection;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AdvertController extends Controller {
 
@@ -134,7 +136,11 @@ class AdvertController extends Controller {
     /** @var Owner $owner */
     $owner = $advert->owner;
     $owner->setAttribute('phone', json_decode($owner->phone, TRUE));
-    $owner->setAttribute('observations', $owner->observations);
+    /** @var Collection $observations */
+    $observations = $owner->observations->sort(function ($a, $b) {
+      return strtotime($b->created_at) - strtotime($a->created_at);
+    });
+    $owner->setAttribute('observations', $observations);
     /** @var Model $entity */
     $entity = $advert->{$advert->type};
     /** @var Improvements $improvements */
@@ -316,12 +322,117 @@ class AdvertController extends Controller {
     return redirect('advert/edit/' . $id);
   }
 
-  public function postDeleteObservation($id) {
+  public function postDeleteObservation($id)
+  {
     /** @var Observation $observation */
     $observation = Observation::find($id);
     $advert_id = $observation->owner->advert->id;
     $observation->delete();
     return redirect('advert/edit/' . $advert_id);
+  }
+
+  public function getImages($id)
+  {
+    $details = $this->getEntityDetails($id, TRUE);
+    if ($details == NULL) {
+      abort(404);
+    }
+    if (!\File::exists('uploaded-images/anunt_' . $id . '/')) {
+      $create = \File::makeDirectory('uploaded-images/anunt_' . $id . '/', $mode = 0777, true, true);
+      if ($create === FALSE) {
+        throw new \Exception("Could not create directory: uploaded-images/anunt_ . {$id}");
+      }
+    }
+    $files = \File::allFiles('uploaded-images/anunt_' . $id . '/');
+    sort($files);
+    return view('advert.images')
+      ->with($details)
+      ->with('files', $files);
+  }
+
+  public function postImages($id, Request $request)
+  {
+    ini_set("memory_limit","256M");
+    $destinationPath = 'uploaded-images/anunt_' . $id;
+    $files = $request->file('files');
+    if ($files[0] === null){
+      return redirect()->back()->withErrors('Nu ati selectat niciun fisier!');
+    }
+    if (!\File::exists($destinationPath)) {
+      \File::makeDirectory($destinationPath, $mode = 0777, true, true);
+      if ($create === FALSE) {
+        throw new \Exception("Could not create directory: {$destinationPath}");
+      }
+    }
+    $destinationPath = $destinationPath . '/';
+    foreach ($request->file('files') as $file) {
+      /** @var UploadedFile $file */
+      $im_path = $destinationPath . $file->getClientOriginalName();
+      $file->move($destinationPath, $file->getClientOriginalName());
+      $image = imagecreatefromstring(file_get_contents($im_path));
+      $watermark = imagecreatefrompng('img/evocasa_logo_big.png');
+
+      $image_width = imagesx($image);
+      $image_height = imagesy($image);
+
+      $watermark_width = imagesx($watermark);
+      $watermark_height = imagesy($watermark);
+
+      $new_watermark_width = $watermark_width;
+      $new_watermark_height = $watermark_height;
+      $diffwi = 0;
+      $diffhe = 0;
+      if($watermark_width > $image_width){
+        $diffwi = $watermark_width - $image_width;
+      }
+      if($watermark_height > $image_height){
+        $diffhe = $watermark_height - $image_height;
+      }
+      if($diffwi > $diffhe){
+        $new_watermark_width -= $diffwi;
+        $new_watermark_height -= $diffwi;
+      } else {
+        $new_watermark_width -= $diffhe;
+        $new_watermark_height -= $diffhe;
+      }
+      imagecopyresized(
+        $image,                                  // Destination image
+        $watermark,                              // Source image
+        $image_width/2 - $new_watermark_width/2,  // Destination X
+        $image_height/2 - $new_watermark_height/2, // Destination Y
+        0,                                       // Source X
+        0,                                       // Source Y
+        $new_watermark_width,                      // Destination W
+        $new_watermark_height,                     // Destination H
+        imagesx($watermark),                     // Source W
+        imagesy($watermark)
+      );                    // Source H
+      imagepng($image,$im_path);
+      imagedestroy($image);
+    }
+    return redirect()->back()->with('success', 1);
+  }
+
+  public function changeImageNumber($id, Request $request){
+    $path = $request->path;
+    $oldfilename = $filename = $request->filename;
+    $number = $request->number;
+    if($filename[2] == '_'){
+      $filename = substr_replace($filename,$number,0,3);
+    }else{
+      $filename = substr_replace($filename,$number,0,0);
+    }
+    if ( !\File::move($path . $oldfilename, $path . $filename))
+    {
+      die("Couldn't rename file");
+    }
+    return redirect('upload-images/' . $request->anunt_id . '#images');
+  }
+
+  public function deleteImage($id, Request $request)
+  {
+    \File::delete($request->filename);
+    return redirect()->back()->with('successDelete', 1);
   }
 
 }

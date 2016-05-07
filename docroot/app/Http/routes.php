@@ -21,10 +21,6 @@ Route::get('adauga-anunt', 'UsersController@viewAdauga');
 Route::post('adauga-anunt', 'UsersController@postAdauga');
 Route::get('editeaza-anunt/{id}', 'UsersController@getEditeaza');
 Route::post('editeaza-anunt', 'UsersController@postEditeaza');
-Route::get('upload-images/{id}', 'UsersController@getUpload');
-Route::post('upload-images', 'UsersController@postUpload');
-Route::post('delete-image', 'UsersController@deleteImage');
-Route::post('change-image-number', 'UsersController@changeImageNumber');
 Route::post('sterge-anunt', 'UsersController@sterge');
 Route::get('printeaza-anunt/{id}', 'UsersController@getPrinteaza');
 Route::get('update-date/{id}', 'UsersController@updateDate');
@@ -32,12 +28,12 @@ Route::get('settings', 'UsersController@getSettings');
 Route::post('settings', 'UsersController@postSettings');
 
 /*Customers*/
-Route::get('clienti', 'CustomersController@getCustomers');
-Route::get('edit-client/{id}', 'CustomersController@editCustomer');
-Route::post('edit-client', 'CustomersController@postEditCustomer');
-Route::post('adauga-client', 'CustomersController@addCustomer');
-Route::post('cauta-client', 'CustomersController@search');
-Route::get('delete-client/{id}', 'CustomersController@deleteCustomer');
+//Route::get('clienti', 'CustomersController@getCustomers');
+//Route::get('edit-client/{id}', 'CustomersController@editCustomer');
+//Route::post('edit-client', 'CustomersController@postEditCustomer');
+//Route::post('adauga-client', 'CustomersController@addCustomer');
+//Route::post('cauta-client', 'CustomersController@search');
+//Route::get('delete-client/{id}', 'CustomersController@deleteCustomer');
 
 /* ----------------- REFACTOR ALL ROUTES ----------------- */
 
@@ -51,3 +47,11 @@ Route::post('advert/edit/{id}', 'AdvertController@postEditEntity');
 Route::post('advert/add-status/{id}', 'AdvertController@postAddStatus');
 Route::post('advert/delete-status/{id}', 'AdvertController@postDeleteStatus');
 Route::get('advert/delete-observation/{id}', 'AdvertController@postDeleteObservation');
+//Route::get('upload-images/{id}', 'UsersController@getUpload');
+//Route::post('upload-images{id}', 'UsersController@postUpload');
+//Route::post('delete-image', 'UsersController@deleteImage');
+//Route::post('change-image-number', 'UsersController@changeImageNumber');
+Route::get('advert/images/{id}', 'AdvertController@getImages');
+Route::post('advert/images/{id}', 'AdvertController@postImages');
+Route::post('advert/change-image-number/{id}', 'AdvertController@changeImageNumber');
+Route::post('advert/delete-image/{id}', 'AdvertController@deleteImage');

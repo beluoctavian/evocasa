@@ -32,12 +32,12 @@ Route::get('settings', 'UsersController@getSettings');
 Route::post('settings', 'UsersController@postSettings');
 
 /*Customers*/
-Route::get('clienti', 'CustomersController@getCustomers');
-Route::get('edit-client/{id}', 'CustomersController@editCustomer');
-Route::post('edit-client', 'CustomersController@postEditCustomer');
-Route::post('adauga-client', 'CustomersController@addCustomer');
-Route::post('cauta-client', 'CustomersController@search');
-Route::get('delete-client/{id}', 'CustomersController@deleteCustomer');
+//Route::get('clienti', 'CustomersController@getCustomers');
+//Route::get('edit-client/{id}', 'CustomersController@editCustomer');
+//Route::post('edit-client', 'CustomersController@postEditCustomer');
+//Route::post('adauga-client', 'CustomersController@addCustomer');
+//Route::post('cauta-client', 'CustomersController@search');
+//Route::get('delete-client/{id}', 'CustomersController@deleteCustomer');
 
 /* ----------------- REFACTOR ALL ROUTES ----------------- */
 

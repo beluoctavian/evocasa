@@ -64,7 +64,6 @@
         <div class="row">
             <div class="col-xs-12 text-center">
                 <a href="/advert/add"><i class="fa fa-file"></i> Adauga anunt</a>
-                <a href="{{ URL::to('clienti') }}"><i class="fa fa-users"></i> Clienti</a>
                 <a href="{{ URL::to('settings') }}"><i class="fa fa-cogs"></i> Setari</a>
                 <a href="{{ URL::to('auth/logout') }}"><i class="fa fa-sign-out"></i> Logout</a>
             </div>
@@ -90,9 +89,6 @@
                 </li>
                 <li>
                     <a href="/advert/add"><i class="fa fa-file"></i> Adauga anunt</a>
-                </li>
-                <li>
-                    <a href="{{ URL::to('clienti') }}"><i class="fa fa-users"></i> Clienti</a>
                 </li>
                 <li>
                     <a href="{{ URL::to('settings') }}"><i class="fa fa-cogs"></i> Setari</a>

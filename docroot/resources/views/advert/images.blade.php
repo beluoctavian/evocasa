@@ -101,24 +101,8 @@
                                     <img class="banner-preview" src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName()) }}" alt=""/>
                                 </a>
                                 <div class="caption">
-                                    <!--
-                                    <p class="no-overflow">{{ $file->getRelativePathName() }}</p>
-                                    -->
-                                    <p class="text-center">{{ getimagesize('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName())[3] }}</p>
-                                    <p>
-                                        <form role="form" method="POST" action="{{ URL::to('advert/change-image-number/' . $advert['id']) }}">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="path" value="{{ 'uploaded-images/anunt_' . $advert['id'] . '/' }}">
-                                            <input type="hidden" name="filename" value="{{ $file->getRelativePathName() }}">
-                                            <select name="number" class="form-control"">
-                                                <option value=""></option>
-                                                @for($it = 1 ; $it <= count($files) ; $it++)
-                                                    <?php $it < 10 ? $itmod = '0' . $it : $itmod = $it; ?>
-                                                    <option value="{{ $itmod . '_' }}" {{ substr($file->getRelativePathName(),0,2) == $itmod ? 'selected' : '' }}> {{ $it }} </option>
-                                                @endfor
-                                            </select>
-                                        </form>
-                                    </p>
+                                    <p class="text-center">{{ $file->getRelativePathName() }}</p>
+{{--                                    <p class="text-center">{{ getimagesize('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName())[3] }}</p>--}}
                                     <p>
                                         <form role="form" method="POST" action="{{ URL::to('advert/delete-image/' . $advert['id']) }}"  onsubmit="return confirm('Sigur doriti sa stergeti imaginea?');">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -130,6 +114,39 @@
                             </div>
                         </div>
                         @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ordine imagini -->
+            <div class="row" id="images-ordering">
+                <div class="col-xs-12 col-sm-12">
+                    <div class="main-title">
+                        <i class="fa fa-sort-amount-asc"></i>
+                        <h2>Ordine imagini</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <form role="form" method="POST" action="{{ URL::to('advert/change-image-order/' . $advert['id']) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="path" value="{{ 'uploaded-images/anunt_' . $advert['id'] . '/' }}">
+                                @foreach ($files as $key => $file)
+                                    <input type="hidden" name="filename[]" value="{{ $file->getRelativePathName() }}">
+                                    <label for="number{{ $key }}">{{ $file->getRelativePathName() }}</label>
+                                    <select id="number{{ $key }}" name="number[]" class="form-control">
+                                    @foreach ($files as $it => $f)
+                                        <option value="{{ $it }}" {{ $key == $it ? 'selected' : '' }}> {{ $it }} </option>
+                                    @endforeach
+                                    </select>
+                                @endforeach
+                                <div class="row margin-bottom">
+                                    <div class="col-xs-12 text-center">
+                                        <button type="submit" class="btn btn-warning btn-lg"><i class="fa fa-random"></i> Sorteaza</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

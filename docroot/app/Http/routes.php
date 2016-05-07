@@ -10,7 +10,6 @@ Route::get('/', 'PagesController@index');
 Route::get('anunturi', 'PagesController@postSearch');
 
 Route::get('search', 'PagesController@postSearch');
-Route::get('anunturi/{id}', 'PagesController@detalii');
 Route::get('despre-noi', 'PagesController@despreNoi');
 Route::get('servicii', 'PagesController@servicii');
 Route::get('contact', 'PagesController@contact');
@@ -53,5 +52,5 @@ Route::get('advert/delete-observation/{id}', 'AdvertController@postDeleteObserva
 //Route::post('change-image-number', 'UsersController@changeImageNumber');
 Route::get('advert/images/{id}', 'AdvertController@getImages');
 Route::post('advert/images/{id}', 'AdvertController@postImages');
-Route::post('advert/change-image-number/{id}', 'AdvertController@changeImageNumber');
+Route::post('advert/change-image-order/{id}', 'AdvertController@changeImageOrder');
 Route::post('advert/delete-image/{id}', 'AdvertController@deleteImage');

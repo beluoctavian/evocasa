@@ -358,7 +358,7 @@ class AdvertController extends Controller {
       return redirect()->back()->withErrors('Nu ati selectat niciun fisier!');
     }
     if (!\File::exists($destinationPath)) {
-      \File::makeDirectory($destinationPath, $mode = 0777, true, true);
+      $create = \File::makeDirectory($destinationPath, $mode = 0777, true, true);
       if ($create === FALSE) {
         throw new \Exception("Could not create directory: {$destinationPath}");
       }

@@ -4,73 +4,37 @@ use App\Advert;
 use App\Apartment;
 use App\Area;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Imobil;
-use App\Observation;
 use App\Neighborhood;
-use App\Owner;
 use App\StatusType;
+use App\Status;
 use Illuminate\Http\Request;
-use Auth;
 use Input;
 use File;
 use Illuminate\Support\Facades\DB;
-use PhpSpec\Wrapper\Subject\Expectation\Negative;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class PagesController extends Controller {
 
-	public function index() {
+	public function index(Request $request) {
+        $recommended_id = StatusType::where('type', 'recomandat')->first()->id;
+        $ids = Status::where('type_id', $recommended_id)->lists('advert_id');
+        $ids = array_unique($ids);
 
-        $ids = Advert::where('first_page', 1)
-//             ->whereHas('status', function ($query) {
-//                 $query->where('type_id', 1);
-//             })
-            ->orderBy('created_at', 'desc')
-            ->lists('id');
-//        $page = Input::get('page');
-//        $partitions = array_unique(Apartment::all()->lists('partitioning'));
-//
-//        $neighborhoods = Neighborhood::all();
-//
-//        $areas = Area::all();
-
-        $page = Input::get('page');
-        if(!$page || $page < 1){
-            $page = 1;
+        $perPage = 5;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $collection = new Collection($ids);
+        $currentPageSearchResults = $collection->slice(($currentPage-1) * $perPage, $perPage)->all();
+        foreach ($currentPageSearchResults as &$item) {
+            $item = AdvertController::getEntityDetails($item);
         }
 
-        $adverts = array();
-        foreach ($ids as $id) {
-            $adverts[] = AdvertController::getEntityDetails($id);
-//            var_dump($adverts);
-//            die();
-        }
+        $paginatedSearchResults = new LengthAwarePaginator($currentPageSearchResults, count($collection), $perPage, $currentPage, [
+          'path'  => $request->url(),
+          'query' => $request->query(),
+        ]);
 
-        return view('pages.new_index')
-            ->with('adverts',$adverts)
-            ->with('page', $page);
-
-
-//        $anunts = DB::table('anunts')
-//            ->where('first_page','=','1')
-//            ->where('status', 'NOT LIKE', '%inactiv%')
-//            ->orderBy('created_at', 'desc')->get();
-//        $page = Input::get('page');
-//        $orase = array_map('ucwords',array_unique(array_map('strtolower', DB::table('anunts')->lists('oras'))));
-//        sort($orase);
-//        $zone = array_map('ucwords',array_unique(array_map('strtolower', DB::table('anunts')->lists('zona'))));
-//        sort($zone);
-//        $cartiere = array_map('ucwords',array_unique(array_map('strtolower', DB::table('anunts')->lists('cartier'))));
-//        sort($cartiere);
-//        $compartimentari = array_map('ucwords',array_unique(array_map('strtolower', DB::table('imobils')->lists('compartimentare'))));
-//        return view('pages.index')
-//            ->with('anunts',$anunts)
-//            ->with('orase',$orase)
-//            ->with('zone',$zone)
-//            ->with('cartiere',$cartiere)
-//            ->with('compartimentari',$compartimentari)
-//            ->with('page',$page)
-//            ->with('entity_type', 'apartment');
+        return view('pages.new_index')->with('items', $paginatedSearchResults);
     }
 //	public function anunturi() {
 //        $gets = Input::get();

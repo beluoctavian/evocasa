@@ -319,12 +319,32 @@ class AdvertController extends Controller {
     return redirect('advert/edit/' . $id);
   }
 
-  public function postDeleteObservation($id) {
+  public function postDeleteObservation($id)
+  {
     /** @var Observation $observation */
     $observation = Observation::find($id);
     $advert_id = $observation->owner->advert->id;
     $observation->delete();
     return redirect('advert/edit/' . $advert_id);
+  }
+
+  public function getImages($id)
+  {
+    $details = $this->getEntityDetails($id, TRUE);
+    if ($details == NULL) {
+      abort(404);
+    }
+    if(!\File::exists('uploaded-images/anunt_' . $id . '/')){
+      $create = \File::makeDirectory('uploaded-images/anunt_' . $id . '/', $mode = 0777, true, true);
+      if ($create === FALSE) {
+        throw new \Exception("Could not create directory: uploaded-images/anunt_ . {$id}");
+      }
+    }
+    $files = \File::allFiles('uploaded-images/anunt_' . $id . '/');
+    sort($files);
+    return view('advert.images')
+      ->with($details)
+      ->with('files', $files);
   }
 
 }

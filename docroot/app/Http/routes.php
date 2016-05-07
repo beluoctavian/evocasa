@@ -42,19 +42,12 @@ Route::get('delete-client/{id}', 'CustomersController@deleteCustomer');
 /* ----------------- REFACTOR ALL ROUTES ----------------- */
 
 /* Pages */
-Route::controller('advert/add', 'AdvertController');
-
 Route::get('anunturi/{id}', 'AdvertController@viewEntity');
 
 /* Admin */
 Route::controller('advert/add', 'AdvertController');
 Route::get('advert/edit/{id}', 'AdvertController@getEditEntity');
 Route::post('advert/edit/{id}', 'AdvertController@postEditEntity');
-Route::controller('advert/add', 'AdvertController');
-
-// Search routes
-Route::get('/migrate', 'PagesController@migrate');
-
 Route::post('advert/add-status/{id}', 'AdvertController@postAddStatus');
 Route::post('advert/delete-status/{id}', 'AdvertController@postDeleteStatus');
 Route::get('advert/delete-observation/{id}', 'AdvertController@postDeleteObservation');

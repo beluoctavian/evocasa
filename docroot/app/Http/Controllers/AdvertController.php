@@ -351,7 +351,6 @@ class AdvertController extends Controller {
   public function postImages($id, Request $request)
   {
     ini_set("memory_limit","256M");
-    $id = $request->id;
     $destinationPath = 'uploaded-images/anunt_' . $id;
     $files = $request->file('files');
     if ($files[0] === null){

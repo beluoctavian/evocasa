@@ -54,7 +54,6 @@
             @endif
             <form method="POST" enctype="multipart/form-data" action="{{ URL::to('advert/images/' . $advert['id']) }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="id" value="{{ $advert['id'] }}">
                 <!-- Adauga imagini -->
                 <div class="row margin-bottom">
                     <div class="col-xs-12 col-sm-12">

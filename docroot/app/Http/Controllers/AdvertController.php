@@ -16,7 +16,7 @@ use App\Status;
 
 class AdvertController extends Controller {
 
-  public $improvements = [
+  public static $improvements = [
     'gresie' => 'Gresie',
     'faianta' => 'Faianta',
     'parchet' => 'Parchet',
@@ -37,7 +37,7 @@ class AdvertController extends Controller {
     'modernizat' => 'Modernizat',
   ];
 
-  public $entity_attributes = [
+  public static $entity_attributes = [
     'usable_area' => 'Suprafata utila',
     'built_area' => 'Suprafata construita',
     'partitioning' => 'Compartimentare',
@@ -103,7 +103,7 @@ class AdvertController extends Controller {
     return $entity;
   }
 
-  public function getEntityDetails($id, $prepareForDisplay = FALSE)
+  public static function getEntityDetails($id, $prepareForDisplay = FALSE)
   {
     /** @var Advert $advert */
     $advert = Advert::find($id);
@@ -155,10 +155,10 @@ class AdvertController extends Controller {
 
       // Prepare the improvements
       foreach ($improvements as $key => $improvement) {
-        if (!array_key_exists($key, $this->improvements)) {
+        if (!array_key_exists($key, self::$improvements)) {
           throw new \Exception('Found undeclared improvement: ' . $key);
         }
-        $improvements[$key] = $this->improvements[$key];
+        $improvements[$key] = self::$improvements[$key];
       }
 
       // Prepare the entity
@@ -202,7 +202,7 @@ class AdvertController extends Controller {
           $suffix .= " ({$entity["obs_{$key}"]})";
           unset($entity["obs_{$key}"]);
         }
-        $entity->setAttribute($this->entity_attributes[$key], $value . $suffix);
+        $entity->setAttribute(self::$entity_attributes[$key], $value . $suffix);
         unset($entity[$key]);
       }
 

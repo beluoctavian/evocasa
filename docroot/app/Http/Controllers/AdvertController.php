@@ -120,12 +120,14 @@ class AdvertController extends Controller {
         if (empty($advert_status[$sts->type_id])) {
           $advert_status[$sts->type_id] = [
             'count' => 1,
-            'date' => $sts->created_at,
+            'created_at' => $sts->created_at,
+            'title' =>  $sts->status_type->title,
           ];
         }
         else {
+          $advert_status[$sts->type_id]['title'] = $sts->status_type->title;
           $advert_status[$sts->type_id]['count']++;
-          $advert_status[$sts->type_id]['date'] = ($sts->created_at > $advert_status[$sts->type_id]['date']) ? $sts->created_at : $advert_status[$sts->type_id]['date'];
+          $advert_status[$sts->type_id]['created_at'] = ($sts->created_at > $advert_status[$sts->type_id]['created_at']) ? $sts->created_at : $advert_status[$sts->type_id]['created_at'];
         }
       }
     }

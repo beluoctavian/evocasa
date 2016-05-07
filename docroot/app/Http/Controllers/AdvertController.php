@@ -293,6 +293,31 @@ class AdvertController extends Controller {
     return redirect('advert/edit/' . $entity->getAttribute('advert_id'))->with('successAdd', TRUE);
   }
 
+  public function postDeleteEntity(Request $request)
+  {
+    $id = $request->get('id');
+    /** @var Advert $advert */
+    $advert = Advert::find($id);
+    $neighborhood = $advert->neighborhood;
+    $area = $advert->area;
+    /** @var Owner $owner */
+    $owner = $advert->owner;
+    $owner->observations()->delete();
+    $owner->delete();
+    $entity = $advert->{$advert->type};
+    $entity->delete();
+    $advert->improvements()->delete();
+    $advert->status()->delete();
+    $advert->delete();
+    if ($area->advert->count() <= 1) {
+      $area->delete();
+    }
+    if ($neighborhood->advert->count() <= 1) {
+      $neighborhood->delete();
+    }
+    return redirect('anunturi')->with('successDelete',1);
+  }
+
   public function updateDate($id){
     /** @var Advert $anunt */
     $anunt = Advert::find($id);

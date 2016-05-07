@@ -40,6 +40,7 @@ Route::get('anunturi/{id}', 'AdvertController@viewEntity');
 Route::controller('advert/add', 'AdvertController');
 Route::get('advert/edit/{id}', 'AdvertController@getEditEntity');
 Route::post('advert/edit/{id}', 'AdvertController@postEditEntity');
+Route::post('advert/delete', 'AdvertController@postDeleteEntity');
 Route::get('advert/update/{id}', 'AdvertController@updateDate');
 Route::post('advert/add-status/{id}', 'AdvertController@postAddStatus');
 Route::post('advert/delete-status/{id}', 'AdvertController@postDeleteStatus');

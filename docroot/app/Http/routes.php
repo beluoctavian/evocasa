@@ -5,7 +5,7 @@ Route::get('login', 'SessionsController@create');
 Route::post('auth/login', 'SessionsController@store');
 Route::get('auth/logout', 'SessionsController@destroy');
 
-Route::get('search', 'PagesController@postSearch');
+//Route::get('anunturi', 'PagesController@postSearch');
 Route::get('despre-noi', 'PagesController@despreNoi');
 Route::get('servicii', 'PagesController@servicii');
 Route::get('contact', 'PagesController@contact');

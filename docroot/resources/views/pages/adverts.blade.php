@@ -28,15 +28,15 @@
                 @endif
                     <div class="row">
                         <div class="col-xs-12">
-                            <a href="/search?type=apartment" class="add-advert-type">
+                            <a href="/anunturi?tip=apartment" class="add-advert-type">
                                 <span class="glyphicon glyphicon-th"></span>
                                 <span>Apartament</span>
                             </a>
-                            <a href="/search?type=house" class="add-advert-type">
+                            <a href="/anunturi?tip=casa" class="add-advert-type">
                                 <span class="glyphicon glyphicon-home"></span>
                                 <span>Casa / Vila</span>
                             </a>
-                            <a href="/search?type=terrain" class="add-advert-type">
+                            <a href="/anunturi?tip=teren" class="add-advert-type">
                                 <span class="glyphicon glyphicon-picture"></span>
                                 <span>Teren</span>
                             </a>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-xs-12">
                         <div id="search-box">
-                            <form method="get" action="{{ URL::to('search') }}">
+                            <form method="get" action="{{ URL::to('anunturi') }}">
                                 {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
                                 @if(!Auth::guest())
                                     <div class="row">
@@ -229,9 +229,9 @@
                                     $link_final = '?sort=price';
                                 ?>
                                 Ordoneaza dupa pret:
-                                <a href="{{ URL::to('/search'. $link_final . '&tip_sortare=asc') }}">crescator <i class="fa fa-arrow-circle-o-up"></i></a>
+                                <a href="{{ URL::to('/anunturi'. $link_final . '&tip_sortare=asc') }}">crescator <i class="fa fa-arrow-circle-o-up"></i></a>
                                 <span>|</span>
-                                <a href="{{ URL::to('/search'. $link_final . '&tip_sortare=desc') }}">descrescator <i class="fa fa-arrow-circle-o-down"></i></a>
+                                <a href="{{ URL::to('/anunturi'. $link_final . '&tip_sortare=desc') }}">descrescator <i class="fa fa-arrow-circle-o-down"></i></a>
                             </div>
                         </div>
                     </div>

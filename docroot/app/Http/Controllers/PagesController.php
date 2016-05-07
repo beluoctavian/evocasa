@@ -176,7 +176,7 @@ class PagesController extends Controller {
     }
     public function postSearch(Request $request){
 //        $link = array();
-        $type = Input::get('type');
+        $entity_type = Input::get('type');
         $key_words = Input::get('cuvinte_cheie');
         $advert_id = Input::get('id_anunt');
         $min_price = Input::get('pret_minim');
@@ -197,9 +197,11 @@ class PagesController extends Controller {
 
         // house properties
         $land_area = Input::get('land_area');
-        $street_opening = Input::get('street_opening');
+        $min_street_opening = Input::get('min_street_opening');
+        $max_street_opening = Input::get('max_street_opening');
         $foot_print = Input::get('foot_print');
-        $total_area = Input::get('total_area');
+        $min_total_area = Input::get('min_total_area');
+        $max_total_area = Input::get('max_total_area');
         $level_area = Input::get('level_area');
         $height = Input::get('height');
         $built_year = Input::get('built_year');
@@ -208,45 +210,66 @@ class PagesController extends Controller {
         $sanitary = Input::get('sanitary');
         $obs_sanitary = Input::get('obs_sanitary');
         $balconies = Input::get('balconies');
+        $obs_balconies = Input::get('obs_balconies');
+        $garage = Input::get('garage');
+        $obs_garage  =Input::get('obs_garage');
 
+
+        // terrain properties
+
+        $min_depth = Input::get('min_depth');
+        $max_depth = Input::get('max_depth');
+        $min_access_width = Input::get('min_access_width');
+        $max_access_width = Input::get('max_access_width');
 
         $type = StatusType::find(Input::get('status'));
+        $entity_type = Input::get('type');
+
+
         $type_id = $type == null ? null : $type->id;
-        if($type == 'apartment'){
-            $adverts = Advert::whereHas('apartment', function($query)
-            use($min_year, $max_year, $min_floor, $max_floor, $min_surface, $max_surface, $partitioning) {
-                if($min_year)
+        if($entity_type == 'terrain'){
+
+            $adverts = Advert::whereHas('terrain', function($query)
+            use($min_total_area, $max_total_area, $min_street_opening, $max_street_opening, $min_depth, $max_depth, $min_access_width, $max_access_width) {
+                if($min_total_area)
                 {
-                    $query->where('built_year', '>=', $min_year);
+                    $query->where('total_area', '>=', $min_total_area);
                 }
-                if($max_year)
+                if($max_total_area)
                 {
-                    $query->where('built_year', '<=', $max_year);
+                    $query->where('total_area', '<=', $max_total_area);
                 }
-                if($max_floor)
+
+                if($min_street_opening)
                 {
-                    $query->where('floor', '<=', substr($max_floor,0,1));
+                    $query->where('street_opening', '>=', $min_street_opening);
                 }
-                if($min_floor)
+                if($max_street_opening)
                 {
-                    $query->where('floor', '>=', substr($min_floor,0,1));
+                    $query->where('street_opening', '<=', $max_street_opening);
                 }
-                if($min_surface)
+
+                if($min_depth)
                 {
-                    $query->where('built_area', '>=', $min_surface);
+                    $query->where('depth', '>=', $min_depth);
                 }
-                if($max_surface)
+                if($max_depth)
                 {
-                    $query->where('built_area', '<=', $max_surface);
+                    $query->where('depth', '<=', $max_depth);
                 }
-                if($partitioning)
+
+                if($min_access_width)
                 {
-                    $query->where('partitioning', $partitioning);
+                    $query->where('access_width', '>=', $min_access_width);
+                }
+                if($max_access_width)
+                {
+                    $query->where('access_width', '<=', $max_access_width);
                 }
             });
         }
         else
-            if($type == 'house')
+            if($entity_type == 'house')
             {
                 $adverts = Advert::whereHas('house', function($query)
                 use($min_year, $max_year, $min_floor, $max_floor, $min_surface, $max_surface, $partitioning) {
@@ -281,7 +304,7 @@ class PagesController extends Controller {
                 });
             }
             else{
-                $adverts = Advert::whereHas('terrain', function($query)
+                $adverts = Advert::whereHas('apartment', function($query)
                 use($min_year, $max_year, $min_floor, $max_floor, $min_surface, $max_surface, $partitioning) {
                     if($min_year)
                     {
@@ -312,6 +335,7 @@ class PagesController extends Controller {
                         $query->where('partitioning', $partitioning);
                     }
                 });
+
             }
 
         if($phone)

@@ -310,7 +310,7 @@ class PagesController extends Controller {
             $adverts->orderBy($sort_after, $sort_order);
         }
 
-        $results  = $adverts->get();
+        $results  = $adverts->paginate(10);
 
         $partitions = array_unique(Apartment::all()->lists('partitioning'));
 
@@ -325,7 +325,7 @@ class PagesController extends Controller {
 //        dd(count($results));
 
         return view('pages.adverts')
-            ->with('adverts',$results)
+            ->with('adverts',$results->appends(Input::except('page')))
             ->with('partitions', $partitions)
             ->with('neighborhoods', $neighborhoods)
             ->with('areas', $areas)

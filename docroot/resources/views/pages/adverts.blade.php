@@ -246,10 +246,7 @@
                 </div>
                 -->
                     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                        @for($it = $page * 10 - 10 ; $it <= $page * 10 - 1 && $it < count($adverts) ; $it++)
-                            <?php
-                            $advert = $adverts[$it];
-                            ?>
+                        @foreach($adverts as $advert)
                             <?php $apartment = $advert->apartment ?>
                             <div class="advert-item" id="{{ 'advert-item-no-' . $advert->id }}">
                                 @if(!Auth::guest())
@@ -339,107 +336,12 @@
                                 </div>
                                 <div class="clear-both"></div>
                             </div>
-                        @endfor
+                        @endforeach
                     </div>
                     <div class="col-xs-12 text-center">
-                        <nav>
-                            <ul class="pagination">
-                                @if($page == 1)
-                                    <li class="disabled">
-                                        <a href="javascript:" aria-label="Next">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                @else
-                                    <?php
-                                    $link_final = '';
-                                    foreach(Input::get() as $key => $value){
-                                        if($key == "page"){
-                                            $value --;
-                                        }
-                                        if($link_final != '')
-                                            $link_final = $link_final . '&' . $key . '=' . $value;
-                                        else
-                                            $link_final = '?' . $key . '=' . $value;
-                                    }
-                                    ?>
-                                    <li>
-                                        <a href="{{ URL::to('./search'. $link_final . '#anunturi') }}" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                @endif
-                                <?php
-                                $puncte_inainte = 0;
-                                $puncte_dupa = 0;
-                                ?>
-                                @for($it =  1 ; $it <= floor((count($adverts)-1)/10 + 1) ; $it++)
-                                    @if($it == 1 || $it == floor((count($adverts)-1)/10 + 1) || ($it >= ($page - 1) && $it <= ($page + 1)))
-                                        <li <?php echo $it == $page ? "class='active'" : ""; ?> >
-                                            <?php
-                                            $link_final = '';
-                                            foreach(Input::get() as $key => $value){
-                                                if($link_final != '')
-                                                    $link_final = $link_final . '&' . $key . '=' . $value;
-                                                else
-                                                    $link_final = '?' . $key . '=' . $value;
-                                            }
-                                            if($link_final != '')
-                                                $link_final = $link_final . '&page=' . ($it);
-                                            else
-                                                $link_final = '?page=' . ($it);
-                                            ?>
-                                            <a href="{{ URL::to('search'. $link_final . '#anunturi') }}">{{ $it }}</a>
-                                        </li>
-                                    @endif
-                                    @if($it != 1 && $it < ($page - 1) && $puncte_inainte == 0)
-                                        <?php $puncte_inainte = 1; ?>
-                                        <li class="disabled">
-                                            <a href="javascript:"><i class="fa fa-ellipsis-h"></i></a>
-                                        </li>
-                                    @endif
-                                    @if($it != floor((count($adverts)-1)/10 + 1) && $it > ($page + 1) && $puncte_dupa == 0)
-                                        <?php $puncte_dupa = 1; ?>
-                                        <li class="disabled">
-                                            <a href="javascript:"><i class="fa fa-ellipsis-h"></i></a>
-                                        </li>
-                                    @endif
-                                @endfor
-                                @if(($page) == floor((count($adverts)-1)/10 + 1))
-                                    <li class="disabled">
-                                        <a href="javascript:" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                @else
-                                    <?php
-                                    $link_final = '';
-                                    $found = false;
-                                    foreach(Input::get() as $key => $value){
-                                        if($key == "page"){
-                                            $value ++;
-                                            $found = true;
-                                        }
-                                        if($link_final != '')
-                                            $link_final = $link_final . '&' . $key . '=' . $value;
-                                        else
-                                            $link_final = '?' . $key . '=' . $value;
-                                    }
-                                    if($found === false){
-                                        if($link_final != '')
-                                            $link_final = $link_final . '&page=' . ($page+1);
-                                        else
-                                            $link_final = '?page=' . ($page+1);
-                                    }
-                                    ?>
-                                    <li>
-                                        <a href="{{ URL::to('/search'. $link_final . '#anunturi') }}" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </nav>
+                        <div class="pagination">
+                            {!! $adverts->render() !!}
+                        </div>
                     </div>
                 </div>
             </div>

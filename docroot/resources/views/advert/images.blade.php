@@ -52,7 +52,7 @@
                 </div>
                 @endforeach
             @endif
-            <form method="POST" enctype="multipart/form-data" action="{{ URL::to('upload-images') }}">
+            <form method="POST" enctype="multipart/form-data" action="{{ URL::to('advert/images/' . $advert['id']) }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="id" value="{{ $advert['id'] }}">
                 <!-- Adauga imagini -->
@@ -98,33 +98,32 @@
                         @foreach ($files as $file)
                         <div class="col-xs-12 col-sm-3">
                             <div class="thumbnail">
-                                <a class="banner-preview-container" href="{{ URL::asset('uploaded-images/anunt_' . $anunt->id . '/' . $file->getRelativePathName()) }}">
-                                    <img class="banner-preview" src="{{ URL::asset('uploaded-images/anunt_' . $anunt->id . '/' . $file->getRelativePathName()) }}" alt=""/>
+                                <a class="banner-preview-container" href="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName()) }}">
+                                    <img class="banner-preview" src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName()) }}" alt=""/>
                                 </a>
                                 <div class="caption">
                                     <!--
                                     <p class="no-overflow">{{ $file->getRelativePathName() }}</p>
                                     -->
-                                    <p class="text-center">{{ getimagesize('uploaded-images/anunt_' . $anunt->id . '/' . $file->getRelativePathName())[3] }}</p>
+                                    <p class="text-center">{{ getimagesize('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName())[3] }}</p>
                                     <p>
-                                        <form role="form" method="POST" action="{{ URL::to('change-image-number') }}">
+                                        <form role="form" method="POST" action="{{ URL::to('advert/change-image-number/' . $advert['id']) }}">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="anunt_id" value="{{ $anunt->id }}">
-                                            <input type="hidden" name="path" value="{{ 'uploaded-images/anunt_' . $anunt->id . '/' }}">
+                                            <input type="hidden" name="path" value="{{ 'uploaded-images/anunt_' . $advert['id'] . '/' }}">
                                             <input type="hidden" name="filename" value="{{ $file->getRelativePathName() }}">
-                                            <select name="number" class="form-control" onchange="this.form.submit()">
+                                            <select name="number" class="form-control"">
                                                 <option value=""></option>
                                                 @for($it = 1 ; $it <= count($files) ; $it++)
-                                                <?php $it < 10 ? $itmod = '0' . $it : $itmod = $it; ?>
-                                                <option value="{{ $itmod . '_' }}" {{ substr($file->getRelativePathName(),0,2) == $itmod ? 'selected' : '' }}> {{ $it }} </option>
+                                                    <?php $it < 10 ? $itmod = '0' . $it : $itmod = $it; ?>
+                                                    <option value="{{ $itmod . '_' }}" {{ substr($file->getRelativePathName(),0,2) == $itmod ? 'selected' : '' }}> {{ $it }} </option>
                                                 @endfor
                                             </select>
                                         </form>
                                     </p>
                                     <p>
-                                        <form role="form" method="POST" action="{{ URL::to('delete-image') }}"  onsubmit="return confirm('Sigur doriti sa stergeti imaginea?');">
+                                        <form role="form" method="POST" action="{{ URL::to('advert/delete-image/' . $advert['id']) }}"  onsubmit="return confirm('Sigur doriti sa stergeti imaginea?');">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="filename" value="{{'uploaded-images/anunt_' . $anunt->id . '/' . $file->getRelativePathName() }}">
+                                            <input type="hidden" name="filename" value="{{'uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName() }}">
                                             <p class="text-center"><button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Sterge imaginea</button></p>
                                         </form>
                                     </p>

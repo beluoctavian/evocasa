@@ -14,6 +14,7 @@ use App\Terrain;
 use App\StatusType;
 use App\Status;
 use Illuminate\Support\Collection;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AdvertController extends Controller {
 
@@ -334,7 +335,7 @@ class AdvertController extends Controller {
     if ($details == NULL) {
       abort(404);
     }
-    if(!\File::exists('uploaded-images/anunt_' . $id . '/')){
+    if (!\File::exists('uploaded-images/anunt_' . $id . '/')) {
       $create = \File::makeDirectory('uploaded-images/anunt_' . $id . '/', $mode = 0777, true, true);
       if ($create === FALSE) {
         throw new \Exception("Could not create directory: uploaded-images/anunt_ . {$id}");
@@ -345,6 +346,70 @@ class AdvertController extends Controller {
     return view('advert.images')
       ->with($details)
       ->with('files', $files);
+  }
+
+  public function postImages($id, Request $request)
+  {
+    ini_set("memory_limit","256M");
+    $id = $request->id;
+    $destinationPath = 'uploaded-images/anunt_' . $id;
+    $files = $request->file('files');
+    if ($files[0] === null){
+      return redirect()->back()->withErrors('Nu ati selectat niciun fisier!');
+    }
+    if (!\File::exists($destinationPath)) {
+      \File::makeDirectory($destinationPath, $mode = 0777, true, true);
+      if ($create === FALSE) {
+        throw new \Exception("Could not create directory: {$destinationPath}");
+      }
+    }
+    $destinationPath = $destinationPath . '/';
+    foreach ($request->file('files') as $file) {
+      /** @var UploadedFile $file */
+      $im_path = $destinationPath . $file->getClientOriginalName();
+      $file->move($destinationPath, $file->getClientOriginalName());
+      $image = imagecreatefromstring(file_get_contents($im_path));
+      $watermark = imagecreatefrompng('img/evocasa_logo_big.png');
+
+      $image_width = imagesx($image);
+      $image_height = imagesy($image);
+
+      $watermark_width = imagesx($watermark);
+      $watermark_height = imagesy($watermark);
+
+      $new_watermark_width = $watermark_width;
+      $new_watermark_height = $watermark_height;
+      $diffwi = 0;
+      $diffhe = 0;
+      if($watermark_width > $image_width){
+        $diffwi = $watermark_width - $image_width;
+      }
+      if($watermark_height > $image_height){
+        $diffhe = $watermark_height - $image_height;
+      }
+      if($diffwi > $diffhe){
+        $new_watermark_width -= $diffwi;
+        $new_watermark_height -= $diffwi;
+      } else {
+        $new_watermark_width -= $diffhe;
+        $new_watermark_height -= $diffhe;
+      }
+      imagecopyresized(
+        $image,                                  // Destination image
+        $watermark,                              // Source image
+        $image_width/2 - $new_watermark_width/2,  // Destination X
+        $image_height/2 - $new_watermark_height/2, // Destination Y
+        0,                                       // Source X
+        0,                                       // Source Y
+        $new_watermark_width,                      // Destination W
+        $new_watermark_height,                     // Destination H
+        imagesx($watermark),                     // Source W
+        imagesy($watermark)
+      );                    // Source H
+      imagepng($image,$im_path);
+      imagedestroy($image);
+    }
+    return $this->getImages($id);
   }
 
 }

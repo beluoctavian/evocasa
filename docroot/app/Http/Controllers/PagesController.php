@@ -247,9 +247,8 @@ class PagesController extends Controller {
 
         $areas = Area::all();
 
-        $page = Input::get('page');
-        if(!$page || $page < 1){
-            $page = 1;
+        foreach ($results as $key => $item) {
+            $results[$key] = AdvertController::getEntityDetails($item->id);
         }
 
         return view('pages.adverts')
@@ -257,7 +256,6 @@ class PagesController extends Controller {
             ->with('partitions', $partitions)
             ->with('neighborhoods', $neighborhoods)
             ->with('areas', $areas)
-            ->with('type', $entity_type)
-            ->with('page', $page);
+            ->with('type', $entity_type);
     }
 }

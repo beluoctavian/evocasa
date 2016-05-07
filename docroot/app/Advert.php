@@ -144,11 +144,11 @@ class Advert extends Model {
             $old_area = $advert->area;
             $advert->fill($valid_parameters);
             $advert->save();
-            if ($old_neighborhood->advert->count() == 0) {
-                $old_neighborhood->delete();
-            }
             if ($old_area->advert->count() == 0) {
                 $old_area->delete();
+            }
+            if ($old_neighborhood->advert->count() == 0) {
+                $old_neighborhood->delete();
             }
         }
         else {

@@ -46,7 +46,7 @@
                         @foreach ($items as $item)
                             <?php $advert = $item['advert']; ?>
                             <?php $apartment = $item['entity'] ;?>
-                            <div class="advert-item">
+                            <div class="advert-item" id="{{ 'advert-item-no-' . $advert['id'] }}">
                                 @if(!Auth::guest())
                                     <div class="controls">
                                         <form method="POST" action="{{ URL::to('sterge-anunt') }}" onSubmit="return confirm('Sigur vrei sa stergi anuntul?');">

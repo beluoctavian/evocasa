@@ -297,7 +297,7 @@ class AdvertController extends Controller {
     /** @var Advert $anunt */
     $anunt = Advert::find($id);
     $anunt->touch();
-    return redirect()->back();
+    return \Redirect::to(\URL::previous() . '#advert-item-no-' . $id);
   }
 
   public function viewEntity($id)

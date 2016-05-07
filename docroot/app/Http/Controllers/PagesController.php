@@ -34,7 +34,7 @@ class PagesController extends Controller {
           'query' => $request->query(),
         ]);
 
-        return view('pages.new_index')->with('items', $paginatedSearchResults);
+        return view('pages.index')->with('items', $paginatedSearchResults);
     }
 //	public function anunturi() {
 //        $gets = Input::get();

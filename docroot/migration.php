@@ -164,7 +164,7 @@ foreach($proprietars as $proprietar) {
                 $status->advert_id = $advert->id;
                 $status->save();
             }
-            if($anunt->prima_pagina == 1)
+            if($anunt->first_page == 1)
             {
                 $status = new \App\Status();
                 $status->type_id = 1;

@@ -21,29 +21,33 @@ class PagesController extends Controller {
 
 	public function index() {
 
-        $adverts = Advert::where('first_page', 1)
+        $ids = Advert::where('first_page', 1)
 //             ->whereHas('status', function ($query) {
 //                 $query->where('type_id', 1);
 //             })
             ->orderBy('created_at', 'desc')
-            ->get();
-        $page = Input::get('page');
-        $partitions = array_unique(Apartment::all()->lists('partitioning'));
-
-        $neighborhoods = Neighborhood::all();
-
-        $areas = Area::all();
+            ->lists('id');
+//        $page = Input::get('page');
+//        $partitions = array_unique(Apartment::all()->lists('partitioning'));
+//
+//        $neighborhoods = Neighborhood::all();
+//
+//        $areas = Area::all();
 
         $page = Input::get('page');
         if(!$page || $page < 1){
             $page = 1;
         }
 
-        return view('pages.adverts')
+        $adverts = array();
+        foreach ($ids as $id) {
+            $adverts[] = AdvertController::getEntityDetails($id);
+//            var_dump($adverts);
+//            die();
+        }
+
+        return view('pages.new_index')
             ->with('adverts',$adverts)
-            ->with('partitions', $partitions)
-            ->with('neighborhoods', $neighborhoods)
-            ->with('areas', $areas)
             ->with('page', $page);
 
 

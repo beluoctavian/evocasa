@@ -221,6 +221,21 @@
 
                                         @else
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Pret minim</label>
+                                            <div class="input-group">
+                                                <input name="pret_minim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
+                                                <span class="input-group-addon">&euro;</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Pret maxim</label>
+                                            <div class="input-group">
+                                                <input name="pret_maxim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
+                                                <span class="input-group-addon">&euro;</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Suprafata minima</label>
                                             <div class="input-group">
                                                 <input name="min_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_minima') ? Input::get('suprafata_minima') : '' }}">

@@ -111,6 +111,8 @@ class Advert extends Model {
      */
     public static function createFromArray(array $parameters, $entity_id = NULL)
     {
+        $parameters['neighborhood'] = ucwords(strtolower($parameters['neighborhood']));
+        $parameters['area'] = ucwords(strtolower($parameters['area']));
         /** @var Neighborhood $neighborhood */
         $neighborhood = Neighborhood::where('name', $parameters['neighborhood'])->first();
         if (!$neighborhood) {

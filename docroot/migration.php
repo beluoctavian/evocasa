@@ -35,32 +35,25 @@ foreach($proprietars as $proprietar) {
         $advert->price = $anunt->pret;
         $advert->old_price = $anunt->pret_vechi;
         $advert->description = $anunt->descriere;
+        $anunt->cartier = ucwords(strtolower($anunt->cartier));
+        $anunt->zona = ucwords(strtolower($anunt->zona));
         $neighborhood = Neighborhood::where('name', $anunt->cartier)->first();
-        $area = Area::where('name', $anunt->zona)->first();
-
-        if ($neighborhood == null or $area == null) {
-            $neighborhood = new Neighborhood();
-            $neighborhood->name = $anunt->cartier;
-            $neighborhood->save();
-
-            $area = new Area();
-            $area->name = $anunt->zona;
-            $area->neighborhood_id = $neighborhood->id;
-            $area->save();
-
-            $advert->area_id = $area->id;
-
-            $advert->neighborhood_id = $neighborhood->id;
-            $advert->area_id = $area->id;
-
+        if (!$neighborhood) {
+            $neighborhood = Neighborhood::create([
+                'name' => $anunt->cartier,
+            ]);
         }
-        else{
-
-            $advert->area_id = $area->id;
-            $advert->neighborhood_id = $neighborhood->id;
-            $advert->save();
-
+        /** @var Area $area */
+        $area = Area::where('name', $anunt->zona)->where('neighborhood_id', $neighborhood->id)->first();
+        if (!$area) {
+            $area = Area::create([
+                'name' => $anunt->zona,
+                'neighborhood_id' => $neighborhood->id,
+            ]);
         }
+
+        $advert->area_id = $area->id;
+        $advert->neighborhood_id = $neighborhood->id;
 
         $advert->save();
         $owner->advert_id = $advert->id;
@@ -77,7 +70,7 @@ foreach($proprietars as $proprietar) {
             $apartment->advert_id = $advert->id;
             $apartment->usable_area = zero($imobil->su);
             $apartment->built_area = zero($imobil->sc);
-            $apartment->partitioning = zero($imobil->compartimentare);
+            $apartment->partitioning = ucwords(strtolower(zero($imobil->compartimentare)));
             $apartment->comfort = zero($imobil->confort);
             $apartment->floor = zero($imobil->etaj);
             $apartment->built_year = zero($imobil->an_constructie);
@@ -173,8 +166,8 @@ foreach($proprietars as $proprietar) {
 
 
         }
+        print 'Success created advert id='.$advert->id. PHP_EOL;
     }
-
 }
 
  function zero($a)

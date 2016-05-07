@@ -18,7 +18,7 @@ class Advert extends Migration {
 			$table->string('title');
 			$table->string('type');
 			$table->string('no_rooms');
-			$table->float('price');
+			$table->integer('price');
 			$table->string('old_price');
 			$table->string('description');
 			$table->integer('neighborhood_id')->unsigned();

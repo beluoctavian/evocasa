@@ -140,7 +140,6 @@ class PagesController extends Controller {
     }
     public function postSearch(Request $request){
 //        $link = array();
-        $entity_type = Input::get('type');
         $key_words = Input::get('cuvinte_cheie');
         $advert_id = Input::get('id_anunt');
         $min_price = Input::get('pret_minim');
@@ -160,41 +159,22 @@ class PagesController extends Controller {
         $sort_order = Input::get('tip_sortare');
 
         // house properties
-        $land_area = Input::get('land_area');
-        $min_street_opening = Input::get('min_street_opening');
-        $max_street_opening = Input::get('max_street_opening');
-        $foot_print = Input::get('foot_print');
+
         $min_total_area = Input::get('min_total_area');
         $max_total_area = Input::get('max_total_area');
-        $level_area = Input::get('level_area');
-        $height = Input::get('height');
-        $built_year = Input::get('built_year');
-        $bathrooms = Input::get('bathrooms');
-        $obs_bathrooms = Input::get('obs_bathrooms');
-        $sanitary = Input::get('sanitary');
-        $obs_sanitary = Input::get('obs_sanitary');
-        $balconies = Input::get('balconies');
-        $obs_balconies = Input::get('obs_balconies');
-        $garage = Input::get('garage');
-        $obs_garage  =Input::get('obs_garage');
 
-
-        // terrain properties
-
-        $min_depth = Input::get('min_depth');
-        $max_depth = Input::get('max_depth');
-        $min_access_width = Input::get('min_access_width');
-        $max_access_width = Input::get('max_access_width');
+        //terrain properties + total area
 
         $type = StatusType::find(Input::get('status'));
         $entity_type = Input::get('type');
 
+        $inactive_status_id = StatusType::where('title', 'Inactiv')->first();
 
         $type_id = $type == null ? null : $type->id;
         if($entity_type == 'terrain'){
 
             $adverts = Advert::whereHas('terrain', function($query)
-            use($min_total_area, $max_total_area, $min_street_opening, $max_street_opening, $min_depth, $max_depth, $min_access_width, $max_access_width) {
+            use($min_total_area, $max_total_area) {
                 if($min_total_area)
                 {
                     $query->where('total_area', '>=', $min_total_area);
@@ -203,40 +183,13 @@ class PagesController extends Controller {
                 {
                     $query->where('total_area', '<=', $max_total_area);
                 }
-
-                if($min_street_opening)
-                {
-                    $query->where('street_opening', '>=', $min_street_opening);
-                }
-                if($max_street_opening)
-                {
-                    $query->where('street_opening', '<=', $max_street_opening);
-                }
-
-                if($min_depth)
-                {
-                    $query->where('depth', '>=', $min_depth);
-                }
-                if($max_depth)
-                {
-                    $query->where('depth', '<=', $max_depth);
-                }
-
-                if($min_access_width)
-                {
-                    $query->where('access_width', '>=', $min_access_width);
-                }
-                if($max_access_width)
-                {
-                    $query->where('access_width', '<=', $max_access_width);
-                }
             });
         }
         else
             if($entity_type == 'house')
             {
                 $adverts = Advert::whereHas('house', function($query)
-                use($min_year, $max_year, $min_floor, $max_floor, $min_surface, $max_surface, $partitioning) {
+                use($min_year, $max_year, $max_total_area, $min_total_area) {
                     if($min_year)
                     {
                         $query->where('built_year', '>=', $min_year);
@@ -245,25 +198,14 @@ class PagesController extends Controller {
                     {
                         $query->where('built_year', '<=', $max_year);
                     }
-                    if($max_floor)
+
+                    if($min_total_area)
                     {
-                        $query->where('floor', '<=', substr($max_floor,0,1));
+                        $query->where('total_area', '>=', $min_total_area);
                     }
-                    if($min_floor)
+                    if($max_total_area)
                     {
-                        $query->where('floor', '>=', substr($min_floor,0,1));
-                    }
-                    if($min_surface)
-                    {
-                        $query->where('built_area', '>=', $min_surface);
-                    }
-                    if($max_surface)
-                    {
-                        $query->where('built_area', '<=', $max_surface);
-                    }
-                    if($partitioning)
-                    {
-                        $query->where('partitioning', $partitioning);
+                        $query->where('total_area', '<=', $max_total_area);
                     }
                 });
             }
@@ -309,12 +251,14 @@ class PagesController extends Controller {
             });
         };
 
+
         if($neighborhood)
         {
             $adverts->whereHas('neighborhood', function($query) use ($neighborhood) {
                 $query->where('name', 'like', '%'.$neighborhood.'%');
             });
         }
+
         if($area)
         {
             $adverts->whereHas('area', function ($query) use ($area) {
@@ -322,12 +266,20 @@ class PagesController extends Controller {
             });
         }
 
+
         if($type)
         {
             $adverts->whereHas('status', function ($query) use ($type_id) {
                 $query->where('type_id', $type_id);
             });
         }
+//        else
+//        {
+//            $adverts->whereHas('status', function ($query) use ($inactive_status_id) {
+//                $query->where('type_id','!=',  $inactive_status_id);
+//            });
+//        }
+        
         if($min_price)
         {
             $adverts->where('price', '>=', $min_price);
@@ -341,10 +293,13 @@ class PagesController extends Controller {
         {
             $adverts->where('title', 'like', '%'.$key_words.'%');
         }
-        if($no_rooms)
+        if($entity_type == 'apartment' or $entity_type == 'house')
         {
-            $no_rooms = explode(' ', $no_rooms);
+            if($no_rooms)
+            {
+                $no_rooms = explode(' ', $no_rooms);
                 $adverts->whereIn('no_rooms', $no_rooms);
+            }
         }
         if($advert_id)
         {
@@ -367,6 +322,7 @@ class PagesController extends Controller {
         if(!$page || $page < 1){
             $page = 1;
         }
+//        dd(count($results));
 
         return view('pages.adverts')
             ->with('adverts',$results)

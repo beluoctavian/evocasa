@@ -7,8 +7,10 @@ Route::get('auth/logout', 'SessionsController@destroy');
 
 /*Pages*/
 Route::get('/', 'PagesController@index');
-Route::get('anunturi', 'PagesController@anunturi');
-Route::post('anunturi', 'PagesController@postSearch');
+Route::get('anunturi', 'PagesController@postSearch');
+
+Route::get('search', 'PagesController@postSearch');
+Route::get('anunturi/{id}', 'PagesController@detalii');
 Route::get('despre-noi', 'PagesController@despreNoi');
 Route::get('servicii', 'PagesController@servicii');
 Route::get('contact', 'PagesController@contact');

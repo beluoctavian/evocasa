@@ -70,7 +70,7 @@ class AdvertController extends Controller {
 
   public function __construct()
   {
-    $this->middleware('auth');
+    $this->middleware('auth', ['except' => ['viewEntity', ]]);
   }
 
   public function getIndex()

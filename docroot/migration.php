@@ -32,7 +32,6 @@ foreach($proprietars as $proprietar) {
         $advert->title = $anunt->titlu;
         $advert->type = 'apartment';
         $advert->no_rooms = $anunt->nr_camere;
-        $advert->first_page = $anunt->first_page;
         $advert->price = $anunt->pret;
         $advert->old_price = $anunt->pret_vechi;
         $advert->description = $anunt->descriere;

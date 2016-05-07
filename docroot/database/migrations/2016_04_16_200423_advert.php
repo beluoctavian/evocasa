@@ -18,7 +18,6 @@ class Advert extends Migration {
 			$table->string('title');
 			$table->string('type');
 			$table->string('no_rooms');
-			$table->boolean('first_page');
 			$table->float('price');
 			$table->string('old_price');
 			$table->string('description');

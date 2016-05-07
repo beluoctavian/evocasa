@@ -413,20 +413,28 @@ class AdvertController extends Controller {
     return redirect()->back()->with('success', 1);
   }
 
-  public function changeImageNumber($id, Request $request){
-    $path = $request->path;
-    $oldfilename = $filename = $request->filename;
-    $number = $request->number;
-    if($filename[2] == '_'){
-      $filename = substr_replace($filename,$number,0,3);
-    }else{
-      $filename = substr_replace($filename,$number,0,0);
+  public function changeImageOrder($id, Request $request)
+  {
+    $path = $request->get('path');
+    $numbers = $request->get('number');
+    foreach ($request->get('filename') as $key => $filename) {
+      $oldfilename = $filename;
+      $number = $numbers[$key];
+      if ($number < 10) {
+        $number = '0' . $number;
+      }
+      $number .= '_';
+      if ($filename[2] == '_') {
+        $filename = substr_replace($filename,$number,0,3);
+      }
+      else {
+        $filename = substr_replace($filename,$number,0,0);
+      }
+      if ( !\File::move($path . $oldfilename, $path . $filename)) {
+        throw new \Exception("Couldn't rename file");
+      }
     }
-    if ( !\File::move($path . $oldfilename, $path . $filename))
-    {
-      die("Couldn't rename file");
-    }
-    return redirect('upload-images/' . $request->anunt_id . '#images');
+    return redirect()->back();
   }
 
   public function deleteImage($id, Request $request)

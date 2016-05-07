@@ -53,5 +53,5 @@ Route::get('advert/delete-observation/{id}', 'AdvertController@postDeleteObserva
 //Route::post('change-image-number', 'UsersController@changeImageNumber');
 Route::get('advert/images/{id}', 'AdvertController@getImages');
 Route::post('advert/images/{id}', 'AdvertController@postImages');
-Route::post('advert/change-image-number/{id}', 'AdvertController@changeImageNumber');
+Route::post('advert/change-image-order/{id}', 'AdvertController@changeImageOrder');
 Route::post('advert/delete-image/{id}', 'AdvertController@deleteImage');

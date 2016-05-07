@@ -94,86 +94,148 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                        <label>Pret minim</label>
-                                        <div class="input-group">
-                                            <input name="pret_minim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
-                                            <span class="input-group-addon">&euro;</span>
+
+                                    @if($type == null or $type == 'apartment')
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Pret minim</label>
+                                            <div class="input-group">
+                                                <input name="pret_minim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
+                                                <span class="input-group-addon">&euro;</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                        <label>Pret maxim</label>
-                                        <div class="input-group">
-                                            <input name="pret_maxim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
-                                            <span class="input-group-addon">&euro;</span>
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Pret maxim</label>
+                                            <div class="input-group">
+                                                <input name="pret_maxim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
+                                                <span class="input-group-addon">&euro;</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group col-xs-12 col-sm-4 col-md-2">
-                                        <label>An constructie minim</label>
-                                        <input name="an_constructie_minim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">
-                                    </div>
-                                    <div class="form-group col-xs-12 col-sm-4 col-md-2">
-                                        <label>An constructie maxim</label>
-                                        <input name="an_constructie_maxim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : '' }}">
-                                    </div>
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                        <label>Numar camere</label>
-                                        <select name="numar_camere" class="form-control">
-                                            <option value="">Indiferent</option>
-                                            <option value="1" {{ Input::get('numar_camere') == 1 ? 'selected' : '' }}>1</option>
-                                            <option value="2" {{ Input::get('numar_camere') == 2 ? 'selected' : '' }}>2</option>
-                                            <option value="3" {{ Input::get('numar_camere') == 3 ? 'selected' : '' }}>3</option>
-                                            <option value="4" {{ Input::get('numar_camere') == 4 ? 'selected' : '' }}>4</option>
-                                            <option value="1 2" {{ Input::get('numar_camere') == "1 2" ? 'selected' : '' }}>1, 2</option>
-                                            <option value="2 3" {{ Input::get('numar_camere') == "2 3" ? 'selected' : '' }}>2, 3</option>
-                                            <option value="3 4" {{ Input::get('numar_camere') == "3 4" ? 'selected' : '' }}>3, 4</option>
-                                            <option value="1 2 3 4" {{ Input::get('numar_camere') == "1 2 3 4" ? 'selected' : '' }}>1, 2, 3, 4</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                        <label>Etaj minim</label>
-                                        <input name="etaj_minim" type="number" class="form-control" value="{{ Input::exists('etaj_minim') ? Input::get('etaj_minim') : '' }}">
-                                    </div>
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                        <label>Etaj maxim</label>
-                                        <input name="etaj_maxim" type="number" class="form-control" value="{{ Input::exists('etaj_maxim') ? Input::get('etaj_maxim') : '' }}">
-                                    </div>
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                        <label>Suprafata minima</label>
-                                        <div class="input-group">
-                                            <input name="suprafata_minima" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_minima') ? Input::get('suprafata_minima') : '' }}">
-                                            <span class="input-group-addon">mp</span>
+                                        <div class="form-group col-xs-12 col-sm-4 col-md-2">
+                                            <label>An constructie minim</label>
+                                            <input name="an_constructie_minim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">
                                         </div>
-                                    </div>
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                        <label>Suprafata maxima</label>
-                                        <div class="input-group">
-                                            <input name="suprafata_maxima" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_maxima') ? Input::get('suprafata_maxima') : '' }}">
-                                            <span class="input-group-addon">mp</span>
+                                        <div class="form-group col-xs-12 col-sm-4 col-md-2">
+                                            <label>An constructie maxim</label>
+                                            <input name="an_constructie_maxim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : '' }}">
                                         </div>
-                                    </div>
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                        <label>Compartimentare</label>
-                                        <div>
-                                            <select name="compartimentare" class="form-control">
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Numar camere</label>
+                                            <select name="numar_camere" class="form-control">
                                                 <option value="">Indiferent</option>
-                                                @foreach($partitions as $partition)
-                                                    <option value="{{ $partition }}" {{ Input::get('compartimentare') == $partition ? 'selected' : '' }}>{{ $partition }}</option>
-                                                @endforeach
+                                                <option value="1" {{ Input::get('numar_camere') == 1 ? 'selected' : '' }}>1</option>
+                                                <option value="2" {{ Input::get('numar_camere') == 2 ? 'selected' : '' }}>2</option>
+                                                <option value="3" {{ Input::get('numar_camere') == 3 ? 'selected' : '' }}>3</option>
+                                                <option value="4" {{ Input::get('numar_camere') == 4 ? 'selected' : '' }}>4</option>
+                                                <option value="1 2" {{ Input::get('numar_camere') == "1 2" ? 'selected' : '' }}>1, 2</option>
+                                                <option value="2 3" {{ Input::get('numar_camere') == "2 3" ? 'selected' : '' }}>2, 3</option>
+                                                <option value="3 4" {{ Input::get('numar_camere') == "3 4" ? 'selected' : '' }}>3, 4</option>
+                                                <option value="1 2 3 4" {{ Input::get('numar_camere') == "1 2 3 4" ? 'selected' : '' }}>1, 2, 3, 4</option>
                                             </select>
                                         </div>
-                                    </div>
-                                    {{--<div class="form-group col-xs-6 col-sm-4 col-md-2">--}}
-                                        {{--<label>Oras</label>--}}
-                                        {{--<div>--}}
-                                            {{--<select name="oras" class="form-control">--}}
-                                                {{--<option value="">Indiferent</option>--}}
-                                                {{--@foreach($orase as $oras)--}}
-                                                    {{--<option value="{{ $oras }}" {{ Input::get('oras') == $oras ? 'selected' : '' }}>{{ $oras }}</option>--}}
-                                                {{--@endforeach--}}
-                                            {{--</select>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Etaj minim</label>
+                                            <input name="etaj_minim" type="number" class="form-control" value="{{ Input::exists('etaj_minim') ? Input::get('etaj_minim') : '' }}">
+                                        </div>
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Etaj maxim</label>
+                                            <input name="etaj_maxim" type="number" class="form-control" value="{{ Input::exists('etaj_maxim') ? Input::get('etaj_maxim') : '' }}">
+                                        </div>
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Suprafata minima</label>
+                                            <div class="input-group">
+                                                <input name="suprafata_minima" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_minima') ? Input::get('suprafata_minima') : '' }}">
+                                                <span class="input-group-addon">mp</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Suprafata maxima</label>
+                                            <div class="input-group">
+                                                <input name="suprafata_maxima" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_maxima') ? Input::get('suprafata_maxima') : '' }}">
+                                                <span class="input-group-addon">mp</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Compartimentare</label>
+                                            <div>
+                                                <select name="compartimentare" class="form-control">
+                                                    <option value="">Indiferent</option>
+                                                    @foreach($partitions as $partition)
+                                                        <option value="{{ $partition }}" {{ Input::get('compartimentare') == $partition ? 'selected' : '' }}>{{ $partition }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @elseif($type == 'casa')
+
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Pret minim</label>
+                                            <div class="input-group">
+                                                <input name="pret_minim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
+                                                <span class="input-group-addon">&euro;</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Pret maxim</label>
+                                            <div class="input-group">
+                                                <input name="pret_maxim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
+                                                <span class="input-group-addon">&euro;</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-12 col-sm-4 col-md-2">
+                                            <label>An constructie minim</label>
+                                            <input name="an_constructie_minim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">
+                                        </div>
+                                        <div class="form-group col-xs-12 col-sm-4 col-md-2">
+                                            <label>An constructie maxim</label>
+                                            <input name="an_constructie_maxim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : '' }}">
+                                        </div>
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Numar camere</label>
+                                            <select name="numar_camere" class="form-control">
+                                                <option value="">Indiferent</option>
+                                                <option value="1" {{ Input::get('numar_camere') == 1 ? 'selected' : '' }}>1</option>
+                                                <option value="2" {{ Input::get('numar_camere') == 2 ? 'selected' : '' }}>2</option>
+                                                <option value="3" {{ Input::get('numar_camere') == 3 ? 'selected' : '' }}>3</option>
+                                                <option value="4" {{ Input::get('numar_camere') == 4 ? 'selected' : '' }}>4</option>
+                                                <option value="1 2" {{ Input::get('numar_camere') == "1 2" ? 'selected' : '' }}>1, 2</option>
+                                                <option value="2 3" {{ Input::get('numar_camere') == "2 3" ? 'selected' : '' }}>2, 3</option>
+                                                <option value="3 4" {{ Input::get('numar_camere') == "3 4" ? 'selected' : '' }}>3, 4</option>
+                                                <option value="1 2 3 4" {{ Input::get('numar_camere') == "1 2 3 4" ? 'selected' : '' }}>1, 2, 3, 4</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Suprafata minima</label>
+                                            <div class="input-group">
+                                                <input name="min_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_minima') ? Input::get('suprafata_minima') : '' }}">
+                                                <span class="input-group-addon">mp</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Suprafata maxima</label>
+                                            <div class="input-group">
+                                                <input name="max_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_maxima') ? Input::get('suprafata_maxima') : '' }}">
+                                                <span class="input-group-addon">mp</span>
+                                            </div>
+                                        </div>
+
+                                        @else
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Suprafata minima</label>
+                                            <div class="input-group">
+                                                <input name="min_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_minima') ? Input::get('suprafata_minima') : '' }}">
+                                                <span class="input-group-addon">mp</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                            <label>Suprafata maxima</label>
+                                            <div class="input-group">
+                                                <input name="max_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_maxima') ? Input::get('suprafata_maxima') : '' }}">
+                                                <span class="input-group-addon">mp</span>
+                                            </div>
+                                        </div>
+                                        @endif
+
                                     <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                         <label>Cartier</label>
                                         <div>

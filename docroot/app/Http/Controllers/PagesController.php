@@ -99,12 +99,10 @@ class PagesController extends Controller {
 
         //terrain properties + total area
 
-        $type = StatusType::find(Input::get('status'));
-        $entity_type = Input::get('type');
+        $status = Input::get('status');
 
-        $inactive_status_id = StatusType::where('title', 'Inactiv')->first();
+        $entity_type = Input::get('tip');
 
-        $type_id = $type == null ? null : $type->id;
         if($entity_type == 'terrain'){
 
             $adverts = Advert::whereHas('terrain', function($query)
@@ -200,13 +198,6 @@ class PagesController extends Controller {
             });
         }
 
-
-        if($type)
-        {
-            $adverts->whereHas('status', function ($query) use ($type_id) {
-                $query->where('type_id', $type_id);
-            });
-        }
         
         if($min_price)
         {
@@ -233,6 +224,16 @@ class PagesController extends Controller {
         {
             $adverts->where('id', Input::get('id_anunt'));
         }
+
+
+        $inactive_status_id = StatusType::where('title', 'Inactiv')->first()->id;
+
+        if($status == 'inactiv')
+        {
+            $adverts->whereHas('status', function($query) use ($inactive_status_id){
+                $query->where('type_id', $inactive_status_id);
+            });
+        }
         if($sort_after)
         {
             $adverts->orderBy('price', $sort_after);
@@ -256,7 +257,7 @@ class PagesController extends Controller {
             ->with('partitions', $partitions)
             ->with('neighborhoods', $neighborhoods)
             ->with('areas', $areas)
-            ->with('type', $type)
+            ->with('type', $entity_type)
             ->with('page', $page);
     }
 }

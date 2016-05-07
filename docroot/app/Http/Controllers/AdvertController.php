@@ -408,7 +408,29 @@ class AdvertController extends Controller {
       imagepng($image,$im_path);
       imagedestroy($image);
     }
-    return $this->getImages($id);
+    return redirect()->back()->with('success', 1);
+  }
+
+  public function changeImageNumber($id, Request $request){
+    $path = $request->path;
+    $oldfilename = $filename = $request->filename;
+    $number = $request->number;
+    if($filename[2] == '_'){
+      $filename = substr_replace($filename,$number,0,3);
+    }else{
+      $filename = substr_replace($filename,$number,0,0);
+    }
+    if ( !\File::move($path . $oldfilename, $path . $filename))
+    {
+      die("Couldn't rename file");
+    }
+    return redirect('upload-images/' . $request->anunt_id . '#images');
+  }
+
+  public function deleteImage($id, Request $request)
+  {
+    \File::delete($request->filename);
+    return redirect()->back()->with('successDelete', 1);
   }
 
 }

@@ -176,6 +176,7 @@ class PagesController extends Controller {
     }
     public function postSearch(Request $request){
 //        $link = array();
+        $type = Input::get('type');
         $key_words = Input::get('cuvinte_cheie');
         $advert_id = Input::get('id_anunt');
         $min_price = Input::get('pret_minim');
@@ -194,39 +195,125 @@ class PagesController extends Controller {
         $sort_after = Input::get('sort');
         $sort_order = Input::get('tip_sortare');
 
+        // house properties
+        $land_area = Input::get('land_area');
+        $street_opening = Input::get('street_opening');
+        $foot_print = Input::get('foot_print');
+        $total_area = Input::get('total_area');
+        $level_area = Input::get('level_area');
+        $height = Input::get('height');
+        $built_year = Input::get('built_year');
+        $bathrooms = Input::get('bathrooms');
+        $obs_bathrooms = Input::get('obs_bathrooms');
+        $sanitary = Input::get('sanitary');
+        $obs_sanitary = Input::get('obs_sanitary');
+        $balconies = Input::get('balconies');
+
+
         $type = StatusType::find(Input::get('status'));
         $type_id = $type == null ? null : $type->id;
-        $adverts = Advert::whereHas('apartment', function($query)
-        use($min_year, $max_year, $min_floor, $max_floor, $min_surface, $max_surface, $partitioning) {
-            if($min_year)
+        if($type == 'apartment'){
+            $adverts = Advert::whereHas('apartment', function($query)
+            use($min_year, $max_year, $min_floor, $max_floor, $min_surface, $max_surface, $partitioning) {
+                if($min_year)
+                {
+                    $query->where('built_year', '>=', $min_year);
+                }
+                if($max_year)
+                {
+                    $query->where('built_year', '<=', $max_year);
+                }
+                if($max_floor)
+                {
+                    $query->where('floor', '<=', substr($max_floor,0,1));
+                }
+                if($min_floor)
+                {
+                    $query->where('floor', '>=', substr($min_floor,0,1));
+                }
+                if($min_surface)
+                {
+                    $query->where('built_area', '>=', $min_surface);
+                }
+                if($max_surface)
+                {
+                    $query->where('built_area', '<=', $max_surface);
+                }
+                if($partitioning)
+                {
+                    $query->where('partitioning', $partitioning);
+                }
+            });
+        }
+        else
+            if($type == 'house')
             {
-                $query->where('built_year', '>=', $min_year);
+                $adverts = Advert::whereHas('house', function($query)
+                use($min_year, $max_year, $min_floor, $max_floor, $min_surface, $max_surface, $partitioning) {
+                    if($min_year)
+                    {
+                        $query->where('built_year', '>=', $min_year);
+                    }
+                    if($max_year)
+                    {
+                        $query->where('built_year', '<=', $max_year);
+                    }
+                    if($max_floor)
+                    {
+                        $query->where('floor', '<=', substr($max_floor,0,1));
+                    }
+                    if($min_floor)
+                    {
+                        $query->where('floor', '>=', substr($min_floor,0,1));
+                    }
+                    if($min_surface)
+                    {
+                        $query->where('built_area', '>=', $min_surface);
+                    }
+                    if($max_surface)
+                    {
+                        $query->where('built_area', '<=', $max_surface);
+                    }
+                    if($partitioning)
+                    {
+                        $query->where('partitioning', $partitioning);
+                    }
+                });
             }
-            if($max_year)
-            {
-                $query->where('built_year', '<=', $max_year);
+            else{
+                $adverts = Advert::whereHas('terrain', function($query)
+                use($min_year, $max_year, $min_floor, $max_floor, $min_surface, $max_surface, $partitioning) {
+                    if($min_year)
+                    {
+                        $query->where('built_year', '>=', $min_year);
+                    }
+                    if($max_year)
+                    {
+                        $query->where('built_year', '<=', $max_year);
+                    }
+                    if($max_floor)
+                    {
+                        $query->where('floor', '<=', substr($max_floor,0,1));
+                    }
+                    if($min_floor)
+                    {
+                        $query->where('floor', '>=', substr($min_floor,0,1));
+                    }
+                    if($min_surface)
+                    {
+                        $query->where('built_area', '>=', $min_surface);
+                    }
+                    if($max_surface)
+                    {
+                        $query->where('built_area', '<=', $max_surface);
+                    }
+                    if($partitioning)
+                    {
+                        $query->where('partitioning', $partitioning);
+                    }
+                });
             }
-            if($max_floor)
-            {
-                $query->where('floor', '<=', substr($max_floor,0,1));
-            }
-            if($min_floor)
-            {
-                $query->where('floor', '>=', substr($min_floor,0,1));
-            }
-            if($min_surface)
-            {
-                $query->where('built_area', '>=', $min_surface);
-            }
-            if($max_surface)
-            {
-                $query->where('built_area', '<=', $max_surface);
-            }
-            if($partitioning)
-            {
-                $query->where('partitioning', $partitioning);
-            }
-        });
+
         if($phone)
         {
             $adverts ->whereHas('owner', function ($query) use ($phone) {
@@ -298,6 +385,7 @@ class PagesController extends Controller {
             ->with('partitions', $partitions)
             ->with('neighborhoods', $neighborhoods)
             ->with('areas', $areas)
+            ->with('type', $type)
             ->with('page', $page);
 
 //        dd($results);

@@ -26,6 +26,22 @@
                         </div>
                     </div>
                 @endif
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a href="/search?type=apartment" class="add-advert-type">
+                                <span class="glyphicon glyphicon-th"></span>
+                                <span>Apartament</span>
+                            </a>
+                            <a href="/search?type=house" class="add-advert-type">
+                                <span class="glyphicon glyphicon-home"></span>
+                                <span>Casa / Vila</span>
+                            </a>
+                            <a href="/search?type=terrain" class="add-advert-type">
+                                <span class="glyphicon glyphicon-picture"></span>
+                                <span>Teren</span>
+                            </a>
+                        </div>
+                    </div>
                 <div class="row margin-bottom">
                     <div class="col-xs-12">
                         <div class="main-title">

@@ -5,10 +5,6 @@ Route::get('login', 'SessionsController@create');
 Route::post('auth/login', 'SessionsController@store');
 Route::get('auth/logout', 'SessionsController@destroy');
 
-/*Pages*/
-Route::get('/', 'PagesController@index');
-Route::get('anunturi', 'PagesController@postSearch');
-
 Route::get('search', 'PagesController@postSearch');
 Route::get('despre-noi', 'PagesController@despreNoi');
 Route::get('servicii', 'PagesController@servicii');
@@ -22,7 +18,6 @@ Route::get('editeaza-anunt/{id}', 'UsersController@getEditeaza');
 Route::post('editeaza-anunt', 'UsersController@postEditeaza');
 Route::post('sterge-anunt', 'UsersController@sterge');
 Route::get('printeaza-anunt/{id}', 'UsersController@getPrinteaza');
-Route::get('update-date/{id}', 'UsersController@updateDate');
 Route::get('settings', 'UsersController@getSettings');
 Route::post('settings', 'UsersController@postSettings');
 
@@ -37,19 +32,18 @@ Route::post('settings', 'UsersController@postSettings');
 /* ----------------- REFACTOR ALL ROUTES ----------------- */
 
 /* Pages */
+Route::get('/', 'PagesController@index');
+Route::get('anunturi', 'PagesController@postSearch');
 Route::get('anunturi/{id}', 'AdvertController@viewEntity');
 
 /* Admin */
 Route::controller('advert/add', 'AdvertController');
 Route::get('advert/edit/{id}', 'AdvertController@getEditEntity');
 Route::post('advert/edit/{id}', 'AdvertController@postEditEntity');
+Route::get('advert/update/{id}', 'AdvertController@updateDate');
 Route::post('advert/add-status/{id}', 'AdvertController@postAddStatus');
 Route::post('advert/delete-status/{id}', 'AdvertController@postDeleteStatus');
 Route::get('advert/delete-observation/{id}', 'AdvertController@postDeleteObservation');
-//Route::get('upload-images/{id}', 'UsersController@getUpload');
-//Route::post('upload-images{id}', 'UsersController@postUpload');
-//Route::post('delete-image', 'UsersController@deleteImage');
-//Route::post('change-image-number', 'UsersController@changeImageNumber');
 Route::get('advert/images/{id}', 'AdvertController@getImages');
 Route::post('advert/images/{id}', 'AdvertController@postImages');
 Route::post('advert/change-image-order/{id}', 'AdvertController@changeImageOrder');

@@ -293,6 +293,13 @@ class AdvertController extends Controller {
     return redirect('advert/edit/' . $entity->getAttribute('advert_id'))->with('successAdd', TRUE);
   }
 
+  public function updateDate($id){
+    /** @var Advert $anunt */
+    $anunt = Advert::find($id);
+    $anunt->touch();
+    return redirect()->back();
+  }
+
   public function viewEntity($id)
   {
     $details = $this->getEntityDetails($id, TRUE);

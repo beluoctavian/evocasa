@@ -260,17 +260,19 @@
                                 <div>
                                     <textarea id="owner[observation]" name="owner[observation]" class="form-control" rows="2"></textarea>
                                 </div>
-                                @foreach ($owner['observations'] as $observation)
-                                    <div class="row">
-                                        <div class="col-xs-11">
-                                            <textarea disabled class="form-control" rows="2">{{ $observation->text }}</textarea>
-                                            {{ $observation->created_at }}
+                                @if (!empty($owner))
+                                    @foreach ($owner['observations'] as $observation)
+                                        <div class="row">
+                                            <div class="col-xs-11">
+                                                <textarea disabled class="form-control" rows="2">{{ $observation->text }}</textarea>
+                                                {{ $observation->created_at }}
+                                            </div>
+                                            <div class="col-xs-1">
+                                                <a href="{{ URL::to('advert/delete-observation/' . $observation->id) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                            </div>
                                         </div>
-                                        <div class="col-xs-1">
-                                            <a href="{{ URL::to('advert/delete-observation/' . $observation->id) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
-                                        </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div><!-- end proprietar -->

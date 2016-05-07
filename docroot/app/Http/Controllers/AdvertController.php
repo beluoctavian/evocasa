@@ -13,6 +13,7 @@ use App\House;
 use App\Terrain;
 use App\StatusType;
 use App\Status;
+use Illuminate\Support\Collection;
 
 class AdvertController extends Controller {
 
@@ -132,7 +133,11 @@ class AdvertController extends Controller {
     /** @var Owner $owner */
     $owner = $advert->owner;
     $owner->setAttribute('phone', json_decode($owner->phone, TRUE));
-    $owner->setAttribute('observations', $owner->observations);
+    /** @var Collection $observations */
+    $observations = $owner->observations->sort(function ($a, $b) {
+      return strtotime($b->created_at) - strtotime($a->created_at);
+    });
+    $owner->setAttribute('observations', $observations);
     /** @var Model $entity */
     $entity = $advert->{$advert->type};
     /** @var Improvements $improvements */

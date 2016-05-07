@@ -49,15 +49,18 @@
                             <div class="advert-item" id="{{ 'advert-item-no-' . $advert['id'] }}">
                                 @if(!Auth::guest())
                                     <div class="controls">
-                                        <form method="POST" action="{{ URL::to('sterge-anunt') }}" onSubmit="return confirm('Sigur vrei sa stergi anuntul?');">
+                                        <div>
+                                            <a href="{{ URL::to('advert/edit/' . $advert['id']) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                        </div>
+                                        <div>
+                                            <a href="{{ URL::to('advert/images/' . $advert['id']) }}" class="btn btn-success"><i class="fa fa-file-image-o"></i></a>
+                                        </div>
+                                        <div>
+                                            <a href="{{ URL::to('advert/update/' . $advert['id']) }}" class="btn btn-warning"><i class="fa fa-wrench"></i></a>
+                                        </div>
+                                        <form method="POST" action="{{ URL::to('advert/delete') }}" onSubmit="return confirm('Sigur vrei sa stergi anuntul?');">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="id" value="{{ $advert['id'] }}">
-                                            <a href="{{ URL::to('advert/edit/' . $advert['id']) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                                            <br>
-                                            <a href="{{ URL::to('advert/images/' . $advert['id']) }}" class="btn btn-success"><i class="fa fa-file-image-o"></i></a>
-                                            <br>
-                                            <a href="{{ URL::to('advert/update/' . $advert['id']) }}" class="btn btn-warning"><i class="fa fa-wrench"></i></a>
-                                            <br>
                                             <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i></button>
                                         </form>
                                     </div>

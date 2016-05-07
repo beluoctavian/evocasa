@@ -235,8 +235,7 @@
             <div class="col-xs-12 col-sm-6 col-md-3 footer-item">
                 <h2>Contact</h2>
                 <div>
-                    <div><i class="fa fa-phone"></i> Ionescu Isac Cosmin: 0773 937 217</div>
-                    <div><i class="fa fa-phone"></i> Agrapinei Gabriela: 0773 937 205</div>
+                    <div><i class="fa fa-phone"></i> 0773 937 217 | 0773 937 205</div>
                     <div><i class="fa fa-envelope"></i> office@evocasainvest.ro</div>
                 </div>
             </div>

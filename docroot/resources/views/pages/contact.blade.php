@@ -68,25 +68,11 @@
         <h4>Date de contact</h4>
         <p>
             <ul class="default">
-                <li><i class="fa fa-map-marker"></i> Sediu social: Strada Motilor, numarul 20, sectorul 3, Bucuresti</li>
+                <li><i class="fa fa-map-marker"></i> Sediu social: Str. Motilor, nr. 20, sectorul 3, Bucuresti</li>
                 <li><i class="fa fa-envelope-o"></i> E-mail: office@evocasainvest.ro</li>
                 <li><i class="fa fa-barcode"></i> CUI: 34565174</li>
                 <li><i class="fa fa-clipboard"></i> Nr. reg. comert: J40 / 6367 / 2015</li>
-            </ul>
-        </p>
-        <h4>Consultanti imobiliari</h4>
-        <p>
-            <ul class="default">
-                <li><b>Ionescu Isac Cosmin</b></li>
-                <li><i class="fa fa-phone"></i> 0773 937 217</li>
-                <li><i class="fa fa-envelope-o"></i> E-mail: ysaccosmin@evocasainvest.ro</li>
-            </ul>
-        </p>
-        <p>
-            <ul class="default">
-                <li><b>Agrapinei Gabriela</b></li>
-                <li><i class="fa fa-phone"></i> 0773 937 205</li>
-                <li><i class="fa fa-envelope-o"></i> E-mail: a.gabriela@evocasainvest.ro</li>
+                <li><i class="fa fa-phone"></i> 0773 937 217 | 0773 937 205</li>
             </ul>
         </p>
     </div>

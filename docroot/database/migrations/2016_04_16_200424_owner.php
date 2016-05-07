@@ -16,7 +16,7 @@ class Owner extends Migration {
 			$table->increments('id');
 			$table->string('first_name');
 			$table->string('last_name');
-			$table->string('phone');
+			$table->longText('phone');
 			$table->string('email');
 			$table->string('cadaster');
 			$table->string('registration');

@@ -160,7 +160,6 @@ class AdvertController extends Controller {
           break;
 
       }
-
       // Prepare the improvements
       foreach ($improvements as $key => $improvement) {
         if (!array_key_exists($key, self::$improvements)) {

@@ -15,7 +15,7 @@ class Improvements extends Migration {
 		Schema::create('improvements', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('improvements');
+			$table->longText('improvements');
 			$table->integer('advert_id')->unsigned();
 			$table->foreign('advert_id')
 				->references('id')

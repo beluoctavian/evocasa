@@ -30,7 +30,7 @@ foreach($proprietars as $proprietar) {
         $advert->id = $anunt->id;
         $advert->code = $anunt->cod;
         $advert->title = $anunt->titlu;
-        $advert->type = 'Apartment';
+        $advert->type = 'apartment';
         $advert->no_rooms = $anunt->nr_camere;
         $advert->first_page = $anunt->first_page;
         $advert->price = $anunt->pret;
@@ -97,7 +97,12 @@ foreach($proprietars as $proprietar) {
             $apartment->save();
         }
         $imbunatatire = Imbunat::where('id_anunt', $anunt->id)->first();
+        unset($imbunatatire->id);
+        unset($imbunatatire->id_anunt);
+        unset($imbunatatire->created_at);
+        unset($imbunatatire->updated_at);
         $improvement = new \App\Improvements();
+        $improvement->id = $imbunatatire->id;
         $improvement->advert_id = $advert->id;
         $improvement->improvements = json_encode($imbunatatire);
         $improvement->save();

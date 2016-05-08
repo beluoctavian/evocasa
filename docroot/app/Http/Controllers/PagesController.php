@@ -241,7 +241,31 @@ class PagesController extends Controller {
             $adverts->orderBy('price', $sort_after);
         }
 
-        $results  = $adverts->paginate(10);
+        $results = [];
+        if($status == 'activ')
+        {
+            foreach($adverts->get() as $advert)
+            {
+                $flag = true;
+                    if($advert->status)
+                {
+                    foreach($advert->status as $status)
+                        if($status->type_id == $inactive_status_id)
+                        {
+                            $flag = false;
+                        }
+                }
+                if($flag == true)
+                    $results[] = $advert->id;
+            }
+            $results  = Advert::whereIn('id', $results)->paginate(10);
+        }
+        else
+        {
+            $results  = $adverts->paginate(10);
+        }
+
+
 
         $partitions = array_unique(Apartment::all()->lists('partitioning'));
 

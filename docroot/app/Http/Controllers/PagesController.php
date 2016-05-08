@@ -235,7 +235,7 @@ class PagesController extends Controller {
         }
         if($advert_id)
         {
-            $adverts->where('id', Input::get('id_anunt'));
+            $adverts->where('code', Input::get('id_anunt'));
         }
 
 

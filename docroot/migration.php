@@ -77,7 +77,8 @@ foreach($proprietars as $proprietar) {
             $apartment->partitioning = ucwords(strtolower(zero($imobil->compartimentare)));
             $apartment->comfort = zero($imobil->confort);
             $apartment->floor = zero($imobil->etaj);
-            $apartment->built_year = zero($imobil->an_constructie);
+            $year = (int) zero($imobil->an_constructie);
+            $apartment->built_year = $year;
             $apartment->bathrooms = zero($imobil->numar_bai);
             $apartment->obs_bathrooms = zero($imobil->obs_numar_bai);
             $apartment->sanitary = zero($imobil->numar_bai_serviciu);

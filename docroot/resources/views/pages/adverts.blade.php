@@ -352,15 +352,7 @@
 @section('scripts')
 <script src="{{ URL::asset('library/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js') }}"></script>
 <script type="text/javascript">
-    $('#numar_camere').select2({
-        tags: true,
-        placeholder: "Indiferent"
-    });
-    $('#neighborhood').select2({
-        tags: true,
-        placeholder: "Indiferent"
-    });
-    $('#area').select2({
+    $('select').select2({
         tags: true,
         placeholder: "Indiferent"
     });

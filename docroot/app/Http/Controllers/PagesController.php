@@ -213,7 +213,7 @@ class PagesController extends Controller {
         {
             $adverts->where('title', 'like', '%'.$key_words.'%');
         }
-        if($entity_type == 'apartment' or $entity_type == 'house')
+        if($entity_type == 'apartment' or $entity_type == 'casa')
         {
             if(count($no_rooms[0]) > 0){
                 $adverts->whereIn('no_rooms', $no_rooms[0]);

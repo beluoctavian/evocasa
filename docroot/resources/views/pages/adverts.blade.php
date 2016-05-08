@@ -62,12 +62,6 @@
                                                 <input name="telefon_proprietar" type="text" class="form-control" value="{{ Input::get('telefon_proprietar') ? Input::get('telefon_proprietar') : '' }}">
                                             </div>
                                         </div>
-                                        <div class="form-group col-xs-12 col-sm-4 col-md-2">
-                                            <label>ID anunt</label>
-                                            <div>
-                                                <input name="id_anunt" type="text" class="form-control" value="{{ Input::get('id_anunt') ? Input::get('id_anunt') : '' }}">
-                                            </div>
-                                        </div>
                                         <div class="form-group col-xs-12 col-sm-2">
                                             <label>Stare</label>
                                             <div>
@@ -81,36 +75,33 @@
                                     </div>
                                 @endif
                                 <div class="row">
+                                    <div class="form-group col-xs-12 col-sm-4 col-md-2">
+                                        <label>ID anunt</label>
+                                        <div>
+                                            <input name="id_anunt" type="text" class="form-control" value="{{ Input::get('id_anunt') ? Input::get('id_anunt') : '' }}">
+                                        </div>
+                                    </div>
                                     <div class="form-group col-xs-12 col-sm-4">
                                         <label>Cuvinte cheie</label>
                                         <div>
                                             <input name="cuvinte_cheie" type="text" class="form-control" value="{{ Input::get('cuvinte_cheie') ? Input::get('cuvinte_cheie') : '' }}">
                                         </div>
                                     </div>
-                                    @if(Auth::guest())
-                                        <div class="form-group col-xs-12 col-sm-4 col-md-2">
-                                            <label>ID anunt</label>
-                                            <div>
-                                                <input name="id_anunt" type="text" class="form-control" value="{{ Input::get('id_anunt') ? Input::get('id_anunt') : '' }}">
-                                            </div>
+                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                        <label>Pret minim</label>
+                                        <div class="input-group">
+                                            <input name="pret_minim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
+                                            <span class="input-group-addon">&euro;</span>
                                         </div>
-                                    @endif
-
-                                        @if($type == null or $type == 'apartment')
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Pret minim</label>
-                                            <div class="input-group">
-                                                <input name="pret_minim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
-                                                <span class="input-group-addon">&euro;</span>
-                                            </div>
+                                    </div>
+                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                        <label>Pret maxim</label>
+                                        <div class="input-group">
+                                            <input name="pret_maxim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
+                                            <span class="input-group-addon">&euro;</span>
                                         </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Pret maxim</label>
-                                            <div class="input-group">
-                                                <input name="pret_maxim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
-                                                <span class="input-group-addon">&euro;</span>
-                                            </div>
-                                        </div>
+                                    </div>
+                                    @if($type == null or $type == 'apartment')
                                         <div class="form-group col-xs-12 col-sm-4 col-md-2">
                                             <label>An constructie minim</label>
                                             <input name="an_constructie_minim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">
@@ -166,21 +157,6 @@
                                             </div>
                                         </div>
                                     @elseif($type == 'casa')
-
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Pret minim</label>
-                                            <div class="input-group">
-                                                <input name="pret_minim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
-                                                <span class="input-group-addon">&euro;</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Pret maxim</label>
-                                            <div class="input-group">
-                                                <input name="pret_maxim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
-                                                <span class="input-group-addon">&euro;</span>
-                                            </div>
-                                        </div>
                                         <div class="form-group col-xs-12 col-sm-4 col-md-2">
                                             <label>An constructie minim</label>
                                             <input name="an_constructie_minim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">
@@ -198,7 +174,6 @@
                                                 <option value="4" {{ Input::get('numar_camere') == 4 ? 'selected' : '' }}>4+</option>
                                             </select>
                                         </div>
-
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Suprafata minima</label>
                                             <div class="input-group">
@@ -213,23 +188,7 @@
                                                 <span class="input-group-addon">mp</span>
                                             </div>
                                         </div>
-
-                                        @else
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Pret minim</label>
-                                            <div class="input-group">
-                                                <input name="pret_minim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
-                                                <span class="input-group-addon">&euro;</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Pret maxim</label>
-                                            <div class="input-group">
-                                                <input name="pret_maxim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
-                                                <span class="input-group-addon">&euro;</span>
-                                            </div>
-                                        </div>
-
+                                    @else
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Suprafata minima</label>
                                             <div class="input-group">
@@ -244,8 +203,7 @@
                                                 <span class="input-group-addon">mp</span>
                                             </div>
                                         </div>
-                                        @endif
-
+                                    @endif
                                     <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                         <label>Cartier</label>
                                         <div>

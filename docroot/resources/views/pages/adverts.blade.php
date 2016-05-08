@@ -92,22 +92,18 @@
                                             <input name="cuvinte_cheie" type="text" class="form-control" value="{{ Input::get('cuvinte_cheie') ? Input::get('cuvinte_cheie') : '' }}">
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="col-xs-12 col-sm-4">
-                                            <label for="price_range">Pret</label>
-                                            <input type="text" id="price_range" value="">
-                                        </div>
+                                    <div class="form-group col-xs-12 col-sm-4">
+                                        <label for="price_range">Pret</label>
+                                        <input type="text" id="price_range" value="">
                                         <div class="hidden">
                                             <input name="pret_minim" id="pret_minim" type="hidden" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
                                             <input name="pret_maxim" id="pret_maxim" type="hidden" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
                                         </div>
                                     </div>
                                     @if($type == null or $type == 'apartment')
-                                        <div>
-                                            <div class="col-xs-12 col-sm-2">
-                                                <label for="an_constructie_range">An constructie</label>
-                                                <input type="text" id="an_constructie_range" value="">
-                                            </div>
+                                        <div class="form-group col-xs-12 col-sm-2">
+                                            <label for="an_constructie_range">An constructie</label>
+                                            <input type="text" id="an_constructie_range" value="">
                                             <div class="hidden">
                                                 <input name="an_constructie_minim" id="an_constructie_minim" type="hidden" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">
                                                 <input name="an_constructie_maxim" id="an_constructie_maxim" type="hidden" value="{{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : '' }}">

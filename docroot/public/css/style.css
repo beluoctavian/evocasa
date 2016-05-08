@@ -609,6 +609,11 @@ footer {
         overflow: hidden;
     }
 }
+#status-area select {
+    float: left;
+    width: 230px;
+    margin-right: 10px;
+}
 .status-item {
     float: left;
     padding: 2px 5px;

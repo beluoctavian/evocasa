@@ -55,12 +55,18 @@
             @if (!empty($advert['id']))
                 <div class="row margin-bottom" id="status-area">
                     <div class="col-xs-12">
+                        <div class="main-title">
+                            <i class="fa fa-bullseye"></i>
+                            <h2>Status</h2>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
                         <div class="row">
                             <form method="POST" action="{{ URL::to('advert/add-status/' . $advert['id']) }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <div class="form-group col-xs-12 col-sm-6">
+                                <div class="form-group col-xs-12">
                                     <select required title="Alege statusul" name="status_type" class="form-control">
-                                        <option selected disabled hidden value=""></option>
+                                        <option selected disabled hidden value="">Alegeti un status</option>
                                         @foreach ($status_types as $status_type)
                                             <option value="{{ $status_type->id }}">
                                                 {{ $status_type->title }}
@@ -71,24 +77,26 @@
                                 </div>
                             </form>
                         </div>
-                    <div class="col-xs-12">
-                        @foreach ($status_types as $status_type)
-                            @if (!empty($advert_status[$status_type->id]))
-                                <span class="status-item" data-toggle="tooltip" data-placement="top" title="{{ $advert_status[$status_type->id]['created_at'] }}">
-                                    <form method="POST" action="{{ URL::to('advert/delete-status/' . $advert['id']) }}">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="hidden" name="type_id" value="{{ $status_type->id }}">
-                                        <button type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                    </form>
-                                    {{ $status_type->title }}
-                                    @if ($advert_status[$status_type->id]['count'] > 1)
-                                        <span class="badge">x{{ $advert_status[$status_type->id]['count'] }}</span>
-                                    @endif
-                                </span>
-                            @endif
-                        @endforeach
                     </div>
-                    </div>
+                    @if (!empty($advert_status))
+                        <div class="col-xs-12">
+                            @foreach ($status_types as $status_type)
+                                @if (!empty($advert_status[$status_type->id]))
+                                    <span class="status-item" data-toggle="tooltip" data-placement="top" title="{{ $advert_status[$status_type->id]['created_at'] }}">
+                                        <form method="POST" action="{{ URL::to('advert/delete-status/' . $advert['id']) }}" onSubmit="return confirm('Sigur vrei sa stergi statusul?');">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="type_id" value="{{ $status_type->id }}">
+                                            <button type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                        </form>
+                                        {{ $status_type->title }}
+                                        @if ($advert_status[$status_type->id]['count'] > 1)
+                                            <span class="badge">x{{ $advert_status[$status_type->id]['count'] }}</span>
+                                        @endif
+                                    </span>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
 
 
@@ -721,10 +729,6 @@
     $('textarea').elastic();
 </script>
 <script type="text/javascript">
-    $('select', '#status-area').select2({
-        minimumResultsForSearch: Infinity,
-        placeholder: "Alegeti un status"
-    });
     $(".status-item").tooltip({ trigger: "hover" });
 </script>
 @endsection

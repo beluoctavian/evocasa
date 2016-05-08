@@ -80,7 +80,10 @@
                                         <input type="hidden" name="type_id" value="{{ $status_type->id }}">
                                         <button type="submit"><i class="fa fa-times" aria-hidden="true"></i></button>
                                     </form>
-                                    {{ $status_type->title }} <span class="badge">{{ $advert_status[$status_type->id]['count'] }}</span>
+                                    {{ $status_type->title }}
+                                    @if ($advert_status[$status_type->id]['count'] > 1)
+                                        <span class="badge">x{{ $advert_status[$status_type->id]['count'] }}</span>
+                                    @endif
                                 </span>
                             @endif
                         @endforeach

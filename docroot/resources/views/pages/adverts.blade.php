@@ -213,7 +213,6 @@
                                         <label>Cartier</label>
                                         <div>
                                             <select multiple id="neighborhood" name="cartier[]" class="form-control">
-                                                <option value="">Indiferent</option>
                                                 @foreach($neighborhoods as $neighborhood)
                                                     <option value="{{ $neighborhood->name }}" {{ Input::get('cartier') == $neighborhood->name ? 'selected' : '' }}>{{ $neighborhood->name }}</option>
                                                 @endforeach
@@ -224,7 +223,6 @@
                                         <label>Zona</label>
                                         <div>
                                             <select multiple id="area" name="zona[]" class="form-control">
-                                                <option value="">Indiferent</option>
                                                 @foreach($areas as $area)
                                                     <option value="{{ $area->name }}" {{ Input::get('zona') == $area->name ? 'selected' : '' }}>{{ $area->name }}</option>
                                                 @endforeach
@@ -393,13 +391,21 @@
         tags: true,
         placeholder: "Indiferent"
     });
+    $('#neighborhood').select2({
+        tags: true,
+        placeholder: "Indiferent"
+    });
+    $('#area').select2({
+        tags: true,
+        placeholder: "Indiferent"
+    });
     $('#price_range').ionRangeSlider({
         type: 'double',
-        min: <?php print $input_defaults['pret_minim']; ?>,
-        max: <?php print $input_defaults['pret_maxim']; ?>,
+        min: {{ $input_defaults['pret_minim'] }},
+        max: {{ $input_defaults['pret_maxim'] }},
         step: 1000,
-        from: 1000,
-        to: 50000,
+        from: {{ Input::get('pret_minim') ? Input::get('pret_minim') : $input_defaults['pret_minim'] }},
+        to: {{ Input::get('pret_maxim') ? Input::get('pret_maxim') : $input_defaults['pret_maxim'] }},
         postfix: "&euro;",
         onChange: function (data) {
             $('#pret_minim').val(data.from);

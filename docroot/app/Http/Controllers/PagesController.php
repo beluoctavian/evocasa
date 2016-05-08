@@ -251,11 +251,17 @@ class PagesController extends Controller {
             $results[$key] = AdvertController::getEntityDetails($item->id);
         }
 
+        $input_defaults = [
+            'pret_minim' => \DB::table('advert')->min('price'),
+            'pret_maxim' => \DB::table('advert')->max('price'),
+        ];
+
         return view('pages.adverts')
             ->with('adverts',$results->appends(Input::except('page')))
             ->with('partitions', $partitions)
             ->with('neighborhoods', $neighborhoods)
             ->with('areas', $areas)
-            ->with('type', $entity_type);
+            ->with('type', $entity_type)
+            ->with('input_defaults', $input_defaults);
     }
 }

@@ -395,8 +395,8 @@
     });
     $('#price_range').ionRangeSlider({
         type: 'double',
-        min: 1000,
-        max: 200000,
+        min: <?php print $input_defaults['pret_minim']; ?>,
+        max: <?php print $input_defaults['pret_maxim']; ?>,
         step: 1000,
         from: 1000,
         to: 50000,

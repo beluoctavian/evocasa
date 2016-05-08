@@ -100,11 +100,10 @@ class PagesController extends Controller {
 
         //terrain properties + total area
 
-        $status = Input::get('status');
+        $status = Input::get('status') ? Input::get('status') : 'activ';
         if(Auth::guest())
         {
             $status = 'activ';
-
         }
 
         $entity_type = Input::get('tip') ?: 'apartament';

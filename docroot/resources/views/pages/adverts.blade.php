@@ -121,16 +121,11 @@
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Numar camere</label>
-                                            <select name="numar_camere" class="form-control">
-                                                <option value="">Indiferent</option>
+                                            <select multiple id="numar_camere" name="numar_camere" class="form-control">
                                                 <option value="1" {{ Input::get('numar_camere') == 1 ? 'selected' : '' }}>1</option>
                                                 <option value="2" {{ Input::get('numar_camere') == 2 ? 'selected' : '' }}>2</option>
                                                 <option value="3" {{ Input::get('numar_camere') == 3 ? 'selected' : '' }}>3</option>
-                                                <option value="4" {{ Input::get('numar_camere') == 4 ? 'selected' : '' }}>4</option>
-                                                <option value="1 2" {{ Input::get('numar_camere') == "1 2" ? 'selected' : '' }}>1, 2</option>
-                                                <option value="2 3" {{ Input::get('numar_camere') == "2 3" ? 'selected' : '' }}>2, 3</option>
-                                                <option value="3 4" {{ Input::get('numar_camere') == "3 4" ? 'selected' : '' }}>3, 4</option>
-                                                <option value="1 2 3 4" {{ Input::get('numar_camere') == "1 2 3 4" ? 'selected' : '' }}>1, 2, 3, 4</option>
+                                                <option value="4" {{ Input::get('numar_camere') == 4 ? 'selected' : '' }}>4+</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
@@ -192,16 +187,11 @@
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Numar camere</label>
-                                            <select name="numar_camere" class="form-control">
-                                                <option value="">Indiferent</option>
+                                            <select multiple id="numar_camere" name="numar_camere" class="form-control">
                                                 <option value="1" {{ Input::get('numar_camere') == 1 ? 'selected' : '' }}>1</option>
                                                 <option value="2" {{ Input::get('numar_camere') == 2 ? 'selected' : '' }}>2</option>
                                                 <option value="3" {{ Input::get('numar_camere') == 3 ? 'selected' : '' }}>3</option>
-                                                <option value="4" {{ Input::get('numar_camere') == 4 ? 'selected' : '' }}>4</option>
-                                                <option value="1 2" {{ Input::get('numar_camere') == "1 2" ? 'selected' : '' }}>1, 2</option>
-                                                <option value="2 3" {{ Input::get('numar_camere') == "2 3" ? 'selected' : '' }}>2, 3</option>
-                                                <option value="3 4" {{ Input::get('numar_camere') == "3 4" ? 'selected' : '' }}>3, 4</option>
-                                                <option value="1 2 3 4" {{ Input::get('numar_camere') == "1 2 3 4" ? 'selected' : '' }}>1, 2, 3, 4</option>
+                                                <option value="4" {{ Input::get('numar_camere') == 4 ? 'selected' : '' }}>4+</option>
                                             </select>
                                         </div>
 
@@ -430,4 +420,10 @@
 @endsection
 
 @section('scripts')
+<script type="text/javascript">
+    $('#numar_camere').select2({
+        tags: true,
+        placeholder: "Indiferent"
+    });
+</script>
 @endsection

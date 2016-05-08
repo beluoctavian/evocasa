@@ -212,7 +212,7 @@
                                     <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                         <label>Cartier</label>
                                         <div>
-                                            <select name="cartier" class="form-control">
+                                            <select multiple id="neighborhood" name="cartier[]" class="form-control">
                                                 <option value="">Indiferent</option>
                                                 @foreach($neighborhoods as $neighborhood)
                                                     <option value="{{ $neighborhood->name }}" {{ Input::get('cartier') == $neighborhood->name ? 'selected' : '' }}>{{ $neighborhood->name }}</option>
@@ -223,7 +223,7 @@
                                     <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                         <label>Zona</label>
                                         <div>
-                                            <select name="zona" class="form-control">
+                                            <select multiple id="area" name="zona[]" class="form-control">
                                                 <option value="">Indiferent</option>
                                                 @foreach($areas as $area)
                                                     <option value="{{ $area->name }}" {{ Input::get('zona') == $area->name ? 'selected' : '' }}>{{ $area->name }}</option>
@@ -405,6 +405,14 @@
             $('#pret_minim').val(data.from);
             $('#pret_maxim').val(data.to);
         },
+    });
+    $('#neighborhood').select2({
+        tags: true,
+        placeholder: "Indiferent"
+    });
+    $('#area').select2({
+        tags: true,
+        placeholder: "Indiferent"
     });
 </script>
 @endsection

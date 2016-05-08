@@ -20,6 +20,7 @@ class Advert extends Model {
         'description',
         'neighborhood_id',
         'area_id',
+        'price_history',
     ];
 
     public static $properties = [
@@ -33,6 +34,7 @@ class Advert extends Model {
         'description',
         'neighborhood_id',
         'area_id',
+        'price_history',
     ];
 
     /**
@@ -142,7 +144,16 @@ class Advert extends Model {
             $advert = self::find($entity_id);
             $old_neighborhood = $advert->neighborhood;
             $old_area = $advert->area;
+            $old_price = $advert->price;
             $advert->fill($valid_parameters);
+            $price_history = json_decode($advert->price_history);
+            if (empty($price_history)) {
+                $price_history = [$old_price];
+            }
+            if ($old_price != $advert->price) {
+                $price_history[] = $advert->price;
+            }
+            $advert->price_history = json_encode($price_history);
             $advert->save();
             if ($old_area->advert->count() == 0) {
                 $old_area->delete();

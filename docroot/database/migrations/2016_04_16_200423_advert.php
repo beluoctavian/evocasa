@@ -29,6 +29,7 @@ class Advert extends Migration {
 			$table->foreign('area_id')
 				->references('id')
 				->on('area');
+			$table->longText('price_history');
 			$table->timestamps();
 		});
 	}

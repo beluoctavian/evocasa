@@ -114,6 +114,7 @@ class AdvertController extends Controller {
     }
     $advert->setAttribute('area', $advert->area->name);
     $advert->setAttribute('neighborhood', $advert->neighborhood->name);
+    $advert->setAttribute('price_history', json_decode($advert->price_history));
     /** @var Status $statuses */
     $status = $advert->status;
     $advert_status = [];

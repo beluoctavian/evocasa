@@ -155,6 +155,16 @@
                                     <textarea id="advert[description]" name="advert[description]" class="form-control" rows="4">{{ !empty($advert['description']) ? $advert['description'] : '' }}</textarea>
                                 </div>
                             </div>
+                            @if (!empty($advert['price_history']))
+                                <div class="form-group col-xs-12">
+                                    <div><b>Istoric pret</b></div>
+                                    <ol>
+                                        @foreach ($advert['price_history'] as $price)
+                                            <li>{{ $price }} &euro;</li>
+                                        @endforeach
+                                    </ol>
+                                </div>
+                            @endif
                         </div>
                     </div> <!-- end anunt -->
 

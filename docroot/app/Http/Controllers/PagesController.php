@@ -252,7 +252,7 @@ class PagesController extends Controller {
             $criteriul = explode('_', $sort_after)[0];
             if($criteriul == 'date')
             {
-                $criteriul = 'created_at';
+                $criteriul = 'updated_at';
             }
             $ordinea = explode('_', $sort_after)[1];
             $adverts->orderBy($criteriul, $ordinea);

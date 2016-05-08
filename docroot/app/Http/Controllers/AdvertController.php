@@ -115,12 +115,22 @@ class AdvertController extends Controller {
     $advert->setAttribute('area', $advert->area->name);
     $advert->setAttribute('neighborhood', $advert->neighborhood->name);
     $advert->setAttribute('price_history', json_decode($advert->price_history));
+    $advert->setAttribute('inactiv', FALSE);
+    $advert->setAttribute('retras', FALSE);
     /** @var Status $statuses */
     $status = $advert->status;
     $advert_status = [];
     if (!empty($status)) {
       foreach ($status as $sts) {
         if (empty($advert_status[$sts->type_id])) {
+          switch ($sts->status_type->type) {
+            case 'inactiv':
+              $advert->setAttribute('inactiv', TRUE);
+              break;
+            case 'retras':
+              $advert->setAttribute('retras', TRUE);
+              break;
+          }
           $advert_status[$sts->type_id] = [
             'count' => 1,
             'created_at' => $sts->created_at,
@@ -128,7 +138,6 @@ class AdvertController extends Controller {
           ];
         }
         else {
-          $advert_status[$sts->type_id]['title'] = $sts->status_type->title;
           $advert_status[$sts->type_id]['count']++;
           $advert_status[$sts->type_id]['created_at'] = ($sts->created_at > $advert_status[$sts->type_id]['created_at']) ? $sts->created_at : $advert_status[$sts->type_id]['created_at'];
         }

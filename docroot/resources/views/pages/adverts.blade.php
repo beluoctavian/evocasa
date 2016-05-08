@@ -330,28 +330,28 @@
                                 <div class="img-container">
                                     @if(Auth::guest())
                                         <a href="{{ URL::to('anunturi/' . $advert['id']) }}">
-                                            @else
-                                                <a href="{{ URL::to('advert/edit/' . $advert['id']) }}">
-                                                    @endif
-                                                    @if(File::exists('uploaded-images/anunt_' . $advert['id'] . '/'))
-                                                        <?php $files = File::allFiles('uploaded-images/anunt_' . $advert['id'] . '/'); sort($files); ?>
-                                                        @if(count($files))
-                                                            <?php $filename = $files[0]->getRelativePathName(); ?>
-                                                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $filename) }}">
-                                                        @else
-                                                            <img src="{{ URL::asset('img/default-img.jpg') }}" />
-                                                        @endif
-                                                    @else
-                                                        <img src="{{ URL::asset('img/default-img.jpg') }}" />
-                                                    @endif
-                                                </a>
-                                                <div class="type">{{ $advert['type'] }}</div>
+                                    @else
+                                        <a href="{{ URL::to('advert/edit/' . $advert['id']) }}">
+                                    @endif
+                                    @if(File::exists('uploaded-images/anunt_' . $advert['id'] . '/'))
+                                        <?php $files = File::allFiles('uploaded-images/anunt_' . $advert['id'] . '/'); sort($files); ?>
+                                        @if (count($files))
+                                            <?php $filename = $files[0]->getRelativePathName(); ?>
+                                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $filename) }}">
+                                        @else
+                                            <img src="{{ URL::asset('img/default-img.jpg') }}" />
+                                        @endif
+                                    @else
+                                        <img src="{{ URL::asset('img/default-img.jpg') }}" />
+                                    @endif
+                                    </a>
+                                    <div class="type">{{ $advert['type'] }}</div>
                                 </div>
                                 <div class="description">
                                     @if(Auth::guest())
-                                        <h2><a href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
+                                        <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
                                     @else
-                                        <h2><a class="" href="{{ URL::to('advert/edit/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
+                                        <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
                                     @endif
                                     <div class="price">
                                         <div class="a-container">

@@ -94,8 +94,8 @@ class PagesController extends Controller {
 
         // house properties
 
-        $min_total_area = Input::get('min_total_area');
-        $max_total_area = Input::get('max_total_area');
+        $min_total_area = Input::get('suprafata_minima');
+        $max_total_area = Input::get('suprafata_maxima');
 
         //terrain properties + total area
 
@@ -133,11 +133,11 @@ class PagesController extends Controller {
 
                     if($min_total_area)
                     {
-                        $query->where('total_area', '>=', $min_total_area);
+                        $query->where('land_area', '>=', $min_total_area);
                     }
                     if($max_total_area)
                     {
-                        $query->where('total_area', '<=', $max_total_area);
+                        $query->where('land_area', '<=', $max_total_area);
                     }
                 });
             }

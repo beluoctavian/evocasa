@@ -285,6 +285,16 @@
                                                    {{ $entity['built_area'] }} mp
                                                 </li>
                                             @endif
+                                            @if(!empty($entity['land_area']))
+                                                <li>
+                                                   Suprafata teren: <b>{{ $entity['land_area'] }}</b> mp
+                                                </li>
+                                            @endif
+                                            @if(!empty($entity['total_area']))
+                                                <li>
+                                                   Suprafata: <b>{{ $entity['total_area'] }}</b> mp
+                                                </li>
+                                            @endif
 
                                             @if(!empty($entity['partitioning']))
                                                 <li class="hidden-xs hidden-sm">

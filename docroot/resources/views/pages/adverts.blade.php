@@ -313,25 +313,21 @@
                                                 </li>
                                             @endif
 
-                                            @if(!empty($entity['total_area']))
-                                                <li class="hidden-xs hidden-sm">
-                                                    Total area: <b>{{ $entity['total_area'] }}</b> mp
-                                                </li>
-                                            @endif
-
                                             @if(!empty($entity['street_opening']))
                                                 <li class="hidden-xs hidden-sm">
                                                    Street opening:<b> {{ $entity['street_opening'] }}</b> m
                                                 </li>
                                             @endif
+
                                             @if(!empty($entity['floor']))
                                                 <li class="hidden-xs hidden-sm">
-                                                    Etaj {{ $entity['floor'] }}
+                                                    Etaj: {{ $entity['floor'] }}
                                                 </li>
                                             @endif
+
                                             @if(!empty($entity['built_year']))
-                                                <li class="hidden-xs hidden-sm">
-                                                    An: <b>{{ $entity['built_year'] }}</b>
+                                                <li>
+                                                    An: {{ $entity['built_year'] }}
                                                 </li>
                                             @endif
 

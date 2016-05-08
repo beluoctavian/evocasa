@@ -429,6 +429,7 @@
         step: 1,
         from: {{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : $input_defaults['an_constructie_minim'] }},
         to: {{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : $input_defaults['an_constructie_maxim'] }},
+        prettify_enabled: false,
         onChange: function (data) {
             $('#an_constructie_minim').val(data.from);
             $('#an_constructie_maxim').val(data.to);

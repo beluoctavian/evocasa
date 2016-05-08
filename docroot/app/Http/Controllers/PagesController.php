@@ -125,7 +125,6 @@ class PagesController extends Controller {
         $phone = Input::get('telefon_proprietar');
         $area[] = Input::get('zona');
         $sort_after = Input::get('sortare');
-
         // house properties
 
         $min_total_area = Input::get('suprafata_minima');
@@ -139,7 +138,7 @@ class PagesController extends Controller {
             $status = 'activ';
         }
 
-        $entity_type = Input::get('tip') ?: 'apartament';
+        $entity_type = Input::get('tip') ? Input::get('tip') : 'apartament';
 
         if($entity_type == 'teren'){
 
@@ -230,7 +229,7 @@ class PagesController extends Controller {
         if($phone)
         {
             $adverts ->whereHas('owner', function ($query) use ($phone) {
-                $query->where('phone', 'like', '%' . $phone . '%');
+                $query->where('owner.phone', 'like', '%' . $phone . '%');
             });
         };
 

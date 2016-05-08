@@ -210,10 +210,10 @@
                                 <div>
                                     <select name="sortare" id="sortare" class="form-control">
                                         <option value="">Implicit</option>
-                                        <option value="price_asc">Pret (cresc.)</option>
-                                        <option value="price_desc">Pret (desc.)</option>
-                                        <option value="date_asc">Data publicarii (cresc.)</option>
-                                        <option value="date_desc">Data publicarii (desc.)</option>
+                                        <option value="price_asc" {{ Input::get('sortare') == 'price_asc' ? 'selected' : '' }}>Pret (cresc.)</option>
+                                        <option value="price_desc" {{ Input::get('sortare') == 'price_desc' ? 'selected' : '' }}>Pret (desc.)</option>
+                                        <option value="date_asc" {{ Input::get('sortare') == 'date_asc' ? 'selected' : '' }}>Data publicarii (cresc.)</option>
+                                        <option value="date_desc" {{ Input::get('sortare') == 'date_desc' ? 'selected' : '' }}>Data publicarii (desc.)</option>
                                     </select>
                                 </div>
                             </div>

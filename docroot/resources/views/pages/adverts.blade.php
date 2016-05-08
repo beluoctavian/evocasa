@@ -411,19 +411,21 @@
             $('#pret_maxim').val(data.to);
         }
     });
-    $('#an_constructie_range').ionRangeSlider({
-        type: 'double',
-        min: {{ $input_defaults['an_constructie_minim'] }},
-        max: {{ $input_defaults['an_constructie_maxim'] }},
-        step: 1,
-        from: {{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : $input_defaults['an_constructie_minim'] }},
-        to: {{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : $input_defaults['an_constructie_maxim'] }},
-        prettify_enabled: false,
-        onChange: function (data) {
-            $('#an_constructie_minim').val(data.from);
-            $('#an_constructie_maxim').val(data.to);
-        }
-    });
+    @if ($type == null or $type == 'apartament' or $type == 'casa')
+        $('#an_constructie_range').ionRangeSlider({
+            type: 'double',
+            min: {{ $input_defaults['an_constructie_minim'] }},
+            max: {{ $input_defaults['an_constructie_maxim'] }},
+            step: 1,
+            from: {{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : $input_defaults['an_constructie_minim'] }},
+            to: {{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : $input_defaults['an_constructie_maxim'] }},
+            prettify_enabled: false,
+            onChange: function (data) {
+                $('#an_constructie_minim').val(data.from);
+                $('#an_constructie_maxim').val(data.to);
+            }
+        });
+    @endif
     $('#area_range').ionRangeSlider({
         type: 'double',
         min: {{ $input_defaults['suprafata_minima'] }},

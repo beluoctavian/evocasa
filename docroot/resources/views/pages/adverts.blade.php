@@ -52,6 +52,7 @@
                     <div class="col-xs-12">
                         <div id="search-box">
                             <form method="get" action="{{ URL::to('anunturi') }}">
+                                <input type="hidden" name = 'tip' value="{{$type}}">
                                 {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
                                 @if(!Auth::guest())
                                     <div class="row">
@@ -95,7 +96,7 @@
                                         </div>
                                     @endif
 
-                                    @if($type == null or $type == 'apartment')
+                                        @if($type == null or $type == 'apartment')
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Pret minim</label>
                                             <div class="input-group">
@@ -207,14 +208,14 @@
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Suprafata minima</label>
                                             <div class="input-group">
-                                                <input name="min_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_minima') ? Input::get('suprafata_minima') : '' }}">
+                                                <input name="min_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('min_total_area') ? Input::get('min_total_area') : '' }}">
                                                 <span class="input-group-addon">mp</span>
                                             </div>
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Suprafata maxima</label>
                                             <div class="input-group">
-                                                <input name="max_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_maxima') ? Input::get('suprafata_maxima') : '' }}">
+                                                <input name="max_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('max_total_area') ? Input::get('max_total_area') : '' }}">
                                                 <span class="input-group-addon">mp</span>
                                             </div>
                                         </div>
@@ -238,14 +239,14 @@
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Suprafata minima</label>
                                             <div class="input-group">
-                                                <input name="min_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_minima') ? Input::get('suprafata_minima') : '' }}">
+                                                <input name="min_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('min_total_area') ? Input::get('min_total_area') : '' }}">
                                                 <span class="input-group-addon">mp</span>
                                             </div>
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Suprafata maxima</label>
                                             <div class="input-group">
-                                                <input name="max_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_maxima') ? Input::get('suprafata_maxima') : '' }}">
+                                                <input name="max_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('max_total_area') ? Input::get('max_total_area') : '' }}">
                                                 <span class="input-group-addon">mp</span>
                                             </div>
                                         </div>
@@ -384,8 +385,8 @@
                                                 @endif
                                             </li>
                                             <li class="hidden-xs hidden-sm">
-                                                @if(!empty($entity['land_area']))
-                                                    Land area: <b>{{ $entity['land_area'] }}</b> mp
+                                                @if(!empty($entity['total_area']))
+                                                    Total area: <b>{{ $entity['total_area'] }}</b> mp
                                                 @endif
                                             </li>
                                             <li class="hidden-xs hidden-sm">

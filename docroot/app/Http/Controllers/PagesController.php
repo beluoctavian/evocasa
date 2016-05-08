@@ -3,6 +3,7 @@
 use App\Advert;
 use App\Apartment;
 use App\Area;
+use App\House;
 use App\Http\Requests;
 use App\Neighborhood;
 use App\StatusType;
@@ -250,7 +251,7 @@ class PagesController extends Controller {
         foreach ($results as $key => $item) {
             $results[$key] = AdvertController::getEntityDetails($item->id);
         }
-//        dd($results[0]);
+//        dd(Input::all());
 
         return view('pages.adverts')
             ->with('adverts',$results->appends(Input::except('page')))

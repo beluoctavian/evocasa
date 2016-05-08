@@ -110,11 +110,11 @@ class PagesController extends Controller {
             use($min_total_area, $max_total_area) {
                 if($min_total_area)
                 {
-                    $query->where('total_area', '>=', $min_total_area);
+                    $query->where('total_area', '>=', (int)$min_total_area);
                 }
                 if($max_total_area)
                 {
-                    $query->where('total_area', '<=', $max_total_area);
+                    $query->where('total_area', '<=', (int)$max_total_area);
                 }
             });
         }

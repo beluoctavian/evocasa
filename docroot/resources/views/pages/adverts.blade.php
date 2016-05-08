@@ -373,37 +373,40 @@
                                     <div class="details">
                                         <ul>
                                             <li>ID: <b>{{ $advert['code'] }}</b></li>
+                                            @if(!empty($entity['built_area']))
+                                                <li>
+                                                   Built area:<b>{{ $entity['built_area'] }} </b> mp
+                                                </li>
+                                            @endif
 
-                                            <li>
-                                                @if(!empty($entity['built_area']))
-                                                    {{ $entity['built_area'] }} mp
-                                                @endif
-                                            </li>
-                                            <li class="hidden-xs hidden-sm">
-                                                @if(!empty($entity['partitioning']))
+                                            @if(!empty($entity['partitioning']))
+                                                <li class="hidden-xs hidden-sm">
                                                     {{ $entity['partitioning'] }}
-                                                @endif
-                                            </li>
-                                            <li class="hidden-xs hidden-sm">
-                                                @if(!empty($entity['total_area']))
+                                                </li>
+                                            @endif
+
+                                            @if(!empty($entity['total_area']))
+                                                <li class="hidden-xs hidden-sm">
                                                     Total area: <b>{{ $entity['total_area'] }}</b> mp
-                                                @endif
-                                            </li>
-                                            <li class="hidden-xs hidden-sm">
-                                                @if(!empty($entity['street_opening']))
+                                                </li>
+                                            @endif
+
+                                            @if(!empty($entity['street_opening']))
+                                                <li class="hidden-xs hidden-sm">
                                                    Street opening:<b> {{ $entity['street_opening'] }}</b> n
-                                                @endif
-                                            </li>
-                                            <li class="hidden-xs hidden-sm">
-                                                @if(!empty($entity['floor']))
+                                                </li>
+                                            @endif
+                                            @if(!empty($entity['floor']))
+                                                <li class="hidden-xs hidden-sm">
                                                     Etaj {{ $entity['floor'] }}
-                                                @endif
-                                            </li>
-                                            <li class="last">
-                                                @if(!empty($entity['built_year']))
-                                                    An {{ $entity['built_year'] }}
-                                                @endif
-                                            </li>
+                                                </li>
+                                            @endif
+                                            @if(!empty($entity['built_year']))
+                                                <li class="hidden-xs hidden-sm">
+                                                    An: <b>{{ $entity['built_year'] }}</b>
+                                                </li>
+                                            @endif
+
                                         </ul>
                                     </div>
                                 </div>

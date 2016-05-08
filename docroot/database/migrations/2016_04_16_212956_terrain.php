@@ -15,10 +15,10 @@ class Terrain extends Migration {
 		Schema::create('terrain', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('total_area');
-			$table->integer('street_opening');
-			$table->integer('depth');
-			$table->integer('access_width');
+			$table->string('total_area');
+			$table->string('street_opening');
+			$table->string('depth');
+			$table->string('access_width');
 			$table->integer('advert_id')->unsigned();
 			$table->foreign('advert_id')
 				->references('id')

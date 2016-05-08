@@ -15,11 +15,11 @@ class House extends Migration {
 		Schema::create('house', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('land_area');
-			$table->integer('street_opening');
+			$table->string('land_area');
+			$table->string('street_opening');
 			$table->string('footprint');
-			$table->integer('total_area');
-			$table->integer('level_area');
+			$table->string('total_area');
+			$table->string('level_area');
 			$table->string('height');
 			$table->string('built_year');
 			$table->string('bathrooms');

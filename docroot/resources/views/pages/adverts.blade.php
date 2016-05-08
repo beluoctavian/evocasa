@@ -60,7 +60,6 @@
                     <div class="col-xs-12">
                         <div id="search-box">
                             <input type="hidden" name = 'tip' value="{{$type}}">
-                            {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
                             @if(!Auth::guest())
                                 <div class="row">
                                     <div class="form-group col-xs-12 col-sm-2">
@@ -393,8 +392,8 @@
         min: {{ $input_defaults['pret_minim'] }},
         max: {{ $input_defaults['pret_maxim'] }},
         step: 1000,
-        from: {{ Input::get('pret_minim') ? Input::get('pret_minim') : $input_defaults['pret_minim'] }},
-        to: {{ Input::get('pret_maxim') ? Input::get('pret_maxim') : $input_defaults['pret_maxim'] }},
+        from: {{ Input::get('pret_minim') || Input::get('pret_minim') === '0' ? Input::get('pret_minim') : $input_defaults['pret_minim'] }},
+        to: {{ Input::get('pret_maxim') || Input::get('pret_maxim') === '0' ? Input::get('pret_maxim') : $input_defaults['pret_maxim'] }},
         postfix: "&euro;",
         onChange: function (data) {
             $('#pret_minim').val(data.from);

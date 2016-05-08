@@ -1,5 +1,10 @@
 @extends('default')
 
+@section('in-head')
+    <link href="{{ URL::asset('library/ion-rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('library/ion-rangeslider/css/ion.rangeSlider.skinNice.css') }}" rel="stylesheet">
+@endsection
+
 @section('carousel')
         <!-- Carousel -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -158,8 +163,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div id="search-box">
-                            <form method="GET" action="{{ URL::to('search') }}">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <form method="GET" action="{{ URL::to('anunturi') }}">
                                 <div class="form-row">
                                     <div class="form-group col-xs-12">
                                         <label>ID anunt</label>
@@ -168,26 +172,20 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-xs-12">
-                                        <label>Pret minim</label>
-                                        <div class="input-group">
-                                            <input name="pret_minim" type="number" min="0" max="150000" step="1" class="form-control">
-                                            <span class="input-group-addon">&euro;</span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-xs-12">
-                                        <label>Pret maxim</label>
-                                        <div class="input-group">
-                                            <input name="pret_maxim" type="number" min="0" max="150000" step="1" class="form-control">
-                                            <span class="input-group-addon">&euro;</span>
+                                        <label for="price_range">Pret</label>
+                                        <input type="text" id="price_range" value="">
+                                        <div class="hidden">
+                                            <input name="pret_minim" id="pret_minim" type="hidden">
+                                            <input name="pret_maxim" id="pret_maxim" type="hidden">
                                         </div>
                                     </div>
                                     <div class="form-group col-xs-12">
                                         <label>Numar camere</label>
-                                        <select name="numar_camere" class="form-control">
-                                            <option value="">Indiferent</option>
-                                            @for($it = 0 ; $it <= 5 ; $it++)
-                                                <option value="{{ $it }}">{{ $it }}</option>
-                                            @endfor
+                                        <select multiple id="numar_camere" name="numar_camere[]" class="form-control">
+                                            <option value="1">garsoniera</option>
+                                            <option value="2">2 camere</option>
+                                            <option value="3">3 camere</option>
+                                            <option value="4">4+ camere</option>
                                         </select>
                                     </div>
                                 </div>
@@ -206,6 +204,25 @@
 @endsection
 
 @section('scripts')
-    <script>
-    </script>
+<script src="{{ URL::asset('library/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js') }}"></script>
+<script>
+    $('select').select2({
+        tags: true,
+        minimumResultsForSearch: Infinity,
+        placeholder: "Indiferent"
+    });
+    $('#price_range').ionRangeSlider({
+        type: 'double',
+        min: {{ $input_defaults['pret_minim'] }},
+        max: {{ $input_defaults['pret_maxim'] }},
+        step: 1000,
+        from: {{ Input::get('pret_minim') ? Input::get('pret_minim') : $input_defaults['pret_minim'] }},
+        to: {{ Input::get('pret_maxim') ? Input::get('pret_maxim') : $input_defaults['pret_maxim'] }},
+        postfix: "&euro;",
+        onChange: function (data) {
+            $('#pret_minim').val(data.from);
+            $('#pret_maxim').val(data.to);
+        }
+    });
+</script>
 @endsection

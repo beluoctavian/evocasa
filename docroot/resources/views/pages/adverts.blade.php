@@ -112,23 +112,23 @@
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Numar camere</label>
                                             <select multiple id="numar_camere" name="numar_camere[]" class="form-control">
-                                                <?php
-
-                                                    $numar_camere = Input::get('numar_camere') == null ? [] : Input::get('numar_camere');
-                                                    ?>
-                                                    <option value="1" {{ in_array(1,$numar_camere) ? 'selected' : '' }}>1</option>
-                                                    <option value="2" {{ in_array(2,$numar_camere) ? 'selected' : '' }}>2</option>
-                                                    <option value="3" {{ in_array(3,$numar_camere) ? 'selected' : '' }}>3</option>
-                                                    <option value="4" {{ in_array(4,$numar_camere) ? 'selected' : '' }}>4+</option>
+                                                <?php $numar_camere = Input::get('numar_camere') == null ? [] : Input::get('numar_camere'); ?>
+                                                <option value="1" {{ in_array(1,$numar_camere) ? 'selected' : '' }}>garsoniera</option>
+                                                <option value="2" {{ in_array(2,$numar_camere) ? 'selected' : '' }}>2 camere</option>
+                                                <option value="3" {{ in_array(3,$numar_camere) ? 'selected' : '' }}>3 camere</option>
+                                                <option value="4" {{ in_array(4,$numar_camere) ? 'selected' : '' }}>4+ camere</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Etaj minim</label>
-                                            <input name="etaj_minim" type="number" class="form-control" value="{{ Input::exists('etaj_minim') ? Input::get('etaj_minim') : '' }}">
-                                        </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Etaj maxim</label>
-                                            <input name="etaj_maxim" type="number" class="form-control" value="{{ Input::exists('etaj_maxim') ? Input::get('etaj_maxim') : '' }}">
+                                        <div class="form-group col-xs-6 col-sm-2">
+                                            <label for="etaj">Etaj</label>
+                                            <select multiple id="etaj" name="etaj[]" class="form-control">
+                                                <?php $etaj = Input::get('etaj') == null ? [] : Input::get('etaj'); ?>
+                                                <option value="demisol" {{ in_array('demisol', $etaj) ? 'selected' : '' }}>Demisol</option>
+                                                <option value="parter" {{ in_array('parter', $etaj) ? 'selected' : '' }}>Parter</option>
+                                                @for ($i = 1; $i <= 15; $i++)
+                                                    <option value="{{ $i }}" {{ in_array($i, $etaj) ? 'selected' : '' }}>Etaj {{ $i }}</option>
+                                                @endfor
+                                            </select>
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Suprafata minima</label>
@@ -171,10 +171,10 @@
 
                                                 $numar_camere = Input::get('numar_camere') == null ? [] : Input::get('numar_camere');
                                                 ?>
-                                                <option value="1" {{ in_array(1,$numar_camere) ? 'selected' : '' }}>1</option>
-                                                <option value="2" {{ in_array(2,$numar_camere) ? 'selected' : '' }}>2</option>
-                                                <option value="3" {{ in_array(3,$numar_camere) ? 'selected' : '' }}>3</option>
-                                                <option value="4" {{ in_array(4,$numar_camere) ? 'selected' : '' }}>4+</option>
+                                                <option value="1" {{ in_array(1,$numar_camere) ? 'selected' : '' }}>garsoniera</option>
+                                                <option value="2" {{ in_array(2,$numar_camere) ? 'selected' : '' }}>2 camere</option>
+                                                <option value="3" {{ in_array(3,$numar_camere) ? 'selected' : '' }}>3 camere</option>
+                                                <option value="4" {{ in_array(4,$numar_camere) ? 'selected' : '' }}>4+ camere</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">

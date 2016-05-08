@@ -719,6 +719,7 @@
 </script>
 <script type="text/javascript">
     $('select', '#status-area').select2({
+        minimumResultsForSearch: Infinity,
         placeholder: "Alegeti un status"
     });
     $(".status-item").tooltip({ trigger: "hover" });

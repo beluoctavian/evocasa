@@ -42,6 +42,16 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="container-fluid">
+            @if(Session::has('success'))
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alert-success">
+                            <span>Ati editat anuntul cu succes!</span>
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
+            @endif
             @if (!empty($advert['id']))
                 <div class="row margin-bottom" id="status-area">
                     <div class="col-xs-12">

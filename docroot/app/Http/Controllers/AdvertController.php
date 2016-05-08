@@ -270,7 +270,7 @@ class AdvertController extends Controller {
   {
     $type = $request->get('entity_type');
     $this->createOrEditEntity($request, $type, $id);
-    return $this->getEditEntity($id);
+    return redirect()->back()->with('success', 1);
   }
 
   public function postApartment(Request $request)

@@ -175,10 +175,13 @@
                                         <div class="form-group col-xs-6 col-sm-2">
                                             <label>Compartimentare</label>
                                             <div>
-                                                <select name="compartimentare" class="form-control">
+                                                <select multiple name="compartimentare[]" id="partitioning" class="form-control">
                                                     <option value="">Indiferent</option>
+                                                    <?php
+                                                        $input_partitioning = Input::get('compartimentare') ? Input::get('compartimentare') : [];
+                                                    ?>
                                                     @foreach($partitions as $partition)
-                                                        <option value="{{ $partition }}" {{ Input::get('compartimentare') == $partition ? 'selected' : '' }}>{{ $partition }}</option>
+                                                        <option value="{{ $partition }}" {{ in_array($partition,$input_partitioning) ? 'selected' : '' }}>{{ $partition }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -357,6 +360,10 @@
         placeholder: "Indiferent"
     });
     $('#neighborhood').select2({
+        tags: true,
+        placeholder: "Indiferent"
+    });
+    $('#partitioning').select2({
         tags: true,
         placeholder: "Indiferent"
     });

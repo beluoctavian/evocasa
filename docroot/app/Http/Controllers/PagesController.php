@@ -86,7 +86,7 @@ class PagesController extends Controller {
         $floor[] = Input::get('etaj');
         $min_surface = Input::get('suprafata_minima');
         $max_surface = Input::get('suprafata_maxima');
-        $partitioning = Input::get('compartimentare');
+        $partitioning[] = Input::get('compartimentare');
         $neighborhood[] = Input::get('cartier');
         $phone = Input::get('phone');
         $area[] = Input::get('zona');
@@ -181,7 +181,7 @@ class PagesController extends Controller {
                     }
                     if($partitioning)
                     {
-                        $query->where('partitioning', $partitioning);
+                        $query->whereIn('partitioning', $partitioning[0]);
                     }
                 });
 

@@ -18,6 +18,35 @@ use Illuminate\Support\Collection;
 
 class PagesController extends Controller {
 
+    private function getInputDefaults($entity_type = 'apartament')
+    {
+        $input_defaults = [
+          'pret_minim' => \DB::table('advert')->min('price'),
+          'pret_maxim' => \DB::table('advert')->max('price'),
+          'an_constructie_minim' => \DB::table('apartment')->where('built_year', '>', '0')->min('built_year'),
+          'an_constructie_maxim' => \DB::table('apartment')->max('built_year'),
+        ];
+        switch($entity_type) {
+            case 'casa':
+                $input_defaults['suprafata_minima'] = \DB::table('house')->min('land_area');
+                $input_defaults['suprafata_maxima'] = \DB::table('house')->max('land_area');
+                break;
+            case 'teren':
+                $input_defaults['suprafata_minima'] = \DB::table('terrain')->min('total_area');
+                $input_defaults['suprafata_maxima'] = \DB::table('terrain')->max('total_area');
+                break;
+            default:
+                $input_defaults['suprafata_minima'] = \DB::table('apartment')->min('built_area');
+                $input_defaults['suprafata_maxima'] = \DB::table('apartment')->max('built_area');
+        }
+        foreach ($input_defaults as $key => $value) {
+            if ($value == '') {
+                $input_defaults[$key] = '0';
+            }
+        }
+        return $input_defaults;
+    }
+
 	public function index(Request $request)
     {
         $recommended_id = StatusType::where('type', 'recomandat')->first()->id;
@@ -37,7 +66,9 @@ class PagesController extends Controller {
           'query' => $request->query(),
         ]);
 
-        return view('pages.index')->with('items', $paginatedSearchResults);
+        return view('pages.index')
+          ->with('items', $paginatedSearchResults)
+          ->with('input_defaults', $this->getInputDefaults());
     }
 
     public function detalii($id)
@@ -218,12 +249,11 @@ class PagesController extends Controller {
         }
 
         
-        if($min_price)
+        if($min_price !== NULL)
         {
             $adverts->where('price', '>=', $min_price);
         }
-
-        if($max_price)
+        if($max_price !== NULL)
         {
             $adverts->where('price', '<=', $max_price);
         }
@@ -302,37 +332,12 @@ class PagesController extends Controller {
             $results[$key] = AdvertController::getEntityDetails($item->id);
         }
 
-        $input_defaults = [
-            'pret_minim' => \DB::table('advert')->min('price'),
-            'pret_maxim' => \DB::table('advert')->max('price'),
-            'an_constructie_minim' => \DB::table('apartment')->where('built_year', '>', '0')->min('built_year'),
-            'an_constructie_maxim' => \DB::table('apartment')->max('built_year'),
-        ];
-        switch($entity_type) {
-            case 'casa':
-                $input_defaults['suprafata_minima'] = \DB::table('house')->min('land_area');
-                $input_defaults['suprafata_maxima'] = \DB::table('house')->max('land_area');
-                break;
-            case 'teren':
-                $input_defaults['suprafata_minima'] = \DB::table('terrain')->min('total_area');
-                $input_defaults['suprafata_maxima'] = \DB::table('terrain')->max('total_area');
-                break;
-            default:
-                $input_defaults['suprafata_minima'] = \DB::table('apartment')->min('built_area');
-                $input_defaults['suprafata_maxima'] = \DB::table('apartment')->max('built_area');
-        }
-        foreach ($input_defaults as $key => $value) {
-            if ($value == '') {
-                $input_defaults[$key] = '0';
-            }
-        }
-
         return view('pages.adverts')
             ->with('adverts',$results->appends(Input::except('page')))
             ->with('partitions', $partitions)
             ->with('neighborhoods', $neighborhoods)
             ->with('areas', $areas)
             ->with('type', $entity_type)
-            ->with('input_defaults', $input_defaults);
+            ->with('input_defaults', $this->getInputDefaults($entity_type));
     }
 }

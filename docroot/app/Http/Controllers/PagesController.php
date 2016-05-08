@@ -103,7 +103,7 @@ class PagesController extends Controller {
 
         $entity_type = Input::get('tip');
 
-        if($entity_type == 'terrain'){
+        if($entity_type == 'teren'){
 
             $adverts = Advert::whereHas('terrain', function($query)
             use($min_total_area, $max_total_area) {
@@ -118,7 +118,7 @@ class PagesController extends Controller {
             });
         }
         else
-            if($entity_type == 'house')
+            if($entity_type == 'casa')
             {
                 $adverts = Advert::whereHas('house', function($query)
                 use($min_year, $max_year, $max_total_area, $min_total_area) {

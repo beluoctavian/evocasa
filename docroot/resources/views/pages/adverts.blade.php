@@ -304,7 +304,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
                         @foreach($adverts as $advert)
-                            <?php $apartment = $advert['entity'];
+                            <?php $entity = $advert['entity'];
                                 $advert = $advert['advert'];
                             ?>
                             <div class="advert-item" id="{{ 'advert-item-no-' . $advert['id'] }}">
@@ -374,23 +374,23 @@
                                             <li>ID: <b>{{ $advert['code'] }}</b></li>
 
                                             <li>
-                                                @if($apartment['built_area'])
-                                                    {{ $apartment['built_area'] }} mp
+                                                @if($entity['built_area'])
+                                                    {{ $entity['built_area'] }} mp
                                                 @endif
                                             </li>
                                             <li class="hidden-xs hidden-sm">
-                                                @if($apartment['partitioning'])
-                                                    {{ $apartment['partitioning'] }}
+                                                @if($entity['partitioning'])
+                                                    {{ $entity['partitioning'] }}
                                                 @endif
                                             </li>
                                             <li class="hidden-xs hidden-sm">
-                                                @if($apartment['floor'])
-                                                    Etaj {{ $apartment['floor'] }}
+                                                @if($entity['floor'])
+                                                    Etaj {{ $entity['floor'] }}
                                                 @endif
                                             </li>
                                             <li class="last">
-                                                @if($apartment['built_year'])
-                                                    An {{ $apartment['built_year'] }}
+                                                @if($entity['built_year'])
+                                                    An {{ $entity['built_year'] }}
                                                 @endif
                                             </li>
                                         </ul>

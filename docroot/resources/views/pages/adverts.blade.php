@@ -103,6 +103,16 @@
                                         </div>
                                     </div>
                                     @if($type == null or $type == 'apartment')
+                                        <div class="price">
+                                            <div class="col-xs-12">
+                                                <label for="price_range">An constructie</label>
+                                                <input type="text" id="an_constructie_range" value="">
+                                            </div>
+                                            <div class="hidden">
+                                                <input name="pret_minim" id="pret_minim" type="text" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
+                                                <input name="pret_maxim" id="pret_maxim" type="text" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
+                                            </div>
+                                        </div>
                                         <div class="form-group col-xs-12 col-sm-4 col-md-2">
                                             <label>An constructie minim</label>
                                             <input name="an_constructie_minim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">

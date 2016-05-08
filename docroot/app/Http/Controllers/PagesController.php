@@ -142,6 +142,7 @@ class PagesController extends Controller {
                 });
             }
             else{
+
                 $adverts = Advert::whereHas('apartment', function($query)
                 use($min_year, $max_year,$floor , $min_surface, $max_surface, $partitioning) {
                     if($min_year)
@@ -170,6 +171,7 @@ class PagesController extends Controller {
                                 $etaj .= "'-1' ) ";
 
                         $query->whereRaw('substring_index(apartment.floor, \'/\', 1)  in '. $etaj);
+
                     }
                     if($min_surface)
                     {
@@ -179,7 +181,7 @@ class PagesController extends Controller {
                     {
                         $query->where('built_area', '<=', $max_surface);
                     }
-                    if($partitioning)
+                    if($partitioning[0])
                     {
                         $query->whereIn('partitioning', $partitioning[0]);
                     }

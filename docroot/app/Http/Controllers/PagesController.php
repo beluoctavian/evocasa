@@ -316,7 +316,20 @@ class PagesController extends Controller {
                 if($flag == true)
                     $results[] = $advert->id;
             }
-            $results  = Advert::whereIn('id', $results)->paginate(10);
+            if($sort_after)
+            {
+                $criteriul = explode('_', $sort_after)[0];
+                if($criteriul == 'date')
+                {
+                    $criteriul = 'updated_at';
+                }
+                $ordinea = explode('_', $sort_after)[1];
+                $results  = Advert::whereIn('id', $results)->orderBy($criteriul, $ordinea)->paginate(10);
+            }
+            else
+            {
+                $results  = Advert::whereIn('id', $results)->paginate(10);
+            }
         }
         else
         {

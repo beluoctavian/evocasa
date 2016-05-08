@@ -33,7 +33,7 @@
                 @endif
                     <div class="row">
                         <div class="col-xs-12">
-                            <a href="/anunturi?tip=apartment" class="add-advert-type">
+                            <a href="/anunturi?tip=apartament" class="add-advert-type">
                                 <span class="glyphicon glyphicon-th"></span>
                                 <span>Apartament</span>
                             </a>
@@ -100,7 +100,7 @@
                                             <input name="pret_maxim" id="pret_maxim" type="hidden" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
                                         </div>
                                     </div>
-                                    @if($type == null or $type == 'apartment')
+                                    @if($type == null or $type == 'apartament')
                                         <div class="form-group col-xs-12 col-sm-2">
                                             <label for="an_constructie_range">An constructie</label>
                                             <input type="text" id="an_constructie_range" value="">

@@ -102,7 +102,7 @@ class PagesController extends Controller {
 
         $status = Input::get('status');
 
-        $entity_type = Input::get('tip') ?: 'apartment';
+        $entity_type = Input::get('tip') ?: 'apartament';
 
         if($entity_type == 'teren'){
 

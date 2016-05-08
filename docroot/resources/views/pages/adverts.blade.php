@@ -393,7 +393,7 @@
 
                                             @if(!empty($entity['street_opening']))
                                                 <li class="hidden-xs hidden-sm">
-                                                   Street opening:<b> {{ $entity['street_opening'] }}</b> n
+                                                   Street opening:<b> {{ $entity['street_opening'] }}</b> m
                                                 </li>
                                             @endif
                                             @if(!empty($entity['floor']))

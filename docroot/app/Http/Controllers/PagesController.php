@@ -23,13 +23,13 @@ class PagesController extends Controller {
         $input_defaults = [
           'pret_minim' => \DB::table('advert')->min('price'),
           'pret_maxim' => \DB::table('advert')->max('price'),
-          'an_constructie_minim' => \DB::table('apartment')->where('built_year', '>', '0')->min('built_year'),
-          'an_constructie_maxim' => \DB::table('apartment')->max('built_year'),
         ];
         switch($entity_type) {
             case 'casa':
                 $input_defaults['suprafata_minima'] = \DB::table('house')->min('land_area');
                 $input_defaults['suprafata_maxima'] = \DB::table('house')->max('land_area');
+                $input_defaults['an_constructie_minim'] = \DB::table('house')->where('built_year', '>', '0')->min('built_year');
+                $input_defaults['an_constructie_maxim'] = \DB::table('house')->max('built_year');
                 break;
             case 'teren':
                 $input_defaults['suprafata_minima'] = \DB::table('terrain')->min('total_area');
@@ -38,6 +38,8 @@ class PagesController extends Controller {
             default:
                 $input_defaults['suprafata_minima'] = \DB::table('apartment')->min('built_area');
                 $input_defaults['suprafata_maxima'] = \DB::table('apartment')->max('built_area');
+                $input_defaults['an_constructie_minim'] = \DB::table('apartment')->where('built_year', '>', '0')->min('built_year');
+                $input_defaults['an_constructie_maxim'] = \DB::table('apartment')->max('built_year');
         }
         foreach ($input_defaults as $key => $value) {
             if ($value == '') {

@@ -70,8 +70,10 @@ foreach($proprietars as $proprietar) {
         if($imobil != null)
         {
             $apartment->advert_id = $advert->id;
-            $apartment->usable_area = zero($imobil->su);
-            $apartment->built_area = zero($imobil->sc);
+            $su = (int) zero($imobil->su) == zero($imobil->su) ? (int) zero($imobil->su) : zero($imobil->su);
+            $sc = (int) zero($imobil->sc) == zero($imobil->sc) ? (int) zero($imobil->sc) : zero($imobil->sc);
+            $apartment->usable_area = $su;
+            $apartment->built_area = $sc;
             $apartment->partitioning = ucwords(strtolower(zero($imobil->compartimentare)));
             $apartment->comfort = zero($imobil->confort);
             $apartment->floor = zero($imobil->etaj);

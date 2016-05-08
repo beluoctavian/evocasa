@@ -371,6 +371,11 @@
         tags: true,
         placeholder: "Indiferent"
     });
+    $('select').select2({
+        tags: true,
+        minimumResultsForSearch: Infinity,
+        placeholder: "Indiferent"
+    });
     $('#sortare').select2({
         templateResult: function (icon) {
             var originalOption = icon.element;

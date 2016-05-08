@@ -214,8 +214,11 @@
                                         <div>
                                             <select multiple id="neighborhood" name="cartier[]" class="form-control">
                                                 <option value="">Indiferent</option>
-                                                @foreach($neighborhoods as $neighborhood)
-                                                    <option value="{{ $neighborhood->name }}" {{ Input::get('cartier') == $neighborhood->name ? 'selected' : '' }}>{{ $neighborhood->name }}</option>
+                                                <?php
+                                                $cartiere = Input::get('cartier') == null ? [] : Input::get('cartier');
+                                                ?>
+                                            @foreach($neighborhoods as $neighborhood)
+                                                    <option value="{{ $neighborhood->name }}" {{ in_array($neighborhood->name,$cartiere) ? 'selected' : '' }}>{{ $neighborhood->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -225,8 +228,11 @@
                                         <div>
                                             <select multiple id="area" name="zona[]" class="form-control">
                                                 <option value="">Indiferent</option>
+                                                <?php
+                                                $zone = Input::get('zona') == null ? [] : Input::get('zona');
+                                                ?>
                                                 @foreach($areas as $area)
-                                                    <option value="{{ $area->name }}" {{ Input::get('zona') == $area->name ? 'selected' : '' }}>{{ $area->name }}</option>
+                                                    <option value="{{ $area->name }}" {{ in_array($area->name, $zone) ? 'selected' : '' }}>{{ $area->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

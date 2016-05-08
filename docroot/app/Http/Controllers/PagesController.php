@@ -88,9 +88,9 @@ class PagesController extends Controller {
         $min_surface = Input::get('suprafata_minima');
         $max_surface = Input::get('suprafata_maxima');
         $partitioning = Input::get('compartimentare');
-        $neighborhood = Input::get('cartier');
+        $neighborhood[] = Input::get('cartier');
         $phone = Input::get('phone');
-        $area = Input::get('zona');
+        $area[] = Input::get('zona');
         $sort_after = Input::get('sortare');
 
         // house properties
@@ -185,19 +185,19 @@ class PagesController extends Controller {
         };
 
 
-        if($neighborhood)
-        {
-            $adverts->whereHas('neighborhood', function($query) use ($neighborhood) {
-                $query->where('name', 'like', '%'.$neighborhood.'%');
-            });
-        }
-
-        if($area)
-        {
-            $adverts->whereHas('area', function ($query) use ($area) {
-                $query->where('name', 'like', '%'.$area.'%');
-            });
-        }
+//        if($neighborhood)
+//        {
+//            $adverts->whereHas('neighborhood', function($query) use ($neighborhood) {
+//                $query->where('name', 'like', '%'.$neighborhood.'%');
+//            });
+//        }
+//
+//        if($area)
+//        {
+//            $adverts->whereHas('area', function ($query) use ($area) {
+//                $query->where('name', 'like', '%'.$area.'%');
+//            });
+//        }
 
         
         if($min_price)

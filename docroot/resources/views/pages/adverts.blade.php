@@ -131,20 +131,6 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Suprafata minima</label>
-                                            <div class="input-group">
-                                                <input name="suprafata_minima" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_minima') ? Input::get('suprafata_minima') : '' }}">
-                                                <span class="input-group-addon">mp</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Suprafata maxima</label>
-                                            <div class="input-group">
-                                                <input name="suprafata_maxima" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('suprafata_maxima') ? Input::get('suprafata_maxima') : '' }}">
-                                                <span class="input-group-addon">mp</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Compartimentare</label>
                                             <div>
                                                 <select name="compartimentare" class="form-control">
@@ -156,13 +142,13 @@
                                             </div>
                                         </div>
                                     @elseif($type == 'casa')
-                                        <div class="form-group col-xs-12 col-sm-4 col-md-2">
-                                            <label>An constructie minim</label>
-                                            <input name="an_constructie_minim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">
-                                        </div>
-                                        <div class="form-group col-xs-12 col-sm-4 col-md-2">
-                                            <label>An constructie maxim</label>
-                                            <input name="an_constructie_maxim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : '' }}">
+                                        <div class="form-group col-xs-12 col-sm-2">
+                                            <label for="an_constructie_range">An constructie</label>
+                                            <input type="text" id="an_constructie_range" value="">
+                                            <div class="hidden">
+                                                <input name="an_constructie_minim" id="an_constructie_minim" type="hidden" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">
+                                                <input name="an_constructie_maxim" id="an_constructie_maxim" type="hidden" value="{{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : '' }}">
+                                            </div>
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Numar camere</label>
@@ -177,36 +163,17 @@
                                                 <option value="4" {{ in_array(4,$numar_camere) ? 'selected' : '' }}>4+ camere</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Suprafata minima</label>
-                                            <div class="input-group">
-                                                <input name="min_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('min_total_area') ? Input::get('min_total_area') : '' }}">
-                                                <span class="input-group-addon">mp</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Suprafata maxima</label>
-                                            <div class="input-group">
-                                                <input name="max_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('max_total_area') ? Input::get('max_total_area') : '' }}">
-                                                <span class="input-group-addon">mp</span>
-                                            </div>
-                                        </div>
                                     @else
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Suprafata minima</label>
-                                            <div class="input-group">
-                                                <input name="min_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('min_total_area') ? Input::get('min_total_area') : '' }}">
-                                                <span class="input-group-addon">mp</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Suprafata maxima</label>
-                                            <div class="input-group">
-                                                <input name="max_total_area" type="number" min="0" max="200" step="1" class="form-control" value="{{ Input::exists('max_total_area') ? Input::get('max_total_area') : '' }}">
-                                                <span class="input-group-addon">mp</span>
-                                            </div>
-                                        </div>
                                     @endif
+
+                                    <div class="form-group col-xs-12 col-sm-2">
+                                        <label for="area_range">Suprafata</label>
+                                        <input type="text" id="area_range" value="">
+                                        <div class="hidden">
+                                            <input name="suprafata_minima" id="suprafata_minima" type="hidden" value="{{ Input::get('suprafata_minima') ? Input::get('suprafata_minima') : '' }}">
+                                            <input name="suprafata_maxima" id="suprafata_maxima" type="hidden" value="{{ Input::get('suprafata_maxima') ? Input::get('suprafata_maxima') : '' }}">
+                                        </div>
+                                    </div>
                                     <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                         <label>Cartier</label>
                                         <div>
@@ -336,7 +303,7 @@
                                             <li>ID: <b>{{ $advert['code'] }}</b></li>
                                             @if(!empty($entity['built_area']))
                                                 <li>
-                                                   Built area:<b>{{ $entity['built_area'] }} </b> mp
+                                                   {{ $entity['built_area'] }} mp
                                                 </li>
                                             @endif
 
@@ -429,6 +396,20 @@
         onChange: function (data) {
             $('#an_constructie_minim').val(data.from);
             $('#an_constructie_maxim').val(data.to);
+        }
+    });
+    $('#area_range').ionRangeSlider({
+        type: 'double',
+        min: {{ $input_defaults['suprafata_minima'] }},
+        max: {{ $input_defaults['suprafata_maxima'] }},
+        step: 1,
+        from: {{ Input::get('suprafata_minima') ? Input::get('suprafata_minima') : $input_defaults['suprafata_minima'] }},
+        to: {{ Input::get('suprafata_maxima') ? Input::get('suprafata_maxima') : $input_defaults['suprafata_maxima'] }},
+        prettify_enabled: false,
+        postfix: "mp",
+        onChange: function (data) {
+            $('#suprafata_minima').val(data.from);
+            $('#suprafata_maxima').val(data.to);
         }
     });
 </script>

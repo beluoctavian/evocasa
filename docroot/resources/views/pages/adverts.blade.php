@@ -441,5 +441,8 @@
         }
     });
     $(".status-item").tooltip({ trigger: "hover" });
+
+    // todo:get child and save to database if not exist
+//    $('#area').on("select2:select", function (e) {  });
 </script>
 @endsection

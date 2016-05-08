@@ -1,5 +1,10 @@
 @extends('default')
 
+@section('in-head')
+    <link href="{{ URL::asset('library/ion-rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('library/ion-rangeslider/css/ion.rangeSlider.skinNice.css') }}" rel="stylesheet">
+@endsection
+
 @section('page-header')
     <div class="page-header">
         <div class="container">
@@ -87,18 +92,14 @@
                                             <input name="cuvinte_cheie" type="text" class="form-control" value="{{ Input::get('cuvinte_cheie') ? Input::get('cuvinte_cheie') : '' }}">
                                         </div>
                                     </div>
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                        <label>Pret minim</label>
-                                        <div class="input-group">
-                                            <input name="pret_minim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
-                                            <span class="input-group-addon">&euro;</span>
+                                    <div class="price">
+                                        <div class="col-xs-12">
+                                            <label for="price_range">Pret</label>
+                                            <input type="text" id="price_range" value="">
                                         </div>
-                                    </div>
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                        <label>Pret maxim</label>
-                                        <div class="input-group">
-                                            <input name="pret_maxim" type="number" min="0" max="1500000" step="1" class="form-control" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
-                                            <span class="input-group-addon">&euro;</span>
+                                        <div class="hidden">
+                                            <input name="pret_minim" id="pret_minim" type="text" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
+                                            <input name="pret_maxim" id="pret_maxim" type="text" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
                                         </div>
                                     </div>
                                     @if($type == null or $type == 'apartment')
@@ -386,10 +387,24 @@
 @endsection
 
 @section('scripts')
+<script src="{{ URL::asset('library/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js') }}"></script>
 <script type="text/javascript">
     $('#numar_camere').select2({
         tags: true,
         placeholder: "Indiferent"
+    });
+    $('#price_range').ionRangeSlider({
+        type: 'double',
+        min: 1000,
+        max: 200000,
+        step: 1000,
+        from: 1000,
+        to: 50000,
+        postfix: "&euro;",
+        onChange: function (data) {
+            $('#pret_minim').val(data.from);
+            $('#pret_maxim').val(data.to);
+        },
     });
 </script>
 @endsection

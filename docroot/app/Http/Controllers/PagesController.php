@@ -83,8 +83,7 @@ class PagesController extends Controller {
         $min_year = Input::get('an_constructie_minim');
         $max_year = Input::get('an_constructie_maxim');
         $no_rooms[] = Input::get('numar_camere');
-        $min_floor = Input::get('etaj_minim');
-        $max_floor = Input::get('etaj_maxim');
+        $floor[] = Input::get('etaj');
         $min_surface = Input::get('suprafata_minima');
         $max_surface = Input::get('suprafata_maxima');
         $partitioning = Input::get('compartimentare');
@@ -144,7 +143,7 @@ class PagesController extends Controller {
             }
             else{
                 $adverts = Advert::whereHas('apartment', function($query)
-                use($min_year, $max_year, $min_floor, $max_floor, $min_surface, $max_surface, $partitioning) {
+                use($min_year, $max_year,$floor , $min_surface, $max_surface, $partitioning) {
                     if($min_year)
                     {
                         $query->where('built_year', '>=', $min_year);
@@ -153,13 +152,24 @@ class PagesController extends Controller {
                     {
                         $query->where('built_year', '<=', $max_year);
                     }
-                    if($max_floor)
+                    if($floor[0])
                     {
-                        $query->where('floor', '<=', substr($max_floor,0,1));
-                    }
-                    if($min_floor)
-                    {
-                        $query->where('floor', '>=', substr($min_floor,0,1));
+                        $etaj = "( ";
+                        foreach($floor[0] as $et)
+                            if($et == 'parter' or $et == 'demisol')
+                                continue;
+                        else
+                            $etaj .= $et . ', ';
+
+                        if(in_array('parter', $floor[0]))
+                            $etaj .= "'P' ) ";
+                        else
+                            if(in_array('parter', $floor[0]))
+                                $etaj .= "D' ) ";
+                            else
+                                $etaj .= "'-1' ) ";
+
+                        $query->whereRaw('substring_index(apartment.floor, \'/\', 1)  in '. $etaj);
                     }
                     if($min_surface)
                     {
@@ -213,8 +223,9 @@ class PagesController extends Controller {
         {
             $adverts->where('title', 'like', '%'.$key_words.'%');
         }
-        if($entity_type == 'apartment' or $entity_type == 'casa') {
-            if (count($no_rooms[0]) > 0) {
+
+        if($entity_type == 'apartament' or $entity_type == 'casa') {
+            if (count($no_rooms[0]  ) > 0) {
                 if (in_array(4, $no_rooms[0])) {
                     for ($value = 5; $value <= 20; $value++)
                         $no_rooms[] = $value;

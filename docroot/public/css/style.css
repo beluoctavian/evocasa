@@ -620,3 +620,24 @@ footer {
 .status-item:hover {
     background-color: #efefef;
 }
+.status-item form {
+    float: left;
+    margin-right: 5px;
+}
+.status-item form button {
+    display: inline-block;
+    border: none;
+    color: RED;
+    padding: 0;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 20px;
+    height: 20px;
+    background-color: #f8f8f8;
+}
+.status-item form button:hover {
+    color: #e30000;
+}
+.status-item:hover form button {
+    background-color: #efefef;
+}

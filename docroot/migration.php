@@ -35,6 +35,8 @@ foreach($proprietars as $proprietar) {
         $advert->price = $anunt->pret;
         $advert->old_price = $anunt->pret_vechi;
         $advert->description = $anunt->descriere;
+        $advert->created_at = $anunt->created_at;
+        $advert->updated_at = $anunt->updated_at;
         $anunt->cartier = ucwords(strtolower($anunt->cartier));
         $anunt->zona = ucwords(strtolower($anunt->zona));
         $neighborhood = Neighborhood::where('name', $anunt->cartier)->first();

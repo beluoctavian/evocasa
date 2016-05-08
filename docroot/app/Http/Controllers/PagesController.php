@@ -20,9 +20,10 @@ class PagesController extends Controller {
 
     private function getInputDefaults($entity_type = 'apartament')
     {
+        $db_type = $entity_type == 'apartament' ? 'apartment' : ($entity_type == 'casa' ? 'house' : 'terrain');
         $input_defaults = [
-          'pret_minim' => \DB::table('advert')->min('price'),
-          'pret_maxim' => \DB::table('advert')->max('price'),
+          'pret_minim' => \DB::table('advert')->where('type', $db_type)->min('price'),
+          'pret_maxim' => \DB::table('advert')->where('type', $db_type)->max('price'),
         ];
         switch($entity_type) {
             case 'casa':

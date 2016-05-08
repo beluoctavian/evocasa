@@ -45,7 +45,7 @@ body {
 .pagination li a, .pagination li a:hover {
     color: #f0b70f;
 }
-.pagination li.active a, .pagination li.active a:hover {
+.pagination li.active span, .pagination li.active span:hover {
     background-color: #f0b70f;
     border-color: #f0b70f;
 }

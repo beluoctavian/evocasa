@@ -9,6 +9,7 @@ use App\Neighborhood;
 use App\StatusType;
 use App\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Input;
 use File;
 use Illuminate\Support\Facades\DB;
@@ -100,6 +101,11 @@ class PagesController extends Controller {
         //terrain properties + total area
 
         $status = Input::get('status');
+        if(Auth::guest())
+        {
+            $status = 'activ';
+
+        }
 
         $entity_type = Input::get('tip') ?: 'apartament';
 

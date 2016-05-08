@@ -73,9 +73,12 @@
                                         <label>Stare</label>
                                         <div>
                                             <select name="status" class="form-control">
+                                                <?php
+                                                  $status = Input::get('status') ? Input::get('status') : 'activ'
+                                                ?>
                                                 <option value="any">Oricare</option>
-                                                <option value="activ" {{ Input::get('status') == 'activ' ? 'selected' : '' }}>Activ</option>
-                                                <option value="inactiv" {{ Input::get('status') == 'inactiv' ? 'selected' : '' }}>Inactiv</option>
+                                                <option value="activ" {{ $status == 'activ' ? 'selected' : '' }}>Activ</option>
+                                                <option value="inactiv" {{ $status == 'inactiv' ? 'selected' : '' }}>Inactiv</option>
                                             </select>
                                         </div>
                                     </div>

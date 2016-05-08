@@ -80,7 +80,7 @@
                                     </div>
                                 @endif
                                 <div class="row">
-                                    <div class="form-group col-xs-12 col-sm-2">
+                                    <div class="form-group col-xs-6 col-sm-2">
                                         <label>ID anunt</label>
                                         <div>
                                             <input name="id_anunt" type="text" class="form-control" value="{{ Input::get('id_anunt') ? Input::get('id_anunt') : '' }}">
@@ -100,8 +100,16 @@
                                             <input name="pret_maxim" id="pret_maxim" type="hidden" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
                                         </div>
                                     </div>
-                                    @if($type == null or $type == 'apartament')
-                                        <div class="form-group col-xs-12 col-sm-2">
+                                    <div class="form-group col-xs-6 col-sm-2">
+                                        <label for="area_range">Suprafata</label>
+                                        <input type="text" id="area_range" value="">
+                                        <div class="hidden">
+                                            <input name="suprafata_minima" id="suprafata_minima" type="hidden" value="{{ Input::get('suprafata_minima') ? Input::get('suprafata_minima') : '' }}">
+                                            <input name="suprafata_maxima" id="suprafata_maxima" type="hidden" value="{{ Input::get('suprafata_maxima') ? Input::get('suprafata_maxima') : '' }}">
+                                        </div>
+                                    </div>
+                                    @if ($type == null or $type == 'apartament' or $type == 'casa')
+                                        <div class="form-group col-xs-6 col-sm-2">
                                             <label for="an_constructie_range">An constructie</label>
                                             <input type="text" id="an_constructie_range" value="">
                                             <div class="hidden">
@@ -109,7 +117,7 @@
                                                 <input name="an_constructie_maxim" id="an_constructie_maxim" type="hidden" value="{{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : '' }}">
                                             </div>
                                         </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                        <div class="form-group col-xs-6 col-sm-2">
                                             <label>Numar camere</label>
                                             <select multiple id="numar_camere" name="numar_camere[]" class="form-control">
                                                 <?php $numar_camere = Input::get('numar_camere') == null ? [] : Input::get('numar_camere'); ?>
@@ -119,62 +127,32 @@
                                                 <option value="4" {{ in_array(4,$numar_camere) ? 'selected' : '' }}>4+ camere</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-xs-6 col-sm-2">
-                                            <label for="etaj">Etaj</label>
-                                            <select multiple id="etaj" name="etaj[]" class="form-control">
-                                                <?php $etaj = Input::get('etaj') == null ? [] : Input::get('etaj'); ?>
-                                                <option value="demisol" {{ in_array('demisol', $etaj) ? 'selected' : '' }}>Demisol</option>
-                                                <option value="parter" {{ in_array('parter', $etaj) ? 'selected' : '' }}>Parter</option>
-                                                @for ($i = 1; $i <= 15; $i++)
-                                                    <option value="{{ $i }}" {{ in_array($i, $etaj) ? 'selected' : '' }}>Etaj {{ $i }}</option>
-                                                @endfor
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Compartimentare</label>
-                                            <div>
-                                                <select name="compartimentare" class="form-control">
-                                                    <option value="">Indiferent</option>
-                                                    @foreach($partitions as $partition)
-                                                        <option value="{{ $partition }}" {{ Input::get('compartimentare') == $partition ? 'selected' : '' }}>{{ $partition }}</option>
-                                                    @endforeach
+                                        @if ($type != 'casa')
+                                            <div class="form-group col-xs-6 col-sm-2">
+                                                <label for="etaj">Etaj</label>
+                                                <select multiple id="etaj" name="etaj[]" class="form-control">
+                                                    <?php $etaj = Input::get('etaj') == null ? [] : Input::get('etaj'); ?>
+                                                    <option value="demisol" {{ in_array('demisol', $etaj) ? 'selected' : '' }}>Demisol</option>
+                                                    <option value="parter" {{ in_array('parter', $etaj) ? 'selected' : '' }}>Parter</option>
+                                                    @for ($i = 1; $i <= 15; $i++)
+                                                        <option value="{{ $i }}" {{ in_array($i, $etaj) ? 'selected' : '' }}>Etaj {{ $i }}</option>
+                                                    @endfor
                                                 </select>
                                             </div>
-                                        </div>
-                                    @elseif($type == 'casa')
-                                        <div class="form-group col-xs-12 col-sm-2">
-                                            <label for="an_constructie_range">An constructie</label>
-                                            <input type="text" id="an_constructie_range" value="">
-                                            <div class="hidden">
-                                                <input name="an_constructie_minim" id="an_constructie_minim" type="hidden" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">
-                                                <input name="an_constructie_maxim" id="an_constructie_maxim" type="hidden" value="{{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : '' }}">
+                                            <div class="form-group col-xs-6 col-sm-2">
+                                                <label>Compartimentare</label>
+                                                <div>
+                                                    <select name="compartimentare" class="form-control">
+                                                        <option value="">Indiferent</option>
+                                                        @foreach($partitions as $partition)
+                                                            <option value="{{ $partition }}" {{ Input::get('compartimentare') == $partition ? 'selected' : '' }}>{{ $partition }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group col-xs-6 col-sm-4 col-md-2">
-                                            <label>Numar camere</label>
-                                            <select multiple id="numar_camere" name="numar_camere[]" class="form-control">
-                                                <?php
-
-                                                $numar_camere = Input::get('numar_camere') == null ? [] : Input::get('numar_camere');
-                                                ?>
-                                                <option value="1" {{ in_array(1,$numar_camere) ? 'selected' : '' }}>garsoniera</option>
-                                                <option value="2" {{ in_array(2,$numar_camere) ? 'selected' : '' }}>2 camere</option>
-                                                <option value="3" {{ in_array(3,$numar_camere) ? 'selected' : '' }}>3 camere</option>
-                                                <option value="4" {{ in_array(4,$numar_camere) ? 'selected' : '' }}>4+ camere</option>
-                                            </select>
-                                        </div>
-                                    @else
+                                        @endif
                                     @endif
-
-                                    <div class="form-group col-xs-12 col-sm-2">
-                                        <label for="area_range">Suprafata</label>
-                                        <input type="text" id="area_range" value="">
-                                        <div class="hidden">
-                                            <input name="suprafata_minima" id="suprafata_minima" type="hidden" value="{{ Input::get('suprafata_minima') ? Input::get('suprafata_minima') : '' }}">
-                                            <input name="suprafata_maxima" id="suprafata_maxima" type="hidden" value="{{ Input::get('suprafata_maxima') ? Input::get('suprafata_maxima') : '' }}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                    <div class="form-group col-xs-6 col-sm-2">
                                         <label>Cartier</label>
                                         <div>
                                             <select multiple id="neighborhood" name="cartier[]" class="form-control">
@@ -188,7 +166,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                    <div class="form-group col-xs-6 col-sm-2">
                                         <label>Zona</label>
                                         <div>
                                             <select multiple id="area" name="zona[]" class="form-control">
@@ -202,14 +180,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                    <div class="form-group col-xs-6 col-sm-2">
                                         <label>Sortare</label>
                                         <div>
                                             <select name="sortare" class="form-control">
                                                 <option value="">Indiferent</option>
                                                 <option value="asc">Crescator</option>
                                                 <option value="desc">Descrescator</option>
-
                                             </select>
                                         </div>
                                     </div>

@@ -15,8 +15,8 @@ class Apartment extends Migration {
 		Schema::create('apartment', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('usable_area');
-			$table->string('built_area');
+			$table->integer('usable_area');
+			$table->integer('built_area');
 			$table->string('partitioning');
 			$table->string('comfort');
 			$table->string('floor');

@@ -354,6 +354,7 @@
 <script type="text/javascript">
     $('select').select2({
         tags: true,
+        minimumResultsForSearch: Infinity,
         placeholder: "Indiferent"
     });
     $('#sortare').select2({

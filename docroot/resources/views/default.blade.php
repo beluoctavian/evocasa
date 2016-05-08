@@ -275,12 +275,6 @@
     });
 </script>
 
-<!-- Select2 -->
-<script type="text/javascript">
-    $('select').select2({
-        minimumResultsForSearch: Infinity
-    });
-</script>
 @yield('scripts')
 </body>
 </html>

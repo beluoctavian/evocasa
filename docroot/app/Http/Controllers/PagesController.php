@@ -122,7 +122,7 @@ class PagesController extends Controller {
         $max_surface = Input::get('suprafata_maxima');
         $partitioning[] = Input::get('compartimentare');
         $neighborhood[] = Input::get('cartier');
-        $phone = Input::get('phone');
+        $phone = Input::get('telefon_proprietar');
         $area[] = Input::get('zona');
         $sort_after = Input::get('sortare');
 

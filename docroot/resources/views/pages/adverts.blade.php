@@ -399,13 +399,21 @@
         tags: true,
         placeholder: "Indiferent"
     });
+    $('#neighborhood').select2({
+        tags: true,
+        placeholder: "Indiferent"
+    });
+    $('#area').select2({
+        tags: true,
+        placeholder: "Indiferent"
+    });
     $('#price_range').ionRangeSlider({
         type: 'double',
-        min: 1000,
-        max: 200000,
+        min: {{ $input_defaults['pret_minim'] }},
+        max: {{ $input_defaults['pret_maxim'] }},
         step: 1000,
-        from: 1000,
-        to: 50000,
+        from: {{ Input::get('pret_minim') ? Input::get('pret_minim') : $input_defaults['pret_minim'] }},
+        to: {{ Input::get('pret_maxim') ? Input::get('pret_maxim') : $input_defaults['pret_maxim'] }},
         postfix: "&euro;",
         onChange: function (data) {
             $('#pret_minim').val(data.from);

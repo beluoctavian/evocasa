@@ -254,7 +254,14 @@ class PagesController extends Controller {
         $input_defaults = [
             'pret_minim' => \DB::table('advert')->min('price'),
             'pret_maxim' => \DB::table('advert')->max('price'),
+            'an_constructie_minim' => \DB::table('apartment')->where('built_year', '>', '0')->min('built_year'),
+            'an_constructie_maxim' => \DB::table('apartment')->max('built_year'),
         ];
+        foreach ($input_defaults as $key => $value) {
+            if ($value == '') {
+                $input_defaults[$key] = '0';
+            }
+        }
 
         return view('pages.adverts')
             ->with('adverts',$results->appends(Input::except('page')))

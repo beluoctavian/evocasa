@@ -20,7 +20,7 @@ class Apartment extends Migration {
 			$table->string('partitioning');
 			$table->string('comfort');
 			$table->string('floor');
-			$table->string('built_year');
+			$table->integer('built_year');
 			$table->string('bathrooms');
 			$table->string('obs_bathrooms');
 			$table->string('sanitary');

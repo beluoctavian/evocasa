@@ -105,21 +105,13 @@
                                     @if($type == null or $type == 'apartment')
                                         <div class="price">
                                             <div class="col-xs-12">
-                                                <label for="price_range">An constructie</label>
+                                                <label for="an_constructie_range">An constructie</label>
                                                 <input type="text" id="an_constructie_range" value="">
                                             </div>
                                             <div class="hidden">
-                                                <input name="pret_minim" id="pret_minim" type="text" value="{{ Input::get('pret_minim') ? Input::get('pret_minim') : '' }}">
-                                                <input name="pret_maxim" id="pret_maxim" type="text" value="{{ Input::get('pret_maxim') ? Input::get('pret_maxim') : '' }}">
+                                                <input name="an_constructie_minim" id="an_constructie_minim" type="text" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">
+                                                <input name="an_constructie_maxim" id="an_constructie_maxim" type="text" value="{{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : '' }}">
                                             </div>
-                                        </div>
-                                        <div class="form-group col-xs-12 col-sm-4 col-md-2">
-                                            <label>An constructie minim</label>
-                                            <input name="an_constructie_minim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">
-                                        </div>
-                                        <div class="form-group col-xs-12 col-sm-4 col-md-2">
-                                            <label>An constructie maxim</label>
-                                            <input name="an_constructie_maxim" type="number" min="1950" max="2020" step="1" class="form-control" value="{{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : '' }}">
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Numar camere</label>
@@ -428,7 +420,19 @@
         onChange: function (data) {
             $('#pret_minim').val(data.from);
             $('#pret_maxim').val(data.to);
-        },
+        }
+    });
+    $('#an_constructie_range').ionRangeSlider({
+        type: 'double',
+        min: {{ $input_defaults['an_constructie_minim'] }},
+        max: {{ $input_defaults['an_constructie_maxim'] }},
+        step: 1,
+        from: {{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : $input_defaults['an_constructie_minim'] }},
+        to: {{ Input::get('an_constructie_maxim') ? Input::get('an_constructie_maxim') : $input_defaults['an_constructie_maxim'] }},
+        onChange: function (data) {
+            $('#an_constructie_minim').val(data.from);
+            $('#an_constructie_maxim').val(data.to);
+        }
     });
 </script>
 @endsection

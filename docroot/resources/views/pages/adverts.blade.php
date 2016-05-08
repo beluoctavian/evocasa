@@ -94,7 +94,38 @@
                                         <input name="cuvinte_cheie" type="text" class="form-control" value="{{ Input::get('cuvinte_cheie') ? Input::get('cuvinte_cheie') : '' }}">
                                     </div>
                                 </div>
-                                <div class="form-group col-xs-12 col-sm-4">
+
+                                <div class="form-group col-xs-6 col-sm-2">
+                                    <label>Cartier</label>
+                                    <div>
+                                        <select multiple id="neighborhood" name="cartier[]" class="form-control">
+                                            <option value="">Indiferent</option>
+                                            <?php
+                                            $cartiere = Input::get('cartier') == null ? [] : Input::get('cartier');
+                                            ?>
+                                            @foreach($neighborhoods as $neighborhood)
+                                                <option value="{{ $neighborhood->name }}" {{ in_array($neighborhood->name,$cartiere) ? 'selected' : '' }}>{{ $neighborhood->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-6 col-sm-2">
+                                    <label>Zona</label>
+                                    <div>
+                                        <select multiple id="area" name="zona[]" class="form-control">
+                                            <option value="">Indiferent</option>
+                                            <?php
+                                            $zone = Input::get('zona') == null ? [] : Input::get('zona');
+                                            ?>
+                                            @foreach($areas as $area)
+                                                <option value="{{ $area->name }}" {{ in_array($area->name, $zone) ? 'selected' : '' }}>{{ $area->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xs-6 col-sm-2">
                                     <label for="price_range">Pret</label>
                                     <input type="text" id="price_range" value="">
                                     <div class="hidden">
@@ -154,34 +185,6 @@
                                         </div>
                                     @endif
                                 @endif
-                                <div class="form-group col-xs-6 col-sm-2">
-                                    <label>Cartier</label>
-                                    <div>
-                                        <select multiple id="neighborhood" name="cartier[]" class="form-control">
-                                            <option value="">Indiferent</option>
-                                            <?php
-                                            $cartiere = Input::get('cartier') == null ? [] : Input::get('cartier');
-                                            ?>
-                                        @foreach($neighborhoods as $neighborhood)
-                                                <option value="{{ $neighborhood->name }}" {{ in_array($neighborhood->name,$cartiere) ? 'selected' : '' }}>{{ $neighborhood->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-xs-6 col-sm-2">
-                                    <label>Zona</label>
-                                    <div>
-                                        <select multiple id="area" name="zona[]" class="form-control">
-                                            <option value="">Indiferent</option>
-                                            <?php
-                                            $zone = Input::get('zona') == null ? [] : Input::get('zona');
-                                            ?>
-                                            @foreach($areas as $area)
-                                                <option value="{{ $area->name }}" {{ in_array($area->name, $zone) ? 'selected' : '' }}>{{ $area->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 text-center">

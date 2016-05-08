@@ -58,10 +58,12 @@ foreach($proprietars as $proprietar) {
         $advert->save();
         $owner->advert_id = $advert->id;
         $owner->save();
-        $observation = new Observation();
-        $observation->text = $proprietar->observatii;
-        $observation->owner_id = $owner->id;
-        $observation->save();
+        if (!empty($proprietar->observatii)) {
+            $observation = new Observation();
+            $observation->text = $proprietar->observatii;
+            $observation->owner_id = $owner->id;
+            $observation->save();
+        }
 
         $apartment = new Apartment();
         $imobil = Imobil::where('id_anunt', $anunt->id)->first();

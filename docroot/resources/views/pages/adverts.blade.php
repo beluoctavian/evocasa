@@ -374,22 +374,32 @@
                                             <li>ID: <b>{{ $advert['code'] }}</b></li>
 
                                             <li>
-                                                @if($entity['built_area'])
+                                                @if(!empty($entity['built_area']))
                                                     {{ $entity['built_area'] }} mp
                                                 @endif
                                             </li>
                                             <li class="hidden-xs hidden-sm">
-                                                @if($entity['partitioning'])
+                                                @if(!empty($entity['partitioning']))
                                                     {{ $entity['partitioning'] }}
                                                 @endif
                                             </li>
                                             <li class="hidden-xs hidden-sm">
-                                                @if($entity['floor'])
+                                                @if(!empty($entity['land_area']))
+                                                    Land area: <b>{{ $entity['land_area'] }}</b> mp
+                                                @endif
+                                            </li>
+                                            <li class="hidden-xs hidden-sm">
+                                                @if(!empty($entity['street_opening']))
+                                                   Street opening:<b> {{ $entity['street_opening'] }}</b> n
+                                                @endif
+                                            </li>
+                                            <li class="hidden-xs hidden-sm">
+                                                @if(!empty($entity['floor']))
                                                     Etaj {{ $entity['floor'] }}
                                                 @endif
                                             </li>
                                             <li class="last">
-                                                @if($entity['built_year'])
+                                                @if(!empty($entity['built_year']))
                                                     An {{ $entity['built_year'] }}
                                                 @endif
                                             </li>

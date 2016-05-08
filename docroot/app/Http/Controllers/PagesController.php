@@ -250,6 +250,7 @@ class PagesController extends Controller {
         foreach ($results as $key => $item) {
             $results[$key] = AdvertController::getEntityDetails($item->id);
         }
+//        dd($results[0]);
 
         return view('pages.adverts')
             ->with('adverts',$results->appends(Input::except('page')))

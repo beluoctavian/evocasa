@@ -121,11 +121,15 @@
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">
                                             <label>Numar camere</label>
-                                            <select multiple id="numar_camere" name="numar_camere" class="form-control">
-                                                <option value="1" {{ Input::get('numar_camere') == 1 ? 'selected' : '' }}>1</option>
-                                                <option value="2" {{ Input::get('numar_camere') == 2 ? 'selected' : '' }}>2</option>
-                                                <option value="3" {{ Input::get('numar_camere') == 3 ? 'selected' : '' }}>3</option>
-                                                <option value="4" {{ Input::get('numar_camere') == 4 ? 'selected' : '' }}>4+</option>
+                                            <select multiple id="numar_camere" name="numar_camere[]" class="form-control">
+                                                <?php
+
+                                                    $numar_camere = Input::get('numar_camere') == null ? [] : Input::get('numar_camere');
+                                                    ?>
+                                                    <option value="1" {{ in_array(1,$numar_camere) ? 'selected' : '' }}>1</option>
+                                                    <option value="2" {{ in_array(2,$numar_camere) ? 'selected' : '' }}>2</option>
+                                                    <option value="3" {{ in_array(3,$numar_camere) ? 'selected' : '' }}>3</option>
+                                                    <option value="4" {{ in_array(4,$numar_camere) ? 'selected' : '' }}>4+</option>
                                             </select>
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-4 col-md-2">

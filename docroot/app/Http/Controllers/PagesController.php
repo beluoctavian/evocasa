@@ -82,7 +82,7 @@ class PagesController extends Controller {
         $max_price = Input::get('pret_maxim');
         $min_year = Input::get('an_constructie_minim');
         $max_year = Input::get('an_constructie_maxim');
-        $no_rooms = Input::get('numar_camere');
+        $no_rooms[] = Input::get('numar_camere');
         $min_floor = Input::get('etaj_minim');
         $max_floor = Input::get('etaj_maxim');
         $min_surface = Input::get('suprafata_minima');
@@ -215,11 +215,10 @@ class PagesController extends Controller {
         }
         if($entity_type == 'apartment' or $entity_type == 'house')
         {
-            if($no_rooms)
-            {
-                $no_rooms = explode(' ', $no_rooms);
-                $adverts->whereIn('no_rooms', $no_rooms);
+            if(count($no_rooms[0]) > 0){
+                $adverts->whereIn('no_rooms', $no_rooms[0]);
             }
+
         }
         if($advert_id)
         {
@@ -251,7 +250,6 @@ class PagesController extends Controller {
         foreach ($results as $key => $item) {
             $results[$key] = AdvertController::getEntityDetails($item->id);
         }
-//        dd(Input::all());
 
         return view('pages.adverts')
             ->with('adverts',$results->appends(Input::except('page')))

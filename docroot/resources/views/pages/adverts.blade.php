@@ -183,10 +183,12 @@
                                     <div class="form-group col-xs-6 col-sm-2">
                                         <label>Sortare</label>
                                         <div>
-                                            <select name="sortare" class="form-control">
-                                                <option value="">Indiferent</option>
-                                                <option value="asc">Crescator</option>
-                                                <option value="desc">Descrescator</option>
+                                            <select name="sortare" id="sortare" class="form-control">
+                                                <option value="">Implicit</option>
+                                                <option value="price_asc">Pret (cresc.)</option>
+                                                <option value="price_desc">Pret (desc.)</option>
+                                                <option value="date_asc">Data publicarii (cresc.)</option>
+                                                <option value="date_desc">Data publicarii (desc.)</option>
                                             </select>
                                         </div>
                                     </div>
@@ -344,6 +346,15 @@
     $('#area').select2({
         tags: true,
         placeholder: "Indiferent"
+    });
+    $('#sortare').select2({
+        templateResult: function (icon) {
+            var originalOption = icon.element;
+            if ($(originalOption).data('icon') == null) {
+                return icon.text;
+            }
+            return ' <i class="fa ' + $(originalOption).data('icon') + '">' + icon.text +'</i>';
+        }
     });
     $('#price_range').ionRangeSlider({
         type: 'double',

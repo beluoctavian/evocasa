@@ -62,13 +62,13 @@
                             <input type="hidden" name = 'tip' value="{{$type}}">
                             @if(!Auth::guest())
                                 <div class="row">
-                                    <div class="form-group col-xs-12 col-sm-2">
+                                    <div class="form-group col-xs-6 col-sm-2">
                                         <label>Telefon proprietar</label>
                                         <div>
                                             <input name="telefon_proprietar" type="text" class="form-control" value="{{ Input::get('telefon_proprietar') ? Input::get('telefon_proprietar') : '' }}">
                                         </div>
                                     </div>
-                                    <div class="form-group col-xs-12 col-sm-2">
+                                    <div class="form-group col-xs-6 col-sm-2">
                                         <label>Stare</label>
                                         <div>
                                             <select name="status" class="form-control">
@@ -84,13 +84,13 @@
                                 </div>
                             @endif
                             <div class="row">
-                                <div class="form-group col-xs-6 col-sm-2">
+                                <div class="form-group col-xs-3 col-sm-2">
                                     <label>ID anunt</label>
                                     <div>
                                         <input name="id_anunt" type="text" class="form-control" value="{{ Input::get('id_anunt') ? Input::get('id_anunt') : '' }}">
                                     </div>
                                 </div>
-                                <div class="form-group col-xs-12 col-sm-4">
+                                <div class="form-group col-xs-9 col-sm-6">
                                     <label>Cuvinte cheie</label>
                                     <div>
                                         <input name="cuvinte_cheie" type="text" class="form-control" value="{{ Input::get('cuvinte_cheie') ? Input::get('cuvinte_cheie') : '' }}">

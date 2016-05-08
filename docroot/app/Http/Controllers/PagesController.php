@@ -249,7 +249,13 @@ class PagesController extends Controller {
         }
         if($sort_after)
         {
-            $adverts->orderBy('price', $sort_after);
+            $criteriul = explode('_', $sort_after)[0];
+            if($criteriul == 'date')
+            {
+                $criteriul = 'created_at';
+            }
+            $ordinea = explode('_', $sort_after)[1];
+            $adverts->orderBy($criteriul, $ordinea);
         }
 
         $results = [];

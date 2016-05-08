@@ -185,19 +185,19 @@ class PagesController extends Controller {
         };
 
 
-//        if($neighborhood)
-//        {
-//            $adverts->whereHas('neighborhood', function($query) use ($neighborhood) {
-//                $query->where('name', 'like', '%'.$neighborhood.'%');
-//            });
-//        }
-//
-//        if($area)
-//        {
-//            $adverts->whereHas('area', function ($query) use ($area) {
-//                $query->where('name', 'like', '%'.$area.'%');
-//            });
-//        }
+        if($neighborhood[0])
+        {
+            $adverts->whereHas('neighborhood', function($query) use ($neighborhood) {
+                $query->whereIn('name',$neighborhood[0]);
+            });
+        }
+
+        if($area[0])
+        {
+            $adverts->whereHas('area', function ($query) use ($area) {
+                $query->whereIn('name', $area[0]);
+            });
+        }
 
         
         if($min_price)

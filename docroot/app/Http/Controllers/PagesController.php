@@ -247,15 +247,17 @@ class PagesController extends Controller {
             });
         }
 
-        
-        if($min_price !== NULL)
+
+        if($min_price !== NULL and $min_price != '')
         {
             $adverts->where('price', '>=', $min_price);
         }
-        if($max_price !== NULL)
+
+        if($max_price !== NULL and $max_price != '')
         {
             $adverts->where('price', '<=', $max_price);
         }
+
         if($key_words)
         {
             $adverts->where('title', 'like', '%'.$key_words.'%');

@@ -102,7 +102,7 @@ class PagesController extends Controller {
 
         $status = Input::get('status');
 
-        $entity_type = Input::get('tip');
+        $entity_type = Input::get('tip') ?: 'apartament';
 
         if($entity_type == 'teren'){
 
@@ -283,6 +283,19 @@ class PagesController extends Controller {
             'an_constructie_minim' => \DB::table('apartment')->where('built_year', '>', '0')->min('built_year'),
             'an_constructie_maxim' => \DB::table('apartment')->max('built_year'),
         ];
+        switch($entity_type) {
+            case 'casa':
+                $input_defaults['suprafata_minima'] = \DB::table('house')->min('land_area');
+                $input_defaults['suprafata_maxima'] = \DB::table('house')->max('land_area');
+                break;
+            case 'teren':
+                $input_defaults['suprafata_minima'] = \DB::table('terrain')->min('total_area');
+                $input_defaults['suprafata_maxima'] = \DB::table('terrain')->max('total_area');
+                break;
+            default:
+                $input_defaults['suprafata_minima'] = \DB::table('apartment')->min('built_area');
+                $input_defaults['suprafata_maxima'] = \DB::table('apartment')->max('built_area');
+        }
         foreach ($input_defaults as $key => $value) {
             if ($value == '') {
                 $input_defaults[$key] = '0';

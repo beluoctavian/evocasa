@@ -430,13 +430,5 @@
             $('#pret_maxim').val(data.to);
         },
     });
-    $('#neighborhood').select2({
-        tags: true,
-        placeholder: "Indiferent"
-    });
-    $('#area').select2({
-        tags: true,
-        placeholder: "Indiferent"
-    });
 </script>
 @endsection

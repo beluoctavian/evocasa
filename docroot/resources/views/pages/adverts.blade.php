@@ -353,7 +353,12 @@
 <script src="{{ URL::asset('library/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js') }}"></script>
 <script type="text/javascript">
     function format(option) {
-        return '<span class="fa fa-square-o pull-left"></span><span class="text">' + option.text + '</span>';
+        if (option.selected == true) {
+            return '<span class="fa fa-check-square-o pull-left"></span><span class="text">' + option.text + '</span>';
+        }
+        else {
+            return '<span class="fa fa-square-o pull-left"></span><span class="text">' + option.text + '</span>';
+        }
     }
     $('select').select2({
         minimumResultsForSearch: Infinity,

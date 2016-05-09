@@ -343,8 +343,15 @@ class AdvertController extends Controller {
     if ($details == NULL) {
       abort(404);
     }
+    $files = [];
+    if (\File::exists('uploaded-images/anunt_' . $id . '/')) {
+      $files = \File::allFiles('uploaded-images/anunt_' . $id . '/');
+    }
+    sort($files);
     return view('advert.viewEntity')
-      ->with('entity_type', $details['advert']['type'])->with($details);
+      ->with('entity_type', $details['advert']['type'])
+      ->with($details)
+      ->with('files', $files);
   }
 
   public function postAddStatus($id, Request $request)

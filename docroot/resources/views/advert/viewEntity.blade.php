@@ -54,16 +54,16 @@
                     <h3 class="red">Pret vechi: {{ $advert['old_price'] }} &euro;</h3>
                     @endif
                 </div>
-                @if (Auth::guest() && isset($files))
-                    @if($files[0] != null)
-                    <div class="col-xs-12">
-                        <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true" data-width="100%" data-ratio="1280/720">
-                            @foreach ($files as $file)
-                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert->id . '/' . $file->getRelativePathName()) }}">
-                            @endforeach
-                         </div>
+                @if (Auth::guest() && !empty($files))
+                    <div class="row margin-top">
+                        <div class="col-xs-12">
+                            <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true" data-width="100%" data-ratio="1280/720">
+                                @foreach ($files as $file)
+                                    <img src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getFilename()) }}">
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
-                    @endif
                 @endif
             </div>
             @if(!Auth::guest())
@@ -104,9 +104,6 @@
                 <div class="col-xs-12 col-sm-4">
                     <div class="list-group">
                         <div class="list-group-item active text-center">DETALII ANUNT</div>
-                        @if (!empty($advert['type']))
-                        <a href="javascript:" class="list-group-item">Tip anunt: {{ $advert['type'] }}</a>
-                        @endif
                         @if (!empty($advert['no_rooms']))
                         <a href="javascript:" class="list-group-item">Numar camere: {{ $advert['no_rooms'] }}</a>
                         @endif
@@ -147,17 +144,15 @@
                     </div>
                 @endif
             </div>
-            @if (!Auth::guest() && isset($files))
+            @if (!Auth::guest() && !empty($files))
                 <div class="row margin-top">
-                    @if ($files[0] != null)
                     <div class="col-xs-12">
                         <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true" data-width="100%" data-ratio="1280/720">
                             @foreach ($files as $file)
-                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert->id . '/' . $file->getRelativePathName()) }}">
+                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getFilename()) }}">
                             @endforeach
                         </div>
                     </div>
-                    @endif
                 </div>
             @endif
         </div>

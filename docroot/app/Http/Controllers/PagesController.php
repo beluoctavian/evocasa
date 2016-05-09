@@ -348,13 +348,15 @@ class PagesController extends Controller {
         foreach ($results as $key => $item) {
             $results[$key] = AdvertController::getEntityDetails($item->id);
         }
-
+        $zona = $request['zona'];
+        $zona = implode(',', $zona);
         return view('pages.adverts')
             ->with('adverts',$results->appends(Input::except('page')))
             ->with('partitions', $partitions)
             ->with('neighborhoods', $neighborhoods)
             ->with('areas', $areas)
             ->with('type', $entity_type)
+            ->with('zona', $zona)
             ->with('input_defaults', $this->getInputDefaults($entity_type));
     }
 

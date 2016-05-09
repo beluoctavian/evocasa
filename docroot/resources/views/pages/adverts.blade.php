@@ -363,6 +363,7 @@
             </div>
         </div>
     </div><!-- /.row -->
+    {{--<div class='hidden' id='hidden' > <?php echo ($zona[0]);  ?> </div>--}}
 @endsection
 
 @section('scripts')
@@ -461,13 +462,18 @@
 
 
     $( window ).load(function() {
+        ceva = '{{ $zona }}' ;
         val = $("#neighborhood").val();
         $.ajax({
             type: "GET",
             url: '/loadData/' + val,
             success: function(json) {
                 $.each(json, function(i, value) {
-                    $('#area').append($('<option>').text(value).attr('value', value));
+                    if(ceva.search(value)!= -1)
+                    $('#area').select2().append($('<option>').text(value).attr('value', value).attr('selected', true));
+                    else
+                    $('#area').select2().append($('<option>').text(value).attr('value', value));
+
                 });
             },
         });

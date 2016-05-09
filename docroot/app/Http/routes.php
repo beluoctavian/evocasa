@@ -1,8 +1,6 @@
 <?php
 /*Administrators*/
-Route::get('printeaza-anunt/{id}', 'UsersController@getPrinteaza');
-Route::get('settings', 'UsersController@getSettings');
-Route::post('settings', 'UsersController@postSettings');
+//Route::get('printeaza-anunt/{id}', 'UsersController@getPrinteaza');
 
 /*Customers*/
 //Route::get('clienti', 'CustomersController@getCustomers');
@@ -12,7 +10,7 @@ Route::post('settings', 'UsersController@postSettings');
 //Route::post('cauta-client', 'CustomersController@search');
 //Route::get('delete-client/{id}', 'CustomersController@deleteCustomer');
 
-/* ----------------- REFACTOR ALL ROUTES ----------------- */
+/* ----------------- REFACTORED ROUTES ----------------- */
 
 /*Session*/
 Route::get('login', 'SessionsController@create');
@@ -41,3 +39,8 @@ Route::get('advert/images/{id}', 'AdvertController@getImages');
 Route::post('advert/images/{id}', 'AdvertController@postImages');
 Route::post('advert/change-image-order/{id}', 'AdvertController@changeImageOrder');
 Route::post('advert/delete-image/{id}', 'AdvertController@deleteImage');
+
+/* Settings */
+Route::get('settings', 'UsersController@getSettings');
+Route::post('settings/user', 'UsersController@postUserSettings');
+Route::post('settings/website', 'UsersController@postWebsiteSettings');

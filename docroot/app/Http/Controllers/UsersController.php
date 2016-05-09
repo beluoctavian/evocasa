@@ -42,7 +42,7 @@ class UsersController extends Controller {
         return view('user.settings');
     }
 
-    public function postSettings(Request $request)
+    public function postUserSettings(Request $request)
     {
         $user = Auth::user();
         if(Hash::check($request->password,$user->password)){

@@ -279,7 +279,7 @@ class AdvertController extends Controller {
   {
     $type = $request->get('entity_type');
     $this->createOrEditEntity($request, $type, $id);
-    return redirect()->back()->with('success', 1);
+    return redirect()->back()->with('success', 'Ati editat anuntul cu succes.');
   }
 
   public function postApartment(Request $request)
@@ -451,7 +451,7 @@ class AdvertController extends Controller {
       imagepng($image,$im_path);
       imagedestroy($image);
     }
-    return redirect()->back()->with('success', 1);
+    return redirect()->back()->with('success', 'Ati uploadat imaginile cu succes');
   }
 
   public function changeImageOrder($id, Request $request)
@@ -476,12 +476,6 @@ class AdvertController extends Controller {
       }
     }
     return redirect()->back();
-  }
-
-  public function deleteImage($id, Request $request)
-  {
-    \File::delete($request->filename);
-    return redirect()->back()->with('successDelete', 1);
   }
 
 }

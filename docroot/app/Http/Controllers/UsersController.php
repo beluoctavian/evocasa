@@ -94,7 +94,12 @@ class UsersController extends Controller {
 
     public function postDeleteFile(Request $request)
     {
-        \File::delete($request->get('file'));
-        return redirect()->back()->with('success', 'Ati sters fisierul.');
+        $success = \File::delete($request->get('file'));
+        if ($success) {
+            return redirect()->back()->with('success', 'Ati sters fisierul. cu succes');
+        }
+        else {
+            return redirect()->back()->with('fail', 'Fisierul nu a putut fi sters.');
+        }
     }
 }

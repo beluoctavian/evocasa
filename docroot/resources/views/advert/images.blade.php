@@ -24,21 +24,21 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="alert alert-success">
-                        <span>Ati uploadat imaginile cu succes!</span>
+                        <span>{{ Session::get('success') }}</span>
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                     </div>
                 </div>
             </div>
             @endif
-            @if(Session::has('successDelete'))
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="alert alert-success">
-                        <span>Ati sters imaginea!</span>
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+            @if(Session::has('fail'))
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alert-danger">
+                            <span>{{ Session::get('fail') }}</span>
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endif
             @if (count($errors) > 0)
                 @foreach ($errors->all() as $error)
@@ -101,12 +101,11 @@
                                     <img class="banner-preview" src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName()) }}" alt=""/>
                                 </a>
                                 <div class="caption">
-                                    <p class="text-center">{{ $file->getRelativePathName() }}</p>
-{{--                                    <p class="text-center">{{ getimagesize('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName())[3] }}</p>--}}
+                                    <p class="text-center">{{ $file->getFilename() }}</p>
                                     <p>
                                         <form role="form" method="POST" action="{{ URL::to('advert/delete-image/' . $advert['id']) }}"  onsubmit="return confirm('Sigur doriti sa stergeti imaginea?');">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="filename" value="{{'uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName() }}">
+                                            <input type="hidden" name="file" value="{{ $file->getPath() . '/' . $file->getFilename() }}">
                                             <p class="text-center"><button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Sterge imaginea</button></p>
                                         </form>
                                     </p>

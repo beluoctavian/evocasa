@@ -34,7 +34,7 @@
 
                 <form method="get" action="{{ URL::to('anunturi') }}">
 
-                <div class="row margin-bottom">
+                <div class="row margin-bottom" id="search-filter-container">
                     <div class="col-xs-12">
                         <div class="main-title">
                             <i class="fa fa-search"></i>

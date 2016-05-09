@@ -435,13 +435,28 @@
             type: "GET",
             url: '/loadData/' + val,
             success: function(json) {
-                $.each(json, function(i, value) {
-                    if($.inArray(value, zone) > -1)
-                    $('#area').select2().append($('<option>').text(value).attr('value', value).attr('selected', true));
-                    else
-                    $('#area').select2().append($('<option>').text(value).attr('value', value));
+                if(ceva == '')
+                {
+                    $.each(json, function(i, value) {
+                        $('#area').select2().append($('<option>').text(value).attr('value', value));
+                    });
+                }
+                else
+                {
+                    $.each(json, function(i, value) {
+                        if($.inArray(value, zone) > -1)
+                        {
+                            $('#area').select2().append($('<option>').text(value).attr('value', value).attr('selected', true));
+//                            if(value == 'Calea Vitan')
+//                            {
+//                                $('#area').select2().append($('<option>').text(value).attr('value', value).attr('selected', true));
+//                            }
+                        }
+                        else
+                            $('#area').select2().append($('<option>').text(value).attr('value', value));
 
-                });
+                    });
+                }
             },
         });
     });

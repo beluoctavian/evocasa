@@ -48,6 +48,9 @@ class UsersController extends Controller {
             }
         }
         $files = \File::allFiles($info_dirname);
+        usort($files, function ($a, $b) {
+            return $a->getCTime() - $b->getCTime();
+        });
         return view('user.settings')
           ->with('files', $files);
     }

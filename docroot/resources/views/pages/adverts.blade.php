@@ -455,9 +455,23 @@
                         $('#area').append($('<option>').text(value).attr('value', value));
                     });
             },
+        });
     });
 
 
+    $( window ).load(function() {
+        val = $("#neighborhood").val();
+        $.ajax({
+            type: "GET",
+            url: '/loadData/' + val,
+            success: function(json) {
+                $.each(json, function(i, value) {
+                    $('#area').append($('<option>').text(value).attr('value', value));
+                });
+            },
+        });
     });
+
+
 </script>
 @endsection

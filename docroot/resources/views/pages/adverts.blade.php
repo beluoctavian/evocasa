@@ -429,13 +429,14 @@
 
     $( window ).load(function() {
         ceva = '{{ $zona }}' ;
+        zone = ceva.split(',');
         val = $("#neighborhood").val();
         $.ajax({
             type: "GET",
             url: '/loadData/' + val,
             success: function(json) {
                 $.each(json, function(i, value) {
-                    if(ceva.search(value)!= -1)
+                    if($.inArray(value, zone) > -1)
                     $('#area').select2().append($('<option>').text(value).attr('value', value).attr('selected', true));
                     else
                     $('#area').select2().append($('<option>').text(value).attr('value', value));

@@ -350,16 +350,16 @@ class PagesController extends Controller {
         }
         $zona = $request['zona'];
         if($zona)
-            $zona = implode(',', $zona);
+            $zone = implode(',', $zona);
         else
-            $zona = '';
+            $zone = '';
         return view('pages.adverts')
             ->with('adverts',$results->appends(Input::except('page')))
             ->with('partitions', $partitions)
             ->with('neighborhoods', $neighborhoods)
             ->with('areas', $areas)
             ->with('type', $entity_type)
-            ->with('zona', $zona)
+            ->with('zona', $zone)
             ->with('input_defaults', $this->getInputDefaults($entity_type));
     }
 

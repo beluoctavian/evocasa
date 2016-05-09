@@ -21,6 +21,7 @@ class Advert extends Model {
         'neighborhood_id',
         'area_id',
         'price_history',
+        'created_by',
     ];
 
     public static $properties = [
@@ -35,77 +36,56 @@ class Advert extends Model {
         'neighborhood_id',
         'area_id',
         'price_history',
+        'created_by',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function owner()
     {
         return $this->hasOne('App\Owner');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function observations()
     {
         return $this->hasMany('App\Observation');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function apartment()
     {
         return $this->hasOne('App\Apartment');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function house()
     {
         return $this->hasOne('App\House');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function terrain()
     {
         return $this->hasOne('App\Terrain');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function neighborhood()
     {
         return $this->belongsTo('App\Neighborhood');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function area()
     {
         return $this->belongsTo('App\Area');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function improvements() {
         return $this->hasOne('App\Improvements');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function status()
     {
         return $this->hasMany('App\Status');
+    }
+    
+    public function user()
+    {
+        return $this->hasOne('App\User');
     }
 
     /**

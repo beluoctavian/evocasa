@@ -28,6 +28,7 @@ foreach($proprietars as $proprietar) {
     if ($anunt != null) {
         $advert = new Advert();
         $advert->id = $anunt->id;
+        $advert->created_by = strstr($anunt->cod, 'IC') === FALSE ? 2 : 1;
         $advert->code = $anunt->cod;
         $advert->title = $anunt->titlu;
         $advert->type = 'apartment';

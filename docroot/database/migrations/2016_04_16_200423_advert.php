@@ -30,6 +30,10 @@ class Advert extends Migration {
 				->references('id')
 				->on('area');
 			$table->longText('price_history');
+			$table->integer('created_by')->unsigned();
+			$table->foreign('created_by')
+				->references('id')
+				->on('users');
 			$table->timestamps();
 		});
 	}

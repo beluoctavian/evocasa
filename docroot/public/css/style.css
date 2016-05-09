@@ -647,7 +647,7 @@ footer {
     background-color: #efefef;
 }
 .sortare-container {
-    padding: 11px;
+    padding: 10px;
 }
 .sortare-container label {
     float: left;
@@ -657,4 +657,26 @@ footer {
 }
 .sortare-container div {
     float: left;
+}
+.select2-container .select2-selection--single {
+    height: 30px;
+    line-height: 30px;
+}
+.select2-results__option {
+    position: relative;
+    min-height: 30px;
+    line-height: 16px;
+}
+.select2-results__option .fa {
+    line-height: 16px;
+}
+.select2-results__option .text {
+    line-height: 16px;
+}
+#search-filter-container .form-group {
+    min-height: 65px;
+}
+#search-filter-container .form-control {
+    box-shadow: none;
+    -webkit-box-shadow: none;
 }

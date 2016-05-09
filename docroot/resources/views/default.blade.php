@@ -88,7 +88,7 @@
                     <a href="#">Esti logat ca: {{ Auth::user()->name }}</a>
                 </li>
                 <li>
-                    <a href="/advert/add"><i class="fa fa-file"></i> Adauga anunt</a>
+                    <a href="{{ URL::to('advert/add') }}"><i class="fa fa-file"></i> Adauga anunt</a>
                 </li>
                 <li>
                     <a href="{{ URL::to('settings') }}"><i class="fa fa-cogs"></i> Setari</a>
@@ -152,7 +152,13 @@
                     <a href="{{ URL::to('/') }}"><i class="fa fa-home"></i> Home</a>
                 </li>
                 <li>
-                    <a href="{{ URL::to('anunturi') }}"><i class="fa fa-files-o"></i> Anunturi</a>
+                    <a href="{{ URL::to('anunturi?tip=apartament') }}"><i class="fa fa-files-o"></i> Apartamente</a>
+                </li>
+                <li>
+                    <a href="{{ URL::to('anunturi?tip=casa') }}"><i class="fa fa-home"></i> Case / Vile</a>
+                </li>
+                <li>
+                    <a href="{{ URL::to('anunturi?tip=teren') }}"><i class="fa fa-globe"></i> Terenuri</a>
                 </li>
                 <li>
                     <a href="{{ URL::to('despre-noi') }}"><i class="fa fa-users"></i> Despre noi</a>
@@ -172,10 +178,12 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 text-center">
-                <select name="navbar" onchange="window.location = this.options[this.selectedIndex].value;">
+                <select id="navbar-select" name="navbar" onchange="window.location = this.options[this.selectedIndex].value;">
                     <option>Selecteaza pagina...</option>
                     <option value="{{ URL::to('/') }}">Home</option>
-                    <option value="{{ URL::to('anunturi') }}">Anunturi</option>
+                    <option value="{{ URL::to('anunturi?tip=apartament') }}">Apartamente</option>
+                    <option value="{{ URL::to('anunturi?tip=casa') }}">Case / Vile</option>
+                    <option value="{{ URL::to('anunturi?tip=teren') }}">Terenuri</option>
                     <option value="{{ URL::to('despre-noi') }}">Despre noi</option>
                     <option value="{{ URL::to('servicii') }}">Servicii si costuri</option>
                     <option value="{{ URL::to('contact') }}">Contact</option>
@@ -270,5 +278,8 @@
 </script>
 
 @yield('scripts')
+<script>
+    $('#navbar-select').select2('destroy');
+</script>
 </body>
 </html>

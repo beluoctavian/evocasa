@@ -136,7 +136,8 @@
                                 <div class="imbunats">
                                     @foreach ($improvements as $improvement)
                                         <p>
-                                            {{ $improvement }} <i class='fa fa-check'></i>
+                                            <span>{{ $improvement }}</span>
+                                            <i class='fa fa-check pull-right'></i>
                                         </p>
                                     @endforeach
                                     <div class="clear-both"></div>

@@ -646,3 +646,15 @@ footer {
 .status-item:hover form button {
     background-color: #efefef;
 }
+.sortare-container {
+    padding: 11px;
+}
+.sortare-container label {
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    margin-right: 5px;
+}
+.sortare-container div {
+    float: left;
+}

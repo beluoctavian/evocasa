@@ -205,7 +205,7 @@
                         <div class="main-title">
                             <i class="fa fa-th-list"></i>
                             <h2>Anunturi</h2>
-                            <div class="pull-right">
+                            <div class="pull-right sortare-container">
                                 <label for="sortare">Sortare</label>
                                 <div>
                                     <select name="sortare" id="sortare" class="form-control">
@@ -390,6 +390,7 @@
         placeholder: "Indiferent"
     });
     $('#sortare').select2({
+        minimumResultsForSearch: Infinity,
         templateResult: function (icon) {
             var originalOption = icon.element;
             if ($(originalOption).data('icon') == null) {

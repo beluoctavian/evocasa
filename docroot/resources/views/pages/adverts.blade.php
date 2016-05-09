@@ -310,12 +310,12 @@
                                             @endif
                                             @if(!empty($entity['land_area']))
                                                 <li>
-                                                   Suprafata teren: <b>{{ $entity['land_area'] }}</b> mp
+                                                   {{ $entity['land_area'] }} mp
                                                 </li>
                                             @endif
                                             @if(!empty($entity['total_area']))
                                                 <li>
-                                                   Suprafata: <b>{{ $entity['total_area'] }}</b> mp
+                                                   {{ $entity['total_area'] }} mp
                                                 </li>
                                             @endif
 

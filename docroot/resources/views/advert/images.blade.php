@@ -135,7 +135,7 @@
                                     <label for="number{{ $key }}">{{ $file->getRelativePathName() }}</label>
                                     <select id="number{{ $key }}" name="number[]" class="form-control">
                                     @foreach ($files as $it => $f)
-                                        <option value="{{ $it }}" {{ $key == $it ? 'selected' : '' }}> {{ $it }} </option>
+                                        <option value="{{ $it +1 }}" {{ $key == $it ? 'selected' : '' }}> {{ $it + 1 }} </option>
                                     @endforeach
                                     </select>
                                 @endforeach

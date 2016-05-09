@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Observation;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Advert;
@@ -115,6 +116,7 @@ class AdvertController extends Controller {
     $advert->setAttribute('area', $advert->area->name);
     $advert->setAttribute('neighborhood', $advert->neighborhood->name);
     $advert->setAttribute('price_history', json_decode($advert->price_history));
+    $advert->setAttribute('user', User::find($advert->created_by)->attributesToArray());
     $advert->setAttribute('inactiv', FALSE);
     $advert->setAttribute('retras', FALSE);
     /** @var Status $statuses */

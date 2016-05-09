@@ -166,7 +166,15 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="sidebar-title">
-                        <h2>Anunturi similare</h2>
+                        <h2>Consultant imobiliar</h2>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="thumbnail">
+                        <img class="banner-preview" src="{{ URL::asset("files/user/{$advert['user']['code']}.jpg") }}" alt="{{ $advert['user']['name'] }}"/>
+                        <div class="caption">
+                            <p class="text-center"><b>{{ $advert['user']['name'] }}</b></p>
+                        </div>
                     </div>
                 </div>
             </div>

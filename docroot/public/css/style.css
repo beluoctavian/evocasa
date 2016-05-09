@@ -658,3 +658,21 @@ footer {
 .sortare-container div {
     float: left;
 }
+.select2-results__option {
+    height: 30px;
+    position: relative;
+}
+.select2-results__option .fa {
+    position: absolute;
+    height: 30px;
+    line-height: 30px;
+    top: 0;
+    left: 5px;
+}
+.select2-results__option .text {
+    position: absolute;
+    height: 30px;
+    line-height: 30px;
+    top: 0;
+    right: 5px;
+}

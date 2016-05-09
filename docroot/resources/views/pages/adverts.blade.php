@@ -352,36 +352,14 @@
 @section('scripts')
 <script src="{{ URL::asset('library/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js') }}"></script>
 <script type="text/javascript">
-    $('#numar_camere').select2({
-        tags: true,
-        placeholder: "Indiferent"
-    });
-    $('#neighborhood').select2({
-        tags: true,
-        placeholder: "Indiferent"
-    });
-    $('#partitioning').select2({
-        tags: true,
-        placeholder: "Indiferent"
-    });
-    $('#area').select2({
-        tags: true,
-        placeholder: "Indiferent"
-    });
+    function format(option) {
+        return '<span class="fa fa-square-o pull-left"></span><span class="text">' + option.text + '</span>';
+    }
     $('select').select2({
-        tags: true,
         minimumResultsForSearch: Infinity,
-        placeholder: "Indiferent"
-    });
-    $('#sortare').select2({
-        minimumResultsForSearch: Infinity,
-        templateResult: function (icon) {
-            var originalOption = icon.element;
-            if ($(originalOption).data('icon') == null) {
-                return icon.text;
-            }
-            return ' <i class="fa ' + $(originalOption).data('icon') + '">' + icon.text +'</i>';
-        }
+        placeholder: "Indiferent",
+        escapeMarkup: function (m) {return m;},
+        templateResult: format
     });
     $('#price_range').ionRangeSlider({
         type: 'double',

@@ -178,7 +178,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 text-center">
-                <select name="navbar" onchange="window.location = this.options[this.selectedIndex].value;">
+                <select id="navbar-select" name="navbar" onchange="window.location = this.options[this.selectedIndex].value;">
                     <option>Selecteaza pagina...</option>
                     <option value="{{ URL::to('/') }}">Home</option>
                     <option value="{{ URL::to('anunturi?tip=apartament') }}">Apartamente</option>
@@ -278,5 +278,8 @@
 </script>
 
 @yield('scripts')
+<script>
+    $('#navbar-select').select2('destroy');
+</script>
 </body>
 </html>

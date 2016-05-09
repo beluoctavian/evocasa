@@ -673,6 +673,9 @@ footer {
 .select2-results__option .text {
     line-height: 16px;
 }
+#search-filter-container .form-group {
+    min-height: 65px;
+}
 #search-filter-container .form-control {
     box-shadow: none;
     -webkit-box-shadow: none;

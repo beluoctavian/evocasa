@@ -95,7 +95,7 @@
                 <div class="col-xs-12 col-sm-12">
                     <div class="list-group">
                         <div class="list-group-item active text-center">DESCRIERE ANUNT</div>
-                        <a href="javascript:" class="list-group-item">{{ nl2br($advert['description']) }}</a>
+                        <a href="javascript:" class="list-group-item">{!! nl2br($advert['description']) !!}</a>
                     </div>
                 </div>
             </div>

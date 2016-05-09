@@ -11,7 +11,12 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		//
+		$info_dirname = 'files/website/info/';
+		$files = \File::allFiles($info_dirname);
+		usort($files, function ($a, $b) {
+			return $a->getCTime() - $b->getCTime();
+		});
+		\View::share('info_files', $files);
 	}
 
 	/**

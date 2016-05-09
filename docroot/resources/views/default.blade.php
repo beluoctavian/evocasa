@@ -213,24 +213,18 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 footer-item">
-                <h2>Harta website</h2>
-                <div>
-                    <p class="text-center">
-                        <a href="{{ URL::to('/') }}">Acasa</a>
-                    </p>
-                    <p class="text-center">
-                        <a href="{{ URL::to('anunturi') }}">Anunturi</a>
-                    </p>
-                    <p class="text-center">
-                        <a href="{{ URL::to('anunturi') }}">Cautare avansata</a>
-                    </p>
-                    <p class="text-center">
-                        <a href="{{ URL::to('despre-noi') }}">Despre noi</a>
-                    </p>
-                    <p class="text-center">
-                        <a href="{{ URL::to('contact') }}">Contact</a>
-                    </p>
-                </div>
+                <h2>Informatii utile</h2>
+                @if (!empty($info_files))
+                    <div>
+                        @foreach ($info_files as $file)
+                            <p class="text-center">
+                                <a href="{{ URL::to($file->getPath() . '/' . $file->getFilename()) }}">
+                                    {{ $file->getFileName() }}
+                                </a>
+                            </p>
+                        @endforeach
+                    </div>
+                @endif
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 footer-item">
                 <h2>Contact</h2>

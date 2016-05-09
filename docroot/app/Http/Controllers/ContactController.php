@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ContactFormRequest;
 
 class ContactController extends Controller {
+
     public function store(ContactFormRequest $request)
     {
         $data = array(
@@ -27,6 +28,5 @@ class ContactController extends Controller {
         );
 
         return redirect('contact')->with('success',1);
-
     }
 }

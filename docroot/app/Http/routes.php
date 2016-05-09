@@ -1,22 +1,5 @@
 <?php
-
-/*Session*/
-Route::get('login', 'SessionsController@create');
-Route::post('auth/login', 'SessionsController@store');
-Route::get('auth/logout', 'SessionsController@destroy');
-
-//Route::get('anunturi', 'PagesController@postSearch');
-Route::get('despre-noi', 'PagesController@despreNoi');
-Route::get('servicii', 'PagesController@servicii');
-Route::get('contact', 'PagesController@contact');
-Route::post('contact', 'ContactController@store');
-
 /*Administrators*/
-Route::get('adauga-anunt', 'UsersController@viewAdauga');
-Route::post('adauga-anunt', 'UsersController@postAdauga');
-Route::get('editeaza-anunt/{id}', 'UsersController@getEditeaza');
-Route::post('editeaza-anunt', 'UsersController@postEditeaza');
-Route::post('sterge-anunt', 'UsersController@sterge');
 Route::get('printeaza-anunt/{id}', 'UsersController@getPrinteaza');
 Route::get('settings', 'UsersController@getSettings');
 Route::post('settings', 'UsersController@postSettings');
@@ -31,10 +14,19 @@ Route::post('settings', 'UsersController@postSettings');
 
 /* ----------------- REFACTOR ALL ROUTES ----------------- */
 
+/*Session*/
+Route::get('login', 'SessionsController@create');
+Route::post('auth/login', 'SessionsController@store');
+Route::get('auth/logout', 'SessionsController@destroy');
+
 /* Pages */
 Route::get('/', 'PagesController@index');
 Route::get('anunturi', 'PagesController@postSearch');
 Route::get('anunturi/{id}', 'AdvertController@viewEntity');
+Route::get('despre-noi', 'PagesController@despreNoi');
+Route::get('servicii', 'PagesController@servicii');
+Route::get('contact', 'PagesController@contact');
+Route::post('contact', 'ContactController@store');
 
 /* Admin */
 Route::controller('advert/add', 'AdvertController');

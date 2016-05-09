@@ -85,7 +85,16 @@
                         <a href="javascript:" class="list-group-item">Certificat energetic: {{ $owner['energy_certificate'] }}</a>
                         <a href="javascript:" class="list-group-item">Certificat urbanism: {{ $owner['urbanism_certificate'] }}</a>
                         <a href="javascript:" class="list-group-item">Poze map: {{ $owner['map_pictures'] ? "Da" : "Nu" }}</a>
-                        <a href="javascript:" class="list-group-item">Observatii: // TODO: Add observations}</a>
+                        @if (count($owner['observations']) > 0)
+                        <a href="javascript:" class="list-group-item">
+                            <span>Observatii:</span>
+                            <ul>
+                                @foreach ($owner['observations'] as $observation)
+                                    <li>{{ $observation->text }} ({{ $observation->created_at }})</li>
+                                @endforeach
+                            </ul>
+                        </a>
+                        @endif
                     </div>
                 </div>
             </div>

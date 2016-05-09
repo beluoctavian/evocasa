@@ -363,7 +363,6 @@
             </div>
         </div>
     </div><!-- /.row -->
-    {{--<div class='hidden' id='hidden' > <?php echo ($zona[0]);  ?> </div>--}}
 @endsection
 
 @section('scripts')

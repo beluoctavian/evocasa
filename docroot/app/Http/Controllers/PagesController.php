@@ -349,7 +349,10 @@ class PagesController extends Controller {
             $results[$key] = AdvertController::getEntityDetails($item->id);
         }
         $zona = $request['zona'];
-        $zona = implode(',', $zona);
+        if($zona)
+            $zona = implode(',', $zona);
+        else
+            $zona = '';
         return view('pages.adverts')
             ->with('adverts',$results->appends(Input::except('page')))
             ->with('partitions', $partitions)

@@ -111,8 +111,9 @@ class Advert extends Model {
             ]);
         }
         $valid_parameters = [
-          'neighborhood_id' => $neighborhood->id,
-          'area_id' => $area->id,
+            'neighborhood_id' => $neighborhood->id,
+            'area_id' => $area->id,
+            'created_by' => \Auth::user()->id,
         ];
         foreach ($parameters as $key => $value) {
             if (in_array($key, self::$properties)) {

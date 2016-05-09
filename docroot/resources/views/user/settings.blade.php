@@ -22,37 +22,17 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="alert alert-success">
-                        <span>Ati facut modificarile cu succes!</span>
+                        <span>{{ Session::get('success') }}</span>
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                     </div>
                 </div>
             </div>
         @endif
-        @if(Session::has('wrongpass'))
+        @if(Session::has('fail'))
             <div class="row">
                 <div class="col-xs-12">
                     <div class="alert alert-danger">
-                        <span>Ati introdus gresit parola!</span>
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    </div>
-                </div>
-            </div>
-        @endif
-        @if(Session::has('notmatch'))
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="alert alert-danger">
-                        <span>Cele 2 parole nu se potrivesc!</span>
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    </div>
-                </div>
-            </div>
-        @endif
-        @if(Session::has('smallpass'))
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="alert alert-danger">
-                        <span>Parola trebuie sa aiba cel putin 6 caractere!</span>
+                        <span>{{ Session::get('fail') }}</span>
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                     </div>
                 </div>
@@ -108,22 +88,55 @@
     </div>
 
     <div class="col-xs-12 col-sm-6">
-        <form method="POST" action="{{ URL::to('settings/website') }}">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="row margin-bottom">
-                <div class="col-xs-12">
-                    <div class="main-title">
-                        <i class="fa fa-cogs"></i>
-                        <h2>Setari website</h2>
+        <div class="row">
+            <div class="col-xs-12">
+                <form method="POST" enctype="multipart/form-data" action="{{ URL::to('settings/website') }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="row margin-bottom">
+                        <div class="col-xs-12">
+                            <div class="main-title">
+                                <i class="fa fa-cogs"></i>
+                                <h2>Setari website</h2>
+                            </div>
+                            <div class="form-row ">
+                                <div class="form-group col-xs-12">
+                                    <label for="files">Upload fisiere informatii utile</label>
+                                    <div>
+                                        <input type="file" id="files" name="files[]" multiple />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <button type="submit" class="btn btn-warning btn-lg">Modifica</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="row">
-                <div class="col-xs-12 text-center">
-                    <button type="submit" class="btn btn-warning btn-lg">Modifica</button>
-                </div>
+            <div class="col-xs-12">
+                @if (!empty($files))
+                    <p>
+                        <b>Fisiere informatii utile:</b>
+                    </p>
+                    <ul>
+                        @foreach ($files as $file)
+                            <li>
+                                <p>
+                                    <form role="form" method="POST" action="{{ URL::to('settings/website/delete-file/') }}"  onsubmit="return confirm('Sigur doriti sa stergeti fisierul?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="file" value="{{ $file->getPath() . '/' . $file->getFilename() }}">
+                                        <span>{{ $file->getFilename() }}</span>
+                                        <span class="text-center"><input type="submit" class="btn btn-danger btn-xs" value="Sterge fisierul"></span>
+                                    </form>
+                                </p>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
             </div>
-        </form>
+        </div>
     </div>
 </div>
 @endsection

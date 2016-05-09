@@ -12,6 +12,7 @@ use App\Imobil;
 use App\Imbunat;
 use App\Proprietar;
 use Hash;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use URL;
 
 class UsersController extends Controller {
@@ -39,13 +40,22 @@ class UsersController extends Controller {
 
     public function getSettings()
     {
-        return view('user.settings');
+        $info_dirname = 'files/website/info/';
+        if (!\File::exists($info_dirname)) {
+            $create = \File::makeDirectory($info_dirname, $mode = 0777, true, true);
+            if ($create === FALSE) {
+                throw new \Exception("Could not create directory:{$info_dirname}");
+            }
+        }
+        $files = \File::allFiles($info_dirname);
+        return view('user.settings')
+          ->with('files', $files);
     }
 
     public function postUserSettings(Request $request)
     {
         $user = Auth::user();
-        if(Hash::check($request->password,$user->password)){
+        if (Hash::check($request->password,$user->password)){
             if($request->newPassword){
                 if(strlen($request->newPassword) < 6){
                     return redirect()->back()->with('smallpass',1);
@@ -57,9 +67,31 @@ class UsersController extends Controller {
             }
             $user->username = $request->username;
             $user->save();
-        }else{
-            return redirect()->back()->with('wrongpass',1);
         }
-        return redirect()->back()->with('success',1);
+        else {
+            return redirect()->back()->with('fail', 'Ati introdus gresit parola!');
+        }
+        return redirect()->back()->with('success', 'Modificarile au fost salvate.');
+    }
+
+    public function postWebsiteSettings(Request $request)
+    {
+
+        ini_set("memory_limit","256M");
+        $destinationPath = 'files/website/info/';
+        $files = $request->file('files');
+        if ($files[0] !== null){
+            foreach ($request->file('files') as $file) {
+                /** @var UploadedFile $file */
+                $file->move($destinationPath, $file->getClientOriginalName());
+            }
+        }
+        return redirect()->back()->with('success', 'Modificarile au fost salvate.');
+    }
+
+    public function postDeleteFile(Request $request)
+    {
+        \File::delete($request->get('file'));
+        return redirect()->back()->with('success', 'Ati sters fisierul.');
     }
 }

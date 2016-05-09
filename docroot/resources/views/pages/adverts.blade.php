@@ -31,22 +31,6 @@
                         </div>
                     </div>
                 @endif
-                <div class="row">
-                    <div class="col-xs-12">
-                        <a href="/anunturi?tip=apartament" class="add-advert-type">
-                            <span class="glyphicon glyphicon-th"></span>
-                            <span>Apartament</span>
-                        </a>
-                        <a href="/anunturi?tip=casa" class="add-advert-type">
-                            <span class="glyphicon glyphicon-home"></span>
-                            <span>Casa / Vila</span>
-                        </a>
-                        <a href="/anunturi?tip=teren" class="add-advert-type">
-                            <span class="glyphicon glyphicon-picture"></span>
-                            <span>Teren</span>
-                        </a>
-                    </div>
-                </div>
 
                 <form method="get" action="{{ URL::to('anunturi') }}">
 

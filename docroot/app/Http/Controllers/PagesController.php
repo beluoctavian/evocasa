@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Neighborhood;
 use App\StatusType;
 use App\Status;
+use \Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Input;
@@ -355,5 +356,13 @@ class PagesController extends Controller {
             ->with('areas', $areas)
             ->with('type', $entity_type)
             ->with('input_defaults', $this->getInputDefaults($entity_type));
+    }
+
+    public function loadData($values)
+    {
+        $neighborhood_names = explode(',', $values);
+        $neighborhoods = Neighborhood::whereIn('name', $neighborhood_names)->lists('id');
+        $areas = Area::whereIn('neighborhood_id', $neighborhoods)->get();
+        return \Response::json($areas->lists('name'));
     }
 }

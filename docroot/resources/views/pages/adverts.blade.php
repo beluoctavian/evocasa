@@ -119,9 +119,9 @@
                                             <?php
                                             $zone = Input::get('zona') == null ? [] : Input::get('zona');
                                             ?>
-                                            @foreach($areas as $area)
-                                                <option value="{{ $area->name }}" {{ in_array($area->name, $zone) ? 'selected' : '' }}>{{ $area->name }}</option>
-                                            @endforeach
+                                            {{--@foreach($areas as $area)--}}
+                                                {{--<option value="{{ $area->name }}" {{ in_array($area->name, $zone) ? 'selected' : '' }}>{{ $area->name }}</option>--}}
+                                            {{--@endforeach--}}
                                         </select>
                                     </div>
                                 </div>
@@ -443,6 +443,21 @@
     $(".status-item").tooltip({ trigger: "hover" });
 
     // todo:get child and save to database if not exist
-//    $('#area').on("select2:select", function (e) {  });
+    $('#neighborhood').on("change", function (e) {
+        $('#area')
+            .empty();
+
+        $.ajax({
+               type: "GET",
+                url: '/loadData/' + $(this).val(),
+                success: function(json) {
+                    $.each(json, function(i, value) {
+                        $('#area').append($('<option>').text(value).attr('value', value));
+                    });
+            },
+    });
+
+
+    });
 </script>
 @endsection

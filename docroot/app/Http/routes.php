@@ -45,3 +45,5 @@ Route::get('settings', 'UsersController@getSettings');
 Route::post('settings/user', 'UsersController@postUserSettings');
 Route::post('settings/website', 'UsersController@postWebsiteSettings');
 Route::post('settings/website/delete-file', 'UsersController@postDeleteFile');
+
+Route::get('/loadData/{params}', 'PagesController@loadData');

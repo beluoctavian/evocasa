@@ -136,6 +136,15 @@ class Advert extends Model {
         if ($entity_id) {
             /** @var Advert $advert */
             $advert = self::find($entity_id);
+            if($parameters['neighborhood'] == '')
+            {
+                $advert->neighborhood_id = null;
+                $advert->area_id = null;
+            }
+            if($parameters['area'] == '')
+            {
+                $advert->area_id = null;
+            }
             $old_neighborhood = $advert->neighborhood;
             $old_area = $advert->area;
             $old_price = $advert->price;

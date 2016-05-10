@@ -136,6 +136,10 @@ class Advert extends Model {
         if ($entity_id) {
             /** @var Advert $advert */
             $advert = self::find($entity_id);
+            $old_area = $advert->area;
+            $old_neighborhood = $advert->neighborhood;
+
+            $old_price = $advert->price;
             if($parameters['neighborhood'] == '')
             {
                 $advert->neighborhood_id = null;
@@ -145,9 +149,6 @@ class Advert extends Model {
             {
                 $advert->area_id = null;
             }
-            $old_neighborhood = $advert->neighborhood;
-            $old_area = $advert->area;
-            $old_price = $advert->price;
             $advert->fill($valid_parameters);
             $price_history = json_decode($advert->price_history);
             if (empty($price_history)) {

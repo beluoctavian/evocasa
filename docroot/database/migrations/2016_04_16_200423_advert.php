@@ -21,11 +21,11 @@ class Advert extends Migration {
 			$table->integer('price');
 			$table->string('old_price');
 			$table->string('description');
-			$table->integer('neighborhood_id')->unsigned();
+			$table->integer('neighborhood_id')->unsigned()->nullable();
 			$table->foreign('neighborhood_id')
 				->references('id')
 				->on('neighborhood');
-			$table->integer('area_id')->unsigned();
+			$table->integer('area_id')->unsigned()->nullable();
 			$table->foreign('area_id')
 				->references('id')
 				->on('area');

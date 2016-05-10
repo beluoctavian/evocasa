@@ -95,26 +95,37 @@ class Advert extends Model {
     {
         $parameters['neighborhood'] = ucwords(strtolower($parameters['neighborhood']));
         $parameters['area'] = ucwords(strtolower($parameters['area']));
-        /** @var Neighborhood $neighborhood */
-        $neighborhood = Neighborhood::where('name', $parameters['neighborhood'])->first();
-        if (!$neighborhood) {
-            $neighborhood = Neighborhood::create([
-              'name' => $parameters['neighborhood'],
-            ]);
+        $area = null;
+        $neighborhood = null;
+        if($parameters['neighborhood'] != '') {
+
+            /** @var Neighborhood $neighborhood */
+            $neighborhood = Neighborhood::where('name', $parameters['neighborhood'])->first();
+            if (!$neighborhood) {
+                $neighborhood = Neighborhood::create([
+                    'name' => $parameters['neighborhood'],
+                ]);
+            }
+            if($parameters['area'] != '') {
+
+                /** @var Area $area */
+                $area = Area::where('name', $parameters['area'])->where('neighborhood_id', $neighborhood->id)->first();
+                if (!$area) {
+                    $area = Area::create([
+                        'name' => $parameters['area'],
+                        'neighborhood_id' => $neighborhood->id,
+                    ]);
+                }
+            }
         }
-        /** @var Area $area */
-        $area = Area::where('name', $parameters['area'])->where('neighborhood_id', $neighborhood->id)->first();
-        if (!$area) {
-            $area = Area::create([
-              'name' => $parameters['area'],
-              'neighborhood_id' => $neighborhood->id,
-            ]);
+        $valid_parameters = [];
+        if($parameters['neighborhood'] != '') {
+            $valid_parameters['neighborhood_id'] = $neighborhood->id;
+            if ($parameters['area'] != '') {
+                $valid_parameters['area_id'] = $area->id;
+            }
         }
-        $valid_parameters = [
-            'neighborhood_id' => $neighborhood->id,
-            'area_id' => $area->id,
-        ];
-        if ($entity_id === NULL) {
+            if ($entity_id === NULL) {
             $valid_parameters['created_by'] = \Auth::user()->id;
         }
         foreach ($parameters as $key => $value) {

@@ -41,22 +41,28 @@ foreach($proprietars as $proprietar) {
         $anunt->cartier = ucwords(strtolower($anunt->cartier));
         $anunt->zona = ucwords(strtolower($anunt->zona));
         $neighborhood = Neighborhood::where('name', $anunt->cartier)->first();
-        if (!$neighborhood) {
-            $neighborhood = Neighborhood::create([
-                'name' => $anunt->cartier,
-            ]);
-        }
-        /** @var Area $area */
-        $area = Area::where('name', $anunt->zona)->where('neighborhood_id', $neighborhood->id)->first();
-        if (!$area) {
-            $area = Area::create([
-                'name' => $anunt->zona,
-                'neighborhood_id' => $neighborhood->id,
-            ]);
-        }
+        if($anunt->cartier != '') {
 
-        $advert->area_id = $area->id;
-        $advert->neighborhood_id = $neighborhood->id;
+            if (!$neighborhood) {
+                $neighborhood = Neighborhood::create([
+                    'name' => $anunt->cartier,
+                ]);
+            }
+            if($anunt->zona != '')
+            {
+                /** @var Area $area */
+                $area = Area::where('name', $anunt->zona)->where('neighborhood_id', $neighborhood->id)->first();
+                if (!$area) {
+                    $area = Area::create([
+                        'name' => $anunt->zona,
+                        'neighborhood_id' => $neighborhood->id,
+                    ]);
+                }
+                $advert->area_id = $area->id;
+            }
+
+            $advert->neighborhood_id = $neighborhood->id;
+        }
 
         $advert->save();
         $owner->advert_id = $advert->id;

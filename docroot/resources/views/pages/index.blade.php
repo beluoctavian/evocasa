@@ -47,7 +47,7 @@
                             <h2>Anunturi</h2>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-12">
+                    <div class="col-xs-12">
                         @foreach ($items as $item)
                             <?php $advert = $item['advert']; ?>
                             <?php $apartment = $item['entity'] ;?>

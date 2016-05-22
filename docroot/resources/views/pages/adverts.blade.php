@@ -411,6 +411,10 @@
     });
     $(".status-item").tooltip({ trigger: "hover" });
 
+    $('#sortare').change(function() {
+        this.form.submit();
+    });
+
     // todo:get child and save to database if not exist
     $('#neighborhood').on("change", function (e) {
         $('#area')

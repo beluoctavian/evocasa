@@ -689,3 +689,7 @@ footer {
 #price_icon_container .tooltip table {
     margin: 0;
 }
+.images-form .caption select {
+    width: 70px;
+    display: inline-block;
+}

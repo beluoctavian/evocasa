@@ -154,7 +154,7 @@
                                                 <?php $etaj = Input::get('etaj') == null ? [] : Input::get('etaj'); ?>
                                                 <option value="demisol" {{ in_array('demisol', $etaj) ? 'selected' : '' }}>Demisol</option>
                                                 <option value="parter" {{ in_array('parter', $etaj) ? 'selected' : '' }}>Parter</option>
-                                                @for ($i = 1; $i <= 15; $i++)
+                                                @for ($i = 1; $i <= 20; $i++)
                                                     <option value="{{ $i }}" {{ in_array($i, $etaj) ? 'selected' : '' }}>Etaj {{ $i }}</option>
                                                 @endfor
                                             </select>

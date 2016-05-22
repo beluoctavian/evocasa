@@ -35,7 +35,6 @@
     <link href="{{ URL::asset('css/defaults.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/style.css') }}" rel="stylesheet">
 
-    <script src="{{ URL::asset('js/resize-advert-item.js') }}"></script>
     @yield('in-head')
 </head>
 

@@ -278,6 +278,7 @@ footer {
     position: relative;
     float: left;
     margin-right: 10px;
+    width: 100%;
 }
 .similar-item  .img-container {
     display: block;
@@ -306,13 +307,14 @@ footer {
     background: #ffffff;
 }
 .advert-item img {
+    min-width: 100%;
     max-width: 100%;
+    max-height: 300px;
     float: left;
 }
 .advert-item .description {
     display: block;
     float: left;
-    width: 848px;
     position: relative;
     height: 150px;
 }
@@ -341,9 +343,13 @@ footer {
 .advert-item h2 a:hover, .similar-item h2 a:hover{
     text-decoration: none;
 }
+@media (max-width: 992px) {
+    .advert-item .description {
+        margin-top: 10px;
+    }
+}
 @media (min-width: 992px) {
-    .advert-item .img-container img{
-        max-width: 230px;
+    .advert-item img {
         max-height: 150px;
     }
     .advert-item .price {
@@ -457,7 +463,6 @@ footer {
         width: 100%;
         position: relative;
         height: 150px;
-        margin: 20px 0 0 0;
     }
     .advert-item .updated-at {
         display: none;

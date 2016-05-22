@@ -232,103 +232,109 @@
                                         </form>
                                     </div>
                                 @endif
-                                <div class="img-container">
-                                    @if(Auth::guest())
-                                        <a href="{{ URL::to('anunturi/' . $advert['id']) }}">
-                                    @else
-                                        <a href="{{ URL::to('advert/edit/' . $advert['id']) }}">
-                                    @endif
-                                    @if(File::exists('uploaded-images/anunt_' . $advert['id'] . '/'))
-                                        <?php $files = File::allFiles('uploaded-images/anunt_' . $advert['id'] . '/'); sort($files); ?>
-                                        @if (count($files))
-                                            <?php $filename = $files[0]->getRelativePathName(); ?>
-                                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $filename) }}">
-                                        @else
-                                            <img src="{{ URL::asset('img/default-img.jpg') }}" />
-                                        @endif
-                                    @else
-                                        <img src="{{ URL::asset('img/default-img.jpg') }}" />
-                                    @endif
-                                    </a>
-                                    <div class="type">{{ $advert['type'] }}</div>
-                                </div>
-                                <div class="description">
-                                    @if(Auth::guest())
-                                        <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
-                                    @else
-                                        <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
-                                    @endif
-                                    <div class="status hidden-xs">
-                                        @foreach ($item['advert_status'] as $status)
-                                            <div class="status-item" title="{{ $status['created_at'] }}">
-                                                <img src="{{ URL::asset("img/status_icons/{$status['title']}.png") }}" />
-                                                @if ($status['count'] > 1)
-                                                    <span class="badge">x{{ $status['count'] }}</span>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-3">
+                                        <div class="img-container">
+                                            @if(Auth::guest())
+                                                <a href="{{ URL::to('anunturi/' . $advert['id']) }}">
+                                            @else
+                                                <a href="{{ URL::to('advert/edit/' . $advert['id']) }}">
+                                            @endif
+                                            @if(File::exists('uploaded-images/anunt_' . $advert['id'] . '/'))
+                                                <?php $files = File::allFiles('uploaded-images/anunt_' . $advert['id'] . '/'); sort($files); ?>
+                                                @if (count($files))
+                                                    <?php $filename = $files[0]->getRelativePathName(); ?>
+                                                    <img src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $filename) }}">
+                                                @else
+                                                    <img src="{{ URL::asset('img/default-img.jpg') }}" />
                                                 @endif
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <div class="price">
-                                        <div class="a-container">
-                                            <a class="actual" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['price'] }} &euro;</a>
-                                        </div>
-                                        @if($advert['old_price'])
-                                            <div class="a-container">
-                                                <a class="vechi" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['old_price'] }} &euro;</a>
-                                            </div>
-                                        @endif
-                                        <div class="clear-both"></div>
-                                        <div class="updated-at text-center" href="{{ URL::to('anunturi/' . $advert['id']) }}">
-                                            <div>
-                                                <p>Actualizat: {{ date("d-m-Y", strtotime($advert['updated_at'])) }}</p>
-                                                <p>Adaugat: {{ date("d-m-Y", strtotime($advert['updated_at'])) }}</p>
-                                            </div>
+                                            @else
+                                                <img src="{{ URL::asset('img/default-img.jpg') }}" />
+                                            @endif
+                                            </a>
+                                            <div class="type">{{ $advert['type'] }}</div>
                                         </div>
                                     </div>
-                                    <div class="details">
-                                        <ul>
-                                            <li>ID: <b>{{ $advert['code'] }}</b></li>
-                                            @if(!empty($entity['built_area']))
-                                                <li>
-                                                   {{ $entity['built_area'] }} mp
-                                                </li>
+                                    <div class="col-xs-12 col-sm-9">
+                                        <div class="description">
+                                            @if(Auth::guest())
+                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
+                                            @else
+                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
                                             @endif
-                                            @if(!empty($entity['land_area']))
-                                                <li>
-                                                   {{ $entity['land_area'] }} mp
-                                                </li>
-                                            @endif
-                                            @if(!empty($entity['total_area']))
-                                                <li>
-                                                   {{ $entity['total_area'] }} mp
-                                                </li>
-                                            @endif
+                                            <div class="status hidden-xs">
+                                                @foreach ($item['advert_status'] as $status)
+                                                    <div class="status-item" title="{{ $status['created_at'] }}">
+                                                        <img src="{{ URL::asset("img/status_icons/{$status['title']}.png") }}" />
+                                                        @if ($status['count'] > 1)
+                                                            <span class="badge">x{{ $status['count'] }}</span>
+                                                        @endif
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <div class="price">
+                                                <div class="a-container">
+                                                    <a class="actual" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['price'] }} &euro;</a>
+                                                </div>
+                                                @if($advert['old_price'])
+                                                    <div class="a-container">
+                                                        <a class="vechi" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['old_price'] }} &euro;</a>
+                                                    </div>
+                                                @endif
+                                                <div class="clear-both"></div>
+                                                <div class="updated-at text-center" href="{{ URL::to('anunturi/' . $advert['id']) }}">
+                                                    <div>
+                                                        <p>Actualizat: {{ date("d-m-Y", strtotime($advert['updated_at'])) }}</p>
+                                                        <p>Adaugat: {{ date("d-m-Y", strtotime($advert['updated_at'])) }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="details">
+                                                <ul>
+                                                    <li>ID: <b>{{ $advert['code'] }}</b></li>
+                                                    @if(!empty($entity['built_area']))
+                                                        <li>
+                                                           {{ $entity['built_area'] }} mp
+                                                        </li>
+                                                    @endif
+                                                    @if(!empty($entity['land_area']))
+                                                        <li>
+                                                           {{ $entity['land_area'] }} mp
+                                                        </li>
+                                                    @endif
+                                                    @if(!empty($entity['total_area']))
+                                                        <li>
+                                                           {{ $entity['total_area'] }} mp
+                                                        </li>
+                                                    @endif
 
-                                            @if(!empty($entity['partitioning']))
-                                                <li class="hidden-xs hidden-sm">
-                                                    {{ $entity['partitioning'] }}
-                                                </li>
-                                            @endif
+                                                    @if(!empty($entity['partitioning']))
+                                                        <li class="hidden-xs hidden-sm">
+                                                            {{ $entity['partitioning'] }}
+                                                        </li>
+                                                    @endif
 
-                                            @if(!empty($entity['street_opening']))
-                                                <li class="hidden-xs hidden-sm">
-                                                   Street opening:<b> {{ $entity['street_opening'] }}</b> m
-                                                </li>
-                                            @endif
+                                                    @if(!empty($entity['street_opening']))
+                                                        <li class="hidden-xs hidden-sm">
+                                                           Street opening:<b> {{ $entity['street_opening'] }}</b> m
+                                                        </li>
+                                                    @endif
 
-                                            @if(!empty($entity['floor']))
-                                                <li class="hidden-xs hidden-sm">
-                                                    Etaj: {{ $entity['floor'] }}
-                                                </li>
-                                            @endif
+                                                    @if(!empty($entity['floor']))
+                                                        <li class="hidden-xs hidden-sm">
+                                                            Etaj: {{ $entity['floor'] }}
+                                                        </li>
+                                                    @endif
 
-                                            @if(!empty($entity['built_year']))
-                                                <li>
-                                                    An: {{ $entity['built_year'] }}
-                                                </li>
-                                            @endif
+                                                    @if(!empty($entity['built_year']))
+                                                        <li>
+                                                            An: {{ $entity['built_year'] }}
+                                                        </li>
+                                                    @endif
 
-                                        </ul>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="clear-both"></div>

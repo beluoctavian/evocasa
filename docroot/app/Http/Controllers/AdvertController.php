@@ -150,6 +150,7 @@ class AdvertController extends Controller {
         }
       }
     }
+    ksort($advert_status);
     /** @var Owner $owner */
     $owner = $advert->owner;
     $owner->setAttribute('phone', json_decode($owner->phone, TRUE));

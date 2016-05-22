@@ -128,7 +128,7 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="file" value="{{ $file->getPath() . '/' . $file->getFilename() }}">
                                         <span>{{ $file->getFilename() }}</span>
-                                        <span class="text-center"><input type="submit" class="btn btn-danger btn-xs" value="Sterge fisierul"></span>
+                                        <span class="text-center"><input type="submit" class="btn btn-danger btn-xs pull-right" value="Sterge fisierul"></span>
                                     </form>
                                 </p>
                             </li>

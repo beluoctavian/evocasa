@@ -35,7 +35,6 @@
     <link href="{{ URL::asset('css/defaults.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/style.css') }}" rel="stylesheet">
 
-    <script src="{{ URL::asset('js/resize-advert-item.js') }}"></script>
     @yield('in-head')
 </head>
 
@@ -279,6 +278,7 @@
 
 @yield('scripts')
 <script>
+    $('#navbar-select').select2();
     $('#navbar-select').select2('destroy');
 </script>
 </body>

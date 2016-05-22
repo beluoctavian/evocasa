@@ -47,7 +47,7 @@
                             <h2>Anunturi</h2>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-12">
+                    <div class="col-xs-12">
                         @foreach ($items as $item)
                             <?php $advert = $item['advert']; ?>
                             <?php $apartment = $item['entity'] ;?>
@@ -70,73 +70,79 @@
                                         </form>
                                     </div>
                                 @endif
-                                <div class="img-container">
-                                    @if(Auth::guest())
-                                        <a href="{{ URL::to('anunturi/' . $advert['id']) }}">
-                                    @else
-                                        <a href="{{ URL::to('advert/edit/' . $advert['id']) }}">
-                                    @endif
-                                    @if(File::exists('uploaded-images/anunt_' . $advert['id'] . '/'))
-                                        <?php $files = File::allFiles('uploaded-images/anunt_' . $advert['id'] . '/'); sort($files); ?>
-                                        @if (count($files))
-                                            <?php $filename = $files[0]->getRelativePathName(); ?>
-                                            <img src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $filename) }}">
-                                        @else
-                                            <img src="{{ URL::asset('img/default-img.jpg') }}" />
-                                        @endif
-                                    @else
-                                        <img src="{{ URL::asset('img/default-img.jpg') }}" />
-                                    @endif
-                                    </a>
-                                    <div class="type">{{ $advert['type'] }}</div>
-                                </div>
-                                <div class="description">
-                                    @if(Auth::guest())
-                                        <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
-                                    @else
-                                        <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
-                                    @endif
-                                    <div class="price">
-                                        <div class="a-container">
-                                            <a class="actual" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['price'] }} &euro;</a>
-                                        </div>
-                                        @if($advert['old_price'])
-                                            <div class="a-container">
-                                                <a class="vechi" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['old_price'] }} &euro;</a>
-                                            </div>
-                                        @endif
-                                        <div class="clear-both"></div>
-                                        <div class="updated-at text-center" href="{{ URL::to('anunturi/' . $advert['id']) }}">
-                                            <div>
-                                                <p>Actualizat: {{ date("d-m-Y", strtotime($advert['updated_at'])) }}</p>
-                                                <p>Adaugat: {{ date("d-m-Y", strtotime($advert['created_at'])) }}</p>
-                                            </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-3">
+                                        <div class="img-container">
+                                            @if(Auth::guest())
+                                                <a href="{{ URL::to('anunturi/' . $advert['id']) }}">
+                                            @else
+                                                <a href="{{ URL::to('advert/edit/' . $advert['id']) }}">
+                                            @endif
+                                            @if(File::exists('uploaded-images/anunt_' . $advert['id'] . '/'))
+                                                <?php $files = File::allFiles('uploaded-images/anunt_' . $advert['id'] . '/'); sort($files); ?>
+                                                @if (count($files))
+                                                    <?php $filename = $files[0]->getRelativePathName(); ?>
+                                                    <img src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $filename) }}">
+                                                @else
+                                                    <img src="{{ URL::asset('img/default-img.jpg') }}" />
+                                                @endif
+                                            @else
+                                                <img src="{{ URL::asset('img/default-img.jpg') }}" />
+                                            @endif
+                                            </a>
+                                            <div class="type">{{ $advert['type'] }}</div>
                                         </div>
                                     </div>
-                                    <div class="details">
-                                        <ul>
-                                            <li>ID: <b>{{ $advert['code'] }}</b></li>
-                                            <li>
-                                                @if($apartment['built_area'])
-                                                    {{ $apartment['built_area'] }} mp
+                                    <div class="col-xs-12 col-sm-9">
+                                        <div class="description">
+                                            @if(Auth::guest())
+                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
+                                            @else
+                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
+                                            @endif
+                                            <div class="price">
+                                                <div class="a-container">
+                                                    <a class="actual" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['price'] }} &euro;</a>
+                                                </div>
+                                                @if($advert['old_price'])
+                                                    <div class="a-container">
+                                                        <a class="vechi" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['old_price'] }} &euro;</a>
+                                                    </div>
                                                 @endif
-                                            </li>
-                                            <li class="hidden-xs hidden-sm">
-                                                @if($apartment['partitioning'])
-                                                    {{ $apartment['partitioning'] }}
-                                                @endif
-                                            </li>
-                                            <li class="hidden-xs hidden-sm">
-                                                @if($apartment['floor'])
-                                                    Etaj {{ $apartment['floor'] }}
-                                                @endif
-                                            </li>
-                                            <li class="last">
-                                                @if($apartment['built_year'])
-                                                    An {{ $apartment['built_year'] }}
-                                                @endif
-                                            </li>
-                                        </ul>
+                                                <div class="clear-both"></div>
+                                                <div class="updated-at text-center" href="{{ URL::to('anunturi/' . $advert['id']) }}">
+                                                    <div>
+                                                        <p>Actualizat: {{ date("d-m-Y", strtotime($advert['updated_at'])) }}</p>
+                                                        <p>Adaugat: {{ date("d-m-Y", strtotime($advert['created_at'])) }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="details">
+                                                <ul>
+                                                    <li>ID: <b>{{ $advert['code'] }}</b></li>
+                                                    <li>
+                                                        @if($apartment['built_area'])
+                                                            {{ $apartment['built_area'] }} mp
+                                                        @endif
+                                                    </li>
+                                                    <li class="hidden-xs hidden-sm">
+                                                        @if($apartment['partitioning'])
+                                                            {{ $apartment['partitioning'] }}
+                                                        @endif
+                                                    </li>
+                                                    <li class="hidden-xs hidden-sm">
+                                                        @if($apartment['floor'])
+                                                            Etaj {{ $apartment['floor'] }}
+                                                        @endif
+                                                    </li>
+                                                    <li class="last">
+                                                        @if($apartment['built_year'])
+                                                            An {{ $apartment['built_year'] }}
+                                                        @endif
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="clear-both"></div>

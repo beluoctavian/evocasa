@@ -111,7 +111,7 @@
                                                     <option value="{{ $it +1 }}" {{ $key == $it ? 'selected' : '' }}> {{ $it + 1 }} </option>
                                                 @endforeach
                                             </select>
-                                            <a onclick="return confirm('Sigur doriti sa stergeti imaginea?');" href="{{ URL::to('advert/delete-image/' . $advert['id']) }}?file={{ $file->getFilename() }}" class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Sterge imaginea</a>
+                                            <a onclick="return confirm('Sigur doriti sa stergeti imaginea?');" href="{{ URL::to('advert/delete-image/' . $advert['id']) }}?file={{ $file->getPath() . '/' . $file->getFilename() }}" class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Sterge imaginea</a>
                                         </p>
                                     </div>
                                 </div>

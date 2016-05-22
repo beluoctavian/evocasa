@@ -617,17 +617,27 @@ footer {
 .status-item {
     float: left;
     padding: 2px 5px;
+    margin-top: 5px;
     margin-right: 5px;
     background-color: #f8f8f8;
     border: 1px solid #efefef;
     cursor: default;
+    line-height: 22px;
 }
 .status-item:hover {
     background-color: #efefef;
 }
+.status-item img {
+    max-width: 22px;
+    max-height: 22px;
+    margin-right: 3px;
+}
+.status-item .badge {
+    margin-left: 3px;
+}
 .status-item form {
-    float: left;
-    margin-right: 5px;
+    float: right;
+    margin-left: 5px;
 }
 .status-item form button {
     display: inline-block;

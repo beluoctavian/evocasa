@@ -258,10 +258,10 @@
                                     @else
                                         <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
                                     @endif
-                                    <div class="status">
+                                    <div class="status hidden-xs">
                                         @foreach ($item['advert_status'] as $status)
                                             <div class="status-item" title="{{ $status['created_at'] }}">
-                                                {{ $status['title'] }}
+                                                <img src="{{ URL::asset("img/status_icons/{$status['title']}.png") }}" />
                                                 @if ($status['count'] > 1)
                                                     <span class="badge">x{{ $status['count'] }}</span>
                                                 @endif

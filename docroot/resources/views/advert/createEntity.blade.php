@@ -171,11 +171,13 @@
                                                 </thead>
                                                 <tbody>
                                                 @foreach ($advert['price_history'] as $price)
-                                            <tr>
-                                                <td>{{ $price['date'] }}</td>
-                                                    <td>{{ $price['price'] }} &euro;</td>
-                                                </tr>
-                                            @endforeach
+                                                    @if (!empty($price['date']) && !empty($price['price']))
+                                                        <tr>
+                                                            <td>{{ $price['date'] }}</td>
+                                                            <td>{{ $price['price'] }} &euro;</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     @endif

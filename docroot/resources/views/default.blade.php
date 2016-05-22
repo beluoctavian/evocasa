@@ -279,6 +279,7 @@
 
 @yield('scripts')
 <script>
+    $('#navbar-select').select2();
     $('#navbar-select').select2('destroy');
 </script>
 </body>

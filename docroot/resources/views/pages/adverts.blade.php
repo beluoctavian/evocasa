@@ -354,6 +354,9 @@
 <script src="{{ URL::asset('library/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js') }}"></script>
 <script type="text/javascript">
     function format(option) {
+        if ('children' in option) {
+            return option.text;
+        }
         if (option.selected == true) {
             return '<span class="fa fa-check-square-o pull-left"></span><span class="text">' + option.text + '</span>';
         }

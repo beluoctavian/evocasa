@@ -193,7 +193,7 @@ class AdvertController extends Controller {
       }
       foreach ($entity->getAttributes() as $key => $value) {
         if (strpos($key, 'obs_') === 0) {
-          if (!array_key_exists(substr($key, 4), $entity->getAttributes())) {
+          if (empty($entity->getAttributes()[substr($key, 4)])) {
             unset($entity[$key]);
           }
           continue;
@@ -223,7 +223,7 @@ class AdvertController extends Controller {
         if (in_array($key, $ml)) {
           $suffix .= " ml";
         }
-        if (array_key_exists("obs_{$key}", $entity->getAttributes())) {
+        if (!empty($entity->getAttributes()["obs_{$key}"])) {
           $suffix .= " ({$entity["obs_{$key}"]})";
           unset($entity["obs_{$key}"]);
         }

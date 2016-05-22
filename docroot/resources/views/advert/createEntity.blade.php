@@ -115,7 +115,7 @@
                             <h2>
                                 <span>Detalii anunt</span>
                                 @if (!empty($advert['id']))
-                                    <span>: <a href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['code'] }}</a></span>
+                                    <span class="name" style="{{ strlen($advert['code']) > 40 ? 'font-size: 14px;' : '' }}">: <a href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['code'] }}</a></span>
                                 @endif
                             </h2>
                         </div>
@@ -727,8 +727,7 @@
 </script>
 <script type="text/javascript">
     $('textarea').elastic();
-</script>
-<script type="text/javascript">
     $(".status-item").tooltip({ trigger: "hover" });
 </script>
+
 @endsection

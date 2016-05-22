@@ -227,7 +227,7 @@
                         @foreach ($info_files as $file)
                             <p class="text-center">
                                 <a href="{{ URL::to($file->getPath() . '/' . $file->getFilename()) }}">
-                                    {{ $file->getFileName() }}
+                                    {{ str_replace(".{$file->getExtension()}", "", $file->getBaseName()) }}
                                 </a>
                             </p>
                         @endforeach

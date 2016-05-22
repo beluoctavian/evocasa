@@ -419,6 +419,8 @@
     $('#neighborhood').on("change", function (e) {
         $('#area')
             .empty();
+        ceva = '{{ $zona }}' ;
+        zone = ceva.split(',');
         $.ajax({
                type: "GET",
                 url: '/loadData/' + $(this).val(),
@@ -426,24 +428,24 @@
                     $.each(json, function(i, value) {
                         var id = "#opt" + json[i].id;
                         var opt = '<optgroup id="opt'+json[i].id+'" label=' +'"' + json[i].title + '"' +'></optgroup>';
-                        $("#area").append(opt);
+                        $("#area").select2().append(opt);
                         if(value.children)
-                        $.each(value.children, function(i, children){
-                            if ($.inArray(children, zone) > -1) {
-                                var option = '<option selected>' + children + '</option>';
-                                $(id).append(option);
-                            }
-                            else
-                            {
-                                var option = '<option>' + children + '</option>';
+                            $.each(value.children, function(i, children){
+                                if ($.inArray(children, zone) > -1) {
+                                    var option = '<option selected>' + children + '</option>';
+                                    $(id).select2().append(option);
+                                }
+                                else
+                                {
+                                    var option = '<option>' + children + '</option>';
 
-                                $(id).append(option);
-                            }
-                        });
-                    });
-            },
-        });
-    });
+                                    $(id).select2().append(option);
+                                }
+                            });
+                         });
+                    }
+                });
+            });
 
     $( window ).load(function() {
         ceva = '{{ $zona }}' ;
@@ -458,12 +460,12 @@
                     $.each(json, function(i, value) {
                         var id = "#opt" + json[i].id;
                         var opt = '<optgroup id="opt'+json[i].id+'" label=' +'"' + json[i].title + '"' +'></optgroup>';
-                        $("#area").append(opt);
+                        $("#area").select2().append(opt);
                         if(value.children)
 
                         $.each(value.children, function(i, value2){
                             var option = '<option>' + value2 + '</option>';
-                            $(id).append(option);
+                            $(id).select2().append(option);
                         });
                     });
                 }
@@ -474,18 +476,21 @@
                     $.each(json, function(i, value) {
                         var id = "#opt" + json[i].id;
                         var opt = '<optgroup id="opt' + json[i].id + '" label=' + '"' + json[i].title + '"' + '></optgroup>';
-                        $("#area").append(opt);
+                        $("#area").select2().append(opt);
+                        console.log(id);
+
                         if(value.children){
                             $.each(value.children, function(i, children){
                                 if ($.inArray(children, zone) > -1) {
                                     var option = '<option selected>' + children + '</option>';
+
                                     $(id).select2().append($('<option>').text(children).attr('value', children).attr('selected', true));
                                 }
                                 else
                                 {
                                     var option = '<option>' + children + '</option>';
 
-                                    $(id).append(option);
+                                    $(id).select2().append(option);
                                 }
                         });
                         }

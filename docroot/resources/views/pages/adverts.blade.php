@@ -59,7 +59,7 @@
                                                 <?php
                                                   $status = Input::get('status') ? Input::get('status') : 'activ'
                                                 ?>
-                                                <option value="any">Oricare</option>
+                                                <option value="any">Indiferent</option>
                                                 <option value="activ" {{ $status == 'activ' ? 'selected' : '' }}>Activ</option>
                                                 <option value="inactiv" {{ $status == 'inactiv' ? 'selected' : '' }}>Inactiv</option>
                                             </select>

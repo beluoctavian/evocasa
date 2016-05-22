@@ -420,12 +420,27 @@
                 url: '/loadData/' + $(this).val(),
                 success: function(json) {
                     $.each(json, function(i, value) {
-                        $('#area').append($('<option>').text(value).attr('value', value));
+                        var id = "#opt" + json[i].id;
+                        var opt = '<optgroup id="opt'+json[i].id+'" label=' +'"' + json[i].title + '"' +'></optgroup>';
+                        $("#area").append(opt);
+                        if(value.children)
+                        $.each(value.children, function(i, children){
+                            if ($.inArray(children, zone) > -1) {
+                                var option = '<option selected>' + children + '</option>';
+                                $(id).append(option);
+                            }
+                            else
+                            {
+                                var option = '<option>' + children + '</option>';
+
+                                $(id).append(option);
+                            }
+                        });
                     });
             },
         });
     });
-    
+
     $( window ).load(function() {
         ceva = '{{ $zona }}' ;
         zone = ceva.split(',');
@@ -437,24 +452,41 @@
                 if(ceva == '')
                 {
                     $.each(json, function(i, value) {
-                        $('#area').select2().append($('<option>').text(value).attr('value', value));
+                        var id = "#opt" + json[i].id;
+                        var opt = '<optgroup id="opt'+json[i].id+'" label=' +'"' + json[i].title + '"' +'></optgroup>';
+                        $("#area").append(opt);
+                        if(value.children)
+
+                        $.each(value.children, function(i, value2){
+                            var option = '<option>' + value2 + '</option>';
+                            $(id).append(option);
+                        });
                     });
                 }
                 else
                 {
+                    //zone luate din get
+                    //json, value luate din search
                     $.each(json, function(i, value) {
-                        if($.inArray(value, zone) > -1)
-                        {
-                            $('#area').select2().append($('<option>').text(value).attr('value', value).attr('selected', true));
-//                            if(value == 'Calea Vitan')
-//                            {
-//                                $('#area').select2().append($('<option>').text(value).attr('value', value).attr('selected', true));
-//                            }
-                        }
-                        else
-                            $('#area').select2().append($('<option>').text(value).attr('value', value));
+                        var id = "#opt" + json[i].id;
+                        var opt = '<optgroup id="opt' + json[i].id + '" label=' + '"' + json[i].title + '"' + '></optgroup>';
+                        $("#area").append(opt);
+                        if(value.children){
+                            $.each(value.children, function(i, children){
+                                if ($.inArray(children, zone) > -1) {
+                                    var option = '<option selected>' + children + '</option>';
+                                    $(id).select2().append($('<option>').text(children).attr('value', children).attr('selected', true));
+                                }
+                                else
+                                {
+                                    var option = '<option>' + children + '</option>';
 
+                                    $(id).append(option);
+                                }
+                        });
+                        }
                     });
+
                 }
             },
         });

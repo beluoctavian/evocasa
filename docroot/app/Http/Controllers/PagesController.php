@@ -367,8 +367,27 @@ class PagesController extends Controller {
     public function loadData($values)
     {
         $neighborhood_names = explode(',', $values);
-        $neighborhoods = Neighborhood::whereIn('name', $neighborhood_names)->lists('id');
-        $areas = Area::whereIn('neighborhood_id', $neighborhoods)->get();
-        return \Response::json($areas->lists('name'));
+        $neighborhoods = Neighborhood::whereIn('name', $neighborhood_names)->get()->all();
+        $areas = [];
+        foreach ($neighborhoods as $neighborhood) {
+            $data = [];
+            $data['title'] = $neighborhood->name;
+            $data['id'] = $neighborhood->id;
+            $zone = $neighborhood->area->all();
+            sort($zone);
+            if(!empty($zone))
+            {
+                foreach($zone as $zona)
+                {
+                    $areas_name = $zona->name;
+                    $data['children'][] = $areas_name;
+                }
+                sort($data['children']);
+            }
+            $areas[] = $data;
+            sort($areas);
+
+        }
+        return \Response::json($areas);
     }
 }

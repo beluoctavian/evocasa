@@ -87,10 +87,11 @@
                                         <select multiple id="neighborhood" name="cartier[]" class="form-control">
                                             <option value="">Indiferent</option>
                                             <?php
-                                            $cartiere = Input::get('cartier') == null ? [] : Input::get('cartier');
+                                                $cartiere = Input::get('cartier') == null ? [] : Input::get('cartier');
+                                                sort($cartiere);
                                             ?>
                                             @foreach($neighborhoods as $neighborhood)
-                                                <option value="{{ $neighborhood->name }}" {{ in_array($neighborhood->name,$cartiere) ? 'selected' : '' }}>{{ $neighborhood->name }}</option>
+                                                <option value="{{ $neighborhood }}" {{ in_array($neighborhood,$cartiere) ? 'selected' : '' }}>{{ $neighborhood }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -414,7 +415,6 @@
     $('#neighborhood').on("change", function (e) {
         $('#area')
             .empty();
-
         $.ajax({
                type: "GET",
                 url: '/loadData/' + $(this).val(),
@@ -425,8 +425,7 @@
             },
         });
     });
-
-
+    
     $( window ).load(function() {
         ceva = '{{ $zona }}' ;
         zone = ceva.split(',');

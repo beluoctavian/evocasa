@@ -341,7 +341,8 @@ class PagesController extends Controller {
 
         $partitions = array_unique(Apartment::all()->lists('partitioning'));
 
-        $neighborhoods = Neighborhood::all();
+        $neighborhoods = Neighborhood::all()->lists('name');
+        sort($neighborhoods);
 
         $areas = Area::all();
 

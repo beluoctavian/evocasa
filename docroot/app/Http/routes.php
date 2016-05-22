@@ -38,7 +38,7 @@ Route::get('advert/delete-observation/{id}', 'AdvertController@postDeleteObserva
 Route::get('advert/images/{id}', 'AdvertController@getImages');
 Route::post('advert/images/{id}', 'AdvertController@postImages');
 Route::post('advert/change-image-order/{id}', 'AdvertController@changeImageOrder');
-Route::post('advert/delete-image/{id}', 'UsersController@postDeleteFile');
+Route::get('advert/delete-image/{id}', 'UsersController@postDeleteFile');
 
 /* Settings */
 Route::get('settings', 'UsersController@getSettings');

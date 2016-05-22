@@ -94,58 +94,35 @@
                         <h2>Imagini uploadate</h2>
                     </div>
                     <div class="row">
-                        @foreach ($files as $file)
-                        <div class="col-xs-12 col-sm-3">
-                            <div class="thumbnail">
-                                <a class="banner-preview-container" href="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName()) }}">
-                                    <img class="banner-preview" src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName()) }}" alt=""/>
-                                </a>
-                                <div class="caption">
-                                    <p class="text-center">{{ $file->getFilename() }}</p>
-                                    <p>
-                                        <form role="form" method="POST" action="{{ URL::to('advert/delete-image/' . $advert['id']) }}"  onsubmit="return confirm('Sigur doriti sa stergeti imaginea?');">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="file" value="{{ $file->getPath() . '/' . $file->getFilename() }}">
-                                            <p class="text-center"><button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> Sterge imaginea</button></p>
-                                        </form>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ordine imagini -->
-            <div class="row" id="images-ordering">
-                <div class="col-xs-12 col-sm-12">
-                    <div class="main-title">
-                        <i class="fa fa-sort-amount-asc"></i>
-                        <h2>Ordine imagini</h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-
-                            <form role="form" method="POST" action="{{ URL::to('advert/change-image-order/' . $advert['id']) }}">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" name="path" value="{{ 'uploaded-images/anunt_' . $advert['id'] . '/' }}">
-                                @foreach ($files as $key => $file)
-                                    <input type="hidden" name="filename[]" value="{{ $file->getRelativePathName() }}">
-                                    <label for="number{{ $key }}">{{ $file->getRelativePathName() }}</label>
-                                    <select id="number{{ $key }}" name="number[]" class="form-control">
-                                    @foreach ($files as $it => $f)
-                                        <option value="{{ $it +1 }}" {{ $key == $it ? 'selected' : '' }}> {{ $it + 1 }} </option>
-                                    @endforeach
-                                    </select>
-                                @endforeach
-                                <div class="row margin-bottom">
-                                    <div class="col-xs-12 text-center">
-                                        <button type="submit" class="btn btn-warning btn-lg"><i class="fa fa-random"></i> Sorteaza</button>
+                        <form class="images-form" role="form" method="POST" action="{{ URL::to('advert/change-image-order/' . $advert['id']) }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="path" value="{{ 'uploaded-images/anunt_' . $advert['id'] . '/' }}">
+                            @foreach ($files as $key => $file)
+                            <div class="col-xs-12 col-sm-3">
+                                <div class="thumbnail">
+                                    <a class="banner-preview-container" href="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName()) }}">
+                                        <img class="banner-preview" src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getRelativePathName()) }}" alt=""/>
+                                    </a>
+                                    <div class="caption">
+                                        <p>
+                                            <input type="hidden" name="filename[]" value="{{ $file->getRelativePathName() }}">
+                                            <select id="number{{ $key }}" name="number[]" class="form-control">
+                                                @foreach ($files as $it => $f)
+                                                    <option value="{{ $it +1 }}" {{ $key == $it ? 'selected' : '' }}> {{ $it + 1 }} </option>
+                                                @endforeach
+                                            </select>
+                                            <a onclick="return confirm('Sigur doriti sa stergeti imaginea?');" href="{{ URL::to('advert/delete-image/' . $advert['id']) }}?file={{ $file->getPath() . '/' . $file->getFilename() }}" class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Sterge imaginea</a>
+                                        </p>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                            @endforeach
+                            <div class="row margin-bottom">
+                                <div class="col-xs-12 text-center">
+                                    <button type="submit" class="btn btn-warning btn-lg"><i class="fa fa-random"></i> Sorteaza imaginile</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

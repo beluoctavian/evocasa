@@ -150,12 +150,20 @@ class Advert extends Model {
                 $advert->area_id = null;
             }
             $advert->fill($valid_parameters);
-            $price_history = json_decode($advert->price_history);
+            $price_history = json_decode($advert->price_history, TRUE);
             if (empty($price_history)) {
-                $price_history = [$old_price];
+                $price_history = [
+                  [
+                    'date' => gmdate('Y-m-d', \time()),
+                    'price' => $old_price,
+                  ],
+                ];
             }
             if ($old_price != $advert->price) {
-                $price_history[] = $advert->price;
+                $price_history[] = [
+                    'date' => gmdate('Y-m-d', \time()),
+                    'price' => $advert->price,
+                ];
             }
             $advert->price_history = json_encode($price_history);
             $advert->save();

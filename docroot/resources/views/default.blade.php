@@ -161,10 +161,10 @@
                     <a href="{{ URL::to('anunturi?tip=teren') }}"><i class="fa fa-globe"></i> Terenuri</a>
                 </li>
                 <li>
-                    <a href="{{ URL::to('despre-noi') }}"><i class="fa fa-users"></i> Despre noi</a>
+                    <a href="{{ URL::to('servicii') }}"><i class="fa fa-credit-card"></i> Servicii si costuri</a>
                 </li>
                 <li>
-                    <a href="{{ URL::to('servicii') }}"><i class="fa fa-credit-card"></i> Servicii si costuri</a>
+                    <a href="{{ URL::to('despre-noi') }}"><i class="fa fa-users"></i> Despre noi</a>
                 </li>
                 <li class="last">
                     <a href="{{ URL::to('contact') }}"><i class="fa fa-envelope-o"></i> Contact</a>
@@ -184,8 +184,8 @@
                     <option value="{{ URL::to('anunturi?tip=apartament') }}">Apartamente</option>
                     <option value="{{ URL::to('anunturi?tip=casa') }}">Case / Vile</option>
                     <option value="{{ URL::to('anunturi?tip=teren') }}">Terenuri</option>
-                    <option value="{{ URL::to('despre-noi') }}">Despre noi</option>
                     <option value="{{ URL::to('servicii') }}">Servicii si costuri</option>
+                    <option value="{{ URL::to('despre-noi') }}">Despre noi</option>
                     <option value="{{ URL::to('contact') }}">Contact</option>
                 </select>
             </div>
@@ -227,7 +227,7 @@
                         @foreach ($info_files as $file)
                             <p class="text-center">
                                 <a href="{{ URL::to($file->getPath() . '/' . $file->getFilename()) }}">
-                                    {{ $file->getFileName() }}
+                                    {{ str_replace(".{$file->getExtension()}", "", $file->getBaseName()) }}
                                 </a>
                             </p>
                         @endforeach

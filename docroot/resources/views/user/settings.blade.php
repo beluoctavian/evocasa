@@ -81,7 +81,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 text-center">
-                    <button type="submit" class="btn btn-warning btn-lg">Modifica</button>
+                    <button type="submit" class="btn btn-warning">Modifica</button>
                 </div>
             </div>
         </form>
@@ -98,19 +98,15 @@
                                 <i class="fa fa-cogs"></i>
                                 <h2>Setari website</h2>
                             </div>
-                            <div class="form-row ">
-                                <div class="form-group col-xs-12">
-                                    <label for="files">Upload fisiere informatii utile</label>
-                                    <div>
-                                        <input type="file" id="files" name="files[]" multiple />
-                                    </div>
-                                </div>
+                            <label for="files">Upload fisiere informatii utile</label>
+                            <div>
+                                <p>
+                                    <input type="file" id="files" name="files[]" multiple />
+                                </p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 text-center">
-                            <button type="submit" class="btn btn-warning btn-lg">Modifica</button>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-warning">Adauga fisiere</button>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -128,7 +124,7 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="file" value="{{ $file->getPath() . '/' . $file->getFilename() }}">
                                         <span>{{ $file->getFilename() }}</span>
-                                        <span class="text-center"><input type="submit" class="btn btn-danger btn-xs" value="Sterge fisierul"></span>
+                                        <span class="text-center"><input type="submit" class="btn btn-danger btn-xs pull-right" value="Sterge fisierul"></span>
                                     </form>
                                 </p>
                             </li>

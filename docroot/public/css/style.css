@@ -179,7 +179,7 @@ body {
 }
 .main-title {
     display: block;
-    height: 50px;
+    height: 40px;
     padding: 0;
     margin: 0 0 30px 0;
     border-radius: 5px;
@@ -188,9 +188,9 @@ body {
 .main-title > i {
     display: block;
     float: left;
-    height: 50px;
-    width: 50px;
-    line-height: 50px;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
     border-radius: 5px 0 0 5px;
     font-size: 20px;
     background: #f0b70f;
@@ -200,8 +200,8 @@ body {
 .main-title h2 {
     display: block;
     float: left;
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
     margin: 0;
     padding: 0 20px 0 20px;
     font-size: 22px;
@@ -647,7 +647,7 @@ footer {
     background-color: #efefef;
 }
 .sortare-container {
-    padding: 10px;
+    padding: 5px;
 }
 .sortare-container label {
     float: left;
@@ -679,4 +679,17 @@ footer {
 #search-filter-container .form-control {
     box-shadow: none;
     -webkit-box-shadow: none;
+}
+.observations-container {
+    margin-top: 10px;
+}
+#price_icon_container .tooltip {
+    width: 250px;
+}
+#price_icon_container .tooltip table {
+    margin: 0;
+}
+.images-form .caption select {
+    width: 70px;
+    display: inline-block;
 }

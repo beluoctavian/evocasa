@@ -24,7 +24,7 @@
 
 @section('content')
 <div class="row">
-    <div id="main-content" class="col-xs-12 col-md-8">
+    <div id="main-content" class="col-xs-12 col-md-9">
         <div class="container-fluid">
             <div class="row">
                 @foreach ($status_types as $status_type)
@@ -166,7 +166,7 @@
             @endif
         </div>
     </div>
-    <div id="sidebar" class="col-xs-4 hidden-xs hidden-sm">
+    <div id="sidebar" class="col-md-3 hidden-xs hidden-sm">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
@@ -178,7 +178,15 @@
                     <div class="thumbnail">
                         <img class="banner-preview" src="{{ URL::asset("files/user/{$advert['user']['code']}.jpg") }}" alt="{{ $advert['user']['name'] }}"/>
                         <div class="caption">
-                            <p class="text-center"><b>{{ $advert['user']['name'] }}</b></p>
+                            @if (!empty($advert['user']['name']))
+                                <p class="text-center"><b>{{ $advert['user']['name'] }}</b></p>
+                            @endif
+                            @if (!empty($advert['user']['email']))
+                                    <p class="text-center"><a href="mailto:{{ $advert['user']['email'] }}" target="_top">{{ $advert['user']['email'] }}</a></p>
+                            @endif
+                            @if (!empty($advert['user']['phone']))
+                                <p class="text-center"><b>{{ $advert['user']['phone'] }}</b></p>
+                            @endif
                         </div>
                     </div>
                 </div>

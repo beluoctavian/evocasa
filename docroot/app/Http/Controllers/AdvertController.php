@@ -120,7 +120,7 @@ class AdvertController extends Controller {
     if($advert->neighborhood){
       $advert->setAttribute('neighborhood', $advert->neighborhood->name);
     }
-    $advert->setAttribute('price_history', json_decode($advert->price_history));
+    $advert->setAttribute('price_history', json_decode($advert->price_history, TRUE));
     $advert->setAttribute('user', User::find($advert->created_by)->attributesToArray());
     $advert->setAttribute('inactiv', FALSE);
     $advert->setAttribute('retras', FALSE);

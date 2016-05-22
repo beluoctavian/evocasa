@@ -17,16 +17,16 @@
 
 @section('content')
 <div class="row">
-    <div class="col-xs-12">
-        <a href="/advert/add/apartment" class="add-advert-type">
+    <div class="col-xs-12 text-center">
+        <a href="/advert/add/apartment" class="btn btn-lg btn-warning add-advert-type">
             <span class="glyphicon glyphicon-th"></span>
             <span>Apartament</span>
         </a>
-        <a href="/advert/add/house" class="add-advert-type">
+        <a href="/advert/add/house" class="btn btn-lg btn-primary add-advert-type">
             <span class="glyphicon glyphicon-home"></span>
             <span>Casa / Vila</span>
         </a>
-        <a href="/advert/add/terrain" class="add-advert-type">
+        <a href="/advert/add/terrain" class="btn btn-lg btn-success add-advert-type">
             <span class="glyphicon glyphicon-picture"></span>
             <span>Teren</span>
         </a>

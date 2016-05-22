@@ -59,7 +59,7 @@
                                                 <?php
                                                   $status = Input::get('status') ? Input::get('status') : 'activ'
                                                 ?>
-                                                <option value="any">Oricare</option>
+                                                <option value="any">Indiferent</option>
                                                 <option value="activ" {{ $status == 'activ' ? 'selected' : '' }}>Activ</option>
                                                 <option value="inactiv" {{ $status == 'inactiv' ? 'selected' : '' }}>Inactiv</option>
                                             </select>
@@ -154,7 +154,7 @@
                                                 <?php $etaj = Input::get('etaj') == null ? [] : Input::get('etaj'); ?>
                                                 <option value="demisol" {{ in_array('demisol', $etaj) ? 'selected' : '' }}>Demisol</option>
                                                 <option value="parter" {{ in_array('parter', $etaj) ? 'selected' : '' }}>Parter</option>
-                                                @for ($i = 1; $i <= 15; $i++)
+                                                @for ($i = 1; $i <= 20; $i++)
                                                     <option value="{{ $i }}" {{ in_array($i, $etaj) ? 'selected' : '' }}>Etaj {{ $i }}</option>
                                                 @endfor
                                             </select>
@@ -410,6 +410,10 @@
         }
     });
     $(".status-item").tooltip({ trigger: "hover" });
+
+    $('#sortare').change(function() {
+        this.form.submit();
+    });
 
     // todo:get child and save to database if not exist
     $('#neighborhood').on("change", function (e) {

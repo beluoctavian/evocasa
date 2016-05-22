@@ -115,7 +115,7 @@
                             <h2>
                                 <span>Detalii anunt</span>
                                 @if (!empty($advert['id']))
-                                    <span>: <a href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['code'] }}</a></span>
+                                    <span class="name" style="{{ strlen($advert['code']) > 40 ? 'font-size: 14px;' : '' }}">: <a href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['code'] }}</a></span>
                                 @endif
                             </h2>
                         </div>
@@ -158,9 +158,30 @@
                         <div class="row">
                             <div class="form-group col-xs-12 col-sm-4">
                                 <label for="advert[price]">Pret actual</label>
-                                <div class="input-group">
+                                <div id="price_icon_container" class="input-group">
                                     <input value="{{ !empty($advert['price']) ? $advert['price'] : '' }}" id="advert[price]" name="advert[price]" type="text" class="form-control">
-                                    <span class="input-group-addon">&euro;</span>
+                                    <span id="price_icon" class="input-group-addon" data-toggle="tooltip" data-placement="right" data-html="true" title='
+                                    @if (!empty($advert['price_history']))
+                                            <table class="price-history-table table table-bordered table-condensed">
+                                                <thead>
+                                                <tr>
+                                                    <td>Data</td>
+                                                    <td>Pret</td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach ($advert['price_history'] as $price)
+                                                    @if (!empty($price['date']) && !empty($price['price']))
+                                                        <tr>
+                                                            <td>{{ $price['date'] }}</td>
+                                                            <td>{{ $price['price'] }} &euro;</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    @endif
+                                            '>&euro;</span>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-4">
@@ -176,16 +197,6 @@
                                     <textarea id="advert[description]" name="advert[description]" class="form-control" rows="4">{{ !empty($advert['description']) ? $advert['description'] : '' }}</textarea>
                                 </div>
                             </div>
-                            @if (!empty($advert['price_history']))
-                                <div class="form-group col-xs-12">
-                                    <div><b>Istoric pret</b></div>
-                                    <ol>
-                                        @foreach ($advert['price_history'] as $price)
-                                            <li>{{ $price }} &euro;</li>
-                                        @endforeach
-                                    </ol>
-                                </div>
-                            @endif
                         </div>
                     </div> <!-- end anunt -->
 
@@ -293,13 +304,10 @@
                                 </div>
                                 @if (!empty($owner))
                                     @foreach ($owner['observations'] as $observation)
-                                        <div class="row">
-                                            <div class="col-xs-11">
+                                        <div class="row observations-container">
+                                            <div class="col-xs-12">
+                                                <span>{{ $observation->created_at }} <a href="{{ URL::to('advert/delete-observation/' . $observation->id) }}"><i class="fa fa-times" aria-hidden="true"></i></a></span>
                                                 <textarea disabled class="form-control" rows="2">{{ $observation->text }}</textarea>
-                                                {{ $observation->created_at }}
-                                            </div>
-                                            <div class="col-xs-1">
-                                                <a href="{{ URL::to('advert/delete-observation/' . $observation->id) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
                                             </div>
                                         </div>
                                     @endforeach
@@ -727,8 +735,8 @@
 </script>
 <script type="text/javascript">
     $('textarea').elastic();
-</script>
-<script type="text/javascript">
     $(".status-item").tooltip({ trigger: "hover" });
+    $("#price_icon").tooltip({ trigger: "hover" });
 </script>
+
 @endsection

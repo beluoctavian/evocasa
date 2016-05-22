@@ -680,3 +680,12 @@ footer {
     box-shadow: none;
     -webkit-box-shadow: none;
 }
+.observations-container {
+    margin-top: 10px;
+}
+#price_icon_container .tooltip {
+    width: 250px;
+}
+#price_icon_container .tooltip table {
+    margin: 0;
+}

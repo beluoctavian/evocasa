@@ -24,7 +24,7 @@
 
 @section('content')
 <div class="row">
-    <div id="main-content" class="col-xs-12 col-md-8">
+    <div id="main-content" class="col-xs-12 col-md-9">
         <div class="container-fluid">
             <div class="row">
                 @foreach ($status_types as $status_type)
@@ -166,7 +166,7 @@
             @endif
         </div>
     </div>
-    <div id="sidebar" class="col-xs-4 hidden-xs hidden-sm">
+    <div id="sidebar" class="col-md-3 hidden-xs hidden-sm">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">

@@ -163,10 +163,10 @@ class Advert extends Model {
             }
             $advert->price_history = json_encode($price_history);
             $advert->save();
-            if ($old_area and $old_area->advert->count() == 0) {
+            if (!empty($old_area) && $old_area->advert->count() == 0) {
                 $old_area->delete();
             }
-            if ($old_neighborhood and $old_neighborhood->advert->count() == 0) {
+            if (!empty($old_neighborhood) && $old_neighborhood->advert->count() == 0) {
                 $old_neighborhood->delete();
             }
         }

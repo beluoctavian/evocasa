@@ -54,8 +54,15 @@ class PagesController extends Controller {
 	public function index(Request $request)
     {
         $recommended_id = StatusType::where('type', 'recomandat')->first()->id;
+        $inactive_id = StatusType::where('type', 'inactiv')->first()->id;
+        $inactive_ids = Status::where('type_id', $inactive_id)->lists('advert_id');
         $ids = Status::where('type_id', $recommended_id)->lists('advert_id');
         $ids = array_unique($ids);
+        foreach ($ids as $key => $id) {
+            if (in_array($id, $inactive_ids)) {
+                unset($ids[$key]);
+            }
+        }
 
         $perPage = 5;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();

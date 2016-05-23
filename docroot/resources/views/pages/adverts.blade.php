@@ -202,6 +202,11 @@
                 </form>
                 <div class="row" id="anunturi">
                     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                        @if($adverts->total() == 0)
+                            <div class="text-center">
+                                <span>Ne pare rau, nu a fost gasit niciun rezultat.</span>
+                            </div>
+                        @endif
                         @foreach($adverts as $item)
                             <?php
                                 $entity = $item['entity'];

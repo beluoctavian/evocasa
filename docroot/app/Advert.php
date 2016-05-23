@@ -97,8 +97,7 @@ class Advert extends Model {
         $parameters['area'] = ucwords(strtolower($parameters['area']));
         $area = null;
         $neighborhood = null;
-        if($parameters['neighborhood'] != '') {
-
+        if(!empty($parameters['neighborhood'])) {
             /** @var Neighborhood $neighborhood */
             $neighborhood = Neighborhood::where('name', $parameters['neighborhood'])->first();
             if (!$neighborhood) {
@@ -106,8 +105,7 @@ class Advert extends Model {
                     'name' => $parameters['neighborhood'],
                 ]);
             }
-            if($parameters['area'] != '') {
-
+            if(!empty($parameters['area'])) {
                 /** @var Area $area */
                 $area = Area::where('name', $parameters['area'])->where('neighborhood_id', $neighborhood->id)->first();
                 if (!$area) {
@@ -119,13 +117,13 @@ class Advert extends Model {
             }
         }
         $valid_parameters = [];
-        if($parameters['neighborhood'] != '') {
+        if (!empty($neighborhood)) {
             $valid_parameters['neighborhood_id'] = $neighborhood->id;
-            if ($parameters['area'] != '') {
-                $valid_parameters['area_id'] = $area->id;
-            }
         }
-            if ($entity_id === NULL) {
+        if (!empty($area)) {
+            $valid_parameters['area_id'] = $area->id;
+        }
+        if ($entity_id === NULL) {
             $valid_parameters['created_by'] = \Auth::user()->id;
         }
         foreach ($parameters as $key => $value) {
@@ -140,13 +138,11 @@ class Advert extends Model {
             $old_neighborhood = $advert->neighborhood;
 
             $old_price = $advert->price;
-            if($parameters['neighborhood'] == '')
-            {
+            if (empty($parameters['neighborhood'])) {
                 $advert->neighborhood_id = null;
                 $advert->area_id = null;
             }
-            if($parameters['area'] == '')
-            {
+            if (empty($parameters['area'])){
                 $advert->area_id = null;
             }
             $advert->fill($valid_parameters);

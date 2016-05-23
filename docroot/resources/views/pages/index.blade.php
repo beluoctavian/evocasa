@@ -157,7 +157,7 @@
                 </div>
             </div>
         </div>
-        <div id="sidebar" class="hidden-xs hidden-sm col-md-3">
+        <div id="sidebar" class="col-md-3">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">

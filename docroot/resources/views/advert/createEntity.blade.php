@@ -307,7 +307,7 @@
                                     @foreach ($owner['observations'] as $observation)
                                         <div class="row observations-container">
                                             <div class="col-xs-12">
-                                                <span>{{ $observation->created_at }} <a href="{{ URL::to('advert/delete-observation/' . $observation->id) }}"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+                                                <span>{{ $observation->created_at }} <a href="{{ URL::to('advert/delete-observation/' . $observation->id) }}"><i class="red fa fa-times" aria-hidden="true"></i></a></span>
                                                 <textarea disabled class="form-control" rows="2">{{ $observation->text }}</textarea>
                                             </div>
                                         </div>

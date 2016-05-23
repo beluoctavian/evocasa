@@ -364,12 +364,13 @@
             return '<span class="fa fa-square-o pull-left"></span><span class="text">' + option.text + '</span>';
         }
     }
-    $('select').select2({
+    var defaultSelect2Options = {
         minimumResultsForSearch: Infinity,
         placeholder: "Indiferent",
         escapeMarkup: function (m) {return m;},
         templateResult: format
-    });
+    };
+    $('select').select2(defaultSelect2Options);
     $('#price_range').ionRangeSlider({
         type: 'double',
         min: {{ $input_defaults['pret_minim'] }},
@@ -431,18 +432,18 @@
                     $.each(json, function(i, value) {
                         var id = "#opt" + json[i].id;
                         var opt = '<optgroup id="opt'+json[i].id+'" label=' +'"' + json[i].title + '"' +'></optgroup>';
-                        $("#area").select2().append(opt);
+                        $("#area").select2(defaultSelect2Options).append(opt);
                         if(value.children)
                             $.each(value.children, function(i, children){
                                 if ($.inArray(children, zone) > -1) {
                                     var option = '<option selected>' + children + '</option>';
-                                    $(id).select2().append(option);
+                                    $(id).append(option);
                                 }
                                 else
                                 {
                                     var option = '<option>' + children + '</option>';
 
-                                    $(id).select2().append(option);
+                                    $(id).append(option);
                                 }
                             });
                          });
@@ -463,12 +464,12 @@
                     $.each(json, function(i, value) {
                         var id = "#opt" + json[i].id;
                         var opt = '<optgroup id="opt'+json[i].id+'" label=' +'"' + json[i].title + '"' +'></optgroup>';
-                        $("#area").select2().append(opt);
+                        $("#area").append(opt);
                         if(value.children)
 
                         $.each(value.children, function(i, value2){
                             var option = '<option>' + value2 + '</option>';
-                            $(id).select2().append(option);
+                            $(id).append(option);
                         });
                     });
                 }
@@ -479,21 +480,16 @@
                     $.each(json, function(i, value) {
                         var id = "#opt" + json[i].id;
                         var opt = '<optgroup id="opt' + json[i].id + '" label=' + '"' + json[i].title + '"' + '></optgroup>';
-                        $("#area").select2().append(opt);
-                        console.log(id);
-
+                        $("#area").append(opt);
+                        
                         if(value.children){
                             $.each(value.children, function(i, children){
+                                var option = '<option selected>' + children + '</option>';
                                 if ($.inArray(children, zone) > -1) {
-                                    var option = '<option selected>' + children + '</option>';
-
                                     $(id).select2().append($('<option>').text(children).attr('value', children).attr('selected', true));
                                 }
-                                else
-                                {
-                                    var option = '<option>' + children + '</option>';
-
-                                    $(id).select2().append(option);
+                                else {
+                                    $(id).append(option);
                                 }
                         });
                         }

@@ -166,7 +166,7 @@
             @endif
         </div>
     </div>
-    <div id="sidebar" class="col-md-3">
+    <div id="sidebar" class="col-xs-12 col-md-3">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">

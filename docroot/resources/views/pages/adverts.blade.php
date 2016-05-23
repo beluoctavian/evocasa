@@ -489,6 +489,7 @@
                                     $(id).select2().append($('<option>').text(children).attr('value', children).attr('selected', true));
                                 }
                                 else {
+                                    option = '<option>' + children + '</option>';
                                     $(id).append(option);
                                 }
                         });
@@ -496,6 +497,7 @@
                     });
 
                 }
+                $("#area").trigger('change');
             },
         });
     });

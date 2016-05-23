@@ -172,6 +172,14 @@ class Advert extends Model {
         }
         else {
             /** @var Advert $advert */
+            if (!empty($valid_parameters['price'])) {
+                $valid_parameters['price_history'] = json_encode([
+                  [
+                    'date' => gmdate('Y-m-d', \time()),
+                    'price' => $valid_parameters['price'],
+                  ],
+                ]);
+            }
             $advert = self::create($valid_parameters);
             $advert->code = \Auth::user()->code . '_' . $advert->id;
             $advert->save();

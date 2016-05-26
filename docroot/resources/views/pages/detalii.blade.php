@@ -129,7 +129,7 @@
                             <a href="javascript:" class="list-group-item">Suprafata utila: {{ $imobil->su }} mp</a>
                         @endif
                         @if($imobil->sc)
-                        <a href="javascript:" class="list-group-item">Suprafata construita: {{ $imobil->sc }} mp</a>
+                        <a href="javascript:" class="list-group-item">Suprafata totala: {{ $imobil->sc }} mp</a>
                         @endif
                         @if($imobil->compartimentare)
                         <a href="javascript:" class="list-group-item">Compartimentare: {{ $imobil->compartimentare }}</a>

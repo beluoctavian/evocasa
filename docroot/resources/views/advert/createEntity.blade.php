@@ -336,7 +336,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="entity[built_area]">Suprafata construita</label>
+                                    <label for="entity[built_area]">Suprafata totala</label>
                                     <div class="input-group">
                                         <input value="{{ !empty($entity['built_area']) ? $entity['built_area'] : '' }}" id="entity[built_area]" name="entity[built_area]" type="text" class="form-control">
                                         <span class="input-group-addon">mp</span>

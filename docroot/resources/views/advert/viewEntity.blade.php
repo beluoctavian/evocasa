@@ -63,7 +63,7 @@
                 </div>
                 @if (Auth::guest() && !empty($files))
                     <div class="row margin-top">
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 col-md-10 col-md-offset-1 margin-top">
                             <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true" data-width="100%" data-ratio="1280/720">
                                 @foreach ($files as $file)
                                     <img src="{{ URL::asset('uploaded-images/anunt_' . $advert['id'] . '/' . $file->getFilename()) }}">

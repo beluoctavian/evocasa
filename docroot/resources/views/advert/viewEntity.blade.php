@@ -186,13 +186,13 @@
                         <img class="banner-preview" src="{{ URL::asset("files/user/{$advert['user']['code']}.jpg") }}" alt="{{ $advert['user']['name'] }}"/>
                         <div class="caption">
                             @if (!empty($advert['user']['name']))
-                                <p class="text-center"><b>{{ $advert['user']['name'] }}</b></p>
+                                <p class="grey" style="font-size: 16px;"><b>{{ strtoupper($advert['user']['name']) }}</b></p>
                             @endif
                             @if (!empty($advert['user']['email']))
-                                    <p class="text-center"><a href="mailto:{{ $advert['user']['email'] }}" target="_top">{{ $advert['user']['email'] }}</a></p>
+                                <p><a class="yellow" href="mailto:{{ $advert['user']['email'] }}" target="_top">{{ $advert['user']['email'] }}</a></p>
                             @endif
                             @if (!empty($advert['user']['phone']))
-                                <p class="text-center"><b>{{ $advert['user']['phone'] }}</b></p>
+                                <p class="yellow"><b>{{ $advert['user']['phone'] }}</b></p>
                             @endif
                         </div>
                     </div>

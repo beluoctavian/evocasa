@@ -727,3 +727,6 @@ footer {
 .view-entity-title {
     color: #fcbf10;
 }
+.yellow, .yellow:hover {
+    color: #fcbf10;;
+}

@@ -50,10 +50,16 @@
                         </form>
                     </div>
                     @endif
-                    <h3>Pret: {{ $advert['price'] }} &euro;</h3>
-                    @if (!empty($advert['old_price']))
-                    <h3 class="red">Pret vechi: {{ $advert['old_price'] }} &euro;</h3>
-                    @endif
+                    <div class="price big with-margin">
+                        <div class="a-container pull-left">
+                            <a class="actual" href="#">{{ $advert['price'] }} &euro;</a>
+                        </div>
+                        @if($advert['old_price'])
+                            <div class="a-container pull-left">
+                                <a class="vechi" href="#">{{ $advert['old_price'] }} &euro;</a>
+                            </div>
+                        @endif
+                    </div>
                 </div>
                 @if (Auth::guest() && !empty($files))
                     <div class="row margin-top">

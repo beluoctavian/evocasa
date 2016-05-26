@@ -371,7 +371,7 @@ footer {
     margin: 0;
     font-size: 12px;
 }
-.advert-item .price a {
+.price a {
     display: inline-block;
     background: rgba(102,102,102,0.3);
     color: #ffffff;
@@ -381,7 +381,7 @@ footer {
     border-radius: 3px;
     font-size: 18px;
 }
-.similar-item .price a {
+.price a {
     display: inline-block;
     background: rgba(102,102,102,0.3);
     color: #ffffff;
@@ -391,15 +391,22 @@ footer {
     border-radius: 3px;
     font-size: 15px;
 }
-.advert-item .price a.actual, .similar-item .price a.actual {
+.price a.actual, .similar-item .price a.actual {
     color: #46ae30;
 }
-.advert-item .price a.vechi, .advert-item .price a.vechi:hover, .similar-item .price a.vechi, .similar-item .price a.vechi:hover {
+.price a.vechi, .advert-item .price a.vechi:hover, .similar-item .price a.vechi, .similar-item .price a.vechi:hover {
     color: #e30000;
     text-decoration: line-through;
 }
-.advert-item .price a:hover, .similar-item .price a:hover {
+.price a:hover, .similar-item .price a:hover {
     text-decoration: none;
+}
+.price.big a {
+    margin-top: 20px;
+    font-size: 20px;
+}
+.price.with-margin a {
+    margin-right: 10px;
 }
 .advert-item .details, .similar-item .details {
     position: absolute;

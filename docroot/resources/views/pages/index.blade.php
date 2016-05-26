@@ -47,7 +47,7 @@
                             <h2>Anunturi</h2>
                         </div>
                     </div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-10 col-xs-offset-1">
                         @foreach ($items as $item)
                             <?php $advert = $item['advert']; ?>
                             <?php $apartment = $item['entity'] ;?>
@@ -167,7 +167,7 @@
                 </div>
             </div>
         </div>
-        <div id="sidebar" class="col-xs-12 col-md-3">
+        <div id="sidebar" class="hidden-xs hidden-sm col-md-3">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">

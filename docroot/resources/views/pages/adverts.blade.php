@@ -351,7 +351,7 @@
                 </div>
             </div>
         </div>
-        <div id="sidebar" class="col-xs-12 col-sm-3">
+        <div id="sidebar" class="hidden-xs hidden-sm col-sm-3">
             <div class="container-fluid">
             </div>
         </div>

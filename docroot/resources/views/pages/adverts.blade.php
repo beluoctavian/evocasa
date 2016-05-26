@@ -47,7 +47,7 @@
                                 @if(!Auth::guest())
                                     <div class="row">
                                         <div class="form-group col-xs-6 col-sm-2">
-                                            <label>Telefon proprietar</label>
+                                            <label>Telefon</label>
                                             <div>
                                                 <input name="telefon_proprietar" type="text" class="form-control" value="{{ Input::get('telefon_proprietar') ? Input::get('telefon_proprietar') : '' }}">
                                             </div>
@@ -124,7 +124,8 @@
                                     </div>
                                     @if ($type == null or $type == 'apartament' or $type == 'casa')
                                         <div class="form-group col-xs-6 col-sm-2">
-                                            <label for="an_constructie_range">An constructie</label>
+                                            <label class="hidden-md hidden-lg" for="an_constructie_range">An constr.</label>
+                                            <label class="hidden-xs hidden-sm" for="an_constructie_range">An constructie</label>
                                             <input type="text" id="an_constructie_range" value="">
                                             <div class="hidden">
                                                 <input name="an_constructie_minim" id="an_constructie_minim" type="hidden" value="{{ Input::get('an_constructie_minim') ? Input::get('an_constructie_minim') : '' }}">
@@ -132,7 +133,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-xs-6 col-sm-2">
-                                            <label>Numar camere</label>
+                                            <label class="hidden-md hidden-lg" for="an_constructie_range">Nr. camere</label>
+                                            <label class="hidden-xs hidden-sm" for="an_constructie_range">Numar camere</label>
                                             <select multiple id="numar_camere" name="numar_camere[]" class="form-control">
                                                 <?php $numar_camere = Input::get('numar_camere') == null ? [] : Input::get('numar_camere'); ?>
                                                 <option value="1" {{ in_array(1,$numar_camere) ? 'selected' : '' }}>garsoniera</option>
@@ -154,7 +156,8 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-xs-6 col-sm-2">
-                                                <label>Compartimentare</label>
+                                                <label class="hidden-md hidden-lg">Compart.</label>
+                                                <label class="hidden-xs hidden-sm">Compartimentare</label>
                                                 <div>
                                                     <select multiple name="compartimentare[]" id="partitioning" class="form-control">
                                                         <option value="">Indiferent</option>

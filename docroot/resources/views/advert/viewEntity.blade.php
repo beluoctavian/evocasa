@@ -35,7 +35,8 @@
                     @endif
                 @endforeach
                 <div class="col-xs-12 relative">
-                    <h2 class="no-margin">{{ $advert['title'] }}, ID: {{ $advert['code'] }}</h2>
+                    <h2 class="no-margin view-entity-title">
+                        <span class="grey"><b>[{{ $advert['code'] }}]</b></span>&nbsp;&nbsp;{{ $advert['title'] }}</h2>
                 </div>
                 <div class="col-xs-12">
                     @if (!Auth::guest())

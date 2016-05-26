@@ -674,11 +674,6 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[modernizat]" {{ !empty($improvements['modernizat']) ? 'checked' : '' }} type="checkbox" value="1"> Modernizat
-                                            </label>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <label class="checkbox-inline">
                                                 <input name="improvements[canalizare]" {{ !empty($improvements['canalizare']) ? 'checked' : '' }} type="checkbox" value="1"> Canalizare
                                             </label>
                                         </div>

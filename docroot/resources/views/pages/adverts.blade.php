@@ -297,41 +297,64 @@
                                             </div>
                                             <div class="details">
                                                 <ul>
-                                                    @if(!empty($entity['land_area']))
-                                                        <li>
-                                                           {{ $entity['land_area'] }} mp
-                                                        </li>
-                                                    @endif
-                                                    @if(!empty($entity['total_area']))
-                                                        <li>
-                                                           {{ $entity['total_area'] }} mp
-                                                        </li>
-                                                    @endif
+                                                    @if ($advert['type'] == 'terrain')
+                                                        @if(!empty($entity['total_area']))
+                                                            <li>
+                                                                {{ $entity['total_area'] }} mp
+                                                            </li>
+                                                        @endif
+                                                        @if(!empty($entity['street_opening']))
+                                                            <li>
+                                                                Deschidere: {{ $entity['street_opening'] }} ml
+                                                            </li>
+                                                        @endif
+                                                        @if(!empty($entity['depth']))
+                                                            <li>
+                                                                Adancime: {{ $entity['depth'] }} ml
+                                                            </li>
+                                                        @endif
+                                                        @if(!empty($entity['access_width']))
+                                                            <li class="hidden-xs hidden-sm">
+                                                                Lat. drum: {{ $entity['access_width'] }} ml
+                                                            </li>
+                                                        @endif
+                                                    @else
+                                                        @if(!empty($entity['land_area']))
+                                                            <li class="hidden-xs hidden-sm">
+                                                                {{ $entity['land_area'] }} mp
+                                                            </li>
+                                                        @endif
 
-                                                    @if(!empty($entity['partitioning']))
-                                                        <li class="hidden-xs hidden-sm">
-                                                            {{ $entity['partitioning'] }}
-                                                        </li>
-                                                    @endif
+                                                        @if(!empty($entity['total_area']))
+                                                            <li>
+                                                                {{ $entity['total_area'] }} mp
+                                                            </li>
+                                                        @endif
 
-                                                    @if(!empty($entity['floor']))
-                                                        <li>
-                                                            Etaj: {{ $entity['floor'] }}
-                                                        </li>
-                                                    @endif
+                                                        @if(!empty($entity['partitioning']))
+                                                            <li class="hidden-xs hidden-sm">
+                                                                {{ $entity['partitioning'] }}
+                                                            </li>
+                                                        @endif
 
-                                                    @if(!empty($entity['height']))
-                                                        <li>
-                                                            Regim inaltime: {{ $entity['height'] }}
-                                                        </li>
-                                                    @endif
+                                                        @if(!empty($entity['floor']))
+                                                            <li>
+                                                                Etaj: {{ $entity['floor'] }}
+                                                            </li>
+                                                        @endif
 
-                                                    @if(!empty($entity['built_year']))
-                                                        <li>
-                                                            An: {{ $entity['built_year'] }}
-                                                        </li>
-                                                    @endif
+                                                        @if(!empty($entity['height']))
+                                                            <li>
+                                                                {{ $entity['height'] }}
+                                                            </li>
+                                                        @endif
 
+                                                        @if(!empty($entity['built_year']))
+                                                            <li>
+                                                                {{ $entity['built_year'] }}
+                                                            </li>
+                                                        @endif
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </div>

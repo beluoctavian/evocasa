@@ -62,7 +62,7 @@ class AdvertController extends Controller {
     'land_area' => 'Suprafata teren',
     'street_opening' => 'Deschidere stradala',
     'footprint' => 'Amprenta la sol',
-    'total_area' => 'Suprafata desfasurata totala',
+    'total_area' => 'Suprafata totala',
     'level_area' => 'Suprafata per nivel',
     'height' => 'Regim inaltime',
     'depth' => 'Adancime',

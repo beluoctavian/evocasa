@@ -297,11 +297,6 @@
                                             </div>
                                             <div class="details">
                                                 <ul>
-                                                    @if(!empty($entity['built_area']))
-                                                        <li>
-                                                           {{ $entity['built_area'] }} mp
-                                                        </li>
-                                                    @endif
                                                     @if(!empty($entity['land_area']))
                                                         <li>
                                                            {{ $entity['land_area'] }} mp
@@ -319,15 +314,15 @@
                                                         </li>
                                                     @endif
 
-                                                    @if(!empty($entity['street_opening']))
-                                                        <li class="hidden-xs hidden-sm">
-                                                           Street opening:<b> {{ $entity['street_opening'] }}</b> m
-                                                        </li>
-                                                    @endif
-
                                                     @if(!empty($entity['floor']))
                                                         <li>
                                                             Etaj: {{ $entity['floor'] }}
+                                                        </li>
+                                                    @endif
+
+                                                    @if(!empty($entity['height']))
+                                                        <li>
+                                                            Regim inaltime: {{ $entity['height'] }}
                                                         </li>
                                                     @endif
 

@@ -213,7 +213,6 @@ class AdvertController extends Controller {
         ];
         $ml = [
           'street_opening',
-          'height',
           'depth',
           'access_width',
         ];

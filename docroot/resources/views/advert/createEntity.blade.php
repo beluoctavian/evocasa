@@ -443,7 +443,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-12 col-sm-4">
-                                    <label for="entity[total_area]">Suprafata desfasurata totala</label>
+                                    <label for="entity[total_area]">Suprafata desfasurata</label>
                                     <div class="input-group">
                                         <input value="{{ !empty($entity['total_area']) ? $entity['total_area'] : '' }}" id="entity[total_area]" name="entity[total_area]" type="text" class="form-control">
                                         <span class="input-group-addon">mp</span>

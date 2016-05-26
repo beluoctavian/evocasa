@@ -323,7 +323,6 @@ footer {
 }
 .advert-item h2{
     font-size: 20px;
-    font-weight: bold;
     padding-right: 110px;
     margin: 0 0 10px 0;
     color: #fcbf10;
@@ -420,12 +419,12 @@ footer {
     box-sizing: border-box;
     float: left;
     margin: 0;
-    width: 20%;
-    height: 30px;
+    width: 25%;
     line-height: 30px;
     text-align: center;
     border-right: 2px solid #efefef;
     font-size: 13px;
+    overflow: hidden;
 }
 .similar-item ul li {
     box-sizing: border-box;

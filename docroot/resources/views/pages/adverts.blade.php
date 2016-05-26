@@ -260,9 +260,13 @@
                                     <div class="col-xs-12 col-sm-9">
                                         <div class="description">
                                             @if(Auth::guest())
-                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
+                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('anunturi/' . $advert['id']) }}">
+                                                        <span class="grey"><b>[{{ $advert['code'] }}]</b></span>&nbsp;&nbsp;{{ $advert['title'] }}
+                                                    </a></h2>
                                             @else
-                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
+                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">
+                                                        <span class="grey"><b>[{{ $advert['code'] }}]</b></span>&nbsp;&nbsp;{{ $advert['title'] }}
+                                                    </a></h2>
                                             @endif
                                             <div class="status hidden-xs">
                                                 @foreach ($item['advert_status'] as $status)
@@ -293,7 +297,6 @@
                                             </div>
                                             <div class="details">
                                                 <ul>
-                                                    <li>ID: <b>{{ $advert['code'] }}</b></li>
                                                     @if(!empty($entity['built_area']))
                                                         <li>
                                                            {{ $entity['built_area'] }} mp
@@ -323,7 +326,7 @@
                                                     @endif
 
                                                     @if(!empty($entity['floor']))
-                                                        <li class="hidden-xs hidden-sm">
+                                                        <li>
                                                             Etaj: {{ $entity['floor'] }}
                                                         </li>
                                                     @endif

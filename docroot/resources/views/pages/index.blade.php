@@ -47,7 +47,11 @@
                             <h2>Anunturi</h2>
                         </div>
                     </div>
-                    <div class="col-xs-10 col-xs-offset-1">
+                    @if (Auth::guest())
+                        <div class="col-xs-12">
+                    @else
+                        <div class="col-xs-11 col-xs-offset-0">
+                    @endif
                         @foreach ($items as $item)
                             <?php $advert = $item['advert']; ?>
                             <?php $apartment = $item['entity'] ;?>
@@ -96,9 +100,13 @@
                                     <div class="col-xs-12 col-sm-9">
                                         <div class="description">
                                             @if(Auth::guest())
-                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
+                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('anunturi/' . $advert['id']) }}">
+                                                        <span class="grey"><b>[{{ $advert['code'] }}]</b></span>&nbsp;&nbsp;{{ $advert['title'] }}
+                                                </a></h2>
                                             @else
-                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">{{ $advert['title'] }}</a></h2>
+                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">
+                                                        <span class="grey"><b>[{{ $advert['code'] }}]</b></span>&nbsp;&nbsp;{{ $advert['title'] }}
+                                                </a></h2>
                                             @endif
                                             <div class="status hidden-xs">
                                                 @foreach ($item['advert_status'] as $status)
@@ -129,7 +137,6 @@
                                             </div>
                                             <div class="details">
                                                 <ul>
-                                                    <li>ID: <b>{{ $advert['code'] }}</b></li>
                                                     <li>
                                                         @if($apartment['built_area'])
                                                             {{ $apartment['built_area'] }} mp
@@ -140,7 +147,7 @@
                                                             {{ $apartment['partitioning'] }}
                                                         @endif
                                                     </li>
-                                                    <li class="hidden-xs hidden-sm">
+                                                    <li>
                                                         @if($apartment['floor'])
                                                             Etaj {{ $apartment['floor'] }}
                                                         @endif

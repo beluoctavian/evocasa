@@ -223,13 +223,15 @@
                 <h2>Informatii utile</h2>
                 @if (!empty($info_files))
                     <div>
-                        @foreach ($info_files as $file)
-                            <p class="text-center">
-                                <a href="{{ URL::to($file->getPath() . '/' . $file->getFilename()) }}">
-                                    {{ str_replace(".{$file->getExtension()}", "", $file->getBaseName()) }}
-                                </a>
-                            </p>
-                        @endforeach
+                        <ul>
+                            @foreach ($info_files as $file)
+                                    <li>
+                                        <a href="{{ URL::to($file->getPath() . '/' . $file->getFilename()) }}">
+                                            {{ str_replace(".{$file->getExtension()}", "", $file->getBaseName()) }}
+                                        </a>
+                                    </li>
+                            @endforeach
+                        </ul>
                     </div>
                 @endif
             </div>

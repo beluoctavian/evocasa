@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?php echo $anunt->titlu; ?></title>
+    <title>{{ $advert['title'] }}</title>
     <!-- Bootstrap Core CSS & Font-Awesome -->
     <link href="{{ URL::asset('css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/font-awesome.min.css') }}" rel="stylesheet">

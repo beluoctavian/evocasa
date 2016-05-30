@@ -747,3 +747,6 @@ footer {
     display: flex;
     flex-direction: column;
 }
+.thumbnail .caption a {
+    word-wrap: break-word;
+}

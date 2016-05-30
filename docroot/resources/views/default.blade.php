@@ -178,6 +178,7 @@
         <div class="row">
             <div class="col-xs-12 text-center navbar-select-container">
                 <select id="navbar-select" name="navbar" onchange="window.location = this.options[this.selectedIndex].value;">
+                    <option value="">Selecteaza pagina...</option>
                     <option class="home-option" value="{{ URL::to('/') }}">Home</option>
                     <option class="apartament-option" value="{{ URL::to('anunturi?tip=apartament') }}">Apartamente</option>
                     <option class="casa-option" value="{{ URL::to('anunturi?tip=casa') }}">Case / Vile</option>
@@ -258,6 +259,9 @@
 <script>
     var active = null;
     switch(window.location.pathname) {
+        case '/':
+            active = 'home';
+            break;
         case '/anunturi':
             if (window.location.search.search('tip=apartament') >= 0) {
                 active = 'apartament';
@@ -279,10 +283,13 @@
             active = 'contact';
             break;
         default:
-            active = 'home';
+            active = null;
     }
-    $('.' + active + '-link').addClass('active');
-    $('.' + active + '-option').attr('selected', 'selected');
+    console.log(active)
+    if (active) {
+        $('.' + active + '-link').addClass('active');
+        $('.' + active + '-option').attr('selected', 'selected');
+    }
 </script>
 <!-- smooth scrooling -->
 <script type="text/javascript">
@@ -310,10 +317,12 @@
 <script>
     var navbar_select = $('#navbar-select');
     navbar_select.select2({
+        placeholder: "Selecteaza pagina...",
         minimumResultsForSearch: Infinity
     });
     $(window).resize(function() {
         navbar_select.select2({
+            placeholder: "Selecteaza pagina...",
             minimumResultsForSearch: Infinity
         });
     });

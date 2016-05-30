@@ -704,6 +704,8 @@
                     <div class="col-xs-12 text-center">
                         @if (!empty($advert['id']))
                             <button type="submit" class="btn btn-warning btn-lg">Editeaza anuntul</button>
+                            <a href="{{ URL::to("advert/images/{$advert['id']}") }}" class="btn btn-warning btn-lg"><i class="fa fa-file-image-o"></i> Uploadeaza poze</a>
+                            <button type="button" onclick="PrintElem('#printable-area')" class="btn btn-warning btn-lg"><i class="fa fa-print"></i> Printeaza anuntul</button>
                         @else
                             <button type="submit" class="btn btn-warning btn-lg">Adauga anuntul</button>
                         @endif
@@ -717,6 +719,15 @@
 
 @section('scripts')
 <script>
+    function PrintElem()
+    {
+        @if (!empty($advert['id']))
+            var mywindow = window.open('{{ URL::to("advert/print/{$advert['id']}") }}', '{{ $advert['title'] }} ', 'height=600,width=900');
+            mywindow.print();
+        @endif
+
+        return true;
+    }
     var tels = 2;
     $(document).ready(function(){
        $('.adauga-telefon').on('click', function(e){
@@ -728,8 +739,6 @@
            $("#telefons").append(el.clone());
        });
     });
-</script>
-<script type="text/javascript">
     $('textarea').elastic();
     $(".status-item").tooltip({ trigger: "hover" });
     $("#price_icon").tooltip({ trigger: "hover" });

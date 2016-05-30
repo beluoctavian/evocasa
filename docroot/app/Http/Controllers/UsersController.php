@@ -23,21 +23,6 @@ class UsersController extends Controller {
         $this->middleware('auth');
     }
 
-    public function getPrinteaza($id)
-    {
-        // TODO: Do we need this anymore?
-        try {
-            $anunt = DB::table('anunts')->where('id','=',$id)->first();
-            $imobil = DB::table('imobils')->where('id_anunt','=',$id)->first();
-            $imbunat = DB::table('imbunats')->where('id_anunt','=',$id)->first();
-            $proprietar = DB::table('proprietars')->where('id_anunt','=',$id)->first();
-        }
-        catch(\Exception $e) {
-            abort(404);
-        }
-        return view('user.print')->with('anunt',$anunt)->with('imobil',$imobil)->with('imbunat',$imbunat)->with('proprietar',$proprietar);
-    }
-
     public function getSettings()
     {
         $info_dirname = 'files/website/info/';

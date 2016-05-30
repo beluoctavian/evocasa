@@ -26,14 +26,16 @@ class CreateUsersTable extends Migration {
             [
                 'username' => 'ysaccosmin@evocasainvest.ro',
                 'name' => 'Ionescu Isac Cosmin',
-                'email' => 'cosmin@evocasainvest.ro',
+                'email' => 'ysaccosmin@evocasainvest.ro',
+                'phone' => '00 40 773 937 217',
                 'password' => '$2y$10$FMAifdEoPNlpuMFti38Yy.vWvMjPKj6ZoMJ6AjtuYuEZARYAgvwIW',
                 'code' => 'IC',
             ],
             [
                 'username' => 'a.gabriela@evocasainvest.ro',
                 'name' => 'Agrapinei Gabriela',
-                'email' => 'gabriela@evocasainvest.ro',
+                'email' => 'a.gabriela@evocasainvest.ro',
+                'phone' => '00 40 773 937 205',
                 'password' => '$2y$10$s7qwu/P5cnb1BE4X8YMwKu0Rehe/hByPc9Mk3oKnBh8T3UuNhhEca',
                 'code' => 'AG',
             ],
@@ -41,6 +43,7 @@ class CreateUsersTable extends Migration {
                 'username' => 'administrator',
                 'name' => 'administrator',
                 'email' => 'administrator@evocasainvest.ro',
+                'phone' => '',
                 'password' => '$2y$10$VQFqI47HvqMXpQBl0RjYSOkVzahyqYnbZ5YGJ7dVGBFjUI/TJKDpO',
                 'code' => 'ADMIN',
             ],
@@ -50,6 +53,7 @@ class CreateUsersTable extends Migration {
             $newUser->username = $user['username'];
             $newUser->name = $user['name'];
             $newUser->email = $user['email'];
+            $newUser->phone = $user['phone'];
             $newUser->code = $user['code'];
             $newUser->password = $user['password'];
             $newUser->save();

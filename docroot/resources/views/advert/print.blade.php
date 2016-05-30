@@ -96,13 +96,13 @@
                         <div class="form-group col-xs-6">
                             <label for="entity[bathrooms]">Bai</label>
                             <div>
-                                <input value="{{ !empty($entity['bathrooms']) ? $entity['bathrooms'] : '' }} {{ !empty($entity['obs_bathrooms']) ? $entity['obs_bathrooms'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding text-center">
+                                <input value="{{ !empty($entity['bathrooms']) ? $entity['bathrooms'] : '' }} {{ !empty($entity['obs_bathrooms']) ? $entity['obs_bathrooms'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding">
                             </div>
                         </div>
                         <div class="form-group col-xs-6">
                             <label for="entity[sanitary]">Gr. sanitare</label>
                             <div>
-                                <input value="{{ !empty($entity['sanitary']) ? $entity['sanitary'] : '' }} {{ !empty($entity['obs_sanitary']) ? $entity['obs_sanitary'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding text-center">
+                                <input value="{{ !empty($entity['sanitary']) ? $entity['sanitary'] : '' }} {{ !empty($entity['obs_sanitary']) ? $entity['obs_sanitary'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding">
                             </div>
                         </div>
                     </div>
@@ -110,13 +110,13 @@
                         <div class="form-group col-xs-6">
                             <label for="entity[balconies]">Balcoane</label>
                             <div>
-                                <input value="{{ !empty($entity['balconies']) ? $entity['balconies'] : '' }} {{ !empty($entity['obs_balconies']) ? $entity['obs_balconies'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding text-center">
+                                <input value="{{ !empty($entity['balconies']) ? $entity['balconies'] : '' }} {{ !empty($entity['obs_balconies']) ? $entity['obs_balconies'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding">
                             </div>
                         </div>
                         <div class="form-group col-xs-6">
                             <label for="entity[parking]">Loc parcare</label>
                             <div>
-                                <input value="{{ !empty($entity['parking']) ? $entity['parking'] : '' }} {{ !empty($entity['obs_parking']) ? $entity['obs_parking'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding text-center">
+                                <input value="{{ !empty($entity['parking']) ? $entity['parking'] : '' }} {{ !empty($entity['obs_parking']) ? $entity['obs_parking'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding">
                             </div>
                         </div>
                     </div>
@@ -124,13 +124,13 @@
                         <div class="form-group col-xs-6">
                             <label for="entity[storeroom]">Boxa</label>
                             <div>
-                                <input value="{{ !empty($entity['storeroom']) ? $entity['storeroom'] : '' }} {{ !empty($entity['obs_storeroom']) ? $entity['obs_storeroom'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding text-center">
+                                <input value="{{ !empty($entity['storeroom']) ? $entity['storeroom'] : '' }} {{ !empty($entity['obs_storeroom']) ? $entity['obs_storeroom'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding">
                             </div>
                         </div>
                         <div class="form-group col-xs-6">
                             <label for="entity[garage]">Garaj</label>
                             <div>
-                                <input value="{{ !empty($entity['garage']) ? $entity['garage'] : '' }} {{ !empty($entity['obs_garage']) ? $entity['obs_garage'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding text-center">
+                                <input value="{{ !empty($entity['garage']) ? $entity['garage'] : '' }} {{ !empty($entity['obs_garage']) ? $entity['obs_garage'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding">
                             </div>
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                         <div class="form-group col-xs-6">
                             <label for="entity[bathrooms]">Bai</label>
                             <div>
-                                <input value="{{ !empty($entity['bathrooms']) ? $entity['bathrooms'] : '' }} {{ !empty($entity['obs_bathrooms']) ? $entity['obs_bathrooms'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding text-center">
+                                <input value="{{ !empty($entity['bathrooms']) ? $entity['bathrooms'] : '' }} {{ !empty($entity['obs_bathrooms']) ? $entity['obs_bathrooms'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding">
                             </div>
                         </div>
                     </div>
@@ -195,13 +195,13 @@
                         <div class="form-group col-xs-6">
                             <label for="entity[sanitary]">Gr. sanitare</label>
                             <div>
-                                <input value="{{ !empty($entity['sanitary']) ? $entity['sanitary'] : '' }} {{ !empty($entity['obs_sanitary']) ? $entity['obs_sanitary'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding text-center">
+                                <input value="{{ !empty($entity['sanitary']) ? $entity['sanitary'] : '' }} {{ !empty($entity['obs_sanitary']) ? $entity['obs_sanitary'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding">
                             </div>
                         </div>
                         <div class="form-group col-xs-6">
                             <label for="entity[balconies]">Balcoane</label>
                             <div>
-                                <input value="{{ !empty($entity['balconies']) ? $entity['balconies'] : '' }} {{ !empty($entity['obs_balconies']) ? $entity['obs_balconies'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding text-center">
+                                <input value="{{ !empty($entity['balconies']) ? $entity['balconies'] : '' }} {{ !empty($entity['obs_balconies']) ? $entity['obs_balconies'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding">
                             </div>
                         </div>
                     </div>
@@ -209,7 +209,7 @@
                         <div class="form-group col-xs-6">
                             <label for="entity[garage]">Garaj</label>
                             <div>
-                                <input value="{{ !empty($entity['garage']) ? $entity['garage'] : '' }} {{ !empty($entity['obs_garage']) ? $entity['obs_garage'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding text-center">
+                                <input value="{{ !empty($entity['garage']) ? $entity['garage'] : '' }} {{ !empty($entity['obs_garage']) ? $entity['obs_garage'] : '' }}" id="entity[bathrooms]" name="entity[bathrooms]" type="text" class="form-control no-padding">
                             </div>
                         </div>
                     </div>
@@ -280,8 +280,8 @@
                                 </div>
                             @endforeach
                         @else
-                            <div class="form-group col-xs-12 col-sm-4 telefon-container">
-                                <label for="owner[phone]">Telefon <a class="adauga-telefon" href="javascript:"><i class="fa fa-plus-square"></i></a></label>
+                            <div class="form-group col-xs-4">
+                                <label for="owner[phone]">Telefon
                                 <div>
                                     <input id="owner[phone]" name="owner[phone][]" type="text" class="form-control">
                                 </div>

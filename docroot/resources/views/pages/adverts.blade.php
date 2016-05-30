@@ -264,20 +264,22 @@
                                                         <span class="grey"><b>[{{ $advert['code'] }}]</b></span>&nbsp;&nbsp;{{ $advert['title'] }}
                                                     </a></h2>
                                             @else
-                                                <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">
+                                                <h2>
+                                                    <a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">
                                                         <span class="grey"><b>[{{ $advert['code'] }}]</b></span>&nbsp;&nbsp;{{ $advert['title'] }}
-                                                    </a></h2>
+                                                    </a>
+                                                </h2>
+                                                <div class="status hidden-xs">
+                                                    @foreach ($item['advert_status'] as $status)
+                                                        <div class="status-item" title="{{ $status['created_at'] }}">
+                                                            <img src="{{ URL::asset("img/status_icons/{$status['title']}.png") }}" />
+                                                            @if ($status['count'] > 1)
+                                                                <span class="badge">x{{ $status['count'] }}</span>
+                                                            @endif
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                             @endif
-                                            <div class="status hidden-xs">
-                                                @foreach ($item['advert_status'] as $status)
-                                                    <div class="status-item" title="{{ $status['created_at'] }}">
-                                                        <img src="{{ URL::asset("img/status_icons/{$status['title']}.png") }}" />
-                                                        @if ($status['count'] > 1)
-                                                            <span class="badge">x{{ $status['count'] }}</span>
-                                                        @endif
-                                                    </div>
-                                                @endforeach
-                                            </div>
                                             <div class="price">
                                                 <div class="a-container">
                                                     <a class="actual" href="{{ URL::to('anunturi/' . $advert['id']) }}">{{ $advert['price'] }} &euro;</a>

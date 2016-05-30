@@ -640,34 +640,34 @@
                                     </div>
                                 </div>
                             </div>
-                            @if ($entity_type == 'house')
-                                <div class="row" style="margin-top: 20px;">
-                                    <div class="col-xs-6">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <label class="checkbox-inline">
-                                                    <input name="improvements[canalizare]" {{ !empty($improvements['canalizare']) ? 'checked' : '' }} type="checkbox" value="1"> Canalizare
-                                                </label>
-                                            </div>
-                                            <div class="col-xs-12">
-                                                <label class="checkbox-inline">
-                                                    <input name="improvements[apa_curenta]" {{ !empty($improvements['apa_curenta']) ? 'checked' : '' }} type="checkbox" value="1"> Apa curenta
-                                                </label>
-                                            </div>
-                                            <div class="col-xs-12">
-                                                <label class="checkbox-inline">
-                                                    <input name="improvements[gaze]" {{ !empty($improvements['gaze']) ? 'checked' : '' }} type="checkbox" value="1"> Gaze
-                                                </label>
-                                            </div>
-                                            <div class="col-xs-12">
-                                                <label class="checkbox-inline">
-                                                    <input name="improvements[electricitate]" {{ !empty($improvements['electricitate']) ? 'checked' : '' }} type="checkbox" value="1"> Electricitate
-                                                </label>
-                                            </div>
+                        @if ($entity_type == 'house')
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-xs-6">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[canalizare]" {{ !empty($improvements['canalizare']) ? 'checked' : '' }} type="checkbox" value="1"> Canalizare
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[apa_curenta]" {{ !empty($improvements['apa_curenta']) ? 'checked' : '' }} type="checkbox" value="1"> Apa curenta
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[gaze]" {{ !empty($improvements['gaze']) ? 'checked' : '' }} type="checkbox" value="1"> Gaze
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label class="checkbox-inline">
+                                                <input name="improvements[electricitate]" {{ !empty($improvements['electricitate']) ? 'checked' : '' }} type="checkbox" value="1"> Electricitate
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+                            </div>
+                        @endif
                         @elseif ($entity_type == 'terrain')
                             <div class="row">
                                 <div class="col-xs-6">

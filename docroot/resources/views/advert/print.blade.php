@@ -363,82 +363,32 @@
                 @endif
             </td>
         </tr>
-        {{--<tr>--}}
-            {{--<td>--}}
-                {{--<h2>Imbunatatiri</h2>--}}
-                {{--<div class="row">--}}
-                    {{--<div class="col-xs-6 no-padding">--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="gresie" type="checkbox" value="gresie" {{ $imbunat->gresie ? "checked" : ""}}> Gresie--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="faianta" type="checkbox" value="faianta" {{ $imbunat->faianta ? "checked" : ""}}> Faianta--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="parchet" type="checkbox" value="parchet" {{ $imbunat->parchet ? "checked" : ""}}> Parchet--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="termopan" type="checkbox" value="termopan" {{ $imbunat->termopan ? "checked" : ""}}> Termopan--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="aer" type="checkbox" value="aer" {{ $imbunat->aer ? "checked" : ""}}> Aer conditionat--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="instalatie_sanitara" type="checkbox" value="instalatie_sanitara" {{ $imbunat->instalatie_sanitara ? "checked" : ""}}> Instalatie sanitara noua--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-xs-6 no-padding">--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="instalatie_electrica" type="checkbox" value="instalatie_electrica" {{ $imbunat->instalatie_electrica ? "checked" : ""}}> Instalatie electrica noua--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="centrala" type="checkbox" value="contor_gaze" {{ $imbunat->contor_gaze ? "checked" : ""}}> Contor gaze individual--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="centrala" type="checkbox" value="centrala" {{ $imbunat->centrala ? "checked" : ""}}> Centrala--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="mobilier" type="checkbox" value="mobilier" {{ $imbunat->mobilier ? "checked" : ""}}> Mobilier inclus--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="usi_interioare" type="checkbox" value="usa_metalica" {{ $imbunat->usi_interioare ? "checked" : ""}}> Usi interioare--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="usa_metalica" type="checkbox" value="usa_metalica" {{ $imbunat->usa_metalica ? "checked" : ""}}> Usa metalica--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-xs-12">--}}
-                            {{--<label class="checkbox-inline">--}}
-                                {{--<input name="fara_imbunatatiri" type="checkbox" value="fara_imbunatatiri" {{ $imbunat->fara_imbunatatiri ? "checked" : ""}}> Fara imbunatatiri--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</td>--}}
-        {{--</tr>--}}
+        <tr>
+            <td>
+                @if ($entity_type == 'apartment')
+                    <h2>Imbunatatiri</h2>
+                @elseif ($entity_type == 'house')
+                    <h2>Imbunatatiri & utilitati</h2>
+                @elseif ($entity_type == 'terrain')
+                    <h2>Utilitati</h2>
+                @endif
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            @foreach ($improvements as $i => $checked)
+                                @if (!empty($checked))
+                                    <div class="col-xs-12">
+                                        <label class="checkbox-inline">
+                                            <input name="improvements[{{ $i }}]" checked type="checkbox" value="1"> {{ ucwords(str_replace('_', ' ', $i)) }}
+                                        </label>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
     </table>
 </div>
 @endsection

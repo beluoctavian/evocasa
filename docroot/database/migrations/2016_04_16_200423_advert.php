@@ -20,7 +20,7 @@ class Advert extends Migration {
 			$table->string('no_rooms');
 			$table->integer('price');
 			$table->string('old_price');
-			$table->string('description');
+			$table->longText('description');
 			$table->integer('neighborhood_id')->unsigned()->nullable();
 			$table->foreign('neighborhood_id')
 				->references('id')

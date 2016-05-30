@@ -15,7 +15,7 @@ class Observation extends Migration {
 		Schema::create('observation', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('text');
+			$table->longText('text');
 			$table->integer('owner_id')->unsigned();
 			$table->foreign('owner_id')
 				->references('id')

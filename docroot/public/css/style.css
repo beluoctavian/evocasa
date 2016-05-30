@@ -730,3 +730,7 @@ footer {
 .yellow, .yellow:hover {
     color: #fcbf10;;
 }
+.navbar-select-container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

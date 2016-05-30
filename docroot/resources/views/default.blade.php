@@ -176,9 +176,8 @@
 <div class="main-nav-sm hidden-md hidden-lg">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 text-center">
+            <div class="col-xs-12 text-center navbar-select-container">
                 <select id="navbar-select" name="navbar" onchange="window.location = this.options[this.selectedIndex].value;">
-                    <option>Selecteaza pagina...</option>
                     <option value="{{ URL::to('/') }}">Home</option>
                     <option value="{{ URL::to('anunturi?tip=apartament') }}">Apartamente</option>
                     <option value="{{ URL::to('anunturi?tip=casa') }}">Case / Vile</option>
@@ -281,8 +280,9 @@
 @yield('scripts')
 <script>
     var navbar_select = $('#navbar-select');
-    navbar_select.select2();
-    navbar_select.select2('destroy');
+    navbar_select.select2({
+        minimumResultsForSearch: Infinity
+    });
 </script>
 </body>
 </html>

@@ -399,9 +399,9 @@
         escapeMarkup: function (m) {return m;},
         templateResult: format
     };
-    $('select').select2(defaultSelect2Options);
+    $('select').not('#navbar-select').select2(defaultSelect2Options);
     $(window).resize(function() {
-        $('select').select2(defaultSelect2Options);
+        $('select').not('#navbar-select').select2(defaultSelect2Options);
     });
     $('#price_range').ionRangeSlider({
         type: 'double',

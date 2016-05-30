@@ -344,7 +344,7 @@ class AdvertController extends Controller {
 
   public function viewEntity($id)
   {
-    $details = $this->getEntityDetails($id, FALSE);
+    $details = $this->getEntityDetails($id, TRUE);
     if ($details == NULL) {
       abort(404);
     }

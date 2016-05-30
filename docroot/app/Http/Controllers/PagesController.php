@@ -296,6 +296,8 @@ class PagesController extends Controller {
                 $query->where('type_id', $inactive_status_id);
             });
         }
+
+        $adverts->orderBy('updated_at', 'desc');
         if($sort_after)
         {
             $criteriul = explode('_', $sort_after)[0];
@@ -336,7 +338,7 @@ class PagesController extends Controller {
             }
             else
             {
-                $results  = Advert::whereIn('id', $results)->paginate(10);
+                $results  = Advert::whereIn('id', $results)->orderBy('updated_at', 'desc')->paginate(10);
             }
         }
         else

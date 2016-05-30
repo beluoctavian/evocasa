@@ -344,7 +344,7 @@ class AdvertController extends Controller {
 
   public function viewEntity($id)
   {
-    $details = $this->getEntityDetails($id, TRUE);
+    $details = $this->getEntityDetails($id, FALSE);
     if ($details == NULL) {
       abort(404);
     }
@@ -361,7 +361,7 @@ class AdvertController extends Controller {
 
   public function getPrint($id)
   {
-    $details = $this->getEntityDetails($id, TRUE);
+    $details = $this->getEntityDetails($id, FALSE);
     if ($details == NULL) {
       abort(404);
     }

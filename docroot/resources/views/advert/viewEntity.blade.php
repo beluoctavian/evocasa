@@ -117,7 +117,7 @@
             </div>
             @endif
             <div class="row margin-top">
-                <div class="col-xs-12 col-sm-4">
+                <div class="col-xs-12 col-sm-3">
                     <div class="list-group">
                         <div class="list-group-item active text-center">DETALII ANUNT</div>
                         @if (!empty($advert['no_rooms']))
@@ -132,7 +132,7 @@
                     </div>
                 </div>
                 @if (!empty($entity))
-                    <div class="col-xs-12 col-sm-4">
+                    <div class="col-xs-12 col-sm-6">
                         <div class="list-group">
                             <div class="list-group-item active text-center">DETALII IMOBIL</div>
                             @foreach ($entity as $attr => $value)
@@ -142,9 +142,9 @@
                     </div>
                 @endif
                 @if (!empty($improvements))
-                    <div class="col-xs-12 col-sm-4">
+                    <div class="col-xs-12 col-sm-3">
                         <div class="list-group">
-                            <div class="list-group-item active text-center" id="improvements">DETALII IMBUNATATIRI</div>
+                            <div class="list-group-item active text-center" id="improvements">IMBUNATATIRI</div>
                             <a href="javascript:" class="list-group-item">
                                 <div class="imbunats">
                                     @foreach ($improvements as $improvement)

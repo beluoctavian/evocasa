@@ -280,8 +280,9 @@
 
 @yield('scripts')
 <script>
-    $('#navbar-select').select2();
-    $('#navbar-select').select2('destroy');
+    var navbar_select = $('#navbar-select');
+    navbar_select.select2();
+    navbar_select.select2('destroy');
 </script>
 </body>
 </html>

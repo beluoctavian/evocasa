@@ -234,6 +234,13 @@
         minimumResultsForSearch: Infinity,
         placeholder: "Indiferent"
     });
+    $(window).resize(function() {
+        $('select').select2({
+            tags: true,
+            minimumResultsForSearch: Infinity,
+            placeholder: "Indiferent"
+        });
+    });
     $('#price_range').ionRangeSlider({
         type: 'double',
         min: {{ $input_defaults['pret_minim'] }},

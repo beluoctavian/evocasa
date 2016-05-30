@@ -400,6 +400,9 @@
         templateResult: format
     };
     $('select').select2(defaultSelect2Options);
+    $(window).resize(function() {
+        $('select').select2(defaultSelect2Options);
+    });
     $('#price_range').ionRangeSlider({
         type: 'double',
         min: {{ $input_defaults['pret_minim'] }},

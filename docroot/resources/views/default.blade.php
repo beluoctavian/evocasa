@@ -147,25 +147,25 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li>
+                <li class="home-link">
                     <a href="{{ URL::to('/') }}"><i class="fa fa-home"></i> Home</a>
                 </li>
-                <li>
+                <li class="apartament-link">
                     <a href="{{ URL::to('anunturi?tip=apartament') }}"><i class="fa fa-files-o"></i> Apartamente</a>
                 </li>
-                <li>
+                <li class="casa-link">
                     <a href="{{ URL::to('anunturi?tip=casa') }}"><i class="fa fa-home"></i> Case / Vile</a>
                 </li>
-                <li>
+                <li class="teren-link">
                     <a href="{{ URL::to('anunturi?tip=teren') }}"><i class="fa fa-globe"></i> Terenuri</a>
                 </li>
-                <li>
+                <li class="servicii-link">
                     <a href="{{ URL::to('servicii') }}"><i class="fa fa-credit-card"></i> Servicii si costuri</a>
                 </li>
-                <li>
+                <li class="despre-link">
                     <a href="{{ URL::to('despre-noi') }}"><i class="fa fa-users"></i> Despre noi</a>
                 </li>
-                <li class="last">
+                <li class="contact-link last">
                     <a href="{{ URL::to('contact') }}"><i class="fa fa-envelope-o"></i> Contact</a>
                 </li>
             </ul>
@@ -178,13 +178,13 @@
         <div class="row">
             <div class="col-xs-12 text-center navbar-select-container">
                 <select id="navbar-select" name="navbar" onchange="window.location = this.options[this.selectedIndex].value;">
-                    <option value="{{ URL::to('/') }}">Home</option>
-                    <option value="{{ URL::to('anunturi?tip=apartament') }}">Apartamente</option>
-                    <option value="{{ URL::to('anunturi?tip=casa') }}">Case / Vile</option>
-                    <option value="{{ URL::to('anunturi?tip=teren') }}">Terenuri</option>
-                    <option value="{{ URL::to('servicii') }}">Servicii si costuri</option>
-                    <option value="{{ URL::to('despre-noi') }}">Despre noi</option>
-                    <option value="{{ URL::to('contact') }}">Contact</option>
+                    <option class="home-option" value="{{ URL::to('/') }}">Home</option>
+                    <option class="apartament-option" value="{{ URL::to('anunturi?tip=apartament') }}">Apartamente</option>
+                    <option class="casa-option" value="{{ URL::to('anunturi?tip=casa') }}">Case / Vile</option>
+                    <option class="teren-option" value="{{ URL::to('anunturi?tip=teren') }}">Terenuri</option>
+                    <option class="servicii-option" value="{{ URL::to('servicii') }}">Servicii si costuri</option>
+                    <option class="despre-option" value="{{ URL::to('despre-noi') }}">Despre noi</option>
+                    <option class="contact-option" value="{{ URL::to('contact') }}">Contact</option>
                 </select>
             </div>
         </div>
@@ -255,6 +255,35 @@
     </div>
 </div>
 
+<script>
+    var active = null;
+    switch(window.location.pathname) {
+        case '/anunturi':
+            if (window.location.search.search('tip=apartament') >= 0) {
+                active = 'apartament';
+                break;
+            }
+            if (window.location.search.search('tip=casa') >= 0) {
+                active = 'casa';
+                break;
+            }
+            active = 'teren';
+            break;
+        case '/servicii':
+            active = 'servicii';
+            break;
+        case '/despre-noi':
+            active = 'despre';
+            break;
+        case '/contact':
+            active = 'contact';
+            break;
+        default:
+            active = 'home';
+    }
+    $('.' + active + '-link').addClass('active');
+    $('.' + active + '-option').attr('selected', 'selected');
+</script>
 <!-- smooth scrooling -->
 <script type="text/javascript">
     jQuery(document).ready(function() {
@@ -282,6 +311,11 @@
     var navbar_select = $('#navbar-select');
     navbar_select.select2({
         minimumResultsForSearch: Infinity
+    });
+    $(window).resize(function() {
+        navbar_select.select2({
+            minimumResultsForSearch: Infinity
+        });
     });
 </script>
 </body>

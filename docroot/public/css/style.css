@@ -137,7 +137,7 @@ body {
     .navbar-guest .navbar-nav li.last a {
         border-right: 1px solid #ececec;
     }
-    .navbar-guest .navbar-nav li a:hover {
+    .navbar-guest .navbar-nav li a:hover, .navbar-guest .navbar-nav li.active a {
         border-top: 3px solid #fcbf10;
         background: #ffffff;
         height: 50px;

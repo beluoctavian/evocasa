@@ -318,16 +318,37 @@
                                                                 Lat. drum: {{ $entity['access_width'] }} ml
                                                             </li>
                                                         @endif
-                                                    @else
+                                                    @elseif ($advert['type'] == 'house')
                                                         @if(!empty($entity['land_area']))
                                                             <li class="hidden-xs hidden-sm">
                                                                 {{ $entity['land_area'] }} mp
                                                             </li>
                                                         @endif
-
                                                         @if(!empty($entity['total_area']))
                                                             <li>
                                                                 {{ $entity['total_area'] }} mp
+                                                            </li>
+                                                        @endif
+
+                                                        @if(!empty($entity['height']))
+                                                            <li>
+                                                                {{ $entity['height'] }}
+                                                            </li>
+                                                        @endif
+
+                                                        @if(!empty($entity['built_year']))
+                                                            <li>
+                                                                {{ $entity['built_year'] }}
+                                                            </li>
+                                                        @endif
+                                                    @else
+                                                        @if(!empty($entity['built_area']))
+                                                            <li>
+                                                                {{ $entity['built_area'] }} mp
+                                                            </li>
+                                                        @elseif(!empty($entity['usable_area']))
+                                                            <li>
+                                                                {{ $entity['usable_area'] }} mp
                                                             </li>
                                                         @endif
 
@@ -343,17 +364,12 @@
                                                             </li>
                                                         @endif
 
-                                                        @if(!empty($entity['height']))
-                                                            <li>
-                                                                {{ $entity['height'] }}
-                                                            </li>
-                                                        @endif
-
                                                         @if(!empty($entity['built_year']))
                                                             <li>
                                                                 {{ $entity['built_year'] }}
                                                             </li>
                                                         @endif
+
                                                     @endif
                                                 </ul>
                                             </div>

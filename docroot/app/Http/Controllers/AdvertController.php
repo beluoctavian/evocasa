@@ -30,7 +30,7 @@ class AdvertController extends Controller {
     'contor_gaze' => 'Contor gaze',
     'centrala' => 'Centrala',
     'mobilier' => 'Mobilier',
-    'usi_interioare' => 'Usi interioare',
+    'usi_interioare' => 'Usi interioare schimbate',
     'usa_metalica' => 'Usa metalica',
     'fara_imbunatatiri' => 'Fara imbunatatiri',
     'canalizare' => 'Canalizare',

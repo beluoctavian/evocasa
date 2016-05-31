@@ -90,7 +90,7 @@ foreach($proprietars as $proprietar) {
             $apartment->built_year = $year;
             $apartment->bathrooms = zero($imobil->numbar_bai);
             $apartment->obs_bathrooms = zero($imobil->obs_numbar_bai);
-            $apartment->sanitary = zero($imobil->nubmar_bai_serviciu);
+            $apartment->sanitary = zero($imobil->numbar_bai_serviciu);
             $apartment->obs_sanitary = zero($imobil->obs_numbar_bai_serviciu);
             $apartment->balconies = zero($imobil->numbar_balcoane);
             $apartment->obs_balconies = zero($imobil->obs_numbar_balcoane);

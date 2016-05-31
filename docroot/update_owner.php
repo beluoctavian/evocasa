@@ -5,7 +5,7 @@ use App\Apartment;
 use App\Imobil;
 use App\Advert;
 $proprietars = DB::table('proprietars')->get();
-
+$ceva = 0;
 foreach($proprietars as $proprietar) {
     $owner = Owner::where('advert_id', $proprietar->id_anunt)->first();
 
@@ -31,8 +31,12 @@ foreach($proprietars as $proprietar) {
             $advert->updated_at = $anunt->updated_at;
             $advert->save();
             $apartment = Apartment::find($anunt->id);
+
 //            echo $imobil->created_at . PHP_EOL;
 
+            if($apartment != null){
+
+            if(isset($imobil->createad_at))
             $apartment->created_at = $imobil->created_at;
 
 
@@ -41,26 +45,25 @@ foreach($proprietars as $proprietar) {
             else
                 $apartment->updated_at = $imobil->created_at;
 
-            $apartment->bathrooms = zero($imobil->numbar_bai);
-            $apartment->obs_bathrooms = zero($imobil->obs_numbar_bai);
-            $apartment->sanitary = zero($imobil->numbar_bai_serviciu);
-            $apartment->obs_sanitary = zero($imobil->obs_numbar_bai_serviciu);
-            $apartment->balconies = zero($imobil->numbar_balcoane);
-            $apartment->obs_balconies = zero($imobil->obs_numbar_balcoane);
+            $apartment->bathrooms = $imobil->numbar_bai;
             $apartment->save();
+
+            $apartment->obs_bathrooms = (string)$imobil->obs_numbar_bai;
+            $apartment->sanitary = (string)$imobil->numbar_bai_serviciu;
+            $apartment->obs_sanitary = (string)$imobil->obs_numbar_bai_serviciu;
+            $apartment->balconies = (string)$imobil->numbar_balcoane;
+            $apartment->obs_balconies = (string)$imobil->obs_numbar_balcoane;
+            $apartment->save();
+
 //            echo $apartment->created_at . PHP_EOL;
 
             echo 'update apartment ' . $apartment->id . PHP_EOL;
+            $ceva ++;
+            }
 
         }
     }
 
-}
+}   
 
-
-function zero($a)
-{
-    if($a == null)
-        return '';
-    return $a;
-}
+echo $ceva;

@@ -297,7 +297,7 @@ class PagesController extends Controller {
             });
         }
 
-        $adverts->orderBy('updated_at', 'desc');
+        $adverts->orderBy('created_at', 'desc');
         if($sort_after)
         {
             $criteriul = explode('_', $sort_after)[0];
@@ -338,7 +338,7 @@ class PagesController extends Controller {
             }
             else
             {
-                $results  = Advert::whereIn('id', $results)->orderBy('updated_at', 'desc')->paginate(10);
+                $results  = Advert::whereIn('id', $results)->orderBy('created_at', 'desc')->paginate(10);
             }
         }
         else

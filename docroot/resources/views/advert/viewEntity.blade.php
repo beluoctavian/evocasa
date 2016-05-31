@@ -132,7 +132,7 @@
                     </div>
                 </div>
                 @if (!empty($entity))
-                    <div class="col-xs-12 col-sm-6">
+                    <div class="col-xs-12 col-sm-5">
                         <div class="list-group">
                             <div class="list-group-item active text-center">DETALII IMOBIL</div>
                             @foreach ($entity as $attr => $value)
@@ -142,9 +142,13 @@
                     </div>
                 @endif
                 @if (!empty($improvements))
-                    <div class="col-xs-12 col-sm-3">
+                    <div class="col-xs-12 col-sm-4">
                         <div class="list-group">
-                            <div class="list-group-item active text-center" id="improvements">IMBUNATATIRI</div>
+                            @if ($advert['type'] == 'casa')
+                                <div class="list-group-item active text-center" id="improvements">IMBUNATATIRI SI<br />UTILITATI</div>
+                            @else
+                                <div class="list-group-item active text-center" id="improvements">IMBUNATATIRI</div>
+                            @endif
                             <a href="javascript:" class="list-group-item">
                                 <div class="imbunats">
                                     @foreach ($improvements as $improvement)

@@ -145,7 +145,7 @@
                     <div class="col-xs-12 col-sm-4">
                         <div class="list-group">
                             @if ($advert['type'] == 'casa')
-                                <div class="list-group-item active text-center" id="improvements">IMBUNATATIRI SI<br />UTILITATI</div>
+                                <div class="list-group-item active text-center" id="improvements">IMBUNATATIRI SI UTILITATI</div>
                             @else
                                 <div class="list-group-item active text-center" id="improvements">IMBUNATATIRI</div>
                             @endif

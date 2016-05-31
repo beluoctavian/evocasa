@@ -32,12 +32,12 @@ class AdvertController extends Controller {
     'mobilier' => 'Mobilier',
     'usi_interioare' => 'Usi interioare schimbate',
     'usa_metalica' => 'Usa metalica',
+    'modernizat' => 'Modernizat',
     'fara_imbunatatiri' => 'Fara imbunatatiri',
     'canalizare' => 'Canalizare',
     'apa_curenta' => 'Apa curenta',
     'gaze' => 'Gaze',
     'electricitate' => 'Electricitate',
-    'modernizat' => 'Modernizat',
   ];
 
   public static $entity_attributes = [
@@ -178,16 +178,27 @@ class AdvertController extends Controller {
           break;
 
       }
-      // Prepare the improvements
-      foreach ($improvements as $key => $improvement) {
-        if (!array_key_exists($key, self::$improvements)) {
-          throw new \Exception('Found undeclared improvement: ' . $key);
+      if ($prepareForDisplay === TRUE) {
+        $ordered_improvements = [];
+        foreach (self::$improvements as $key => $improvement) {
+          if (!empty($improvements[$key])) {
+            $ordered_improvements[] = $improvement;
+          }
         }
-        if (empty($improvement)) {
-          unset($improvements[$key]);
-        }
-        else {
-          $improvements[$key] = self::$improvements[$key];
+        $improvements = $ordered_improvements;
+      }
+      else {
+        // Prepare the improvements
+        foreach ($improvements as $key => $improvement) {
+          if (!array_key_exists($key, self::$improvements)) {
+            throw new \Exception('Found undeclared improvement: ' . $key);
+          }
+          if (empty($improvement)) {
+            unset($improvements[$key]);
+          }
+          else {
+            $improvements[$key] = self::$improvements[$key];
+          }
         }
       }
 

@@ -364,7 +364,7 @@ class PagesController extends Controller {
         else
             $zone = '';
         return view('pages.adverts')
-            ->with('adverts',$results->appends(Input::except('page')))
+            ->with('adverts',$results->setPath('')->appends(Input::except('page')))
             ->with('partitions', $partitions)
             ->with('neighborhoods', $neighborhoods)
             ->with('areas', $areas)

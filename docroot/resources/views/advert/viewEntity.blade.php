@@ -157,6 +157,15 @@
                                             <i class='fa fa-check pull-right'></i>
                                         </p>
                                     @endforeach
+                                    @if (!empty($utilities))
+                                        <br />
+                                        @foreach ($utilities as $improvement)
+                                            <p>
+                                                <span>{{ $improvement }}</span>
+                                                <i class='fa fa-check pull-right'></i>
+                                            </p>
+                                        @endforeach
+                                    @endif
                                     <div class="clear-both"></div>
                                 </div>
                             </a>

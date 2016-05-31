@@ -40,6 +40,13 @@ class AdvertController extends Controller {
     'electricitate' => 'Electricitate',
   ];
 
+  public static $utilities = [
+    'canalizare' => 'Canalizare',
+    'apa_curenta' => 'Apa curenta',
+    'gaze' => 'Gaze',
+    'electricitate' => 'Electricitate',
+  ];
+
   public static $entity_attributes = [
     'usable_area' => 'Suprafata utila',
     'built_area' => 'Suprafata construita',
@@ -163,6 +170,7 @@ class AdvertController extends Controller {
     $entity = $advert->{$advert->type};
     /** @var Improvements $improvements */
     $improvements = json_decode($advert->improvements->improvements, TRUE);
+    $utilities = [];
 
     if ($prepareForDisplay === TRUE) {
       // Prepare the advert
@@ -182,7 +190,12 @@ class AdvertController extends Controller {
         $ordered_improvements = [];
         foreach (self::$improvements as $key => $improvement) {
           if (!empty($improvements[$key])) {
-            $ordered_improvements[] = $improvement;
+            if (array_key_exists($key, self::$utilities)) {
+              $utilities[] = $improvement;
+            }
+            else {
+              $ordered_improvements[] = $improvement;
+            }
           }
         }
         $improvements = $ordered_improvements;
@@ -197,6 +210,9 @@ class AdvertController extends Controller {
             unset($improvements[$key]);
           }
           else {
+            if (array_key_exists($key, self::$utilities)) {
+              $utilities[] = $improvement;
+            }
             $improvements[$key] = self::$improvements[$key];
           }
         }
@@ -253,6 +269,7 @@ class AdvertController extends Controller {
       'owner' => $owner->attributesToArray(),
       'entity' => $entity->attributesToArray(),
       'improvements' => $improvements,
+      'utilities' => $utilities,
       'status_types' => StatusType::all(),
       'advert_status' => $advert_status,
     ];

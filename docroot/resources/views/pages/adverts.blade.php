@@ -293,7 +293,7 @@
                                                 <div class="updated-at text-center" href="{{ URL::to('anunturi/' . $advert['id']) }}">
                                                     <div>
                                                         <p>Actualizat: {{ date("d-m-Y", strtotime($advert['updated_at'])) }}</p>
-                                                        <p>Adaugat: {{ date("d-m-Y", strtotime($advert['updated_at'])) }}</p>
+                                                        <p>Adaugat: {{ date("d-m-Y", strtotime($advert['created_at'])) }}</p>
                                                     </div>
                                                 </div>
                                             </div>

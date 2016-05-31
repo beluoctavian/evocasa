@@ -3,6 +3,7 @@ use App\Owner;
 use App\Proprietar;
 use App\Apartment;
 use App\Imobil;
+use App\Observation;
 use App\Advert;
 $proprietars = DB::table('proprietars')->get();
 $ceva = 0;
@@ -17,7 +18,16 @@ foreach($proprietars as $proprietar) {
         $phone = json_encode($phone);
         $owner->phone = $phone;
         $owner->save();
+        if (!empty($proprietar->observatii)) {
+            $observation = Observation::where('owner_id', $owner->id)->first() ;
+            if(!$observation)
+                $observation = new Observation();
+            $observation->text = $proprietar->observatii;
+            $observation->owner_id = $owner->id;
+            $observation->save();
+        }
     }
+
 
     $anunt = DB::table('anunts')->find($proprietar->id_anunt);
     if ($anunt != null) {
@@ -30,7 +40,7 @@ foreach($proprietars as $proprietar) {
             $advert->created_at = $anunt->created_at;
             $advert->updated_at = $anunt->updated_at;
             $advert->save();
-            $apartment = Apartment::find($anunt->id);
+            $apartment = Apartment::where('advert_id', $advert->id)->first();
 
 //            echo $imobil->created_at . PHP_EOL;
 
@@ -58,12 +68,14 @@ foreach($proprietars as $proprietar) {
 //            echo $apartment->created_at . PHP_EOL;
 
             echo 'update apartment ' . $apartment->id . PHP_EOL;
-            $ceva ++;
+                $ceva ++;
+
             }
+
 
         }
     }
 
-}   
+}
 
 echo $ceva;

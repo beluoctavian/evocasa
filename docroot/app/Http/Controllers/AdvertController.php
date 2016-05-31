@@ -183,7 +183,12 @@ class AdvertController extends Controller {
         if (!array_key_exists($key, self::$improvements)) {
           throw new \Exception('Found undeclared improvement: ' . $key);
         }
-        $improvements[$key] = self::$improvements[$key];
+        if (empty($improvement)) {
+          unset($improvements[$key]);
+        }
+        else {
+          $improvements[$key] = self::$improvements[$key];
+        }
       }
 
       // Prepare the entity

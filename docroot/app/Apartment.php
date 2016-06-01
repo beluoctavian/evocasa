@@ -67,10 +67,12 @@ class Apartment extends Model {
      */
     public static function createFromArray(array $parameters, Advert $advert)
     {
+        $parameters['partitioning'] = ucwords(strtolower($parameters['partitioning']));
+
         $valid_parameters = [];
         foreach ($parameters as $key => $value) {
             if (in_array($key, self::$properties)) {
-                $valid_parameters[$key] = $value;
+                $valid_parameters[$key] = trim($value);
             }
         }
         $valid_parameters['advert_id'] = $advert->id;

@@ -49,7 +49,7 @@ class AdvertController extends Controller {
 
   public static $entity_attributes = [
     'usable_area' => 'Suprafata utila',
-    'built_area' => 'Suprafata construita',
+    'built_area' => 'Suprafata totala',
     'partitioning' => 'Compartimentare',
     'comfort' => 'Confort',
     'floor' => 'Etaj',

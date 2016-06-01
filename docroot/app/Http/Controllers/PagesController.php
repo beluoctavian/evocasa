@@ -82,27 +82,6 @@ class PagesController extends Controller {
           ->with('input_defaults', $this->getInputDefaults());
     }
 
-    public function detalii($id)
-    {
-        try {
-            $anunt = DB::table('anunts')->where('id','=',$id)->first();
-            $imobil = DB::table('imobils')->where('id_anunt','=',$id)->first();
-            $imbunat = DB::table('imbunats')->where('id_anunt','=',$id)->first();
-            $proprietar = DB::table('proprietars')->where('id_anunt','=',$id)->first();
-            $similare = DB::table('anunts')->where('cartier', 'LIKE', '%'.$anunt->cartier.'%')->where('nr_camere', '=', $anunt->nr_camere)->where('id', '!=', $anunt->id)->take(2)->get();
-        }catch(\Exception $e){
-            return abort('404');
-        }
-        if(File::exists('uploaded-images/anunt_' . $id . '/')){
-            $files = File::allFiles('uploaded-images/anunt_' . $id . '/');
-            if(count($files)){
-                sort($files);
-                return view('pages.detalii')->with('anunt',$anunt)->with('imobil',$imobil)->with('imbunat',$imbunat)->with('proprietar',$proprietar)->with('similare',$similare)->with('files',$files);
-            }
-        }
-        return view('pages.detalii')->with('anunt',$anunt)->with('imobil',$imobil)->with('imbunat',$imbunat)->with('proprietar',$proprietar)->with('similare',$similare);
-    }
-
     public function despreNoi()
     {
         return view('pages.desprenoi');
@@ -117,8 +96,9 @@ class PagesController extends Controller {
     {
         return view('pages.contact');
     }
-    public function postSearch(Request $request){
-//        $link = array();
+
+    public function postSearch(Request $request)
+    {
         $key_words = Input::get('cuvinte_cheie');
         $advert_id = Input::get('id_anunt');
         $min_price = Input::get('pret_minim');
@@ -142,134 +122,106 @@ class PagesController extends Controller {
         //terrain properties + total area
 
         $status = Input::get('status') ? Input::get('status') : 'activ';
-        if(Auth::guest())
-        {
+        if(Auth::guest()) {
             $status = 'activ';
         }
 
         $entity_type = Input::get('tip') ? Input::get('tip') : 'apartament';
 
-        if($entity_type == 'teren'){
-
-            $adverts = Advert::whereHas('terrain', function($query)
-            use($min_total_area, $max_total_area) {
-                if($min_total_area)
-                {
+        if($entity_type == 'teren') {
+            $adverts = Advert::whereHas('terrain', function($query) use($min_total_area, $max_total_area) {
+                if($min_total_area) {
                     $query->where('total_area', '>=', (int)$min_total_area);
                 }
-                if($max_total_area)
-                {
+                if($max_total_area) {
                     $query->where('total_area', '<=', (int)$max_total_area);
                 }
             });
         }
-        else
-            if($entity_type == 'casa')
-            {
-                $adverts = Advert::whereHas('house', function($query)
-                use($min_year, $max_year, $max_total_area, $min_total_area) {
-                    if($min_year)
-                    {
+        else {
+            if($entity_type == 'casa') {
+                $adverts = Advert::whereHas('house', function($query) use($min_year, $max_year, $max_total_area, $min_total_area) {
+                    if($min_year) {
                         $query->where('built_year', '>=', $min_year);
                     }
-                    if($max_year)
-                    {
+                    if($max_year) {
                         $query->where('built_year', '<=', $max_year);
                     }
-
-                    if($min_total_area)
-                    {
+                    if($min_total_area) {
                         $query->where('land_area', '>=', $min_total_area);
                     }
-                    if($max_total_area)
-                    {
+                    if($max_total_area) {
                         $query->where('land_area', '<=', $max_total_area);
                     }
                 });
             }
-            else{
-
-                $adverts = Advert::whereHas('apartment', function($query)
-                use($min_year, $max_year,$floor , $min_surface, $max_surface, $partitioning) {
-                    if($min_year)
-                    {
+            else {
+                $adverts = Advert::whereHas('apartment', function($query) use($min_year, $max_year,$floor , $min_surface, $max_surface, $partitioning) {
+                    if($min_year) {
                         $query->where('built_year', '>=', $min_year);
                     }
-                    if($max_year)
-                    {
+                    if($max_year) {
                         $query->where('built_year', '<=', $max_year);
                     }
-                    if($floor[0])
-                    {
+                    if($floor[0]) {
                         $etaj = "( ";
-                        foreach($floor[0] as $et)
-                            if($et == 'parter' or $et == 'demisol')
+                        foreach($floor[0] as $et) {
+                            if($et == 'parter' or $et == 'demisol') {
                                 continue;
-                        else
-                            $etaj .= $et . ', ';
+                            }
+                            else {
+                                $etaj .= $et . ', ';
+                            }
+                        }
 
-                        if(in_array('parter', $floor[0]))
+                        if(in_array('parter', $floor[0])) {
                             $etaj .= "'P' ) ";
-                        else
-                            if(in_array('parter', $floor[0]))
+                        }
+                        else {
+                            if(in_array('parter', $floor[0])) {
                                 $etaj .= "D' ) ";
-                            else
+                            }
+                            else {
                                 $etaj .= "'-1' ) ";
-
+                            }
+                        }
                         $query->whereRaw('substring_index(apartment.floor, \'/\', 1)  in '. $etaj);
-
                     }
-                    if($min_surface)
-                    {
+                    if($min_surface) {
                         $query->where('built_area', '>=', $min_surface);
                     }
-                    if($max_surface)
-                    {
+                    if($max_surface) {
                         $query->where('built_area', '<=', $max_surface);
                     }
-                    if($partitioning[0])
-                    {
+                    if($partitioning[0]) {
                         $query->whereIn('partitioning', $partitioning[0]);
                     }
                 });
-
             }
+        }
 
-        if($phone)
-        {
+        if($phone) {
             $adverts ->whereHas('owner', function ($query) use ($phone) {
                 $query->where('owner.phone', 'like', '%' . $phone . '%');
             });
         };
-
-
-        if($neighborhood[0])
-        {
+        if($neighborhood[0]) {
             $adverts->whereHas('neighborhood', function($query) use ($neighborhood) {
                 $query->whereIn('name',$neighborhood[0]);
             });
         }
-
-        if($area[0])
-        {
+        if($area[0]) {
             $adverts->whereHas('area', function ($query) use ($area) {
                 $query->whereIn('name', $area[0]);
             });
         }
-
-
-        if($min_price !== NULL and $min_price != '')
-        {
+        if($min_price !== NULL and $min_price != '') {
             $adverts->where('price', '>=', $min_price);
         }
-
-        if($max_price !== NULL and $max_price != '')
-        {
+        if($max_price !== NULL and $max_price != '') {
             $adverts->where('price', '<=', $max_price);
         }
-
-        if($key_words)
-        {
+        if($key_words) {
             $adverts->where('title', 'like', '%'.$key_words.'%');
         }
 
@@ -282,27 +234,23 @@ class PagesController extends Controller {
                 $adverts->whereIn('no_rooms', $no_rooms[0]);
             }
         }
-        if($advert_id)
-        {
+        if($advert_id) {
             $adverts->where('code', Input::get('id_anunt'));
         }
 
 
         $inactive_status_id = StatusType::where('title', 'Inactiv')->first()->id;
 
-        if($status == 'inactiv')
-        {
-            $adverts->whereHas('status', function($query) use ($inactive_status_id){
+        if($status == 'inactiv') {
+            $adverts->whereHas('status', function($query) use ($inactive_status_id) {
                 $query->where('type_id', $inactive_status_id);
             });
         }
 
         $adverts->orderBy('created_at', 'desc');
-        if($sort_after)
-        {
+        if($sort_after) {
             $criteriul = explode('_', $sort_after)[0];
-            if($criteriul == 'date')
-            {
+            if($criteriul == 'date') {
                 $criteriul = 'updated_at';
             }
             $ordinea = explode('_', $sort_after)[1];
@@ -310,43 +258,35 @@ class PagesController extends Controller {
         }
 
         $results = [];
-        if($status == 'activ')
-        {
-            foreach($adverts->get() as $advert)
-            {
+        if($status == 'activ') {
+            foreach($adverts->get() as $advert) {
                 $flag = true;
-                    if($advert->status)
-                {
-                    foreach($advert->status as $status)
-                        if($status->type_id == $inactive_status_id)
-                        {
+                if($advert->status) {
+                    foreach($advert->status as $status) {
+                        if($status->type_id == $inactive_status_id) {
                             $flag = false;
                         }
+                    }
                 }
-                if($flag == true)
+                if($flag == true) {
                     $results[] = $advert->id;
+                }
             }
-            if($sort_after)
-            {
+            if($sort_after) {
                 $criteriul = explode('_', $sort_after)[0];
-                if($criteriul == 'date')
-                {
+                if($criteriul == 'date') {
                     $criteriul = 'updated_at';
                 }
                 $ordinea = explode('_', $sort_after)[1];
                 $results  = Advert::whereIn('id', $results)->orderBy($criteriul, $ordinea)->paginate(10);
             }
-            else
-            {
+            else {
                 $results  = Advert::whereIn('id', $results)->orderBy('created_at', 'desc')->paginate(10);
             }
         }
-        else
-        {
+        else {
             $results  = $adverts->paginate(10);
         }
-
-
 
         $partitions = array_unique(Apartment::all()->lists('partitioning'));
 
@@ -359,10 +299,12 @@ class PagesController extends Controller {
             $results[$key] = AdvertController::getEntityDetails($item->id);
         }
         $zona = $request['zona'];
-        if($zona)
+        if ($zona) {
             $zone = implode(',', $zona);
-        else
+        }
+        else {
             $zone = '';
+        }
         return view('pages.adverts')
             ->with('adverts',$results->setPath('')->appends(Input::except('page')))
             ->with('partitions', $partitions)

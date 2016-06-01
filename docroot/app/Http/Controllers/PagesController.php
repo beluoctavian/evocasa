@@ -305,8 +305,9 @@ class PagesController extends Controller {
         else {
             $zone = '';
         }
+        /** @var LengthAwarePaginator $results */
         return view('pages.adverts')
-            ->with('adverts',$results->setPath('')->appends(Input::except('page')))
+            ->with('adverts',$results->setPath('')->appends(Input::except('page'))->fragment('anunturi'))
             ->with('partitions', $partitions)
             ->with('neighborhoods', $neighborhoods)
             ->with('areas', $areas)

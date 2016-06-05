@@ -256,110 +256,119 @@
         <tr>
             <td>
                 <h2>Detalii proprietar</h2>
-                <div class="row">
-                    <div class="form-group col-xs-4">
+                <p class="row">
+                    <div class="col-xs-3 no-padding">
                         <label for="owner[last_name]">Nume</label>
+                    </div>
+                    <div class="col-xs-9">
                         <div>
                             <input value="{{ !empty($owner['last_name']) ? $owner['last_name'] : '' }}" id="owner[last_name]" name="owner[last_name]" type="text" class="form-control">
                         </div>
                     </div>
-                    <div class="form-group col-xs-4">
+                </p>
+                <p class="row">
+                    <div class="col-xs-3 no-padding">
                         <label for="owner[first_name]">Prenume</label>
+                    </div>
+                    <div class="col-xs-9">
                         <div>
                             <input value="{{ !empty($owner['first_name']) ? $owner['first_name'] : '' }}" id="owner[first_name]" name="owner[first_name]" type="text" class="form-control">
                         </div>
                     </div>
-                    <div id="telefons">
-                        @if (!empty($owner['phone']) && count($owner['phone']) > 0)
-                            @foreach($owner['phone'] as $it => $tel)
-                                <div class="form-group col-xs-4 telefon-container">
-                                    <label>Telefon {{ $it+1 }}</label>
-                                    <div>
-                                        <input name="owner[phone][]" type="text" class="form-control" value="{{ $tel }}">
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="form-group col-xs-4">
-                                <label for="owner[phone]">Telefon
-                                <div>
-                                    <input id="owner[phone]" name="owner[phone][]" type="text" class="form-control">
-                                </div>
-                            </div>
-                        @endif
+                </p>
+                <p class="row">
+                    <div class="col-xs-3 no-padding">
+                        <label>Telefon</label>
                     </div>
-                    <div class="form-group col-xs-8">
+                    <div class="col-xs-9">
+                        <textarea class="form-control">{{ (!empty($owner['phone']) && count($owner['phone']) > 0) ? implode(', ', $owner['phone']) : '' }}</textarea>
+                    </div>
+                </p>
+                <p class="row">
+                    <div class="col-xs-3 no-padding">
                         <label for="owner[email]">E-mail</label>
-                        <div>
-                            <input value="{{ !empty($owner['email']) ? $owner['email'] : '' }}" id="owner[email]" name="owner[email]" type="text" class="form-control">
-                        </div>
                     </div>
-                    <div class="form-group col-xs-6">
+                    <div class="col-xs-9">
+                        <input value="{{ !empty($owner['email']) ? $owner['email'] : '' }}" id="owner[email]" name="owner[email]" type="text" class="form-control">
+                    </div>
+                </p>
+                <p class="row">
+                    <div class="col-xs-3 no-padding">
                         <label for="owner[cadaster]">Cadastru</label>
-                        <div>
-                            <input value="{{ !empty($owner['cadaster']) ? $owner['cadaster'] : '' }}" id="owner[cadaster]" name="owner[cadaster]" type="text" class="form-control">
+                    </div>
+                    <div class="col-xs-9">
+                        <input value="{{ !empty($owner['cadaster']) ? $owner['cadaster'] : '' }}" id="owner[cadaster]" name="owner[cadaster]" type="text" class="form-control">
+                    </div>
+                </p>
+                <p class="row">
+                    <div class="col-xs-3 no-padding">
+                    <label for="owner[registration]">Intabulare</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input value="{{ !empty($owner['registration']) ? $owner['registration'] : '' }}" id="owner[registration]" name="owner[registration]" type="text" class="form-control">
+                    </div>
+                </p>
+                @if ($entity_type == 'terrain')
+                    <p class="row">
+                        <div class="col-xs-3 no-padding">
+                            <label for="owner[urbanism_certificate]">Certificat urbanism</label>
                         </div>
-                    </div>
-                    <div class="form-group col-xs-6">
-                        <label for="owner[registration]">Intabulare</label>
-                        <div>
-                            <input value="{{ !empty($owner['registration']) ? $owner['registration'] : '' }}" id="owner[registration]" name="owner[registration]" type="text" class="form-control">
+                        <div class="col-xs-9">
+                            <input value="{{ !empty($owner['urbanism_certificate']) ? $owner['urbanism_certificate'] : '' }}" id="owner[urbanism_certificate]" name="owner[urbanism_certificate]" type="text" class="form-control">
                         </div>
+                    </p>
+                @else
+                    <p class="row">
+                        <div class="col-xs-3 no-padding">
+                            <label for="owner[energy_certificate]">Certificat energetic</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <input value="{{ !empty($owner['energy_certificate']) ? $owner['energy_certificate'] : '' }}" id=owner[energy_certificate] name="owner[energy_certificate]" type="text" class="form-control">
+                        </div>
+                    </p>
+                @endif
+                <p class="row">
+                    <div class="col-xs-6">
+                        <label class="checkbox-inline">
+                            <input {{ !empty($owner['map_pictures']) ? 'checked' : '' }} name="owner[map_pictures]" type="checkbox" value="1"> Poze MAP
+                        </label>
                     </div>
-                    <div class="form-group col-xs-6">
-                        @if ($entity_type == 'terrain')
-                            <div>
-                                <label for="owner[urbanism_certificate]">Certificat urbanism</label>
-                                <div>
-                                    <input value="{{ !empty($owner['urbanism_certificate']) ? $owner['urbanism_certificate'] : '' }}" id="owner[urbanism_certificate]" name="owner[urbanism_certificate]" type="text" class="form-control">
-                                </div>
-                            </div>
-                        @else
-                            <div>
-                                <label for="owner[energy_certificate]">Certificat energetic</label>
-                                <div>
-                                    <input value="{{ !empty($owner['energy_certificate']) ? $owner['energy_certificate'] : '' }}" id=owner[energy_certificate] name="owner[energy_certificate]" type="text" class="form-control">
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="form-group col-xs-6 margin-top-small">
-                        <div>
+                    @if ($entity_type == 'apartment')
+                        <div class="col-xs-6">
                             <label class="checkbox-inline">
-                                <input {{ !empty($owner['map_pictures']) ? 'checked' : '' }} name="owner[map_pictures]" type="checkbox" value="1"> Poze MAP
+                                <input {{ !empty($owner['rehabilitated_block']) ? 'checked' : '' }} name="owner[rehabilitated_block]" type="checkbox" value="1"> Bloc reabilitat
                             </label>
                         </div>
-                        @if ($entity_type == 'apartment')
-                            <div>
-                                <label class="checkbox-inline">
-                                    <input {{ !empty($owner['rehabilitated_block']) ? 'checked' : '' }} name="owner[rehabilitated_block]" type="checkbox" value="1"> Bloc reabilitat
-                                </label>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-xs-12">
+                    @endif
+                </p>
+                <p class="row">
+                    <div class="col-xs-12 no-padding">
                         <label for="owner[address]">Adresa</label>
                         <div>
                             <textarea id="owner[address]" name="owner[address]" class="form-control" rows="2">{{ !empty($owner['address']) ? $owner['address'] : '' }}</textarea>
                         </div>
                     </div>
-                </div>
-                @if (!empty($owner) && !empty($owner['observations']))
-                    <div class="row">
-                        <div class="form-group col-xs-12">
-                            <label for="owner[observation]">Observatii</label>
-                            @foreach ($owner['observations'] as $observation)
-                                <div class="row observations-container">
-                                    <div class="col-xs-12">
-                                        <span>{{ $observation->created_at }}</span>
-                                        <textarea class="form-control" rows="2">{{ $observation->text }}</textarea>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+                </p>
+                <p class="row">
+                    <div class="col-xs-12 no-padding">
+                        <label for="owner[observation]">Observatii</label>
                     </div>
+                </p>
+                @if (!empty($owner) && !empty($owner['observations']->count()))
+                    @foreach ($owner['observations'] as $observation)
+                        <p class="row observations-container">
+                            <div class="col-xs-12 no-padding">
+                                <span>{{ $observation->created_at }}</span>
+                                <textarea class="form-control" rows="2">{{ $observation->text }}</textarea>
+                            </div>
+                        </p>
+                    @endforeach
+                @else
+                    <p class="row observations-container">
+                        <div class="col-xs-12 no-padding">
+                            <textarea class="form-control" rows="2"></textarea>
+                        </div>
+                    </p>
                 @endif
             </td>
         </tr>
@@ -376,13 +385,11 @@
                     <div class="col-xs-12">
                         <div class="row">
                             @foreach ($improvements as $i => $checked)
-                                @if (!empty($checked))
-                                    <div class="col-xs-12">
-                                        <label class="checkbox-inline">
-                                            <input name="improvements[{{ $i }}]" checked type="checkbox" value="1"> {{ ucwords(str_replace('_', ' ', $i)) }}
-                                        </label>
-                                    </div>
-                                @endif
+                                <div class="col-xs-12">
+                                    <label class="checkbox-inline">
+                                        <input name="improvements[{{ $i }}]" checked type="checkbox" value="1"> {{ ucwords(str_replace('_', ' ', $i)) }}
+                                    </label>
+                                </div>
                             @endforeach
                         </div>
                     </div>

@@ -400,6 +400,15 @@
 @section('scripts')
 <script src="{{ URL::asset('library/ion-rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js') }}"></script>
 <script type="text/javascript">
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == 'id_anunt') {
+            window.location.hash= '#anunturi';
+        }
+    }
+    
     function format(option) {
         if ('children' in option) {
             return option.text;

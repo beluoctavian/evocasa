@@ -176,7 +176,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 text-center">
                                         <button type="submit" class="btn btn-warning btn-md"><i class="fa fa-search"></i> Cauta</button>
-                                        <a href="{{ URL::to('anunturi') }}" class="btn btn-warning btn-md"><i class="fa fa-trash-o"></i> Reset</a>
+                                        <a href="{{ URL::to('anunturi?tip=' . $type) }}" class="btn btn-warning btn-md"><i class="fa fa-trash-o"></i> Reset</a>
                                     </div>
                                 </div>
                             </div>

@@ -55,7 +55,7 @@
                                         <div class="form-group col-xs-6 col-sm-2">
                                             <label>Stare</label>
                                             <div>
-                                                <select name="status" class="form-control">
+                                                <select id="stare_select" name="status" class="form-control">
                                                     <?php
                                                       $status = Input::get('status') ? Input::get('status') : 'activ'
                                                     ?>
@@ -476,6 +476,10 @@
 
     $('#sortare').change(function() {
         this.form.submit();
+    });
+
+    $('#stare_select').change(function() {
+        $(this).select2('destroy').select2(defaultSelect2Options);
     });
 
     // todo:get child and save to database if not exist

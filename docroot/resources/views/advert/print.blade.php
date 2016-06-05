@@ -381,19 +381,44 @@
                 @elseif ($entity_type == 'terrain')
                     <h2>Utilitati</h2>
                 @endif
+                @if ($entity_type == 'terrain')
                 <div class="row">
-                    <div class="col-xs-12">
-                        <div class="row">
-                            @foreach ($improvements as $i => $checked)
+                    <div class="col-xs-6">
+                            @foreach ($all_utilities as $key => $val)
                                 <div class="col-xs-12">
                                     <label class="checkbox-inline">
-                                        <input name="improvements[{{ $i }}]" checked type="checkbox" value="1"> {{ ucwords(str_replace('_', ' ', $i)) }}
+                                        <input name="improvements[{{ $key }}]" type="checkbox" {{ array_key_exists($key, $improvements) ? 'checked' : '' }}> {{ $val }}
                                     </label>
                                 </div>
                             @endforeach
-                        </div>
                     </div>
                 </div>
+                @else
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <?php
+                            $i = 1;
+                            $total = count($all_improvements);
+                            ?>
+                            @foreach ($all_improvements as $key => $val)
+                                @if ($key == 'fara_imbunatatiri')
+                                    <div class="col-xs-12">
+                                        &nbsp;
+                                    </div>
+                                @endif
+                                <div class="col-xs-12">
+                                    <label class="checkbox-inline">
+                                        <input name="improvements[{{ $key }}]" type="checkbox" {{ array_key_exists($key, $improvements) ? 'checked' : '' }}> {{ $val }}
+                                    </label>
+                                </div>
+                                @if ($i++ == (int) ($total / 2) +1)
+                                    </div>
+                                    <div class="col-xs-6">
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
             </td>
         </tr>
     </table>

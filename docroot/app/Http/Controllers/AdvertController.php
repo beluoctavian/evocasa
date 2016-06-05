@@ -186,37 +186,19 @@ class AdvertController extends Controller {
           break;
 
       }
-      if ($prepareForDisplay === TRUE) {
-        $ordered_improvements = [];
-        foreach (self::$improvements as $key => $improvement) {
-          if (!empty($improvements[$key])) {
-            if (array_key_exists($key, self::$utilities)) {
-              $utilities[] = $improvement;
-            }
-            else {
-              $ordered_improvements[] = $improvement;
-            }
-          }
-        }
-        $improvements = $ordered_improvements;
-      }
-      else {
-        // Prepare the improvements
-        foreach ($improvements as $key => $improvement) {
-          if (!array_key_exists($key, self::$improvements)) {
-            throw new \Exception('Found undeclared improvement: ' . $key);
-          }
-          if (empty($improvement)) {
-            unset($improvements[$key]);
+
+      $ordered_improvements = [];
+      foreach (self::$improvements as $key => $improvement) {
+        if (!empty($improvements[$key])) {
+          if (array_key_exists($key, self::$utilities)) {
+            $utilities[] = $improvement;
           }
           else {
-            if (array_key_exists($key, self::$utilities)) {
-              $utilities[] = $improvement;
-            }
-            $improvements[$key] = self::$improvements[$key];
+            $ordered_improvements[] = $improvement;
           }
         }
       }
+      $improvements = $ordered_improvements;
 
       // Prepare the entity
       $to_unset = ['id', 'advert_id', 'created_at', 'updated_at'];
@@ -262,6 +244,22 @@ class AdvertController extends Controller {
         unset($entity[$key]);
       }
 
+    }
+    else {
+      foreach ($improvements as $key => $improvement) {
+        if (!array_key_exists($key, self::$improvements)) {
+          throw new \Exception('Found undeclared improvement: ' . $key);
+        }
+        if (empty($improvement)) {
+          unset($improvements[$key]);
+        }
+        else {
+          if (array_key_exists($key, self::$utilities)) {
+            $utilities[] = $improvement;
+          }
+          $improvements[$key] = self::$improvements[$key];
+        }
+      }
     }
 
     return [
@@ -398,15 +396,18 @@ class AdvertController extends Controller {
     if ($details == NULL) {
       abort(404);
     }
-    $files = [];
-    if (\File::exists('uploaded-images/anunt_' . $id . '/')) {
-      $files = \File::allFiles('uploaded-images/anunt_' . $id . '/');
+    $all_improvements = self::$improvements;
+    $all_utilities = self::$utilities;
+    foreach ($all_utilities as $key => $val) {
+      if (!empty($all_improvements[$key])) {
+        unset($all_improvements[$key]);
+      }
     }
-    sort($files);
     return view('advert.print')
       ->with('entity_type', $details['advert']['type'])
       ->with($details)
-      ->with('files', $files);
+      ->with('all_improvements', $all_improvements)
+      ->with('all_utilities', $all_utilities);
   }
 
   public function postAddStatus($id, Request $request)

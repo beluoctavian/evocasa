@@ -285,7 +285,6 @@
         default:
             active = null;
     }
-    console.log(active)
     if (active) {
         $('.' + active + '-link').addClass('active');
         $('.' + active + '-option').attr('selected', 'selected');

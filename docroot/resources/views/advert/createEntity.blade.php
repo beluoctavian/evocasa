@@ -735,7 +735,6 @@
            $('input',el).val("");
            $('label',el).text($('label',el).text() + ' ' + tels);
            tels = tels + 1;
-           console.log(el);
            $("#telefons").append(el.clone());
        });
     });

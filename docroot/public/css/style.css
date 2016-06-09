@@ -112,7 +112,7 @@ body {
     font-weight: 700;
     color: #4d4d4d;
 }
-@media (min-width: 992px) {
+@media (min-width: 991px) {
     /* Guest navbar */
     .navbar-guest {
         background-color: #f8f8f8;
@@ -342,12 +342,12 @@ footer {
 .advert-item h2 a:hover, .similar-item h2 a:hover{
     text-decoration: none;
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .advert-item .description {
         margin-top: 10px;
     }
 }
-@media (min-width: 992px) {
+@media (min-width: 991px) {
     .advert-item img {
         max-height: 150px;
     }
@@ -456,7 +456,7 @@ footer {
         font-size: 18px !important;
     }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .advert-item .img-container {
         display: block;
         position: relative;
@@ -618,7 +618,7 @@ footer {
 .customer-options a.edit {
     margin-right: 5px;}
 
-@media (min-width: 992px) {
+@media (min-width: 991px) {
     .banner-preview-container {
         display: block;
         height: 200px;

@@ -65,7 +65,7 @@ class PagesController extends Controller {
         }
 
         $perPage = 10;
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $currentPage = LengthAwarePaginator::resolveCurrentPage() ?: 1;
         $collection = new Collection($ids);
         $currentPageSearchResults = $collection->slice(($currentPage-1) * $perPage, $perPage)->all();
         foreach ($currentPageSearchResults as &$item) {

@@ -450,6 +450,12 @@ footer {
 .advert-item ul li.last {
     border-right: 0px none #efefef;
 }
+
+@media (max-width: 450px) {
+    .advert-item h2 {
+        font-size: 18px !important;
+    }
+}
 @media (max-width: 992px) {
     .advert-item .img-container {
         display: block;
@@ -474,11 +480,10 @@ footer {
         display: none;
     }
     .advert-item h2 {
-        font-size: 20px !important;
+        font-size: 20px;
         padding-right: 0px;
         margin: 0 0 10px 0;
         color: #fcbf10;
-        font-size: 24px;
     }
     .advert-item ul li {
         box-sizing: border-box;

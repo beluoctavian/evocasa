@@ -1,4 +1,7 @@
 @media print {
+    * {
+        max-width: 100%;
+    }
     table {
             width: 100%;
             font-size: 12px!important;
@@ -29,6 +32,9 @@
     }
 }
 
+* {
+    max-width: 100%;
+}
 table {
     width: 50%;
     float: left;

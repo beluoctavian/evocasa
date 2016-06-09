@@ -93,8 +93,8 @@ class Advert extends Model {
      */
     public static function createFromArray(array $parameters, $entity_id = NULL)
     {
-        $parameters['neighborhood'] = ucwords(strtolower($parameters['neighborhood']));
-        $parameters['area'] = ucwords(strtolower($parameters['area']));
+        $parameters['neighborhood'] = trim(ucwords(strtolower($parameters['neighborhood'])));
+        $parameters['area'] = trim(ucwords(strtolower($parameters['area'])));
         $area = null;
         $neighborhood = null;
         if(!empty($parameters['neighborhood'])) {

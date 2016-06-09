@@ -342,7 +342,7 @@ footer {
 .advert-item h2 a:hover, .similar-item h2 a:hover{
     text-decoration: none;
 }
-@media (max-width: 991px) {
+@media (max-width: 993px) {
     .advert-item .description {
         margin-top: 10px;
     }
@@ -456,7 +456,7 @@ footer {
         font-size: 18px !important;
     }
 }
-@media (max-width: 991px) {
+@media (max-width: 993px) {
     .advert-item .img-container {
         display: block;
         position: relative;

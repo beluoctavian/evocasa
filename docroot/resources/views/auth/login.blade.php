@@ -18,21 +18,21 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <div class="form-group">
-                        <label class="col-xs-3 col-sm-2 control-label">Username</label>
-                        <div class="col-xs-9 col-sm-10">
+                        <label class="col-xs-3 control-label">Username</label>
+                        <div class="col-xs-9">
                             <input type="text" class="form-control" name="username" value="{{ old('username') }}">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-3 col-sm-2 control-label">Parola</label>
-                        <div class="col-xs-9 col-sm-10">
+                        <label class="col-xs-3 control-label">Parola</label>
+                        <div class="col-xs-9">
                             <input type="password" class="form-control" name="password">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-xs-9 col-xs-offset-3 col-sm-10 col-sm-offset-2">
+                        <div class="col-xs-9 col-xs-offset-3">
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
                     </div>

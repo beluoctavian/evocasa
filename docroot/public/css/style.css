@@ -755,3 +755,10 @@ footer {
 .thumbnail .caption a {
     word-wrap: break-word;
 }
+
+@media screen and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0)
+{ @media {
+    .row.safari-fix .col-sm-9 {
+        width: 74%!important;
+    }
+}}

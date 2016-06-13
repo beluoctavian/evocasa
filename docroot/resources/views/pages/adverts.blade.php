@@ -234,7 +234,7 @@
                                         </form>
                                     </div>
                                 @endif
-                                <div class="row">
+                                <div class="row safari-fix">
                                     <div class="col-xs-12 col-sm-3">
                                         <div class="img-container">
                                             @if(Auth::guest())

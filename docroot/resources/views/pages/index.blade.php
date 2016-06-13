@@ -102,7 +102,23 @@
                                             @if(Auth::guest())
                                                 <h2><a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('anunturi/' . $advert['id']) }}">
                                                         <span class="grey"><b>[{{ $advert['code'] }}]</b></span>&nbsp;&nbsp;{{ $advert['title'] }}
-                                                </a></h2>
+                                                </a>
+                                                </h2>
+                                                <div class="status hidden-xs">
+                                                    <div class="updated-at text-right pull-right" href="{{ URL::to('anunturi/' . $advert['id']) }}">
+                                                        <table>
+                                                            <tr>
+                                                                <td class="text-right">Actualizat:</td>
+                                                                <td class="text-right">{{ date("d-m-Y", strtotime($advert['updated_at'])) }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right">Adaugat:</td>
+                                                                <td class="text-right">{{ date("d-m-Y", strtotime($advert['created_at'])) }}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
                                             @else
                                                 <h2>
                                                     <a class="{{ $advert['inactiv'] == TRUE ? 'red' : ($advert['retras'] == TRUE ? 'grey' : '') }}" href="{{ URL::to('advert/edit/' . $advert['id']) }}">
@@ -118,6 +134,19 @@
                                                             @endif
                                                         </div>
                                                     @endforeach
+                                                    <div class="updated-at text-right pull-right" href="{{ URL::to('anunturi/' . $advert['id']) }}">
+                                                        <table>
+                                                            <tr>
+                                                                <td class="text-right">Actualizat:</td>
+                                                                <td class="text-right">{{ date("d-m-Y", strtotime($advert['updated_at'])) }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right">Adaugat:</td>
+                                                                <td class="text-right">{{ date("d-m-Y", strtotime($advert['created_at'])) }}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                        <div class="clearfix"></div>
                                                 </div>
                                             @endif
                                             <div class="price">
@@ -130,12 +159,6 @@
                                                     </div>
                                                 @endif
                                                 <div class="clear-both"></div>
-                                                <div class="updated-at text-center" href="{{ URL::to('anunturi/' . $advert['id']) }}">
-                                                    <div>
-                                                        <p>Actualizat: {{ date("d-m-Y", strtotime($advert['updated_at'])) }}</p>
-                                                        <p>Adaugat: {{ date("d-m-Y", strtotime($advert['created_at'])) }}</p>
-                                                    </div>
-                                                </div>
                                             </div>
                                             <div class="details">
                                                 <ul>

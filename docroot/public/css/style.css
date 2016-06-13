@@ -317,6 +317,12 @@ footer {
     position: relative;
     height: 150px;
     width: 100%;
+    position: relative;
+}
+.advert-item .description .status {
+    position: absolute;
+    bottom: 35px;
+    width: 100%;
 }
 .similar-item .description {
     display: block;
@@ -370,7 +376,7 @@ footer {
 .similar-item .updated-at {
     display: none;
 }
-.advert-item .updated-at p{
+.advert-item .updated-at td {
     margin: 0;
     font-size: 12px;
 }
@@ -756,7 +762,7 @@ footer {
     word-wrap: break-word;
 }
 
-@media screen and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0)
+@media screen and (min-color-index:0) and (-webkit-min-device-pixel-ratio:0) and (min-width: 450px)
 { @media {
     .row.safari-fix .col-sm-9 {
         width: 74%!important;

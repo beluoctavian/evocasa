@@ -65,7 +65,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <span>Costul perceput de agenția noastră pentru oricare din pachetele descrise mai sus este de 3 (trei) % din prețul de tranzacționare al imobilului.</span>
+                    <span>Costul perceput de agenția noastră pentru oricare din pachetele descrise mai sus este de 2 (doi) % din prețul de tranzacționare al imobilului.</span>
                 </div>
             </div>
         </div>

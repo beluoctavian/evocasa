@@ -57,7 +57,7 @@
                                             <div>
                                                 <select id="stare_select" name="status" class="form-control">
                                                     <?php
-                                                      $status = Input::get('status') ? Input::get('status') : 'activ'
+                                                      $status = Input::get('status') ? Input::get('status') : 'any';
                                                     ?>
                                                     <option value="any">Indiferent</option>
                                                     <option value="activ" {{ $status == 'activ' ? 'selected' : '' }}>Activ</option>

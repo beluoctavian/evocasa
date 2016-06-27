@@ -89,8 +89,11 @@
                         <a href="javascript:" class="list-group-item">Adresa: {{ $owner['address'] }}</a>
                         <a href="javascript:" class="list-group-item">Cadastru: {{ $owner['cadaster'] }}</a>
                         <a href="javascript:" class="list-group-item">Intabulare: {{ $owner['registration'] }}</a>
-                        <a href="javascript:" class="list-group-item">Certificat energetic: {{ $owner['energy_certificate'] }}</a>
-                        <a href="javascript:" class="list-group-item">Certificat urbanism: {{ $owner['urbanism_certificate'] }}</a>
+                        @if ($advert['type'] == 'teren')
+                            <a href="javascript:" class="list-group-item">Certificat urbanism: {{ $owner['urbanism_certificate'] }}</a>
+                        @else
+                            <a href="javascript:" class="list-group-item">Certificat energetic: {{ $owner['energy_certificate'] }}</a>
+                        @endif
                         <a href="javascript:" class="list-group-item">Poze map: {{ $owner['map_pictures'] ? "Da" : "Nu" }}</a>
                         @if (count($owner['observations']) > 0)
                         <a href="javascript:" class="list-group-item">

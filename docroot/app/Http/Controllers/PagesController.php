@@ -166,26 +166,23 @@ class PagesController extends Controller {
                     }
                     if($floor[0]) {
                         $etaj = "( ";
-                        foreach($floor[0] as $et) {
-                            if($et == 'parter' or $et == 'demisol') {
-                                continue;
+                        $keys = array_keys($floor[0]);
+                        $last_key = end($keys);
+                        foreach($floor[0] as $key => $et) {
+                            if($et == 'parter') {
+                                $etaj .= "'P'";
+                            }
+                            elseif ($et == 'demisol') {
+                                $etaj .= "'D'";
                             }
                             else {
-                                $etaj .= $et . ', ';
+                                $etaj .= $et;
+                            }
+                            if ($key != $last_key) {
+                                $etaj .= ', ';
                             }
                         }
-
-                        if(in_array('parter', $floor[0])) {
-                            $etaj .= "'P' ) ";
-                        }
-                        else {
-                            if(in_array('parter', $floor[0])) {
-                                $etaj .= "D' ) ";
-                            }
-                            else {
-                                $etaj .= "'-1' ) ";
-                            }
-                        }
+                        $etaj .= ' )';
                         $query->whereRaw('substring_index(apartment.floor, \'/\', 1)  in '. $etaj);
                     }
                     if($min_surface) {

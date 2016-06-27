@@ -212,6 +212,7 @@
                     <div class="col-xs-12">
                         <div id="search-box">
                             <form method="GET" action="{{ URL::to('anunturi') }}">
+                                <input type="hidden" name="tip" value="apartament" />
                                 <div class="form-row">
                                     <div class="form-group col-xs-12">
                                         <label>ID anunt</label>

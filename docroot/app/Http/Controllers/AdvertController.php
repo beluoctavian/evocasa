@@ -32,7 +32,6 @@ class AdvertController extends Controller {
     'mobilier' => 'Mobilier',
     'usi_interioare' => 'Usi interioare schimbate',
     'usa_metalica' => 'Usa metalica',
-    'modernizat' => 'Modernizat',
     'fara_imbunatatiri' => 'Fara imbunatatiri',
     'canalizare' => 'Canalizare',
     'apa_curenta' => 'Apa curenta',

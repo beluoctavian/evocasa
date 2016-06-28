@@ -611,7 +611,7 @@
                                         @endif
                                         <div class="col-xs-12">
                                             <label class="checkbox-inline">
-                                                <input name="improvements[centrala]" {{ !empty($improvements['centrala']) ? 'checked' : '' }} type="checkbox" value="1"> Centrala
+                                                <input name="improvements[centrala]" {{ !empty($improvements['centrala']) ? 'checked' : '' }} type="checkbox" value="1"> Centrala termica individuala
                                             </label>
                                         </div>
                                         <div class="col-xs-12">

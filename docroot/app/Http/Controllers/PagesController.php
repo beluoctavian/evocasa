@@ -56,13 +56,14 @@ class PagesController extends Controller {
         $recommended_id = StatusType::where('type', 'recomandat')->first()->id;
         $inactive_id = StatusType::where('type', 'inactiv')->first()->id;
         $inactive_ids = Status::where('type_id', $inactive_id)->lists('advert_id');
-        $ids = Status::where('type_id', $recommended_id)->orderBy('created_at', 'DESC')->lists('advert_id');
+        $ids = Status::where('type_id', $recommended_id)->lists('advert_id');
         $ids = array_unique($ids);
         foreach ($ids as $key => $id) {
             if (in_array($id, $inactive_ids)) {
                 unset($ids[$key]);
             }
         }
+        $ids  = Advert::whereIn('id', $ids)->orderBy('created_at', 'desc')->lists('id');
 
         $perPage = 10;
         $currentPage = LengthAwarePaginator::resolveCurrentPage() ?: 1;

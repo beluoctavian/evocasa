@@ -245,45 +245,38 @@ class PagesController extends Controller {
             });
         }
 
-        $adverts->orderBy('created_at', 'desc');
-        if($sort_after) {
-            $criteriul = explode('_', $sort_after)[0];
-            if($criteriul == 'date') {
-                $criteriul = 'updated_at';
-            }
-            $ordinea = explode('_', $sort_after)[1];
-            $adverts->orderBy($criteriul, $ordinea);
-        }
-
         $results = [];
         if($status == 'activ') {
-            foreach($adverts->get() as $advert) {
-                $flag = true;
-                if($advert->status) {
-                    foreach($advert->status as $status) {
-                        if($status->type_id == $inactive_status_id) {
-                            $flag = false;
+            foreach ($adverts->get() as $advert) {
+                $flag = TRUE;
+                if ($advert->status) {
+                    foreach ($advert->status as $status) {
+                        if ($status->type_id == $inactive_status_id) {
+                            $flag = FALSE;
                         }
                     }
                 }
-                if($flag == true) {
+                if ($flag == TRUE) {
                     $results[] = $advert->id;
                 }
             }
-            if($sort_after) {
-                $criteriul = explode('_', $sort_after)[0];
-                if($criteriul == 'date') {
-                    $criteriul = 'updated_at';
-                }
-                $ordinea = explode('_', $sort_after)[1];
-                $results  = Advert::whereIn('id', $results)->orderBy($criteriul, $ordinea)->paginate(10);
-            }
-            else {
-                $results  = Advert::whereIn('id', $results)->orderBy('created_at', 'desc')->paginate(10);
-            }
         }
         else {
-            $results  = $adverts->paginate(10);
+            foreach ($adverts->get() as $advert) {
+                $results[] = $advert->id;
+            }
+        }
+
+        if($sort_after) {
+            $criteriul = explode('_', $sort_after)[0];
+            if($criteriul == 'date') {
+                $criteriul = 'created_at';
+            }
+            $ordinea = explode('_', $sort_after)[1];
+            $results  = Advert::whereIn('id', $results)->orderBy($criteriul, $ordinea)->paginate(10);
+        }
+        else {
+            $results  = Advert::whereIn('id', $results)->orderBy('created_at', 'desc')->paginate(10);
         }
 
         $partitions = array_unique(Apartment::all()->lists('partitioning'));
